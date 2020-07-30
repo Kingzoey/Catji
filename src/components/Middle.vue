@@ -37,6 +37,29 @@
                         <a title="最热视频2">最热视频2</a>
                     </div>
                 </div>
+                <div class="top-right-line">
+                    <div class="normal-item">
+                        <a class="cover" href="#" target="_blank">
+                            <img :src="test1" width="150" alt="最热视频2"/>
+                        </a>
+                        <br>
+                        <a title="最热视频2">最热视频2</a>
+                    </div>
+                    <div class="normal-item">
+                        <a class="cover" href="#" target="_blank">
+                            <img :src="test1" width="150" alt="最热视频2"/>
+                        </a>
+                            <br>
+                        <a title="最热视频2">最热视频2</a>
+                    </div>
+                    <div class="normal-item">
+                        <a class="cover" href="#" target="_blank">
+                            <img :src="test1" width="150" alt="最热视频2"/>
+                        </a>
+                            <br>
+                        <a title="最热视频2">最热视频2</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
