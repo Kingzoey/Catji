@@ -1,7 +1,7 @@
 <template>
     <div class="hot-part">
         <header class="hot-header">
-            <span class="name">最热</span>
+            <span class="hot-name">最热</span>
         </header>
         <div class="hot-list-top">
             <div class="top-left">
@@ -79,6 +79,12 @@ export default {
 </script>
 
 <style>
+.hot-name{
+    font-size: 50px;
+}
+.hot-header{
+    margin-left: 100px;
+}
 .top-left{
     margin-top:50px;
     float:left;
