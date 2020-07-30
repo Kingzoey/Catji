@@ -67,7 +67,7 @@
 
 
 <script>
-import test1 from "https://github.com/Kingzoey/Catji/blob/dev/src/assets/test.png";
+import test1 from "@/assets/test.png";
 export default {
     name: "Middle",
     data() {
@@ -86,13 +86,14 @@ export default {
     margin-left: 100px;
 }
 .top-left{
-    margin-top:50px;
+    margin-top:100px;
     float:left;
-    margin-left:300px;
+    margin-left:50px;
 }
 .top-right{
     float:right;
-    margin-right: 400px;
+    margin-right: 200px;
+    margin-bottom:100px;
 }
 .normal-item{
     float:left;
