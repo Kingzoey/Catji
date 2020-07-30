@@ -67,7 +67,7 @@
 
 
 <script>
-import test1 from "F:/Catji/Catji/src/assets/test.png";
+import test1 from "https://github.com/Kingzoey/Catji/blob/dev/src/assets/test.png";
 export default {
     name: "Middle",
     data() {
