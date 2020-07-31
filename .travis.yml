@@ -4,6 +4,11 @@ branches:
 
 language: node_js
 
+# Note: you should set Environment Variables here or 'Settings' on travis-ci.org
+env:
+  global:
+    - GH_REF: github.com/Kingzoey/Catji.git
+
 sudo: false
 
 node_js: stable
@@ -32,7 +37,3 @@ after_success:
   - git commit --message "Automatically update from travis-ci"
   - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
 
-# Note: you should set Environment Variables here or 'Settings' on travis-ci.org
-env:
-  global:
-    - GH_REF: github.com/Kingzoey/Catji.git
