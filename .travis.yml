@@ -1,0 +1,38 @@
+branches:
+  only:
+    - dev
+
+language: node_js
+
+sudo: false
+
+node_js: stable
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+before_script:
+  - git config user.name "Kingzoey"
+  - git config user.email "邮箱地址@example.com"
+  - git clone --branch gh-pages https://${GH_REF} dist
+
+script:
+  - npm test
+
+after_success:
+  - npm run build
+  - cd dist
+  # - echo "lightmoon.pw" > CNAME
+  # - cp index.html 404.html
+  - git add --all .
+  - git commit --message "Automatically update from travis-ci"
+  - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
+
+# Note: you should set Environment Variables here or 'Settings' on travis-ci.org
+env:
+  global:
+    - GH_REF: github.com/Kingzoey/Catji.git
