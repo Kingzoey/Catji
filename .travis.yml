@@ -1,39 +1,38 @@
+# Note: you should set Environment Variables here or 'Settings' on travis-ci.org
+env:
+  global:
+    - GH_REF: github.com/Kingzoey/Catji.git
+    
 branches:
   only:
     - dev
 
 language: node_js
 
-# Note: you should set Environment Variables here or 'Settings' on travis-ci.org
-env:
-  global:
-    - GH_REF: github.com/Kingzoey/Catji.git
-
-sudo: false
-
-node_js: stable
+node_js:
+  - "node"
 
 cache:
   directories:
     - node_modules
 
+sudo: false
+
 install:
   - npm install
 
-before_script:
+# before_script:
+
+script: 
+  - npm run build
+  - cd ./dist
+  - git init
   - git config user.name "Kingzoey"
   - git config user.email "729650614@qq.com"
-  - git clone --branch gh-pages https://${GH_REF} dist
+  - git add .
+  - git commit -m "Travis CI Auto Builder"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
 
-script:
-  - npm test
+# after_script:
 
-after_success:
-  - npm run build
-  - cd dist
-  # - echo "lightmoon.pw" > CNAME
-  # - cp index.html 404.html
-  - git add --all .
-  - git commit --message "Automatically update from travis-ci"
-  - git push --quiet --force  "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
 
