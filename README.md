@@ -1,2 +1,2 @@
-# Catji1
+# Catji
 A project for cats of Tongji.
