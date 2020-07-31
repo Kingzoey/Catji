@@ -24,7 +24,7 @@ install:
 # before_script:
 
 script: 
-  - npm run build
+  - npm run build-gh
   - cd ./dist
   - git init
   - git config --global user.name "Kingzoey"
