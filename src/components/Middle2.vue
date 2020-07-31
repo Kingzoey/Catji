@@ -1,63 +1,63 @@
 <template>
-    <div class="hot-part">
-        <header class="hot-header">
-            <span class="hot-name">最热</span>
+    <div class="new-part">
+        <header class="new-header">
+            <span class="new-name">最新</span>
         </header>
-        <div class="hot-list-top">
+        <div class="new-list-top">
             <div class="top-left">
                <div class="big-item">
-                    <a class="cover" href="#" target="_blank">
-                        <img :src="test1" height="200" width="440" alt="最热视频1"/>
+                    <a class="cover" newhref="#" target="_blank">
+                        <img :src="test1" height="200" width="440" alt="最新视频1"/>
                     </a>
                      <br>
-                    <a title="最热视频1">最热视频1</a>
+                    <a title="最新视频1">最新视频1</a>
                 </div>
             </div>
             <div class="top-right">
                <div class="top-right-line1">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频2"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频2"/>
                         </a>
                         <br>
-                        <a title="最热视频2">最热视频2</a>
+                        <a title="最新视频2">最新视频2</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频3"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频3"/>
                         </a>
                             <br>
-                        <a title="最热视频3">最热视频3</a>
+                        <a title="最新视频3">最新视频3</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频4"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频4"/>
                         </a>
                             <br>
-                        <a title="最热视频4">最热视频4</a>
+                        <a title="最新视频4">最新视频4</a>
                     </div>
                 </div>
                 <div class="top-right-line2">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频5"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频5"/>
                         </a>
                         <br>
-                        <a title="最热视频5">最热视频5</a>
+                        <a title="最新视频5">最新视频5</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频6"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频6"/>
                         </a>
                             <br>
-                        <a title="最热视频6">最热视频6</a>
+                        <a title="最新视频6">最新视频6</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频7"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频7"/>
                         </a>
                             <br>
-                        <a title="最热视频7">最热视频7</a>
+                        <a title="最新视频7">最新视频7</a>
                     </div>
                 </div> 
             </div>    
@@ -65,38 +65,38 @@
                 <div class="bottom-line1">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频8"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频8"/>
                         </a>
                             <br>
-                        <a title="最热视频8">最热视频8</a>
+                        <a title="最新视频8">最新视频8</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频9"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频9"/>
                         </a>
                             <br>
-                        <a title="最热视频9">最热视频9</a>
+                        <a title="最新视频9">最新视频9</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频10"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频10"/>
                         </a>
                             <br>
-                        <a title="最热视频10">最热视频10</a>
+                        <a title="最新视频10">最新视频10</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频11"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频11"/>
                         </a>
                             <br>
-                        <a title="最热视频11">最热视频11</a>
+                        <a title="最新视频11">最新视频11</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最热视频12"/>
+                            <img :src="test1" height="100" width="200" alt="最新视频12"/>
                         </a>
                             <br>
-                        <a title="最热视频12">最热视频12</a>
+                        <a title="最新视频12">最新视频12</a>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
 <script>
 import test1 from "@/assets/test.png";
 export default {
-    name: "Middle",
+    name: "Middle2",
     data() {
         return {
             test1: test1,
@@ -119,21 +119,21 @@ export default {
 </script>
 
 <style>
-.hot-list-top:after{
+.new-list-top:after{
     content:"";
     display:block;
     clear:both;
 }
-.hot-name{
+.new-name{
     font-size: 50px;
 }
-.hot-header{
+.new-header{
     margin-left: 10px;
 }
 .top-left{
     float:left;
     margin-left: 50px;
-}
+} */
 .bottom{
     float:left;
 }
