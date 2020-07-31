@@ -17,7 +17,7 @@ install:
 
 before_script:
   - git config user.name "Kingzoey"
-  - git config user.email "邮箱地址@example.com"
+  - git config user.email "729650614@qq.com"
   - git clone --branch gh-pages https://${GH_REF} dist
 
 script:
