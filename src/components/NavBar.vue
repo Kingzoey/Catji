@@ -23,6 +23,7 @@
 					<ul style="float: left;">
 						<li><router-link to="/">首页</router-link></li>
 						<li><router-link to="/home_0">首页_0</router-link></li>
+            <li><router-link to="/home_1">首页_1</router-link></li>
 						<li><router-link to="/login">登录</router-link></li>
 						<li><router-link to="/register">注册</router-link></li>
 						<li><router-link to="/search"><font-awesome-icon :icon="['fas', 'search']" /></router-link></li>
