@@ -25,11 +25,11 @@
 						<li><router-link to="/home_0">首页_0</router-link></li>
 						<li><router-link to="/login">登录</router-link></li>
 						<li><router-link to="/register">注册</router-link></li>
-						<li><router-link to="/search">搜索</router-link></li>
+						<li><router-link to="/search"><font-awesome-icon :icon="['fas', 'search']" /></router-link></li>
 					</ul>
 
 					<ul style="float: right;">
-						<li><router-link to="/mine">用户</router-link></li>
+						<li><router-link to="/mine"><font-awesome-icon :icon="['fas', 'user']" /></router-link></li>
 						<li><router-link to="/message">消息</router-link></li>
 						<li><router-link to="/blog">动态</router-link></li>
 						<li><router-link to="/favorite">收藏</router-link></li>
@@ -73,7 +73,7 @@ nav div router-link:hover{
 .top .a {
 	width: 100%;
 	height: 38px;
-	background: rgba(255, 255, 255, 0.5);}
+	background: rgba(255, 255, 255, 0);}
 	
 .top .a .b {
 	width: 1000px;
