@@ -7,9 +7,9 @@
             <div class="top-left">
                <div class="big-item">
                     <a class="cover" href="#" target="_blank">
-                        <img :src="test1" height="200" width="440" alt="最热视频1"/>
+                        <img :src="test1" height="230" width="450" alt="最热视频1"/>
                     </a>
-                     <br>
+                    <br>
                     <a title="最热视频1">最热视频1</a>
                 </div>
             </div>
@@ -119,6 +119,9 @@ export default {
 </script>
 
 <style>
+.hot-part{
+    margin-top:30px;
+}
 .hot-list-top:after{
     content:"";
     display:block;
