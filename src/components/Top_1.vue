@@ -3,7 +3,7 @@
     <header class="rank-header">
       <span class="name">排行榜</span>
       <div class="more tab-switch">
-        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">最新</div>
+        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">Tag</div>
       </div>
     </header>
     <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
