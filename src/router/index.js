@@ -43,6 +43,31 @@ Vue.use(VueRouter)
     path: '/search',
     name: 'Search',
     component: () => import('../views/Search.vue')
+  },
+  {
+    path: '/mine',
+    name: 'Mine',
+    component: () => import('../views/Mine.vue')
+  },
+  {
+    path: '/message',
+    name: 'Message',
+    component: () => import('../views/Message.vue')
+  },
+  {
+    path: '/blog',
+    name: 'Blog',
+    component: () => import('../views/Blog.vue')
+  },
+  {
+    path: '/favorite',
+    name: 'Favorite',
+    component: () => import('../views/Favorite.vue')
+  },
+  {
+    path: '/release',
+    name: 'Release',
+    component: () => import('../views/Release.vue')
   }
 ]
 
