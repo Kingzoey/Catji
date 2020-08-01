@@ -1,7 +1,9 @@
 <template>
     <div>
+        <navbar></navbar>
         <input type="text">
         <button></button>
+
     </div>
 </template>
 
@@ -14,3 +16,5 @@ export default {
 <style lang="stylus" scoped>
 
 </style>
+
+<!--<hotsearch></hotsearch> -->
