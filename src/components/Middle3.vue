@@ -7,7 +7,7 @@
             <div class="top-left">
                <div class="big-item">
                     <a class="cover" newhref="#" target="_blank">
-                        <img :src="test1" height="200" width="440" alt="标签1"/>
+                        <img :src="test1" height="230" width="450" alt="标签1"/>
                     </a>
                      <br>
                     <a title="标签1">标签1</a>
@@ -119,6 +119,9 @@ export default {
 </script>
 
 <style>
+.tag-part{
+    margin-top:30px;
+}
 .tag-list-top:after{
     content:"";
     display:block;
