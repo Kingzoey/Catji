@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <Top style="background-color: #f0f0f0;"></Top>
+	<NavBar></NavBar>
+    <Top></Top>
     <Middle></Middle>
     <Middle2></Middle2>
     <Middle3></Middle3>
@@ -9,6 +10,7 @@
 
 <script>
 // @ is an alias to /src
+import NavBar from "@/components/NavBar.vue";
 import Top from "@/components/Top.vue";
 import Middle from "@/components/Middle.vue";
 import Middle2 from "@/components/Middle2.vue";
@@ -16,6 +18,7 @@ import Middle3 from "@/components/Middle3.vue";
 export default {
   name: "Home",
   components: {
+	NavBar,
     Top,
     Middle,
     Middle2,
@@ -23,3 +26,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+	/*
+	*{margin: 0; padding: 0;}
+	.nav{
+		width: 100%;
+		height: 100px;
+		background: url(../assets/Nav.png);
+		position: relative;
+		top: -60px;
+		z-index:8;
+	}
+	*/
+</style>

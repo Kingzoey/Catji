@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  name: "NavBar",
+  name: "NavBar2",
 };
 </script>
 
@@ -69,15 +69,13 @@ nav div router-link:hover{
 *{margin: 0; padding: 0;} 
 .top {
 	width: 100%;
-	height: 100px;
-	background: url(../assets/Nav.png);}
+	height: 40px;
+	background-color: #00FFFF;}
 
 .top .a {
 	width: 100%;
 	height: 38px;
-	background: rgba(255, 255, 255, 0);
-	position:relative;
-	z-index:999;}
+	background: rgba(255, 255, 255, 0);}
 	
 .top .a .b {
 	width: 1000px;
