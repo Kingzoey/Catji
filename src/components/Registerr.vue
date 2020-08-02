@@ -9,7 +9,7 @@
         </div>
         <div class="mainbody">
             <div class="reg_head">
-                <p>注册新用户<em>我有账号，去<a href="login.html">登录</a></em></p>
+                <p>注册新用户<em>我有账号，去<a href="/login">登录</a></em></p>
                 
         </div>
             <div class=reg_list>

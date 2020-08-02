@@ -70,7 +70,7 @@ nav div router-link:hover{
 .top {
 	width: 100%;
 	height: 40px;
-	background-color: #00FFFF;}
+	background-color: #c0c5d8;}
 
 .top .a {
 	width: 100%;
