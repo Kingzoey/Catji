@@ -1,17 +1,16 @@
 <template>
-  <div class="rigister">
-    <Top style="background-color: #f0f0f0;"></Top>
-    <rigister></rigister>
+  <div class="register">
+    <Registerr style="background-color: #f0f0f0;"></Registerr>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import rigister from "@components/Rigister.Vue"
+import Registerr from "@/components/Registerr.vue";
 export default {
-  name: "Home",
+  name: "Register",
   components: {
-    rigister,
+    Registerr,
   },
 };
 </script>

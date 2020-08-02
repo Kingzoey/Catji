@@ -1,16 +1,18 @@
 <template>
-    <div>
-        <input type="text">
-        <button></button>
-    </div>
+  <div>
+	<NavBar2></NavBar2>
+  </div>
 </template>
 
 <script>
+	import NavBar2 from "@/components/NavBar2.vue";
 export default {
-    
-}
+  name: "Search",
+components: {
+	NavBar2,
+  },
+};
 </script>
 
-<style lang="stylus" scoped>
-
+<style scoped>
 </style>
