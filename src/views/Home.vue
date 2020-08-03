@@ -10,7 +10,7 @@
 
 <script>
 // @ is an alias to /src
-import NavBar from "@/components/NavBar.vue";
+import NavBar from "@/components/NavBar_Home.vue";
 import Top from "@/components/Top.vue";
 import Middle from "@/components/Middle.vue";
 import Middle2 from "@/components/Middle2.vue";

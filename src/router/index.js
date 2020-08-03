@@ -1,39 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Test from '../views/Test.vue'
-import Home_0 from '../views/Home_0.vue'
-import Home_1 from '../views/Home_1.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import('../views/Home.vue')
   },
   {
     path: '/test',
     name: 'Test',
-    component: Test
-  },
-  {
-    path: '/home_0',
-    name: 'Home_0',
-    component: Home_0
-  },
-  {
-    path: '/home_1',
-    name: 'Home_1',
-    component: Home_1
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    component: () => import('../views/Test.vue')
   },
   {
     path: '/login',
@@ -46,27 +24,17 @@ const routes = [
     component: () => import('../views/Register.vue')
   },
   {
-    path: '/login_0',
-    name: 'Login_0',
-    component: () => import('../views/Login_0.vue')
-  },
-  {
-    path: '/register_0',
-    name: 'Register_0',
-    component: () => import('../views/Register_0.vue')
-  },
-  {
     path: '/search',
     name: 'Search',
     component: () => import('../views/Search.vue')
   },
   {
-    path: '/mine',
-    name: 'Mine',
-    component: () => import('../views/Mine.vue')
+    path: '/space/:usid',
+    name: 'Space',
+    component: () => import('../views/Space.vue')
   },
   {
-    path: '/message',
+    path: '/message/:usid',
     name: 'Message',
     component: () => import('../views/Message.vue')
   },
@@ -75,15 +43,16 @@ const routes = [
     name: 'Blog',
     component: () => import('../views/Blog.vue')
   },
-  {
-    path: '/favorite',
-    name: 'Favorite',
-    component: () => import('../views/Favorite.vue')
-  },
+  // 收藏夹放在个人空间里
+  // {
+  //   path: '/favorite/:usid',
+  //   name: 'Favorite',
+  //   component: () => import('../views/Favorite.vue')
+  // },
   {
     path: '/upload',
-    name: 'Release',
-    component: () => import('../views/Release.vue')
+    name: 'Upload',
+    component: () => import('../views/Upload.vue')
   },
   {
     path: '/video/:vid',
