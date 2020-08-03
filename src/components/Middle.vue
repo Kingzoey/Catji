@@ -121,6 +121,10 @@ export default {
 <style>
 .hot-part{
     margin-top:30px;
+    width:1600px;
+    height:450px;
+    MARGIN-RIGHT: auto;
+    MARGIN-LEFT: auto;
 }
 .hot-list-top:after{
     content:"";

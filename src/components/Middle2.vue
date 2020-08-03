@@ -121,6 +121,10 @@ export default {
 <style>
 .new-part{
     margin-top:30px;
+    width:1600px;
+    height:450px;
+    MARGIN-RIGHT: auto;
+    MARGIN-LEFT: auto;
 }
 .new-list-top:after{
     content:"";
