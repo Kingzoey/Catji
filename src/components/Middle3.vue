@@ -7,7 +7,7 @@
             <div class="top-left">
                <div class="big-item">
                     <a class="cover" newhref="#" target="_blank">
-                        <img :src="test1" height="230" width="450" alt="标签1"/>
+                        <img :src="test1" height="208" width="400" alt="标签1"/>
                     </a>
                      <br>
                     <a title="标签1">标签1</a>
@@ -17,21 +17,21 @@
                <div class="top-right-line1">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签2"/>
+                            <img :src="test1" height="90" width="175" alt="标签2"/>
                         </a>
                         <br>
                         <a title="标签2">标签2</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签3"/>
+                            <img :src="test1" height="90" width="175" alt="标签3"/>
                         </a>
                             <br>
                         <a title="标签3">标签3</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签4"/>
+                            <img :src="test1" height="90" width="175" alt="标签4"/>
                         </a>
                             <br>
                         <a title="标签4">标签4</a>
@@ -40,21 +40,21 @@
                 <div class="top-right-line2">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签5"/>
+                            <img :src="test1" height="90" width="175" alt="标签5"/>
                         </a>
                         <br>
                         <a title="标签5">标签5</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签6"/>
+                            <img :src="test1" height="90" width="175" alt="标签6"/>
                         </a>
                             <br>
                         <a title="标签6">标签6</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签7"/>
+                            <img :src="test1" height="90" width="175" alt="标签7"/>
                         </a>
                             <br>
                         <a title="标签7">标签7</a>
@@ -65,35 +65,35 @@
                 <div class="bottom-line1">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签8"/>
+                            <img :src="test1" height="90" width="175" alt="标签8"/>
                         </a>
                             <br>
                         <a title="标签">标签8</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签9"/>
+                            <img :src="test1" height="90" width="175" alt="标签9"/>
                         </a>
                             <br>
                         <a title="标签9">标签9</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签10"/>
+                            <img :src="test1" height="90" width="175" alt="标签10"/>
                         </a>
                             <br>
                         <a title="标签10">标签10</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签11"/>
+                            <img :src="test1" height="90" width="175" alt="标签11"/>
                         </a>
                             <br>
                         <a title="标签11">标签11</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="标签12"/>
+                            <img :src="test1" height="90" width="175" alt="标签12"/>
                         </a>
                             <br>
                         <a title="标签12">标签12</a>
@@ -120,7 +120,6 @@ export default {
 
 <style>
 .tag-part{
-    /*margin-top:30px;*/
 	position: absolute;
 	top:1600px;
 }
@@ -129,6 +128,9 @@ export default {
     display:block;
     clear:both;
 }
+.tag-list-top{
+    white-space: nowrap;
+}
 .tag-name{
     font-size: 50px;
 }
@@ -136,7 +138,7 @@ export default {
     margin-left: 10px;
 }
 .top-left{
-    float:left;
+    display: inline-block;
     margin-left: 50px;
 }
 .bottom{
@@ -148,7 +150,7 @@ export default {
     margin-left: 50px;
 }
 .top-right{
-    float:right;
+    display: inline-block;
     margin-right: 270px;
 }
 </style>
