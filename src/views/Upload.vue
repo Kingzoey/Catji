@@ -1,15 +1,15 @@
 <template>
   <div>
-	<NavBar2></NavBar2>
+    <NavBar />
   </div>
 </template>
 
 <script>
-import NavBar2 from "@/components/NavBar2.vue";
+import NavBar from "@/components/NavBar.vue";
 export default {
-  name: "Release",
+  name: "Upload",
   components: {
-	NavBar2,
+    NavBar,
   },
 };
 </script>
