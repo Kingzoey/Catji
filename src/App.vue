@@ -16,7 +16,6 @@ export default {
 </script>
 
 <style>
-
 /* 以下是全局样式 */
 * {
   margin: 0;
@@ -53,5 +52,20 @@ a {
 a,
 a:hover {
   text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+/* 用来清除浮动的class */
+.clearfix::after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
 }
 </style>
