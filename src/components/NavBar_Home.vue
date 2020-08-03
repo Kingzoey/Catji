@@ -70,6 +70,15 @@ export default {
   margin: 0 auto;
 }
 
+.nav li a {
+  color: #fff;
+  display: block;
+}
+
+.nav li a:hover {
+  color:cornflowerblue;
+}
+
 .nav ul li {
   width: 50px;
   height: 38px;
