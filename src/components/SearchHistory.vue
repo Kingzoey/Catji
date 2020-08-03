@@ -105,7 +105,11 @@ export default {
 
 <style scoped>
 .rank-list {
-  width: 320px;
+ 
+   width: 265px;
+  position: relative;
+   top:20px;left: 25%;
+   z-index: 100;
 }
 
 .rank-header {

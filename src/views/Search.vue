@@ -5,7 +5,7 @@
     <br />
     <br />
     <SearchHistory></SearchHistory>
-    <SearchHistory></SearchHistory>
+    
   </div>
 </template>
 
