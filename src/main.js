@@ -4,6 +4,10 @@ import router from './router'
 import store from './store'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
+// import 'vue-video-player/src/custom-theme.css'
+Vue.use(VueVideoPlayer)
 
 // 图标查询地址: https://fontawesome.com/icons?d=gallery&q=cat&m=free
 // 使用方法:
@@ -13,7 +17,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 // ! 这样可以保证没用到的图标不会被打包进入最终发布文件里
 // 更多参考: https://github.com/FortAwesome/vue-fontawesome#installation
 import { faUser, faSearch, faCat, faDog } from '@fortawesome/free-solid-svg-icons'
-library.add(faUser, faSearch,faCat, faDog)
+import { faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus } from '@fortawesome/free-solid-svg-icons'
+library.add(faUser, faSearch, faCat, faDog)
+library.add(faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

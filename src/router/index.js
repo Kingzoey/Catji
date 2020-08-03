@@ -65,9 +65,14 @@ Vue.use(VueRouter)
     component: () => import('../views/Favorite.vue')
   },
   {
-    path: '/release',
+    path: '/upload',
     name: 'Release',
     component: () => import('../views/Release.vue')
+  },
+  {
+    path: '/video/:vid',
+    name: 'Video',
+    component: () => import('../views/Video.vue')
   }
 ]
 
