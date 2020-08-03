@@ -7,7 +7,7 @@
       </div>
     </header>
     <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
-      <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
+      <span class="number" :class="{on : index < 0}">{{index + 1}}</span>
       <router-link :to="item.url" class="link">
         <p :title="item.title" class="title">{{item.title}}</p>
       </router-link>
@@ -98,8 +98,6 @@ export default {
             "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
         },
       ],
-     
-  
     };
   },
 };
