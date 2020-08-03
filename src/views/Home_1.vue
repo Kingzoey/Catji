@@ -7,7 +7,7 @@
 
 <script>
 // @ is an alias to /src
-import NavBar2 from "@/components/NavBar2.vue";
+import NavBar2 from "@/components/NavBar.vue";
 import Top_1 from "@/components/Top_1.vue";
 export default {
   name: "Home_1",
