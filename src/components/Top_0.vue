@@ -30,7 +30,7 @@
 
 <script>
 export default {
-  name: "Top",
+  name: "Top0",
   computed: {
     curHotlist() {
       return this.videoHotList;
@@ -253,6 +253,9 @@ export default {
 <style scoped>
 .rank-list {
   width: 265px;
+  position: relative;
+   top:200px;left: 1260px;
+   z-index: 100;
 }
 
 .rank-header {

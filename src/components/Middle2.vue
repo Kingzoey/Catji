@@ -120,7 +120,9 @@ export default {
 
 <style>
 .new-part{
-    margin-top:30px;
+    /*margin-top:30px;*/
+	position: absolute;
+	top:850px;
 }
 .new-list-top:after{
     content:"";

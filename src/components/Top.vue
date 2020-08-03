@@ -236,6 +236,9 @@ export default {
 <style scoped>
 .rank-list {
   width: 265px;
+  position: relative;
+   top:50px;left: 1260px;
+   z-index: 100;
 }
 
 .rank-header {

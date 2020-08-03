@@ -120,7 +120,9 @@ export default {
 
 <style>
 .tag-part{
-    margin-top:30px;
+    /*margin-top:30px;*/
+	position: absolute;
+	top:1600px;
 }
 .tag-list-top:after{
     content:"";
