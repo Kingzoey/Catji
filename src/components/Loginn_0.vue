@@ -54,8 +54,8 @@
 		</div>
 		<div class="register w3layouts agileits">
 			<h2>注 册</h2>
-			<a href="/register_0/" style='-webkit-appearance: none;
-                <button>立即注册</button>
+			<a href="/register/" style='-webkit-appearance: none;
+                <button class="register-button">立即注册</button>
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -65,6 +65,8 @@
     justify-content: center;
     outline: none;
     cursor: pointer;
+    margin-top:100px;
+    margin-left:150px;
     width: 150px;
     height: 50px;
     background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
@@ -77,7 +79,7 @@
     font-weight: 600;
     color: #606060;
     text-shadow: 0 1px #fff;color:#606060' id="register_from"><span>立即注册</span></a>
-	
+	<br><br><br><br><br><br><br><br><br><br><br>
     <div v-html="htmlContent" style="white-space: pre-wrap;"></div>
 
 			<div class="clear"></div>
@@ -353,6 +355,8 @@ input[type="text"], input[type="password"] {
     color: #FFF;
 }
 
+
+
 .register {
     width: 44%;
     float: left;
@@ -372,6 +376,10 @@ input[type="text"], input[type="password"] {
 
 .register p a:hover {
     color: #FFF;
+}
+
+.register_from{
+    margin-top: 100px;
 }
 
 .footer {
@@ -622,6 +630,7 @@ input[type="text"], input[type="password"] {
         font-size: 12.4px;
     }
 }
+
 /*--- Responsive Code ---*/
 
 </style>
