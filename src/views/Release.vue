@@ -5,7 +5,7 @@
 </template>
 
 <script>
-	import NavBar2 from "@/components/NavBar2.vue";
+import NavBar2 from "@/components/NavBar2.vue";
 export default {
   name: "Release",
   components: {
