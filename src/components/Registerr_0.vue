@@ -10,7 +10,7 @@
 	<!-- //Meta-Tags -->
 
 	<!-- Style -->
-	<h1>Catji——同济猫咪分享社区</h1>
+	<h1 class="registerr_title">Catji——同济猫咪分享社区</h1>
 
 	<div class="container w3layouts agileits">
 
@@ -70,7 +70,7 @@
 </div>
 </template>
 
-<style>
+<style scope>
     /*-- Reset Code --*/	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 	article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
 	ol,ul{list-style:none;padding:0;margin:0;}
@@ -99,10 +99,11 @@
 
 /*-- Index-Page-Styling --*/
 
-body {
+.registerr {
+    height:1000px;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    background: url("../assets/backgroundd.jpg");
+    background: url("../assets/backgroundd-.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -111,6 +112,8 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
 }
+
+
 
 body a {
     transition:0.5s all;
@@ -124,6 +127,8 @@ body a {
 h1 {
     font-size: 45px;
     font-weight: 500;
+    height:200px;
+    line-height: 300px;
     letter-spacing: 4px;
     margin: 60px 0;
     color: #FFFFFF;
@@ -144,12 +149,7 @@ h1 {
     border-bottom-right-radius: initial;
 }
 
-.login {
-    width: 45%;
-    float: left;
-    text-align: left;
-    padding-right: 40px;
-}
+
 
 ::-webkit-input-placeholder {
     color: #CCC;
@@ -335,6 +335,7 @@ input[type="text"], input[type="password"] {
 .login a:hover {
     color: #FFF;
 }
+
 
 .register {
     width: 44%;
