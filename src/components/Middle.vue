@@ -120,11 +120,8 @@ export default {
 
 <style>
 .hot-part{
-    margin-top:30px;
-    width:1600px;
-    height:450px;
-    MARGIN-RIGHT: auto;
-    MARGIN-LEFT: auto;
+	position: absolute;
+	top:100px;
 }
 .hot-list-top:after{
     content:"";

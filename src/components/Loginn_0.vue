@@ -54,7 +54,7 @@
 		</div>
 		<div class="register w3layouts agileits">
 			<h2>注 册</h2>
-			<a href="/register/" style='-webkit-appearance: none;
+			<a href="/register" style='-webkit-appearance: none;
                 <button class="register-button">立即注册</button>
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -122,7 +122,7 @@
     height:1000px;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    background: url("../assets/backgroundd-.jpg");
+    background: url("../assets/backgroundd.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

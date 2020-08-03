@@ -120,11 +120,8 @@ export default {
 
 <style>
 .tag-part{
-    margin-top:30px;
-    width:1600px;
-    height:450px;
-    MARGIN-RIGHT: auto;
-    MARGIN-LEFT: auto;
+	position: absolute;
+	top:1600px;
 }
 .tag-list-top:after{
     content:"";
@@ -153,7 +150,7 @@ export default {
     margin-left: 50px;
 }
 .top-right{
-    float:right;
-    margin-right: 350px;
+    display: inline-block;
+    margin-right: 270px;
 }
 </style>

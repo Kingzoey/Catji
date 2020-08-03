@@ -18,7 +18,7 @@
 			<h2>登 录</h2>
 			
 			<div class="send-button w3layouts agileits">
-                <a href="/login/" style='-webkit-appearance: none;
+                <a href="/login" style='-webkit-appearance: none;
                 <button>立即登录</button>
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -103,7 +103,7 @@
     height:1000px;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    background: url("../assets/backgroundd-.jpg");
+    background: url("../assets/backgroundd.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
