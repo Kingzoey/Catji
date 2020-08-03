@@ -1,18 +1,18 @@
 <template>
-  <div class="register">
+  <div class="login_0">
   <NavBar2></NavBar2>
-    <Registerr style="background-color: #f0f0f0;"></Registerr>
+    <Loginn_0 style="background-color: #f0f0f0;"></Loginn_0>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import NavBar2 from "@/components/NavBar2.vue";
-import Registerr from "@/components/Registerr.vue";
+import Loginn_0 from "@/components/Loginn_0.vue";
 export default {
-  name: "Register",
+  name: "Login_0",
   components: {
-    Registerr,
+    Loginn_0,
     NavBar2,
   },
 };
