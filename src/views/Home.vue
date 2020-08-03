@@ -2,6 +2,8 @@
   <div class="home">
 	<NavBar></NavBar>
     <Top></Top>
+	<Top_0></Top_0>
+	<Top_1></Top_1>
     <Middle></Middle>
     <Middle2></Middle2>
     <Middle3></Middle3>
@@ -10,8 +12,10 @@
 
 <script>
 // @ is an alias to /src
-import NavBar from "@/components/NavBar.vue";
+import NavBar from "@/components/NavBar_Home.vue";
 import Top from "@/components/Top.vue";
+import Top_0 from "@/components/Top_0.vue";
+import Top_1 from "@/components/Top_1.vue";
 import Middle from "@/components/Middle.vue";
 import Middle2 from "@/components/Middle2.vue";
 import Middle3 from "@/components/Middle3.vue";
@@ -20,6 +24,8 @@ export default {
   components: {
 	NavBar,
     Top,
+	Top_0,
+	Top_1,
     Middle,
     Middle2,
     Middle3

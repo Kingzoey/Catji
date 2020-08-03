@@ -7,7 +7,7 @@
             <div class="top-left">
                <div class="big-item">
                     <a class="cover" newhref="#" target="_blank">
-                        <img :src="test1" height="230" width="450" alt="最新视频1"/>
+                        <img :src="test1" height="208" width="400" alt="最新视频1"/>
                     </a>
                      <br>
                     <a title="最新视频1">最新视频1</a>
@@ -17,21 +17,21 @@
                <div class="top-right-line1">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频2"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频2"/>
                         </a>
                         <br>
                         <a title="最新视频2">最新视频2</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频3"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频3"/>
                         </a>
                             <br>
                         <a title="最新视频3">最新视频3</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频4"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频4"/>
                         </a>
                             <br>
                         <a title="最新视频4">最新视频4</a>
@@ -40,21 +40,21 @@
                 <div class="top-right-line2">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频5"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频5"/>
                         </a>
                         <br>
                         <a title="最新视频5">最新视频5</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频6"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频6"/>
                         </a>
                             <br>
                         <a title="最新视频6">最新视频6</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频7"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频7"/>
                         </a>
                             <br>
                         <a title="最新视频7">最新视频7</a>
@@ -65,35 +65,35 @@
                 <div class="bottom-line1">
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频8"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频8"/>
                         </a>
                             <br>
                         <a title="最新视频8">最新视频8</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频9"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频9"/>
                         </a>
                             <br>
                         <a title="最新视频9">最新视频9</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频10"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频10"/>
                         </a>
                             <br>
                         <a title="最新视频10">最新视频10</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频11"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频11"/>
                         </a>
                             <br>
                         <a title="最新视频11">最新视频11</a>
                     </div>
                     <div class="normal-item">
                         <a class="cover" href="#" target="_blank">
-                            <img :src="test1" height="100" width="200" alt="最新视频12"/>
+                            <img :src="test1" height="90" width="175" alt="最新视频12"/>
                         </a>
                             <br>
                         <a title="最新视频12">最新视频12</a>
@@ -131,6 +131,9 @@ export default {
     display:block;
     clear:both;
 }
+.new-list-top{
+    white-space: nowrap;
+}
 .new-name{
     font-size: 50px;
 }
@@ -138,9 +141,9 @@ export default {
     margin-left: 10px;
 }
 .top-left{
-    float:left;
     margin-left: 50px;
-} */
+    display: inline-block;
+} 
 .bottom{
     float:left;
 }
@@ -150,7 +153,7 @@ export default {
     margin-left: 50px;
 }
 .top-right{
-    float:right;
+   display: inline-block;
     margin-right: 270px;
 }
 </style>
