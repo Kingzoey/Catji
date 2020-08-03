@@ -6,7 +6,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import NavBar2 from "@/components/NavBar2.vue";
+import NavBar2 from "@/components/NavBar.vue";
 export default {
   name: "About",
   components: {
