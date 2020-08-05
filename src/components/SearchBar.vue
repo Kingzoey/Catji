@@ -12,7 +12,7 @@ export default {
 };
 </script>
 
-<style >
+<style scoped>
 #box {
   width: 380px;
   margin: 30px auto;
