@@ -1,7 +1,7 @@
 <template>
   <div>
-    <NavBar />
-    <UploadFile />
+    <NavBar></NavBar>
+    <UploadFile></UploadFile>
   </div>
 </template>
 
