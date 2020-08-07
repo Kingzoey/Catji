@@ -35,7 +35,7 @@
             <router-link to="/favorite">收藏</router-link>
           </li>
           <li class="tougao">
-            <router-link to="/release">投稿</router-link>
+            <router-link to="/upload">投稿</router-link>
           </li>
         </ul>
       </div>

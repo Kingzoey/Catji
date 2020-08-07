@@ -26,3 +26,15 @@ export default {
   },
 };
 </script>
+
+
+
+<style scoped>
+
+.search {
+ 
+    background: url("../assets/backgroundd.jpg");
+    
+}
+
+</style>
