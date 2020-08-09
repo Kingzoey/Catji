@@ -69,7 +69,6 @@
 	</div>
 </div>
 </template>
-
 <style scoped>
     /*-- Reset Code --*/	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
 	article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
@@ -92,14 +91,14 @@
 	nav.vertical ul li{display:block;}
 	nav.horizontal ul li{display: inline-block;}
 	img{max-width:100%;}
-
+    
 /*-- Reset Code --*/
 
 
 
 /*-- Index-Page-Styling --*/
 
-.registerr {
+.loginn {
     height:1000px;
     font-family: 'Roboto', sans-serif;
     text-align: center;
@@ -114,7 +113,6 @@
 }
 
 
-
 body a {
     transition:0.5s all;
     -webkit-transition:0.5s all;
@@ -127,7 +125,7 @@ body a {
 h1 {
     font-size: 45px;
     font-weight: 500;
-    height:200px;
+    height:400px;
     line-height: 300px;
     letter-spacing: 4px;
     margin: 60px 0;
@@ -149,7 +147,12 @@ h1 {
     border-bottom-right-radius: initial;
 }
 
-
+.login {
+    width: 45%;
+    float: left;
+    text-align: left;
+    padding-right: 40px;
+}
 
 ::-webkit-input-placeholder {
     color: #CCC;
@@ -176,7 +179,7 @@ h2 {
 }
 
 ul.tick {
-    float: left;
+    
     list-style: none;
     display: inline-block;
     width: 100%;
@@ -336,6 +339,19 @@ input[type="text"], input[type="password"] {
     color: #FFF;
 }
 
+.registerr {
+    height:1000px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    background: url("../assets/backgroundd.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+}
 
 .register {
     width: 44%;
@@ -356,6 +372,10 @@ input[type="text"], input[type="password"] {
 
 .register p a:hover {
     color: #FFF;
+}
+
+.register_from{
+    margin-top: 100px;
 }
 
 .footer {
@@ -606,6 +626,7 @@ input[type="text"], input[type="password"] {
         font-size: 12.4px;
     }
 }
+
 /*--- Responsive Code ---*/
 
 </style>
