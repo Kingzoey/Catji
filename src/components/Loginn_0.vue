@@ -51,9 +51,9 @@
       </div>
       <div class="register clearfix">
         <h2>注 册</h2>
-        <a href="/register" class="some-class">
+        <router-link to="/register" class="some-class">
           <span>立即注册</span>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -120,6 +120,7 @@ h1 {
   float: left;
   text-align: left;
   padding-right: 40px;
+  border-right: 1px solid #ddd;
 }
 
 h2 {
@@ -281,7 +282,6 @@ input[type="password"] {
 .register {
   width: 44%;
   float: left;
-  border-left: 1px solid #ddd;
   padding-left: 40px;
   text-align: left;
 }
