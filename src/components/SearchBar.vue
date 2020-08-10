@@ -3,7 +3,7 @@
   <div id="box">
     <input type="search" name="search" placeholder="请输入关键字" />
     <div id="search">
-      <a href="#">
+      <a href="/searchResult">
         <button id="searchButton">搜索</button>
       </a>
     </div>
