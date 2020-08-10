@@ -318,7 +318,7 @@ export default {
 <style scoped>
 .total {
   position: absolute;
-  top: 60px;
+  top: 300px;
   left: 300px;
 }
 .normal-item {
