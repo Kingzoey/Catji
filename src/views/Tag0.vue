@@ -1,7 +1,7 @@
 <template>
   <div class="Tagg0">
   <NavBar2></NavBar2>
-    <Tagg0 style="background-color: #f0f0f0;"></Tagg0>
+    <Tagg0 style="background-color: #fbfbfb;"></Tagg0>
   </div>
 </template>
 

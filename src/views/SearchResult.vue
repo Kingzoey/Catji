@@ -1,10 +1,10 @@
 <template>
-    <div class="SearchResult">
-      <NavBar></NavBar>
+  <div class="SearchResult">
+    <NavBar></NavBar>
     <SearchBar></SearchBar>
     <br />
     <br />
-      <header class="SearchResult-header">
+    <header class="SearchResult-header">
       <span class="name">搜索结果</span>
       <div class="more tab-switch">
         <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">视频</div>
@@ -31,7 +31,7 @@
         <p :title="item.title" class="title">{{item.title}}</p>
       </router-link>
     </div>
-    </div>
+  </div>
 </template>    
 
 
@@ -41,7 +41,7 @@
 import NavBar from "@/components/NavBar.vue";
 export default {
   name: "SearchResult",
-   components: {
+  components: {
     NavBar,
   },
   computed: {
