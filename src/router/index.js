@@ -84,7 +84,7 @@ const routes = [{
 		path: '/videolist',
 		name: 'videolist',
 		component: () =>
-			import ('../views/videolist.vue')
+			import ('../views/VideoList.vue')
 	},
     {
         path: '/searchResult',
