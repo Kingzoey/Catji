@@ -80,6 +80,12 @@ const routes = [{
         component: () =>
             import ('../views/Video.vue')
     },
+	{
+		path: '/videolist',
+		name: 'videolist',
+		component: () =>
+			import ('../views/videolist.vue')
+	},
     {
         path: '/searchResult',
         name: 'SearchResult',
