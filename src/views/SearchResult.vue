@@ -68,6 +68,7 @@ export default {
   justify-content: space-between;
   height: 36px;
   margin-bottom: 16px;
+  background: url("../assets/backgroundd.jpg");
 }
 
 .name {
@@ -75,26 +76,27 @@ export default {
   color: #212121;
   vertical-align: bottom;
   font-size: 30px;
-  line-height: 40px;
+  line-height: 80px;
 }
 
 .more {
   display: inline-block;
   padding: 0 0 0 12px;
-  color: #505050;
+  color:#999;
   text-align: center;
   transition: all 0.2s;
 }
 
 .tab-switch {
   display: flex;
-}
+  /* background-color: lightpink; */
+  }
 
 .tab-switch-item {
   font-size: 20px;
   line-height: 40px;
-  height: 30px;
-  margin-right: 300px;
+  height: 40px;
+  margin-right: 278px;
   cursor: pointer;
 }
 
@@ -110,10 +112,9 @@ export default {
   justify-content: space-between;
   margin-bottom: 18px;
 }
-
 .number {
   font-size: 14px;
-  color: #999;
+  color:dimgray;
   width: 18px;
   height: 18px;
   text-align: center;
