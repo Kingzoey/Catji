@@ -1,6 +1,11 @@
 <template>
     <div class="SearchResult">
-    <header class="rank-header">
+      <NavBar></NavBar>
+    <SearchBar></SearchBar>
+    <br />
+    <br />
+      <header class="SearchResult-header">
+      <span class="name">搜索结果</span>
       <div class="more tab-switch">
         <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">视频</div>
         <div class="tab-switch-item" :class="{on : on == 1}" @click="on = 1">用户</div>
@@ -8,9 +13,9 @@
         <div class="tab-switch-item" :class="{on : on == 3}" @click="on = 3">tag</div>
       </div>
     </header>
-    <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
+    <div class="SearchResult-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
       <span class="number" :class="{on : index < 4}">{{index + 1}}</span>
-      <div class="preview" v-if="index < 3">
+      <div class="preview" v-if="index < 4">
         <div class="pic">
           <router-link :to="item.url" class="link">
             <img :src="item.cover" :alt="item.title" />
@@ -27,12 +32,18 @@
       </router-link>
     </div>
     </div>
-</template>
+</template>    
+
+
 
 
 <script>
+import NavBar from "@/components/NavBar.vue";
 export default {
-  name: "Top",
+  name: "SearchResult",
+   components: {
+    NavBar,
+  },
   computed: {
     curHotlist() {
       if (this.on === 0) return this.videoHotList;
@@ -44,261 +55,14 @@ export default {
   data() {
     return {
       on: 0,
-      videoHotList: [
-        {
-          id: 100000,
-          url: "/video/100000",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100001,
-          url: "/video/100001",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100002,
-          url: "/video/100002",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100003,
-          url: "/video/100003",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100004,
-          url: "/video/100004",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100005,
-          url: "/video/100005",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100006,
-          url: "/video/100006",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100007,
-          url: "/video/100007",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100008,
-          url: "/video/100008",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100009,
-          url: "/video/100009",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-      ],
-      userHotList: [
-        {
-          id: 100000,
-          url: "/space/100000",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100001,
-          url: "/space/100001",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100002,
-          url: "/space/100002",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100003,
-          url: "/space/100003",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100004,
-          url: "/space/100004",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100005,
-          url: "/space/100005",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100006,
-          url: "/space/100006",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100007,
-          url: "/space/100007",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100008,
-          url: "/space/100008",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100009,
-          url: "/space/100009",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-      ],
-      nekoHotList: [
-        {
-          id: 100000,
-          url: "/cat/100000",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100001,
-          url: "/cat/100001",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100002,
-          url: "/cat/100002",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100003,
-          url: "/cat/100003",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100004,
-          url: "/cat/100004",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100005,
-          url: "/cat/100005",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100006,
-          url: "/cat/100006",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100007,
-          url: "/cat/100007",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100008,
-          url: "/cat/100008",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100009,
-          url: "/cat/100009",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-      ],
-      tagHotList: [
-        {
-          id: 100000,
-          url: "/space/100000",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100001,
-          url: "/space/100001",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100002,
-          url: "/space/100002",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100003,
-          url: "/space/100003",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100004,
-          url: "/space/100004",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100005,
-          url: "/space/100005",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100006,
-          url: "/space/100006",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100007,
-          url: "/space/100007",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100008,
-          url: "/space/100008",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100009,
-          url: "/space/100009",
-          title: "测试tag",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-      ],
     };
   },
 };
 </script>
 
+
 <style scoped>
-.rank-header {
+.SearchResult-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -310,8 +74,8 @@ export default {
   display: inline-block;
   color: #212121;
   vertical-align: bottom;
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 30px;
+  line-height: 40px;
 }
 
 .more {
@@ -327,10 +91,10 @@ export default {
 }
 
 .tab-switch-item {
-  font-size: 14px;
-  line-height: 30px;
+  font-size: 20px;
+  line-height: 40px;
   height: 30px;
-  margin-right: 24px;
+  margin-right: 300px;
   cursor: pointer;
 }
 
@@ -339,7 +103,7 @@ export default {
   color: #00a1d6;
 }
 
-.rank-wrap {
+.SearchResult-wrap {
   display: flex;
   position: relative;
   -ms-flex-pack: justify;
@@ -397,3 +161,4 @@ export default {
   margin-left: 12px;
 }
 </style>
+    
