@@ -2,7 +2,11 @@
 <template>
   <div id="box">
     <input type="search" name="search" placeholder="请输入关键字" />
-    <div id="search">搜索</div>
+    <div id="search">
+      <a href="#">
+        <button id="searchButton">搜索</button>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -32,7 +36,7 @@ input {
   padding: 0 0 0 40px;
 }
 
-#search {
+#searchButton {
   width: 78px;
   height: 32px;
   float: right;
