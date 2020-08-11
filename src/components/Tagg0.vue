@@ -7,7 +7,7 @@
     objectid="1022:2315223416241c875fe8526024a1716f70fd69"
   >
     <div class="card-topic-a" node-type="topicSmall">
-      <img src="//wx1.sinaimg.cn/thumb180/00000a57ly9fs0olacvpbj2050050wg1.jpg" class="spic" />
+      <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3113236089,387341124&fm=26&gp=0.jpg" class="spic" />
       <div class="info">
         <div class="title">
           <h1>
