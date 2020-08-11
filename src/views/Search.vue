@@ -1,6 +1,10 @@
 <template>
-  <div class="search">
+  <div class="search clearfix">
+    
     <NavBar></NavBar>
+    <br />
+    <br />
+    <br/>
     <SearchBar></SearchBar>
     <br />
     <br />
@@ -34,7 +38,12 @@ export default {
 .search {
  
     background: url("../assets/backgroundd.jpg");
-    
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    position: absolute;
+    overflow: hidden;
 }
 
 </style>
