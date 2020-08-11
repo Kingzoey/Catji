@@ -316,15 +316,11 @@ export default {
 </script>
 
 <style scoped>
-.total {
-  position: absolute;
-  top: 300px;
-  left: 300px;
-}
+
 .normal-item {
   float: left;
   border: 200px;
-  margin-left: 50px;
+  margin-left: 70px;
 }
 
 .cb-send {
@@ -534,6 +530,8 @@ export default {
 
 .cb-page {
   margin: 20px 0;
+  float: left;
+  margin-left: 700px;
   /* font-size: 12px; */
 }
 

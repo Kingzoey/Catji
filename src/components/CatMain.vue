@@ -1,4 +1,3 @@
-
 <template>
   <!--话题结果-->
   <div
@@ -7,11 +6,13 @@
     objectid="1022:2315223416241c875fe8526024a1716f70fd69"
   >
     <div class="card-topic-a" node-type="topicSmall">
-      <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3113236089,387341124&fm=26&gp=0.jpg" class="spic" />
+      <div class="pic">
+          <img :src="DLAM" width="300" height="300" />
+      </div>
       <div class="info">
         <div class="title">
           <h1>
-            <a href="javascript:void(0);">#Catji#</a>
+            <a href="javascript:void(0);">哆啦a梦</a>
           </h1>
           <div>
             <a
@@ -20,16 +21,14 @@
               action-type="topicShare"
               action-data="uid=1736329970&title=分享&content=我分享了话题#nba比赛日#"
             >分享</a>
-            <a
-              href="/claim/apply?object_id=1022:2315223416241c875fe8526024a1716f70fd69&uid=2910965943&query=%23NBA%E6%AF%94%E8%B5%9B%E6%97%A5%23"
-              class="s-btn-c"
-              target="_blank"
-            >申请主持人</a>
+            
           </div>
         </div>
+        
         <div class="total">
-          <span>阅读45.2亿</span>
-          <span>讨论44.7万</span>
+          <span>粉丝：十亿</span>
+          <br>
+          <span>铲屎官：野比大雄</span>
         </div>
       </div>
     </div>
@@ -42,47 +41,21 @@
           <i class="icon-warn-s"></i>上传失败，你的图片过小，需要上传1000x300像素以上的图片
         </p>
       </div>
-      <div class="card-topic-a">
-        <img src="//wx1.sinaimg.cn/thumb180/00000a57ly9fs0olacvpbj2050050wg1.jpg" class="spic" />
-        <div class="info">
-          <div class="title">
-            <h1>
-              <a href="javascript:void(0);">#NBA比赛日#</a>
-            </h1>
-            <div>
-              <a
-                href="javascript:void(0);"
-                class="s-btn-c"
-                action-type="topicShare"
-                action-data="uid=1736329970&title=分享&content=我分享了话题#nba比赛日#"
-              >分享</a>
-              <a
-                href="/claim/apply?object_id=1022:2315223416241c875fe8526024a1716f70fd69&uid=2910965943&query=%23NBA%E6%AF%94%E8%B5%9B%E6%97%A5%23"
-                class="s-btn-c"
-                target="_blank"
-              >申请主持人</a>
-            </div>
-          </div>
-          <div class="total">
-            <span>阅读45.2亿</span>
-            <span>讨论44.7万</span>
-          </div>
-        </div>
-      </div>
     </div>
+
     <!--话题头部主导航-->
     <div class="m-main-nav">
       <li>
-        <a class="cur" href="/" title="视频">视频</a>
+        <a class="cur" href="/" title="猫咪介绍">猫咪视频</a>
       </li>
       <li>
-        <a href="/" title="动态">动态</a>
+        <a href="/" title="猫咪动态">猫咪动态</a>
       </li>
       <li>
-        <a href="/" title="猫咪">猫咪</a>
+        <a href="/" title="猫咪视频">猫咪视频</a>
       </li>
       <li>
-        <a href="/" title="Tag">Tag</a>
+        <a href="/" title="猫咪Tag">猫咪Tag</a>
       </li>
     </div>
     <!--/话题头部主导航-->
@@ -90,10 +63,20 @@
 </template>
 
 <script>
-</script>
+import DLAM from "@/assets/DLAM.jpg";
+export default {
+    name: "CatMain",
+    data() {
+        return {
+            DLAM: DLAM,
+        };
+  }
+}
+</script>>
 
 <style scoped>
 /* card wrap */
+
 .card-wrap {
   margin-bottom: 10px;
   border-radius: 2px;
@@ -101,7 +84,15 @@
   background: #fff;
 }
 /* card */
-
+.pic
+{
+    text-align: center;
+}
+.info
+{
+    
+    margin-left: 840px;
+}
 /* card head */
 .card-head {
   font-size: 14px;
@@ -135,7 +126,7 @@
   vertical-align: -3px;
   margin-left: 10px;
 }
-.card-topic-a .up-pic,
+
 .card-topic-b .up-pic {
   position: absolute;
   top: 10px;
@@ -165,19 +156,14 @@
 .card-topic-a {
   padding: 26px 20px;
   border-bottom: 1px solid #e6e6e6;
-  position: relative;
+  margin-bottom: 10px;
 }
 .card-topic-a .spic,
 .card-topic-a .info {
   display: inline-block;
   vertical-align: middle;
 }
-.card-topic-a .spic {
-  border-radius: 3px;
-  width: 70px;
-  height: 70px;
-  margin-right: 20px;
-}
+
 .card-topic-a .info .title {
   margin-bottom: 5px;
   height: 28px;
