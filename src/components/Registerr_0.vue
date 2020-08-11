@@ -259,7 +259,7 @@ input[type="password"] {
 }
 
 .login a:hover {
-  color: #fff;
+  color: #000;
 }
 
 .registerr {

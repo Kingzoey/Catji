@@ -279,6 +279,7 @@ input[type="password"] {
   color: #fff;
 }
 
+
 .register {
   width: 44%;
   float: left;
@@ -289,6 +290,14 @@ input[type="password"] {
 .register p {
   color: #ccc;
   margin-bottom: 10px;
+}
+
+.register a {
+  color: #ccc;
+}
+
+.register a:hover {
+  color: #000;
 }
 
 .register p a {
