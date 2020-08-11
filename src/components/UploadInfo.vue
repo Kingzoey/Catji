@@ -1,25 +1,39 @@
 <template>
   
       <div class="register clearfix">
-        <h2>标题</h2>
+        <p>
+    <span class="header">
+      <em style="color:red;font-size:15px;">*</em>&nbsp;标题
+    </span>
+    <span>可输入20个字</span></p>
+
         <form action="#" method="post"><br>
           <input type="text" placeholder="可输入20个字" id="re_username" />
          <br><br><br><br>
-          <h2>类型</h2>
+   <p>
+    <span class="header">
+      <em style="color:red;font-size:15px;">*</em>&nbsp;类型
+    </span>
+    <span>是否符合原创规则</span>
+    </p>
           <br><input type="radio" name="type" value="yuanchuang">原创
           <input type="radio" name="type" value="zhuanzai"> 转载<br><br>
-          <h2>分区</h2>
-<div class="dropdown">
-  <button class="dropbtn">选择分区</button><br><br>
+             <p>
+    <span class="header">
+      <em style="color:red;font-size:15px;">*</em>&nbsp;分区
+    </span>
+<span class="dropdown">
+  <button class="dropbtn">选择分区</button>
   <div class="dropdown-content">
 <input type="button" value="发布动态" id="register" /><br>
 <input type="button" value="发布猫圈" id="register" /><br>
   </div>
-</div>
-          <h2>标签</h2>
+</span></p><br>
+           <span class="header">标签</span>
+           <span>    添加标签增加关联！</span>
                  
-          <input type="text" placeholder="创建标签" id="re_username" /><br><br><br><br>
-          <h2>简介</h2>
+          <input type="text" placeholder="创建标签" id="re_username" />
+         <br><br><br><br><br> <div class="header">简介</div>
                   
           <input type="text" placeholder="介绍一下内容" id="re_username" />
         </form>
@@ -39,6 +53,11 @@ export default {
 </script>
 
 <style scoped>
+.header {
+  font-size: 20px;
+  color: #333;
+  font-weight: 400;
+}
 .dropdown {
   position: relative;
   display: inline-block;
