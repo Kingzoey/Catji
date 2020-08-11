@@ -3,7 +3,7 @@
     <header class="rank-header">
       <span class="name">搜索历史</span>
       <div class="more tab-switch">
-        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">我搜过的</div>
+        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0"></div>
       </div>
     </header>
     <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
@@ -109,7 +109,7 @@ export default {
    width: 265px;
    float:left;
    position: relative;
-   top:60px;left: 30%;
+   top:30px;left: 55%;
    z-index: 100;
 }
 

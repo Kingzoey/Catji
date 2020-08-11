@@ -7,7 +7,7 @@
       </div>
     </header>
     <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
-      <span class="number" :class="{on : index < 0}">{{index + 1}}</span>
+      <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
       <router-link :to="item.url" class="link">
         <p :title="item.title" class="title">{{item.title}}</p>
       </router-link>
@@ -109,7 +109,7 @@ export default {
    width: 265px;
    float:left;
    position: relative;
-   top:60px;left: 45%;
+   top:30px;left: 10%;
    z-index: 100;
 }
 

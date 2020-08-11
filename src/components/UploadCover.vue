@@ -1,77 +1,85 @@
 <template>
-    <div class="mainBody">
-       <div class="head">
-           <h1>投稿信息</h1>
-       </div>
-       <div class="File">
-            <div class="UploadIco">
-            
-                    <img :src= "uploadCover" height="100" width="200"> 
-                    <br/>
-                    <p> &nbsp;&nbsp;&nbsp;    
-                    <input type="file" name="cover" class="button" >
-                    </p>
-            </div>
-            <div class="state">
-                  
-                <div class="state2">
-                    <h2>封面</h2>
-                    <tr>JPG、JEPG、PNG格式图片需要小于10M</tr>
-                    <tr>GIF格式图片需要小于3M，建议时长小于3s</tr>
-                   
-                </div>
-              
-            </div>
-                       
-        
-       </div>
+  <div class="cover-warp">
+    <h1 class="title">投稿信息</h1>
+    <div class="cover clearfix">
+      <div class="cover-pic">
+        <div class="clickable" @click="choose_cover">
+          <img :src="coverUrl" height="100" width="200" />
+        </div>
+      </div>
+      <div class="cover-tips">
+        <p class="header">
+          <em style="color:red;font-size:18px;">*</em>&nbsp;封面
+        </p>
+        <em>JPG、JEPG、PNG格式图片需要小于10M</em>
+        <em>GIF格式图片需要小于3M，建议时长小于3s</em>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-import uploadCover from "@/assets/uploadCover.png";
+import no_cover from "@/assets/uploadCover.png";
 export default {
-    name: "Middle",
-    data() {
-        return {
-            uploadCover:uploadCover,
-        };
-  }
-}
+  name: "Middle",
+  data() {
+    return {
+      coverUrl: no_cover,
+    };
+  },
+  methods: {
+    choose_cover() {
+      alert("hello");
+    },
+  },
+};
 </script>
 
-<style>
-.mainBody
-{
-    float:left;
-    margin-right:50px;
-    margin-top:50px;
+<style scoped>
+.main-body {
 }
 
-.File
-{
- /*   border:0.5px solid grey;*/
-    margin-top:50px;
+.header {
+  font-size: 16px;
+  line-height: 16px;
+  color: #333;
 }
 
-.UploadIco
-{
-    margin-top:50px;
-    text-align: center;
+.title {
+  font-size: 22px;
+  line-height: 22px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  color: #333;
 }
 
-
-.state
-{
-    margin-left: 20px;
-    
+.cover {
+  /*   border:0.5px solid grey;*/
 }
 
-.state2
-{
-    margin-top:50px;
+.cover-pic {
+  float: left;
+  width: 192px;
+  height: 106px;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
+.clickable {
+  cursor: pointer;
+}
 
+.cover-tips {
+  float: left;
+  margin: 20px;
+}
 
+.cover-tips > em {
+  display: block;
+  color: #666;
+  line-height: 12px;
+  font-size: 12px;
+  font-style: normal;
+  margin-top: 6px;
+}
 </style>

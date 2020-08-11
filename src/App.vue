@@ -54,6 +54,14 @@ ul {
   list-style: none;
 }
 
+[type="button"],
+[type="reset"],
+[type="submit"],
+button {
+  border-style: none;
+  padding: 0;
+}
+
 /* 用来清除浮动的class */
 .clearfix::after {
   content: ".";

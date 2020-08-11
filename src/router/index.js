@@ -79,7 +79,20 @@ const routes = [{
         name: 'Video',
         component: () =>
             import ('../views/Video.vue')
+    },
+	{
+		path: '/videolist',
+		name: 'videolist',
+		component: () =>
+			import ('../views/VideoList.vue')
+	},
+    {
+        path: '/searchResult',
+        name: 'SearchResult',
+        component: () =>
+            import ('../views/SearchResult.vue')
     }
+
 ]
 
 const router = new VueRouter({

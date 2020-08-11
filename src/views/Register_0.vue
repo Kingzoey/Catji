@@ -1,7 +1,7 @@
 <template>
   <div class="register_0">
-  <NavBar2></NavBar2>
-    <Registerr_0 style="background-color: #f0f0f0;"></Registerr_0>
+    <NavBar2 />
+    <Registerr_0 />
   </div>
 </template>
 
