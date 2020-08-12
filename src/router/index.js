@@ -80,17 +80,23 @@ const routes = [{
         component: () =>
             import ('../views/Video.vue')
     },
-	{
-		path: '/videolist',
-		name: 'videolist',
-		component: () =>
-			import ('../views/VideoList.vue')
-	},
+    {
+        path: '/videolist',
+        name: 'videolist',
+        component: () =>
+            import ('../views/VideoList.vue')
+    },
     {
         path: '/searchResult',
         name: 'SearchResult',
         component: () =>
             import ('../views/SearchResult.vue')
+    },
+    {
+        path: '/cat',
+        name: 'Cat',
+        component: () =>
+            import ('../views/Cat.vue')
     }
 
 ]
