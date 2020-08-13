@@ -1,3 +1,7 @@
+//
+// 这里的切换栏不单独分成组件了, 不然页面和组件之间的数据传递不好弄
+// 见views/SearchResult.vue
+//
 <template>
   <div class="SearchResultBar">
     <header class="SearchResultBar-header">
@@ -74,7 +78,7 @@ export default {
 .more {
   display: inline-block;
   padding: 0 0 0 12px;
-  color:#999;
+  color: #999;
   text-align: center;
   transition: all 0.2s;
 }
@@ -82,7 +86,7 @@ export default {
 .tab-switch {
   display: flex;
   /* background-color: lightpink; */
-  }
+}
 
 .tab-switch-item {
   font-size: 20px;
@@ -106,7 +110,7 @@ export default {
 }
 .number {
   font-size: 14px;
-  color:dimgray;
+  color: dimgray;
   width: 18px;
   height: 18px;
   text-align: center;
