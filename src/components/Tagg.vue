@@ -100,6 +100,11 @@
   border: 1px solid #eee;
   background: #fff;
 }
+.m-main-nav
+{
+  text-align: center;
+  margin-bottom: 100px;
+}
 /* card */
 
 /* card head */
