@@ -149,6 +149,13 @@
         <br />
         <a title="视频20">视频20</a>
       </div>
+      <div class="normal-item">
+        <a class="cover" href="#" target="_blank">
+          <img :src="test1" height="90" width="175" alt="视频20" />
+        </a>
+        <br />
+        <a title="视频21">视频21</a>
+      </div>
     </div>
     <div class="cb-page">
       <a @click="toPage(cur_page-1)" class="prev" v-if="cur_page > 1">上一页</a>
@@ -529,7 +536,7 @@ export default {
 }
 
 .cb-page {
-  margin: 20px 0;
+  margin-top: 50px;
   float: left;
   margin-left: 700px;
   /* font-size: 12px; */

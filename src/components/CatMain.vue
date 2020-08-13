@@ -46,16 +46,16 @@
     <!--话题头部主导航-->
     <div class="m-main-nav">
       <li>
-        <a class="cur" href="/" title="猫咪介绍">猫咪视频</a>
+        <a class="cur" href="/cat" title="猫咪介绍">猫咪视频</a>
       </li>
       <li>
-        <a href="/" title="猫咪动态">猫咪动态</a>
+        <a href="/cat" title="猫咪动态">猫咪动态</a>
       </li>
       <li>
-        <a href="/" title="猫咪视频">猫咪视频</a>
+        <a href="/cat" title="猫咪视频">猫咪视频</a>
       </li>
       <li>
-        <a href="/" title="猫咪Tag">猫咪Tag</a>
+        <a href="/cat" title="猫咪Tag">猫咪Tag</a>
       </li>
     </div>
     <!--/话题头部主导航-->
@@ -72,6 +72,7 @@ export default {
         };
   }
 }
+
 </script>>
 
 <style scoped>
@@ -92,6 +93,11 @@ export default {
 {
     
     margin-left: 840px;
+}
+.m-main-nav
+{
+  text-align: center;
+  margin-bottom: 100px;
 }
 /* card head */
 .card-head {
