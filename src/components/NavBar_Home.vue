@@ -1,3 +1,6 @@
+//
+// 导航栏 - Home页专用
+//
 <template>
   <div class="header-box">
     <div class="header">
@@ -76,7 +79,7 @@ export default {
 }
 
 .nav li a:hover {
-  color:cornflowerblue;
+  color: cornflowerblue;
 }
 
 .nav ul li {
