@@ -148,11 +148,11 @@ export default {
   color:cornflowerblue;
 }
 
-.more tab-switch li a {
+.more .tab-switch li a {
   color: #fff;
   display: block;
 }
-.more tab-switch li a:hover {
+.more .tab-switch li a:hover {
   color:cornflowerblue;
 }
 

@@ -97,6 +97,18 @@ const routes = [{
         name: 'Cat',
         component: () =>
             import ('../views/Cat.vue')
+    },
+    {
+        path: '/userlist',
+        name: 'UserList',
+        component: () =>
+            import ('../views/UserList.vue')
+    },
+    {
+        path: '/ulist',
+        name: 'UList',
+        component: () =>
+            import ('../views/UList.vue')
     }
 
 ]
