@@ -1,17 +1,18 @@
 <template>
 	<div class="content" style="">
-		<div class="user-pic" style="background-image: url(&quot;//i0.hdslb.com/bfs/space/768cc4fd97618cf589d23c2711a1d1a729f42235.png@.webp&quot;);"></div>
-		<a class="user-name tc-black c-pointer" data-userinfo-popup-inited="true" href="http://localhost:8082/">bili_17352450701</a>
-		<div class="bottom"><a class="number-part c-pointer f-left" href="http://localhost:8082/">
+		<div class="user-pic" style="background-image">
+		</div>
+		<a class="user-name tc-black c-pointer" data-userinfo-popup-inited="true" href="http://localhost:8080/">bili_17352450701</a>
+		<div class="bottom"><a class="number-part c-pointer f-left" href="http://localhost:8080/">
 				<p class="numbers fs-14">3</p>
 				<p class="text tc-slate fs-12 ls-0">关注</p>
-			</a><a class="number-part c-pointer f-left" href="http://localhost:8082/">
+			</a><a class="number-part c-pointer f-left" href="http://localhost:8080/">
 				<p class="numbers fs-14">0</p>
 				<p class="text tc-slate fs-12 ls-0">粉丝</p>
-			</a><a class="number-part c-pointer f-left" href="http://localhost:8082/">
+			</a><a class="number-part c-pointer f-left" href="http://localhost:8080/">
 				<p class="numbers fs-14">1</p>
 				<p class="text tc-slate fs-12 ls-0">动态</p>
-			</a></div><img src="//i0.hdslb.com/bfs/face/member/noface.jpg@.webp" class="user-head c-pointer"
+			</a></div><img src="../assets/userhead.png" class="user-head c-pointer"
 		data-userinfo-popup-inited="true">
 	</div>
 </template>
@@ -29,6 +30,7 @@
 		width: 244px;
 		height: 64px;
 		background: center/cover no-repeat;
+		background-image: url(../assets/userinfo.jpg);
 	}
 
 	.content .user-name {
