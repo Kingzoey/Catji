@@ -112,6 +112,12 @@ export default {
   margin-bottom: 16px;
 }
 
+.m-main-nav
+{
+  text-align: center;
+  margin-bottom: 100px;
+}
+
 .name {
   display: inline-block;
   color: #212121;

@@ -1,25 +1,27 @@
 <template>
-  <div class="main-content clearfix">
-    <div class="left-column">
-      <div class="video-info">
-        <h1 class="info-title">
-          <span class="title" :title="video.title">{{video.title}}</span>
-        </h1>
-        <div class="info-meta">
-          <span class="meta-view" :title="video.view_num + '次播放'">{{video.view_num}}播放 ·</span>
-          <span class="meta-comment" :title="video.comment_num + '条评论'">{{video.comment_num}}评论</span>
-          <span class="meta-time">{{video.upload_time}}</span>
+  <div>
+    <NavBar />
+    <div class="main-content clearfix">
+      <div class="left-column">
+        <div class="video-info">
+          <h1 class="info-title">
+            <span class="title" :title="video.title">{{video.title}}</span>
+          </h1>
+          <div class="info-meta">
+            <span class="meta-view" :title="video.view_num + '次播放'">{{video.view_num}}播放 ·</span>
+            <span class="meta-comment" :title="video.comment_num + '条评论'">{{video.comment_num}}评论</span>
+            <span class="meta-time">{{video.upload_time}}</span>
+          </div>
         </div>
-      </div>
-      <div class="player-warp">
-        <!-- <video-player
+        <div class="player-warp">
+          <!-- <video-player
             class="video-player-box"
             ref="videoPlayer"
             :options="playerOptions"
             :playsinline="true"
             customEventName="customstatechangedeventname"
-        ></video-player>-->
-        <!-- @play="onPlayerPlay($event)"
+          ></video-player>-->
+          <!-- @play="onPlayerPlay($event)"
             @pause="onPlayerPause($event)"
             @ended="onPlayerEnded($event)"
             @waiting="onPlayerWaiting($event)"
@@ -29,87 +31,88 @@
             @canplay="onPlayerCanplay($event)"
             @canplaythrough="onPlayerCanplaythrough($event)"
             @statechanged="playerStateChanged($event)"
-        @ready="playerReadied"-->
-      </div>
-      <div class="toolbar">
-        <span class="like" :title="video.like_num + '次点赞'">
-          <font-awesome-icon :icon="['fas', 'thumbs-up']" />
-          {{video.like_num}}
-        </span>
-        <span class="favorite" :title="video.favorite_num + '次收藏'">
-          <font-awesome-icon :icon="['fas', 'star']" />
-          {{video.favorite_num}}
-        </span>
-        <span class="share" :title="video.share_num + '次分享'">
-          <font-awesome-icon :icon="['fas', 'share-square']" />
-          {{video.share_num}}
-        </span>
-      </div>
-      <div class="video-desc">
-        <div class="desc-info" :class="{open : expand}">{{video.desc}}</div>
-        <div class="expand-all" :class="{open : expand}" @click="expand = !expand">
-          <span>
-            {{expand ? '收起' : '展开全部'}}
-            <font-awesome-icon :icon="['fas', (expand ? 'chevron-up' : 'chevron-down')]" />
+          @ready="playerReadied"-->
+        </div>
+        <div class="toolbar">
+          <span class="like" :title="video.like_num + '次点赞'">
+            <font-awesome-icon :icon="['fas', 'thumbs-up']" />
+            {{video.like_num}}
+          </span>
+          <span class="favorite" :title="video.favorite_num + '次收藏'">
+            <font-awesome-icon :icon="['fas', 'star']" />
+            {{video.favorite_num}}
+          </span>
+          <span class="share" :title="video.share_num + '次分享'">
+            <font-awesome-icon :icon="['fas', 'share-square']" />
+            {{video.share_num}}
           </span>
         </div>
-      </div>
-      <div class="video-tag clearfix">
-        <ul>
-          <li class="tag" v-for="item in video.tags" :key="item.tag_id">
-            <router-link :to="/tag/ + item.tag_id">{{item.name}}</router-link>
-          </li>
-        </ul>
-      </div>
-      <VideoComment />
-    </div>
-    <div class="right-column">
-      <div class="video-up">
-        <!-- up头像 -->
-        <div class="up-avatar">
-          <router-link :to="/space/ + video.up.usid">
-            <img :src="video.up.avatar" width="48" height="48" />
-          </router-link>
-        </div>
-        <!-- up名字, up介绍, 右上 -->
-        <div class="up-info">
-          <div class="up-name" style="line-height:20px;height:20px;">
-            <router-link :to="/space/ + video.up.usid" class="username">{{video.up.name}}</router-link>
-            <router-link :to="/message/ + video.up.usid" class="message">
-              <font-awesome-icon :icon="['fas', 'envelope']" />&nbsp;私信
-            </router-link>
-          </div>
-          <div class="up-desc">{{video.up.desc}}</div>
-        </div>
-        <!-- 关注up, 右下 -->
-        <div class="up-btns">
-          <div class="up-follow">
+        <div class="video-desc">
+          <div class="desc-info" :class="{open : expand}">{{video.desc}}</div>
+          <div class="expand-all" :class="{open : expand}" @click="expand = !expand">
             <span>
-              <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注
-              <span>{{video.up.follow_num}}</span>
+              {{expand ? '收起' : '展开全部'}}
+              <font-awesome-icon :icon="['fas', (expand ? 'chevron-up' : 'chevron-down')]" />
             </span>
           </div>
         </div>
+        <div class="video-tag clearfix">
+          <ul>
+            <li class="tag" v-for="item in video.tags" :key="item.tag_id">
+              <router-link :to="/tag/ + item.tag_id">{{item.name}}</router-link>
+            </li>
+          </ul>
+        </div>
+        <VideoComment />
       </div>
-      <div class="rec">
-        <div class="rec-head">视频推荐</div>
-        <div class="rec-list">
-          <div class="rectem" v-for="rectem in recs" :key="rectem.vid">
-            <!-- 封面, 左侧 -->
-            <div class="rectem-cover">
-              <router-link :to="/video/ + rectem.vid">
-                <img :src="rectem.cover" width="168" height="95" />
+      <div class="right-column">
+        <div class="video-up">
+          <!-- up头像 -->
+          <div class="up-avatar">
+            <router-link :to="/space/ + video.up.usid">
+              <img :src="video.up.avatar" width="48" height="48" />
+            </router-link>
+          </div>
+          <!-- up名字, up介绍, 右上 -->
+          <div class="up-info">
+            <div class="up-name" style="line-height:20px;height:20px;">
+              <router-link :to="/space/ + video.up.usid" class="username">{{video.up.name}}</router-link>
+              <router-link :to="/message/ + video.up.usid" class="message">
+                <font-awesome-icon :icon="['fas', 'envelope']" />&nbsp;私信
               </router-link>
             </div>
-            <!-- 信息, 右侧 -->
-            <div class="rectem-info">
-              <div class="rectem-title">
-                <router-link :to="/video/ + rectem.vid">{{rectem.title}}</router-link>
+            <div class="up-desc">{{video.up.desc}}</div>
+          </div>
+          <!-- 关注up, 右下 -->
+          <div class="up-btns">
+            <div class="up-follow">
+              <span>
+                <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注
+                <span>{{video.up.follow_num}}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="rec">
+          <div class="rec-head">视频推荐</div>
+          <div class="rec-list">
+            <div class="rectem" v-for="rectem in recs" :key="rectem.vid">
+              <!-- 封面, 左侧 -->
+              <div class="rectem-cover">
+                <router-link :to="/video/ + rectem.vid">
+                  <img :src="rectem.cover" width="168" height="95" />
+                </router-link>
               </div>
-              <div class="rectem-up">
-                <router-link :to="/space/ + rectem.up.usid">{{rectem.up.name}}</router-link>
+              <!-- 信息, 右侧 -->
+              <div class="rectem-info">
+                <div class="rectem-title">
+                  <router-link :to="/video/ + rectem.vid">{{rectem.title}}</router-link>
+                </div>
+                <div class="rectem-up">
+                  <router-link :to="/space/ + rectem.up.usid">{{rectem.up.name}}</router-link>
+                </div>
+                <div class="rectem-count">{{rectem.view_num}} 播放 · {{rectem.comment_num}} 弹幕</div>
               </div>
-              <div class="rectem-count">{{rectem.view_num}} 播放 · {{rectem.comment_num}} 弹幕</div>
             </div>
           </div>
         </div>
@@ -119,10 +122,12 @@
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
 export default {
   name: "Video",
   components: {
+    NavBar,
     VideoComment,
   },
   beforeMount() {

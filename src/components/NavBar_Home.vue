@@ -1,5 +1,9 @@
+//
+// 导航栏 - Home页专用
+//
 <template>
   <div class="header-box">
+    <div class="grad"></div>
     <div class="header">
       <div class="nav">
         <ul>
@@ -53,20 +57,32 @@ export default {
 .header-box {
   width: 100%;
   height: 100px;
-  background: url(../assets/Nav.png);
+  background: url("../assets/Nav.png");
+  min-height: 155px;
+  background-repeat: no-repeat;
+  background-position: center 0;
+  background-size: cover;
 }
-
 .header {
   width: 100%;
-  height: 38px;
+  height: 48px;
   background: rgba(255, 255, 255, 0);
   position: relative;
   z-index: 999;
 }
-
+.grad {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), transparent);
+}
 .nav {
   width: 1000px;
-  height: 38px;
+  height: 48px;
   margin: 0 auto;
 }
 
@@ -76,15 +92,15 @@ export default {
 }
 
 .nav li a:hover {
-  color:cornflowerblue;
+  color: cornflowerblue;
 }
 
 .nav ul li {
   width: 50px;
-  height: 38px;
+  height: 48px;
   float: left;
   list-style: none;
-  line-height: 38px;
+  line-height: 48px;
   text-align: center;
   font-size: 16px;
   font-family: 微软雅黑;
@@ -94,7 +110,7 @@ export default {
 .nav ul li header {
   text-decoration: none;
   width: 50px;
-  height: 38px;
+  height: 48px;
   display: block;
   color: aliceblue;
 }
