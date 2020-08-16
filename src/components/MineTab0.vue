@@ -1,9 +1,11 @@
 <template>
+<div id="area-main-left" class="l">
   <div id="list-guide-left">
     <div class="part-guide-left active">
       <div class="banner">
         <a href="#area=splash" class="tab fixed">
-          <i class="icon icon-home"></i>欢迎
+		<font-awesome-icon :icon="['fas', 'smile']" />
+          <i class="icon icon-home"></i> 欢迎
         </a>
       </div>
      
@@ -12,7 +14,8 @@
     <div class="part-guide-left">
       <div class="banner">
         <a href="#area=setting" class="tab fixed">
-          <i class="icon icon-cog"></i>个人资料
+		<font-awesome-icon :icon="['fas', 'edit']" />
+          <i class="icon icon-cog"></i> 个人资料
         </a>
         <span id="hint-setting-left" class="hidden">0</span>
       </div>
@@ -22,7 +25,8 @@
     <div class="part-guide-left">
       <div class="banner">
         <a href="https://member.acfun.cn/academy" class="tab fixed">
-          <i class="icon icon-university"></i>关注 / 粉丝列表
+		<font-awesome-icon :icon="['fas', 'list']" />
+          <i class="icon icon-university"></i> 关注 / 粉丝列表
         </a>
       </div>
     </div>
@@ -30,7 +34,8 @@
     <div class="part-guide-left">
       <div class="banner">
         <a href="#area=favourite" class="tab fixed">
-          <i class="icon icon-folder-open"></i>收藏夹
+			<font-awesome-icon :icon="['fas', 'folder']" />
+          <i class="icon icon-folder-open"></i> 收藏夹
         </a>
         <span id="hint-favourite-left" class="hidden">0</span>
       </div>
@@ -39,7 +44,8 @@
     <div class="part-guide-left">
       <div class="banner">
         <a href="#area=history" class="tab fixed">
-          <i class="icon icon-history"></i>历史
+			<font-awesome-icon :icon="['fas', 'history']" />
+          <i class="icon icon-history"></i> 历史
         </a>
       </div>
       
@@ -47,14 +53,16 @@
     <div class="part-guide-left">
       <div class="banner">
         <a href="https://member.acfun.cn" class="tab fixed unfold">
-          <i class="icon icon-upload"></i>投稿管理
+		<font-awesome-icon :icon="['fas', 'upload']" />
+          <i class="icon icon-upload"></i> 投稿管理
         </a>
       </div>
     </div>
     <div class="part-guide-left">
       <div class="banner nav-data-center">
         <a href="https://member.acfun.cn/video-data-center" class="tab fixed">
-          <i class="icon icon-bar-chart"></i>数据中心
+		<font-awesome-icon :icon="['fas', 'database']" />
+          <i class="icon icon-bar-chart"></i>  数据中心
         </a>
         <img
           src="https://static.yximgs.com/udata/pkg/acfun/icon_new_pink.svg"
@@ -63,64 +71,23 @@
       </div>
     </div>
     
-    <div class="part-guide-left guide-creator">
-      <div class="banner">
-        <a class="tab fixed">
-          <i class="icon icon-creator"></i>MCN平台
-        </a>
-      </div>
-    </div>
-    
-    
-    
     
     
   </div>
+</div>
 </template>
 
-<script>
-export default {
-  name: "MineTab",
-
-  data() {
-    return {
-      on: 0,
-      hover: 0,
-      tabs: [
-        {
-          name: "欢迎",
-          component: () => import("../components/VideoListt.vue"),
-        },
-        {
-          name: "收藏夹",
-          component: () => import("../components/ListView.vue"),
-        },
-        {
-          name: "观看历史",
-          component: () => import("../components/ListView.vue"),
-        },
-        {
-          name: "投稿管理",
-          component: () => import("../components/TagList.vue"),
-        },
-        { name: "设置", component: () => import("../components/TagList.vue") },
-      ],
-    };
-  },
-  mounted() {
-    this.hover = this.on;
-  },
-  methods: {},
-};
 
 
-
-</script>
 
 <style scoped>
 #list-guide-left {
 	display: block;
 	width: 197px;
+}
+
+.l {
+    float: left;
 }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
