@@ -3,7 +3,7 @@
   <div id="list-guide-left">
     <div class="part-guide-left active">
       <div class="banner">
-        <a href="#area=splash" class="tab fixed">
+        <a href="/welcome" class="tab fixed">
 		<font-awesome-icon :icon="['fas', 'smile']" />
           <i class="icon icon-home"></i> 欢迎
         </a>
@@ -13,7 +13,7 @@
     
     <div class="part-guide-left">
       <div class="banner">
-        <a href="#area=setting" class="tab fixed">
+        <a href="/udata" class="tab fixed">
 		<font-awesome-icon :icon="['fas', 'edit']" />
           <i class="icon icon-cog"></i> 个人资料
         </a>
@@ -24,7 +24,7 @@
 
     <div class="part-guide-left">
       <div class="banner">
-        <a href="https://member.acfun.cn/academy" class="tab fixed">
+        <a href="/flist" class="tab fixed">
 		<font-awesome-icon :icon="['fas', 'list']" />
           <i class="icon icon-university"></i> 关注 / 粉丝列表
         </a>
@@ -33,7 +33,7 @@
     
     <div class="part-guide-left">
       <div class="banner">
-        <a href="#area=favourite" class="tab fixed">
+        <a href="/favourite" class="tab fixed">
 			<font-awesome-icon :icon="['fas', 'folder']" />
           <i class="icon icon-folder-open"></i> 收藏夹
         </a>
@@ -43,7 +43,7 @@
     </div>
     <div class="part-guide-left">
       <div class="banner">
-        <a href="#area=history" class="tab fixed">
+        <a href="/history" class="tab fixed">
 			<font-awesome-icon :icon="['fas', 'history']" />
           <i class="icon icon-history"></i> 历史
         </a>
@@ -52,7 +52,7 @@
     </div>
     <div class="part-guide-left">
       <div class="banner">
-        <a href="https://member.acfun.cn" class="tab fixed unfold">
+        <a href="/uploadlist" class="tab fixed unfold">
 		<font-awesome-icon :icon="['fas', 'upload']" />
           <i class="icon icon-upload"></i> 投稿管理
         </a>
@@ -60,9 +60,9 @@
     </div>
     <div class="part-guide-left">
       <div class="banner nav-data-center">
-        <a href="https://member.acfun.cn/video-data-center" class="tab fixed">
+        <a href="/datacentre" class="tab fixed">
 		<font-awesome-icon :icon="['fas', 'database']" />
-          <i class="icon icon-bar-chart"></i>  数据中心
+          <i class="icon icon-bar-chart"></i> 数据中心
         </a>
         <img
           src="https://static.yximgs.com/udata/pkg/acfun/icon_new_pink.svg"
@@ -70,9 +70,7 @@
         />
       </div>
     </div>
-    
-    
-    
+
   </div>
 </div>
 </template>
