@@ -10,25 +10,7 @@
         <form action="#" method="post"><br>
           <input type="text" placeholder="可输入20个字" id="re_username" />
          <br><br><br><br>
-   <p>
-    <span class="header">
-      <em style="color:red;font-size:15px;">*</em>&nbsp;类型
-    </span>
-    <span>是否符合原创规则</span>
-    </p>
-          <br><input type="radio" name="type" value="yuanchuang">原创
-          <input type="radio" name="type" value="zhuanzai"> 转载<br><br>
-             <p>
-    <span class="header">
-      <em style="color:red;font-size:15px;">*</em>&nbsp;分区
-    </span>
-<span class="dropdown">
-  <button class="dropbtn">选择分区</button>
-  <div class="dropdown-content">
-<input type="button" value="发布动态" id="register" /><br>
-<input type="button" value="发布猫圈" id="register" /><br>
-  </div>
-</span></p><br>
+
            <span class="header">标签</span>
            <span>    添加标签增加关联！</span>
                  
