@@ -1,4 +1,5 @@
 <template>
+<div id="area-main-left" class="l">
   <div id="list-guide-left">
     <div class="part-guide-left active">
       <div class="banner">
@@ -71,56 +72,21 @@
       </div>
     </div>
     
-    
-    
-    
-    
   </div>
+</div>
 </template>
 
-<script>
-export default {
-  name: "MineTab",
-
-  data() {
-    return {
-      on: 0,
-      hover: 0,
-      tabs: [
-        {
-          name: "欢迎",
-          component: () => import("../components/VideoListt.vue"),
-        },
-        {
-          name: "收藏夹",
-          component: () => import("../components/ListView.vue"),
-        },
-        {
-          name: "观看历史",
-          component: () => import("../components/ListView.vue"),
-        },
-        {
-          name: "投稿管理",
-          component: () => import("../components/TagList.vue"),
-        },
-        { name: "设置", component: () => import("../components/TagList.vue") },
-      ],
-    };
-  },
-  mounted() {
-    this.hover = this.on;
-  },
-  methods: {},
-};
 
 
-
-</script>
 
 <style scoped>
 #list-guide-left {
 	display: block;
 	width: 197px;
+}
+
+.l {
+    float: left;
 }
 
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
