@@ -121,6 +121,12 @@ const routes = [{
         name: 'Mine',
         component: () =>
             import ('../views/Mine.vue')
+    },
+    {
+        path: '/mine0',
+        name: 'Mine0',
+        component: () =>
+            import ('../views/Mine0.vue')
     }
 
 ]
