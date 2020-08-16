@@ -12,7 +12,7 @@
                 @mouseleave="hover = on"
                 >{{item.name}}
                 </li>
-                <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
+                
             </ul>
       </div>
       <component :is="tabs[on].component"></component>
@@ -22,11 +22,7 @@
 <script>
 export default {
     name:"MineTab",
-    computed: {
-    anthorx() {
-      return 100 + this.hover * 250;
-    },
-  },
+    
   data() {
     return {
       on: 0,
@@ -60,15 +56,15 @@ export default {
 }
 
 .nav-switch-item:hover {
-  color: #00a1d6;
+  color: pink;
 }
 
 .nav-switch-item.on {
-  color: #00a1d6;
+  color: pink;
 }
 
 .nav-switch-anchor {
-  background-color: #00a1d6;
+  background-color: pink;
   height: 2px;
   width: 50px;
   display: block;
