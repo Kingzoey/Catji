@@ -80,17 +80,53 @@ const routes = [{
         component: () =>
             import ('../views/Video.vue')
     },
-	{
-		path: '/videolist',
-		name: 'videolist',
-		component: () =>
-			import ('../views/VideoList.vue')
-	},
+    {
+        path: '/videolist',
+        name: 'videolist',
+        component: () =>
+            import ('../views/VideoList.vue')
+    },
     {
         path: '/searchResult',
         name: 'SearchResult',
         component: () =>
             import ('../views/SearchResult.vue')
+    },
+    {
+        path: '/cat',
+        name: 'Cat',
+        component: () =>
+            import ('../views/Cat.vue')
+    },
+    {
+        path: '/userlist',
+        name: 'UserList',
+        component: () =>
+            import ('../views/UserList.vue')
+    },
+    {
+        path: '/ulist',
+        name: 'UList',
+        component: () =>
+            import ('../views/UList.vue')
+    },
+    {
+        path: '/uinfo',
+        name: 'UInfo',
+        component: () =>
+            import ('../views/UInfo.vue')
+    },
+    {
+        path: '/mine',
+        name: 'Mine',
+        component: () =>
+            import ('../views/Mine.vue')
+    },
+    {
+        path: '/mine0',
+        name: 'Mine0',
+        component: () =>
+            import ('../views/Mine0.vue')
     }
 
 ]

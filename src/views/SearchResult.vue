@@ -1,43 +1,30 @@
 <template>
   <div class="SearchResult">
-    <NavBar></NavBar>
-    <SearchBar></SearchBar>
-    <br />
-    <br />
-    <header class="SearchResult-header">
+    <NavBar />
+    <div class="container">
       <span class="name">搜索结果</span>
-      <div class="more tab-switch">
-        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">视频</div>
-        <div class="tab-switch-item" :class="{on : on == 1}" @click="on = 1">用户</div>
-        <div class="tab-switch-item" :class="{on : on == 2}" @click="on = 2">猫咪</div>
-        <div class="tab-switch-item" :class="{on : on == 3}" @click="on = 3">tag</div>
+      <div class="nav">
+        <ul class="nav-switch">
+          <li
+            v-for="(item, index) in tabs"
+            :key="item.name"
+            class="nav-switch-item"
+            :class="{on : on == index}"
+            @click="on = index"
+            @mouseenter="hover = index"
+            @mouseleave="hover = on"
+          >{{item.name}}</li>
+          <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
+        </ul>
       </div>
-    </header>
-    <div class="SearchResult-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
-      <span class="number" :class="{on : index < 4}">{{index + 1}}</span>
-      <div class="preview" v-if="index < 4">
-        <div class="pic">
-          <router-link :to="item.url" class="link">
-            <img :src="item.cover" :alt="item.title" />
-          </router-link>
-        </div>
-        <div class="txt">
-          <router-link :to="item.url" class="link">
-            <p :title="item.title" class="title">{{item.title}}</p>
-          </router-link>
-        </div>
-      </div>
-      <router-link :to="item.url" class="link" v-else>
-        <p :title="item.title" class="title">{{item.title}}</p>
-      </router-link>
+      <component :is="tabs[on].component"></component>
     </div>
   </div>
-</template>    
-
-
-
+</template>
 
 <script>
+// import SearchResultBar from "@/components/SearchResultBar.vue";
+// 这里的切换栏不单独分成组件了, 不然页面和组件之间的数据传递不好弄
 import NavBar from "@/components/NavBar.vue";
 export default {
   name: "SearchResult",
@@ -45,30 +32,33 @@ export default {
     NavBar,
   },
   computed: {
-    curHotlist() {
-      if (this.on === 0) return this.videoHotList;
-      else if (this.on === 1) return this.userHotList;
-      else if (this.on === 2) return this.nekoHotList;
-      else return this.tagHotList;
+    anthorx() {
+      return 100 + this.hover * 250;
     },
   },
   data() {
     return {
       on: 0,
+      hover: 0,
+      tabs: [
+        { name: "视频", component: () => import("../components/VideoListt.vue") },
+        { name: "用户", component: () => import("../components/ListView.vue") },
+        { name: "猫咪", component: () => import("../components/ListView.vue") },
+        { name: "标签", component: () => import("../components/TagList.vue") },
+      ],
     };
   },
+  mounted() {
+    this.hover = this.on;
+  },
+  methods: {},
 };
 </script>
 
-
 <style scoped>
-.SearchResult-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 36px;
-  margin-bottom: 16px;
-  background: url("../assets/backgroundd.jpg");
+.container {
+  width: 1000px;
+  margin: 0 auto;
 }
 
 .name {
@@ -79,87 +69,58 @@ export default {
   line-height: 80px;
 }
 
-.more {
-  display: inline-block;
-  padding: 0 0 0 12px;
-  color:#999;
-  text-align: center;
-  transition: all 0.2s;
-}
-
-.tab-switch {
+.nav-header {
   display: flex;
-  /* background-color: lightpink; */
-  }
-
-.tab-switch-item {
-  font-size: 20px;
-  line-height: 40px;
-  height: 40px;
-  margin-right: 278px;
-  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  margin-bottom: 16px;
+  background: url("../assets/backgroundd.jpg");
 }
 
-.tab-switch-item.on {
-  border-bottom: 1px solid #00a1d6;
+.nav-switch {
+  position: relative;
+}
+
+.nav-switch-item {
+  display: inline-block;
+  height: 56px;
+  line-height: 56px;
+  width: 25%;
+  text-align: center;
+  font-size: 18px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccd0d7;
+}
+
+.nav-switch-item:hover {
   color: #00a1d6;
 }
 
-.SearchResult-wrap {
+.nav-switch-item.on {
+  color: #00a1d6;
+}
+
+.nav-switch-anchor {
+  background-color: #00a1d6;
+  height: 2px;
+  width: 50px;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 54px;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition-property: width, height, transform;
+  will-change: transform;
+  pointer-events: none;
+  transition-duration: 200ms;
+}
+
+.nav-wrap {
   display: flex;
   position: relative;
   -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 18px;
 }
-.number {
-  font-size: 14px;
-  color:dimgray;
-  width: 18px;
-  height: 18px;
-  text-align: center;
-  line-height: 18px;
-  border-radius: 2px;
-  display: inline-block;
-}
-
-.number.on {
-  color: #fff;
-  background: #00a1d6;
-}
-
-.title,
-.preview {
-  width: 235px;
-}
-
-.title {
-  font-size: 14px;
-  line-height: 20px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.preview {
-  width: 235px;
-  display: flex;
-  position: relative;
-  font-weight: 500;
-}
-
-.pic {
-  position: relative;
-}
-
-.pic img {
-  width: 112px;
-  height: 63px;
-  border-radius: 2px;
-}
-
-.txt {
-  margin-left: 12px;
-}
 </style>
-    

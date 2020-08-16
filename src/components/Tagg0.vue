@@ -112,6 +112,12 @@ export default {
   margin-bottom: 16px;
 }
 
+.m-main-nav
+{
+  text-align: center;
+  margin-bottom: 100px;
+}
+
 .name {
   display: inline-block;
   color: #212121;
@@ -148,11 +154,11 @@ export default {
   color:cornflowerblue;
 }
 
-.more tab-switch li a {
+.more .tab-switch li a {
   color: #fff;
   display: block;
 }
-.more tab-switch li a:hover {
+.more .tab-switch li a:hover {
   color:cornflowerblue;
 }
 
@@ -525,7 +531,7 @@ body {
 a {
   color: #333;
 }
-/*橘黄色*/
+/*橘黄色-Orange*/
 a:hover {
   color: #eb7350;
 }
