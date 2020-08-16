@@ -20,10 +20,13 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 	.content {
 		width: 244px;
-		height: 188px;
+		height: 220px;
+		position: relative;
+		background-color: white;
+		border-radius: 4px;
 	}
 
 	.content .user-pic {
@@ -74,7 +77,7 @@
 		width: 56px;
 		height: 56px;
 		left: 16px;
-		top: 110px;
+		top: 54px;
 		border-radius: 50%;
 		overflow: hidden;
 	}
