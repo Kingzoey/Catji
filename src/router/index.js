@@ -62,6 +62,12 @@ const routes = [{
         component: () =>
             import ('../views/Blog.vue')
     },
+    {
+        path: '/catspace',
+        name: 'CatSpace',
+        component: () =>
+            import ('../views/CatSpace.vue')
+    },
     // 收藏夹放在个人空间里
     // {
     //   path: '/favorite/:usid',
@@ -121,6 +127,12 @@ const routes = [{
         name: 'Mine',
         component: () =>
             import ('../views/Mine.vue')
+    },
+    {
+        path: '/mine0',
+        name: 'Mine0',
+        component: () =>
+            import ('../views/Mine0.vue')
     }
 
 ]

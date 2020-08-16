@@ -269,23 +269,19 @@
 </script>
 
 <style scoped>
-body {
-	font-family: Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
-	color: #222;
-	font-size: 14px;
-}
+
 .adaptive-scroll[data-v-08ab5c2b] {
 	-webkit-box-flex: 1;
 	-ms-flex: 1;
 	flex: 1;
 }
-* {
-	margin: 0;
-	padding: 0;
+
+.live-panel {
+  background-color: white;
+  border-radius: 4px;
+  margin-top: 8px;
 }
-元素 {
-	min-height: 0px;
-}
+
 .live-panel-item .live-up-img[data-v-2284ddc9] {
 	display: block;
 	width: 38px;
@@ -304,14 +300,6 @@ body {
 	border: 1px solid #fff;
 }
 
-a {
-	outline: none;
-	text-decoration: none;
-}
-
-元素 {
-	background-image: url("//i0.hdslb.com/bfs/face/5d35da6e93fbfb1a77ad6d1f1004b08413913f9a.jpg@50w_50h.webp");
-}
 
 .live-panel-item[data-v-2284ddc9]:first-child {
 	margin-top: 10px;
@@ -349,16 +337,6 @@ a {
 	justify-content: flex-start;
 }
 
-* {
-	margin: 0;
-	padding: 0;
-}
-
-body {
-	font-family: Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
-	color: #222;
-	font-size: 14px;
-}
 
 .live-panel-item[data-v-2284ddc9]:first-child {
 	margin-top: 10px;
@@ -369,40 +347,22 @@ body {
 	line-height: 22px;
 }
 
-body {
-	font-family: Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
-	color: #222;
-	font-size: 14px;
-}
 
 .live-panel .more-button .more[data-v-420e12aa] {
 	font-size: 12px;
 	letter-spacing: 0;
 }
 
-a {
-	outline: none;
-	text-decoration: none;
-}
 
 .c-pointer {
 	cursor: pointer;
 }
 
-body {
-	font-family: Helvetica Neue, Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Heiti SC, WenQuanYi Micro Hei, sans-serif;
-	color: #222;
-	font-size: 14px;
-}
 
 .tc-slate {
 	color: #99a2aa;
 }
 
-a {
-	outline: none;
-	text-decoration: none;
-}
 
 .live-panel-item .live-detail .up-name[data-v-2284ddc9] {
 	font-size: 14px;
@@ -413,10 +373,5 @@ a {
 	text-overflow: ellipsis;
 	max-height: 20px;
 }
-
-html {
-	font-size: 14px;
-}
-
 
 </style>

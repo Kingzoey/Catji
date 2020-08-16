@@ -57,6 +57,7 @@ ul {
 [type="button"],
 [type="reset"],
 [type="submit"],
+input,
 button {
   border-style: none;
   padding: 0;

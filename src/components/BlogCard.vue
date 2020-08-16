@@ -187,7 +187,6 @@ export default {
   border-radius: 4px;
   min-width: 632px;
   background: #fff;
-  border: 1px solid red;
   margin-top: 8px;
 }
 .user-head {

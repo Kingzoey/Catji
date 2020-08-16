@@ -2,11 +2,11 @@
 	<div class="content" style="">
 		<div class="user-pic" style="background-image">
 		</div>
-		<a class="user-name tc-black c-pointer" data-userinfo-popup-inited="true" href="http://localhost:8080/">bili_17352450701</a>
-		<div class="bottom"><a class="number-part c-pointer f-left" href="http://localhost:8080/">
+		<a class="user-name tc-black c-pointer" data-userinfo-popup-inited="true" href="http://localhost:8080/">catid</a>
+		<div class="bottom"><!--<a class="number-part c-pointer f-left" href="http://localhost:8080/">
 				<p class="numbers fs-14">3</p>
 				<p class="text tc-slate fs-12 ls-0">关注</p>
-			</a><a class="number-part c-pointer f-left" href="http://localhost:8080/">
+			</a>--><a class="number-part c-pointer f-left" href="http://localhost:8080/">
 				<p class="numbers fs-14">0</p>
 				<p class="text tc-slate fs-12 ls-0">粉丝</p>
 			</a><a class="number-part c-pointer f-left" href="http://localhost:8080/">
@@ -20,13 +20,10 @@
 <script>
 </script>
 
-<style scoped>
+<style>
 	.content {
 		width: 244px;
-		height: 220px;
-		position: relative;
-		background-color: white;
-		border-radius: 4px;
+		height: 188px;
 	}
 
 	.content .user-pic {
@@ -77,7 +74,7 @@
 		width: 56px;
 		height: 56px;
 		left: 16px;
-		top: 54px;
+		top: 110px;
 		border-radius: 50%;
 		overflow: hidden;
 	}

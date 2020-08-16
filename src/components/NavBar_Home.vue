@@ -3,7 +3,11 @@
 //
 <template>
   <div class="header-box">
-    <div class="grad"></div>
+    <div class="grad">
+      <a href="/" class="head-logo" data-v-3120f830="">
+        <img src="../assets/logo_demo.png" title="" style="">
+      </a>
+    </div>
     <div class="header">
       <div class="nav">
         <ul>
