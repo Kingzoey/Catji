@@ -7,7 +7,7 @@
         <UListt />
       </div>
       <div class="right">
-        <!-- <BlogPublish /> -->
+        <BlogPublish /> 
         <BlogCard />
       </div>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 import BlogCard from "@/components/BlogCard.vue";
-// import BlogPublish from "@/components/BlogPublish.vue";
+import BlogPublish from "@/components/BlogPublish.vue";
 import NavBar from "@/components/NavBar.vue";
 import UserInfo from "@/components/UserInfo.vue";
 import UListt from "@/components/UListt.vue";
@@ -26,7 +26,7 @@ export default {
     NavBar,
     UserInfo,
     UListt,
-    // BlogPublish,
+    BlogPublish,
     BlogCard,
   },
 };
