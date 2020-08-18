@@ -29,7 +29,7 @@
 
         <ul style="float: right;">
           <li>
-            <router-link to="/mine">
+            <router-link to="/mine0">
               <font-awesome-icon :icon="['fas', 'user']" />
             </router-link>
           </li>
