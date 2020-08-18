@@ -3,7 +3,7 @@
         <form method="post" name="form1">
             <li class="user">
                 <label for="username">昵称：</label>
-                <input type="text" id="username" name="username">
+                <textarea class="username" placeholder="王二狗子" rows="1" type="textarea" validateevent="true"></textarea>
             </li>
             <li class="user">
                 <label for="sex">性别：</label>
@@ -40,11 +40,9 @@
 	text-align: right;
 	font-size: 14px;
 }
-.user input
+.user textarea
 {
-    border: 1px solid black;
 	width: 250px;
-	padding-left: 10px;
     outline: none;
 }
 .signal
