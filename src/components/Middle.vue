@@ -121,7 +121,7 @@ export default {
 <style>
 .hot-part{
 	position: absolute;
-	top:100px;
+	top:150px;
 }
 .hot-list-top:after{
     content:"";

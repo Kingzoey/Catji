@@ -121,7 +121,7 @@ export default {
 <style>
 .new-part{
 	position: absolute;
-	top:850px;
+	top:900px;
 }
 .new-list-top:after{
     content:"";

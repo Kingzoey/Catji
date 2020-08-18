@@ -121,7 +121,7 @@ export default {
 <style>
 .tag-part{
 	position: absolute;
-	top:1600px;
+	top:1650px;
 }
 .tag-list-top:after{
     content:"";

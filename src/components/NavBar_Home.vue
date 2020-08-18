@@ -5,7 +5,7 @@
   <div class="header-box">
     <div class="grad">
       <a href="/" class="head-logo" data-v-3120f830="">
-        <img src="../assets/logo_demo.png" title="" style="">
+        <img src="../assets/logo_demo2_11.png" title="" style="">
       </a>
     </div>
     <div class="header">
