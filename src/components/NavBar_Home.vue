@@ -5,7 +5,7 @@
   <div class="header-box">
     <div class="grad">
       <a href="/" class="head-logo" data-v-3120f830="">
-        <img src="../assets/logo_demo2_11.png" title="" style="">
+        <img src="../assets/logo_demo2_00.png" title="" style="">
       </a>
     </div>
     <div class="header">
@@ -61,7 +61,7 @@ export default {
 .header-box {
   width: 100%;
   height: 100px;
-  background: url("../assets/Nav.png");
+  background: url("../assets/Nav11.jpg");
   min-height: 155px;
   background-repeat: no-repeat;
   background-position: center 0;
