@@ -4,12 +4,12 @@
             <li class="user">
                 <div class="item_bock head_p">
                     <div class="head_img">
-                        <img :src="test1" width="30" height="30"/>
+                        <img :src="userInfo.avatar" width="30" height="30"/>
                     </div>
                     <div class="setting_right" @click="uploadHeadImg">
                         <div class="caption">更改头像</div>
                     </div>
-                    <input type="file" accept="image/jpg" @change="handleFile(this)" class="hiddenInput"/>
+                    <input type="file" accept="image/*" @change="handleFile" class="hiddenInput"/>
                 </div>
             </li>
             <li class="user">
@@ -50,6 +50,9 @@ export default {
     name: "Middle",
     data() {
         return {
+            userInfo:{
+                avatar:'@/assets/test.png'
+            },
             test1: test1,
         };
     },
