@@ -66,12 +66,17 @@ export default {
         {
           name: "我的收藏",
           iconname: "cat",
-          tab: () => import("@/views/Home.vue"),
+          tab: () => import("@/components/Middle.vue"),
         },
         {
           name: "观看历史",
           iconname: "cat",
-          tab: () => import("@/views/Login.vue"),
+          tab: () => import("@/components/Middle.vue"),
+        },
+        {
+          name: "投稿列表",
+          iconname: "cat",
+          tab: () => import("@/components/Middle.vue"),
         },
       ],
     };
@@ -179,7 +184,11 @@ export default {
   display: inline-block;
   height: 36px;
   margin-right: 4px;
-  color: #999;
+  color:#999;
+}
+
+.tab-item.on a{
+  color: #3a9bd9;
 }
 
 .tab-item a svg {
