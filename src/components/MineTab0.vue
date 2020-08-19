@@ -19,9 +19,15 @@
         </a>
         <span id="hint-setting-left" class="hidden">0</span>
       </div>
-      
     </div>
-
+	<div class="part-guide-left">
+      <div class="banner">
+        <a href="/uploadlist" class="tab fixed unfold">
+		<font-awesome-icon :icon="['fas', 'blog']" />
+          <i class="icon icon-upload"></i> 个人动态
+        </a>
+      </div>
+    </div>
     <div class="part-guide-left">
       <div class="banner">
         <a href="/flist" class="tab fixed">
@@ -30,7 +36,6 @@
         </a>
       </div>
     </div>
-    
     <div class="part-guide-left">
       <div class="banner">
         <a href="/favourite" class="tab fixed">
@@ -48,7 +53,6 @@
           <i class="icon icon-history"></i> 历史
         </a>
       </div>
-      
     </div>
     <div class="part-guide-left">
       <div class="banner">
