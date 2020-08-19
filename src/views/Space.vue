@@ -66,17 +66,17 @@ export default {
         {
           name: "我的收藏",
           iconname: "cat",
-          tab: () => import("@/components/Middle.vue"),
+          tab: () => import("@/components/HistoryBlock.vue"),
         },
         {
           name: "观看历史",
           iconname: "cat",
-          tab: () => import("@/components/Middle.vue"),
+          tab: () => import("@/components/HistoryBlock.vue"),
         },
         {
           name: "投稿列表",
           iconname: "cat",
-          tab: () => import("@/components/Middle.vue"),
+          tab: () => import("@/components/HistoryBlock.vue"),
         },
       ],
     };
