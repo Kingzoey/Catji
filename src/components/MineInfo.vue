@@ -29,7 +29,7 @@
                 <textarea class="signal" placeholder="设置您的签名" rows="2" autocomplete="off" type="textarea" validateevent="true"></textarea>
             </li>
             <br>
-            <li class="user">
+            <li class="user birthclass">
                 <label for="birthday">出生日期：</label>
                 <textarea class="birthday" placeholder="2000-01-01" rows="1" type="textarea" validateevent="true"></textarea>
             </li>
@@ -81,6 +81,10 @@ export default {
 *
 {
     list-style: none;
+}
+.MineInfo
+{
+    margin-top: 50px;
 }
 .item_bock {
   display: flex;
@@ -139,6 +143,10 @@ export default {
     height: 88px;
     resize: none;
     vertical-align:text-top;
+}
+.birthclass
+{
+    margin-left: 195px;
 }
 .emailclass
 {
