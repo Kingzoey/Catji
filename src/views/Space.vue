@@ -66,7 +66,7 @@ export default {
         {
           name: "个人资料",
           iconname: "edit",
-          tab: () => import("@/views/Home.vue"),
+          tab: () => import("@/components/MineInfo.vue"),
         },
         {
           name: "个人动态",
@@ -86,7 +86,7 @@ export default {
         {
           name: "观看历史",
           iconname: "history",
-          tab: () => import("@/views/Login.vue"),
+          tab: () => import("@/components/HistoryBlock.vue"),
         },
         {
           name: "投稿管理",
