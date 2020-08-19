@@ -16,7 +16,7 @@ Vue.use(VueVideoPlayer)
 // 3. 在需要放置图标的地方这样写 <font-awesome-icon :icon="['fas', 'cat']" />
 // ! 这样可以保证没用到的图标不会被打包进入最终发布文件里
 // 更多参考: https://github.com/FortAwesome/vue-fontawesome#installation
-import { faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase} from '@fortawesome/free-solid-svg-icons'
+import { faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase } from '@fortawesome/free-solid-svg-icons'
 import { faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus } from '@fortawesome/free-solid-svg-icons'
 library.add(faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase)
 library.add(faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus)

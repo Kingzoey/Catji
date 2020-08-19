@@ -4,9 +4,9 @@
 <template>
   <div class="header-box">
     <div class="grad">
-      <a href="/" class="head-logo" data-v-3120f830="">
-        <img src="../assets/logo_demo2_00.png" title="" style="">
-      </a>
+      <router-link to="/" class="head-logo">
+        <img src="../assets/logo_demo2_00.png" title style />
+      </router-link>
     </div>
     <div class="header">
       <div class="nav">
@@ -29,7 +29,7 @@
 
         <ul style="float: right;">
           <li>
-            <router-link to="/mine0">
+            <router-link to="/space">
               <font-awesome-icon :icon="['fas', 'user']" />
             </router-link>
           </li>
