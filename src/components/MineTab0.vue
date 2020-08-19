@@ -65,7 +65,7 @@
     <div class="part-guide-left">
       <div class="banner nav-data-center">
         <a href="/datacentre" class="tab fixed">
-		<font-awesome-icon :icon="['fas', 'database']" />
+		<font-awesome-icon :icon="['fas', 'rocket']" />
           <i class="icon icon-bar-chart"></i> 数据中心
         </a>
         <img
