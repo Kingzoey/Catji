@@ -139,6 +139,12 @@ const routes = [{
 		name: 'CatSpace',
 		component: () =>
 			import('../views/CatSpace.vue')
+	},
+	{
+		path: '/myblog',
+		name: 'MyBlog',
+		component: () =>
+			import('../views/MyBlog.vue')
 	}
 
 ]
