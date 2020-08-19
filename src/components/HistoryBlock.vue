@@ -44,15 +44,19 @@ export default {
           upname: "王三锤",//上传视频up主
           cover: "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=338026201,811635179&fm=26&gp=0.jpg",//封面
         },
-        /*
-        {
-          usid: 3,
-          name: "王小绿",
-          desc: "23岁, 是学生",
-          work_num: 12,
-          follow_num: 9876,
-          avatar: "//static.hdslb.com/images/member/noface.gif",
-        },*/
+         {
+          vid: 4,
+          vtitle: "同济人气猫咪",
+          upname: "王四锤",//上传视频up主
+          cover: "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=187649172,1956357065&fm=26&gp=0.jpg",//封面
+        },
+         {
+          vid: 5,
+          vtitle: "小猫咪叫人起床",
+          upname: "王五锤",//上传视频up主
+          cover: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2418940404,2594675617&fm=26&gp=0.jpg",//封面
+        },
+    
       ],
     };
   },
