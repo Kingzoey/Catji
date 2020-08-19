@@ -142,6 +142,7 @@ export default {
   border-radius: 64px;
   background-color: #fafafa;
 }
+
 .avatar img {
   width: 112px;
   height: 112px;
