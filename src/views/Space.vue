@@ -230,7 +230,11 @@ export default {
   display: inline-block;
   height: 36px;
   margin-right: 4px;
-  color: #999;
+  color:#999;
+}
+
+.tab-item.on a{
+  color: #3a9bd9;
 }
 
 .tab-item a svg {
