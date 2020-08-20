@@ -151,8 +151,13 @@ const routes = [{
 	name: 'MyBlog',
 	component: () =>
 		import('../views/MyBlog.vue')
+},
+{
+	path: '/game',
+	name: 'Game',
+	component: () =>
+		import('../views/Game.vue')
 }
-
 ]
 
 const router = new VueRouter({
