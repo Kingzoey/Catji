@@ -61,7 +61,7 @@ export default {
         {
           name: "欢迎",
           iconname: "smile",
-          tab: () => import("@/views/About.vue"),
+          tab: () => import("@/views/Test.vue"),
         },
         {
           name: "个人资料",
@@ -81,7 +81,7 @@ export default {
         {
           name: "我的收藏",
           iconname: "folder",
-          tab: () => import("@/views/Home.vue"),
+          tab: () => import("@/components/HistoryBlock.vue"),
         },
         {
           name: "观看历史",
@@ -91,7 +91,7 @@ export default {
         {
           name: "投稿管理",
           iconname: "upload",
-          tab: () => import("@/views/Home.vue"),
+          tab: () => import("@/components/HistoryBlock.vue"),
         },
         {
           name: "数据中心",
@@ -232,10 +232,6 @@ export default {
   height: 36px;
   margin-right: 4px;
   color:#999;
-}
-
-.tab-item.on a{
-  color: #3a9bd9;
 }
 
 .tab-item a svg {
