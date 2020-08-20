@@ -254,7 +254,7 @@ export default {
 .rank-list {
   width: 265px;
   position: relative;
-   top:400px;left: 1260px;
+   top:400px;left:10px;
    z-index: 100;
 }
 
