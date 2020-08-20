@@ -5,9 +5,12 @@
       <div class="left">
         <Middle></Middle>
         <br />
+        <br />
         <Middle2></Middle2>
         <br />
+        <br />
         <Middle3></Middle3>
+        <br />
         <br />
       </div>
       <div class="right">
@@ -63,15 +66,17 @@ export default {
   margin: auto;
   display: table;
   width: 80%;
-  margin-bottom: 60px;
+ padding-left:30px;
 }
 .left,
 .right {
   display: table-cell;
 }
 .left {
+	padding-top:0px;
   width: 1030px;
 }
 .right {
+	padding-top:0px;
 }
 </style>
