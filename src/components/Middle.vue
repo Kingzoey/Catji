@@ -5,7 +5,7 @@
         <br />
         <div class="icon"></div>
         <span class="hot-name">
-          <font-awesome-icon :icon="['fas', 'fire-alt']" />&nbsp;最热
+          <font-awesome-icon :icon="['fas', 'fire-alt']" />&nbsp;最 热
         </span>
       </header>
       <div class="hot-list-top">

@@ -5,7 +5,7 @@
         <br />
         <div class="icon"></div>
         <span class="new-name">
-          <font-awesome-icon :icon="['fas', 'newspaper']" />&nbsp;最新
+          <font-awesome-icon :icon="['fas', 'newspaper']" />&nbsp;最 新
         </span>
       </header>
       <div class="new-list-top">

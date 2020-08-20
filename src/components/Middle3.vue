@@ -5,7 +5,7 @@
         <br />
         <div class="icon"></div>
         <span class="tag-name">
-          <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;标签
+          <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;标 签
         </span>
       </header>
       <div class="tag-list-top">
