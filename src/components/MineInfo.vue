@@ -4,7 +4,7 @@
       <li class="user">
         <div class="item_bock head_p">
           <div class="head_img">
-            <img :src="userInfo.avatar" width="30" height="30" />
+            <img :src="this.$store.state.user.avatar" width="30" height="30" />
           </div>
           <div class="setting_right" @click="uploadHeadImg">
             <div class="caption">
@@ -67,7 +67,6 @@
           validateevent="true"
         ></textarea>
       </li>
-      <br />
       <li class="user birthclass">
         <font-awesome-icon :icon="['fas', 'calendar']" />
         <label for="birthday">生日：</label>    
@@ -222,11 +221,15 @@ export default {
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+.user {
+  margin-left: 50px;
+}
+
 .birthclass {
-  margin-left: 195px;
+  margin-left: 50px;
 }
 .emailclass {
-  margin-left: 195px;
+  margin-left: 50px;
 }
 .save button {
   display: block;
