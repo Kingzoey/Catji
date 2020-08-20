@@ -3,7 +3,10 @@
     <div class="card">
       <header class="tag-header">
         <br />
-        <span class="tag-name">标签</span>
+        <div class="icon"></div>
+        <span class="tag-name">
+          <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;标签
+        </span>
       </header>
       <div class="tag-list-top">
         <div class="top-left">
@@ -82,7 +85,8 @@
           </div>
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
@@ -109,34 +113,34 @@ export default {
 .tag-part {
   position: inherit;
 }
-.tag-list-top:after{
-    content:"";
-    display:block;
-    clear:both;
+.tag-list-top:after {
+  content: "";
+  display: block;
+  clear: both;
 }
-.tag-list-top{
-    white-space: nowrap;
+.tag-list-top {
+  white-space: nowrap;
 }
-.tag-name{
-    font-size: 30px;
+.tag-name {
+  font-size: 30px;
 }
-.tag-header{
-    margin-left: 10px;
+.tag-header {
+  margin-left: 10px;
 }
-.top-left{
-    display: inline-block;
-    margin-left: 50px;
+.top-left {
+  display: inline-block;
+  margin-left: 50px;
 }
-.bottom{
-    float:left;
+.bottom {
+  float: left;
 }
-.normal-item{
-    float:left;
-    border:200px;
-    margin-left: 50px;
+.normal-item {
+  float: left;
+  border: 200px;
+  margin-left: 50px;
 }
-.top-right{
-    display: inline-block;
-    margin-right: 10px;
+.top-right {
+  display: inline-block;
+  margin-right: 10px;
 }
 </style>

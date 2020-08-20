@@ -1,7 +1,9 @@
 <template>
   <div class="rank-list">
     <header class="rank-header">
-      <span class="name">排行榜</span>
+      <span class="name">
+        <font-awesome-icon :icon="['fas', 'list-ol']" />&nbsp;TOP
+      </span>
       <div class="more tab-switch">
         <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">Tag</div>
       </div>
@@ -20,12 +22,11 @@
           </router-link>
         </div>
       </div>
-      <router-link :to="item.url" class="link"  v-else>
+      <router-link :to="item.url" class="link" v-else>
         <p :title="item.title" class="title">{{item.title}}</p>
       </router-link>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -82,7 +83,6 @@ export default {
           title: "测试视频",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-
       ],
       userHotList: [
         {
@@ -134,7 +134,6 @@ export default {
           cover:
             "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
         },
-
       ],
       nekoHotList: [
         {
@@ -186,7 +185,6 @@ export default {
           cover:
             "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
         },
-       
       ],
     };
   },
@@ -197,14 +195,12 @@ export default {
 .rank-list {
   width: 265px;
   position: inherit;
-   margin-top:40px;
-   margin-left:20px;
-   padding-left:10px;
-     background-color: rgb(255, 255, 255);
+  margin-top: 40px;
+  margin-left: 20px;
+  padding-left: 10px;
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
-   
 }
-
 
 .rank-header {
   display: flex;

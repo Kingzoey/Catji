@@ -3,7 +3,10 @@
     <div class="card">
       <header class="hot-header">
         <br />
-        <span class="hot-name">最热</span>
+        <div class="icon"></div>
+        <span class="hot-name">
+          <font-awesome-icon :icon="['fas', 'fire-alt']" />&nbsp;最热
+        </span>
       </header>
       <div class="hot-list-top">
         <div class="top-left">
@@ -31,7 +34,6 @@
               <br />
               <a title="最热视频3">最热视频3</a>
             </div>
-            
           </div>
           <div class="top-right-line2">
             <div class="normal-item">
@@ -48,7 +50,6 @@
               <br />
               <a title="最热视频6">最热视频6</a>
             </div>
-           
           </div>
         </div>
         <div class="bottom">
@@ -81,11 +82,11 @@
               <br />
               <a title="最热视频11">最热视频11</a>
             </div>
-           
           </div>
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
@@ -104,7 +105,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .card {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;

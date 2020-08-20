@@ -2,8 +2,11 @@
   <div class="new-part">
     <div class="card">
       <header class="new-header">
-       <br /> 
-        <span class="new-name">最新</span>
+        <br />
+        <div class="icon"></div>
+        <span class="new-name">
+          <font-awesome-icon :icon="['fas', 'newspaper']" />&nbsp;最新
+        </span>
       </header>
       <div class="new-list-top">
         <div class="top-left">
@@ -31,7 +34,6 @@
               <br />
               <a title="最新视频3">最新视频3</a>
             </div>
-
           </div>
           <div class="top-right-line2">
             <div class="normal-item">
@@ -48,7 +50,6 @@
               <br />
               <a title="最新视频6">最新视频6</a>
             </div>
-
           </div>
         </div>
         <div class="bottom">
@@ -81,11 +82,11 @@
               <br />
               <a title="最新视频11">最新视频11</a>
             </div>
-
           </div>
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
@@ -125,11 +126,10 @@ export default {
 }
 .new-header {
   margin-left: 10px;
- 
 }
 .top-left {
   display: inline-block;
-   margin:-31px
+  margin: -31px;
 }
 .bottom {
   float: left;

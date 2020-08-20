@@ -1,7 +1,9 @@
 <template>
   <div class="rank-list">
     <header class="rank-header">
-      <span class="name">排行榜</span>
+      <span class="name">
+        <font-awesome-icon :icon="['fas', 'list-ol']" />&nbsp;TOP
+      </span>
       <div class="more tab-switch">
         <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">视频</div>
         <div class="tab-switch-item" :class="{on : on == 1}" @click="on = 1">用户</div>
@@ -85,7 +87,6 @@ export default {
           title: "测试视频",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-
       ],
       userHotList: [
         {
@@ -130,7 +131,6 @@ export default {
           title: "测试用户",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-
       ],
       nekoHotList: [
         {
@@ -175,7 +175,6 @@ export default {
           title: "测试猫咪",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-
       ],
     };
   },
@@ -186,12 +185,11 @@ export default {
 .rank-list {
   width: 265px;
   position: inherit;
-   margin-top:40px;
-   margin-left:20px;
-   padding-left:10px;
-     background-color: rgb(255, 255, 255);
+  margin-top: 40px;
+  margin-left: 20px;
+  padding-left: 10px;
+  background-color: rgb(255, 255, 255);
   border-radius: 10px;
-   
 }
 
 .rank-header {
