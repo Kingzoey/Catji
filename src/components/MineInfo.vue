@@ -31,7 +31,7 @@
         
         </select>
         -->
-        <div class="el-radio-group">
+        <div class="el-radio-group" style="display: inline-block;">
           <label class="el-radio-button">
             <input type="radio" class="el-radio-button__orig-radio" value="男" />
             <span class="el-radio-button__inner">
@@ -49,7 +49,7 @@
           <label class="el-radio-button">
             <input type="radio" class="el-radio-button__orig-radio" value="保密" />
             <span class="el-radio-button__inner">
-              保密
+              密
               <font-awesome-icon :icon="['fas', 'mask']" />
             </span>
           </label>
@@ -129,7 +129,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 * {
   list-style: none;
 }

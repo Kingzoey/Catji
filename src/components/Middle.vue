@@ -122,7 +122,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card {
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
