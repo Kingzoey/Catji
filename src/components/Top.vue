@@ -85,24 +85,7 @@ export default {
           title: "测试视频",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-        {
-          id: 100007,
-          url: "/video/100007",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100008,
-          url: "/video/100008",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100009,
-          url: "/video/100009",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
+
       ],
       userHotList: [
         {
@@ -147,24 +130,7 @@ export default {
           title: "测试用户",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-        {
-          id: 100007,
-          url: "/space/100007",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100008,
-          url: "/space/100008",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100009,
-          url: "/space/100009",
-          title: "测试用户",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
+
       ],
       nekoHotList: [
         {
@@ -209,24 +175,7 @@ export default {
           title: "测试猫咪",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-        {
-          id: 100007,
-          url: "/cat/100007",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100008,
-          url: "/cat/100008",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100009,
-          url: "/cat/100009",
-          title: "测试猫咪",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
+
       ],
     };
   },
@@ -236,9 +185,13 @@ export default {
 <style scoped>
 .rank-list {
   width: 265px;
-  position: relative;
-   top:50px;left: 1260px;
-   z-index: 100;
+  position: inherit;
+   margin-top:40px;
+   margin-left:20px;
+   padding-left:10px;
+     background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+   
 }
 
 .rank-header {

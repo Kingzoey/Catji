@@ -82,24 +82,7 @@ export default {
           title: "测试视频",
           cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
         },
-        {
-          id: 100006,
-          url: "/video/100006",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100006,
-          url: "/video/100006",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100006,
-          url: "/video/100006",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
+
       ],
       userHotList: [
         {
@@ -151,27 +134,7 @@ export default {
           cover:
             "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
         },
-        {
-          id: 100006,
-          url: "/space/100006",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100006,
-          url: "/space/100006",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100006,
-          url: "/space/100006",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
+
       ],
       nekoHotList: [
         {
@@ -223,27 +186,7 @@ export default {
           cover:
             "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
         },
-        {
-          id: 100006,
-          url: "/cat/100006",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100006,
-          url: "/cat/100006",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100006,
-          url: "/cat/100006",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
+
       ],
     };
   },
@@ -253,10 +196,15 @@ export default {
 <style scoped>
 .rank-list {
   width: 265px;
-  position: relative;
-   top:200px;left: 1260px;
-   z-index: 100;
+  position: inherit;
+   margin-top:40px;
+   margin-left:20px;
+   padding-left:10px;
+     background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+   
 }
+
 
 .rank-header {
   display: flex;
