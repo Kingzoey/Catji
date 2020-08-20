@@ -61,7 +61,7 @@ export default {
         {
           name: "欢迎",
           iconname: "smile",
-          tab: () => import("@/views/About.vue"),
+          tab: () => import("@/views/Test.vue"),
         },
         {
           name: "个人资料",
