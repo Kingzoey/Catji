@@ -3,9 +3,12 @@
     <NavBar />
     <div class="container">
       <div class="left">
-       <Middle></Middle>
+        <Middle></Middle>
+        <br />
         <Middle2></Middle2>
-        <Middle3></Middle3> 
+        <br />
+        <Middle3></Middle3>
+        <br />
       </div>
       <div class="right">
         <Top></Top>
@@ -52,28 +55,23 @@ export default {
 	}
 	*/
 .home {
-  
   width: 100%;
   background-color: rgb(232, 248, 255);
 }
+
 .container {
-	margin: auto;
+  margin: auto;
   display: table;
   width: 80%;
-  display: flex;
-    
-    margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 .left,
 .right {
-  
   display: table-cell;
 }
 .left {
-  width: 1200px;
-
+  width: 1030px;
 }
 .right {
-
 }
 </style>
