@@ -31,13 +31,6 @@
               <br />
               <a title="标签视频3">标签视频3</a>
             </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="标签视频4" />
-              </a>
-              <br />
-              <a title="标签视频4">标签视频4</a>
-            </div>
           </div>
           <div class="top-right-line2">
             <div class="normal-item">
@@ -53,13 +46,6 @@
               </a>
               <br />
               <a title="标签视频6">标签视频6</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="标签视频7" />
-              </a>
-              <br />
-              <a title="标签视频7">标签视频7</a>
             </div>
           </div>
         </div>
@@ -92,13 +78,6 @@
               </a>
               <br />
               <a title="标签视频11">标签视频11</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="标签视频12" />
-              </a>
-              <br />
-              <a title="标签视频12">标签视频12</a>
             </div>
           </div>
         </div>

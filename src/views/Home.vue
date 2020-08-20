@@ -65,8 +65,7 @@ export default {
 .container {
   margin: auto;
   display: table;
-  width: 80%;
- padding-left:30px;
+
 }
 .left,
 .right {
@@ -74,7 +73,7 @@ export default {
 }
 .left {
 	padding-top:0px;
-  width: 1030px;
+  width: 840px;
 }
 .right {
 	padding-top:0px;
