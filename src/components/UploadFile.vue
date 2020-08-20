@@ -1,7 +1,8 @@
 <template>
   <div class="file-warp">
     <div class="header">
-      <em style="color:red;font-size:18px;">*</em>&nbsp;上传文件
+      <em style="color:red;font-size:18px;"></em>&nbsp;
+      <font-awesome-icon :icon="['fas', 'file']" />&nbsp;上传文件
     </div>
     <div class="tips-warp">
       <span class="file-tips">请勿上传含有政治因素、色情挑逗、血腥暴力等违法因素的视频内容</span>
@@ -121,7 +122,7 @@ export default {
 
 .upload-btn {
   color: #fff;
-  background-color: #fd4c5d;
+  background-color: #fb7299;
   border-color: #fd4c5d;
   border-radius: 4px;
   width: 164px;

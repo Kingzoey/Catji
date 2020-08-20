@@ -29,19 +29,19 @@
             <li class="qq">
               <a href="#">
                 <span class="icons"></span>
-                <span class="text">QQ</span>
+                <span class="text">&nbsp;QQ</span>
               </a>
             </li>
             <li class="weixin">
               <a href="#">
                 <span class="icons"></span>
-                <span class="text">微信</span>
+                <span class="text">&nbsp;微信</span>
               </a>
             </li>
             <li class="weibo">
               <a href="#">
                 <span class="icons"></span>
-                <span class="text">微博</span>
+                <span class="text">&nbsp;微博</span>
               </a>
             </li>
             <div class="clear"></div>
@@ -71,27 +71,38 @@
   background-size: cover;
 }
 .some-class {
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
+  text-align: center;
+  display: block;
+  width: 60%;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 100;
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid rgba(238, 238, 238, 0.41);
+  border-width: thin;
   cursor: pointer;
-  margin-top: 100px;
-  margin-left: 150px;
-  width: 150px;
-  height: 50px;
-  background-image: linear-gradient(to top, #d8d9db 0%, #fff 80%, #fdfdfd 100%);
-  border-radius: 30px;
-  border: 1px solid #8f9092;
-  /* box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 0 #CECFD1; */
-  transition: all 0.2s ease;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  text-shadow: 0 1px #fff;
-  color: #606060;
+  outline: none;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+  text-decoration: none;
 }
+
+.some-class:hover {
+  background-color: #000;
+  border: 1px solid #fff;
+  color: #fff;
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  -ms-transition: 0.5s all;
+  text-decoration: none;
+}
+
 body a {
   transition: 0.5s all;
   text-decoration: none;
@@ -294,10 +305,6 @@ input[type="password"] {
 
 .register a {
   color: #ccc;
-}
-
-.register a:hover {
-  color: #000;
 }
 
 .register p a {

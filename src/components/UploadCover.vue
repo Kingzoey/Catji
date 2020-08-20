@@ -1,6 +1,8 @@
 <template>
   <div class="cover-warp">
-    <h1 class="title">投稿信息</h1>
+    <h1 class="title">
+      <font-awesome-icon :icon="['fas', 'upload']" />&nbsp;投稿信息
+    </h1>
     <div class="cover clearfix">
       <div class="cover-pic">
         <div class="clickable" @click="choose_cover">
@@ -9,7 +11,8 @@
       </div>
       <div class="cover-tips">
         <p class="header">
-          <em style="color:red;font-size:18px;">*</em>&nbsp;封面
+          <em style="color:red;font-size:18px;"></em>&nbsp;
+          <font-awesome-icon :icon="['fas', 'images']" />&nbsp;封面
         </p>
         <em>JPG、JEPG、PNG格式图片需要小于10M</em>
         <em>GIF格式图片需要小于3M，建议时长小于3s</em>
