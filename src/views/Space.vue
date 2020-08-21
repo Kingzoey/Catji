@@ -71,7 +71,7 @@ export default {
         {
           name: "个人动态",
           iconname: "blog",
-          tab: () => import("@/views/Login.vue"),
+          tab: () => import("@/views/MyBlog.vue"),
         },
         {
           name: "关注 / 粉丝列表",

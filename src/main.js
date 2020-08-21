@@ -17,9 +17,9 @@ Vue.use(VueVideoPlayer)
 // ! 这样可以保证没用到的图标不会被打包进入最终发布文件里
 // 更多参考: https://github.com/FortAwesome/vue-fontawesome#installation
 import { faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase, faBlog, faStore, faRocket, faPen, faCalendar, faAt, faTransgender, faMars, faVenus, faMask, faListOl, faVenusMars, faFireAlt, faHashtag, faNewspaper, faImages, faBook, faFile, faHatCowboy} from '@fortawesome/free-solid-svg-icons'
-import { faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus,faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 library.add(faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase, faBlog, faStore, faRocket, faPen, faCalendar, faAt, faTransgender, faMars, faVenus, faMask, faListOl, faVenusMars, faFireAlt, faHashtag, faNewspaper, faImages, faBook, faFile, faHatCowboy)
-library.add(faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus)
+library.add(faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus,faTrashAlt)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
