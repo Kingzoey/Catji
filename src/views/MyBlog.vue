@@ -93,7 +93,7 @@
 
 <style scoped>
 	.page {
-		background-color: antiquewhite;
+		background-color: #79D2FF;
 	}
 
 	.container {
@@ -106,7 +106,7 @@
 	.left {
 		width: 900px;
 		float: left;
-		left: 50%;
+		margin-left:25px;
 	}
 
 	.right {
