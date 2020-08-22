@@ -192,6 +192,7 @@ input {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .searchButton:hover {
   background: #00b5e5;
 }
@@ -205,8 +206,16 @@ input {
   width: 100%;
   height: 100%;
 }
+
+.rank-wrap :hover {
+  color:#00a1d6;
+}
+
+/*
 .rank-list{
 	width:250px;
 	background-color:rgba(255, 255, 255, 0.5);
+  opacity:0.5;
 }
+*/
 </style>
