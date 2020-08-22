@@ -3,8 +3,23 @@
     <h1 class="title">投稿信息</h1>
     <div class="cover clearfix">
       <div class="cover-pic">
-        <div class="clickable" @click="choose_cover">
-          <img :src="coverUrl" height="100" width="200" />
+        <div style="position: relative;">
+          <input
+            id="upload-input"
+            style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
+            type="file"
+            accept="image/gif, image/jpg, image/png"
+            multiple
+          />
+          <!-- 自定义按钮效果 -->
+          <div style="text-align: top">
+            <span style="font-size: 12px;"></span>
+            <img
+              id="upload"
+              src="@/assets/uploadCover.png"
+              style="width: 200px; height: 100px; vertical-align: middle;"
+            />
+          </div>
         </div>
       </div>
       <div class="cover-tips">
@@ -27,18 +42,10 @@ export default {
       coverUrl: no_cover,
     };
   },
-  methods: {
-    choose_cover() {
-      alert("hello");
-    },
-  },
 };
 </script>
 
 <style scoped>
-.main-body {
-}
-
 .header {
   font-size: 16px;
   line-height: 16px;
@@ -51,10 +58,6 @@ export default {
   margin-bottom: 20px;
   font-weight: 500;
   color: #333;
-}
-
-.cover {
-  /*   border:0.5px solid grey;*/
 }
 
 .cover-pic {
