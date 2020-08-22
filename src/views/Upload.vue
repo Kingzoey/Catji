@@ -3,10 +3,12 @@
     <NavBar />
     <div class="container clearfix">
       <div class="left">
-        <UploadCover />
-        <UploadInfo />
+        <UploadCover class="UploadCover" />
+        <UploadInfo class="UploadInfo" />
       </div>
-      <UploadFile class="file" />
+      <div class="right">
+        <UploadFile/>
+      </div>  
     </div>
   </div>
 </template>
@@ -28,18 +30,38 @@ export default {
 </script>
 
 <style scoped>
+.upload-page {
+  background-color:antiquewhite
+}
+
 .container {
   width: 1000px;
+  height:1000px;
   margin: 0 auto;
   margin-top: 20px;
 }
 
 .left {
-  width: 560px;
+  width: 540px;
+  height: 500px;
   float: left;
+  /* background-color:white */
 }
 
-.file {
-  float: right;
+.UploadInfo{
+  margin-top: 20px;
+  background-color:white
+}
+
+.UploadCover{
+  background-color:white
+}
+
+.right {
+  width: 300px;
+  height: 535px;
+  float: left;
+  margin-left:50px;
+  background-color:white
 }
 </style>

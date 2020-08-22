@@ -22,6 +22,11 @@
           <div class="item">注册页/register</div>
         </router-link>
       </li>
+      <li>
+        <router-link to="/game">
+          <div class="item">游戏页/game</div>
+        </router-link>
+      </li>
       <!-- <li>
         <router-link to="页面链接">
           <div class="item">注释</div>

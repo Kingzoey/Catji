@@ -1,30 +1,44 @@
 <template>
-  
-      <div class="register clearfix">
-        <p>
-    <span class="header">
-      <em style="color:red;font-size:15px;">*</em>&nbsp;标题
-    </span>
-    <span>可输入20个字</span></p>
+  <div class="register clearfix">
+    <p>
+      <span class="header">
+        <em style="color:red;font-size:15px;"></em>&nbsp;
+        <font-awesome-icon :icon="['fas', 'hat-cowboy']" />&nbsp;标题
+      </span>
+      <span>可输入20个字</span>
+    </p>
 
-        <form action="#" method="post"><br>
-          <input type="text" placeholder="可输入20个字" id="re_username" />
-         <br><br><br><br>
+    <form action="#" method="post">
+      <br />
+      <input type="text" placeholder="可输入20个字" id="re_username" />
+      <br />
+      <br />
+      <br />
+      <br />
 
-           <span class="header">标签</span>
-           <span>    添加标签增加关联！</span>
-                 
-          <input type="text" placeholder="创建标签" id="re_username" />
-         <br><br><br><br><br> <div class="header">简介</div>
-                  
-          <input type="text" placeholder="介绍一下内容" id="re_username" />
-        </form>
-        <div class="send-button">
-          <form>
-            <input type="button" value="发布内容" id="register" />
-          </form>
-        </div>
+      <span class="header">
+        <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;&nbsp;标签
+      </span>
+      <span>添加标签增加关联！</span>
+
+      <input type="text" placeholder="创建标签" id="re_username" />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="header">
+        <font-awesome-icon :icon="['fas', 'book']" />&nbsp;&nbsp;&nbsp;简介
       </div>
+
+      <input type="text" placeholder="介绍一下内容" id="re_username" />
+    </form>
+    <div class="send-button">
+      <form>
+        <input type="button" value="发布内容" id="register" />
+      </form>
+    </div>
+  </div>
 </template>
 
 
@@ -49,7 +63,7 @@ export default {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 12px 16px;
 }
 .dropdown:hover .dropdown-content {
@@ -77,8 +91,6 @@ export default {
   color: #606060;
 }
 
-
-
 body a {
   transition: 0.5s all;
   text-decoration: none;
@@ -92,9 +104,6 @@ h1 {
   letter-spacing: 4px;
   color: #ffffff;
 }
-
-
-
 
 h2 {
   font-size: 25px;
@@ -110,7 +119,6 @@ ul.tick {
   width: 100%;
   margin-bottom: 20px;
 }
-
 
 ul.tick li input[type="checkbox"] + label {
   position: relative;
@@ -154,7 +162,7 @@ input[type="text"] {
   padding: 10px 0;
   font-size: 16px;
   font-weight: 100;
-  background-color:  rgb(252, 86, 86);
+  background-color: #fb7299;
   color: rgb(250, 250, 250);
   border: 1px solid rgba(255, 58, 58, 0.41);
   border-width: thin;
@@ -165,11 +173,10 @@ input[type="text"] {
 }
 
 .send-button input[type="button"]:hover {
-  background-color: rgb(165, 19, 19);
+  background-color: #ec4556;
   border: 1px solid #fff;
   color: #fff;
   transition: 0.5s all;
   text-decoration: none;
 }
-
 </style>
