@@ -14,15 +14,14 @@
       <div class="register clearfix">
         <h2>注 册</h2>
         <form action="#" method="post">
-          <input type="text" placeholder="请输入用户名" id="re_username" />
-          <input type="text" placeholder="请输入姓名" id="re_name" />
-          <input type="text" placeholder="请输入年龄" id="re_age" />
-          <input type="password" placeholder="请输入密码" id="re_password" />
-          <input type="password" placeholder="再次输入以确认密码" id="re_repassword" />
+          <input type="text" placeholder="请输入用户名" v-model="nickname" />
+          <input type="text" placeholder="请输入邮箱" v-model="email" />
+          <input type="password" placeholder="请输入密码" v-model="password1" />
+          <input type="password" placeholder="再次输入以确认密码" v-model="password2" />
         </form>
         <div class="send-button">
           <form>
-            <input type="button" value="注册" id="register" />
+            <input type="button" value="注册" @click="register()" />
           </form>
         </div>
       </div>
@@ -31,8 +30,28 @@
 </template>
 
 <script>
+import { register } from "../api";
 export default {
   name: "Registerr_0",
+  data() {
+    return {
+      nickname: "",
+      email: "",
+      password1: "",
+      password2: "",
+    };
+  },
+  methods: {
+    async register() {
+      if (this.password1 !== this.password2) {
+        return;
+      }
+      let res = await register(this.nickname, this.email, "", this.password1);
+      let usid = res.data;
+      console.log(usid);
+      this.$store.state.user.usid = usid;
+    },
+  },
 };
 </script>
 
