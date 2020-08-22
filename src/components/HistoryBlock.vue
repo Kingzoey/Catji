@@ -88,7 +88,7 @@ export default {
   height: 80px;
   padding: 0px;
   left: 5px;
-  top: 5px;
+  top: 9.8px;
 }
 .coverimg {
   display: block;
