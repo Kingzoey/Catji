@@ -20,7 +20,7 @@
 <script>
 </script>
 
-<style>
+<style scoped>
 	.content {
 		width: 244px;
 		height: 188px;

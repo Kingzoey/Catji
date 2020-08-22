@@ -3,7 +3,10 @@
     <div class="card">
       <header class="tag-header">
         <br />
-        <span class="tag-name">标签</span>
+        <div class="icon"></div>
+        <span class="tag-name">
+          <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;标 签
+        </span>
       </header>
       <div class="tag-list-top">
         <div class="top-left">
@@ -31,13 +34,6 @@
               <br />
               <a title="标签视频3">标签视频3</a>
             </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="标签视频4" />
-              </a>
-              <br />
-              <a title="标签视频4">标签视频4</a>
-            </div>
           </div>
           <div class="top-right-line2">
             <div class="normal-item">
@@ -53,13 +49,6 @@
               </a>
               <br />
               <a title="标签视频6">标签视频6</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="标签视频7" />
-              </a>
-              <br />
-              <a title="标签视频7">标签视频7</a>
             </div>
           </div>
         </div>
@@ -93,17 +82,11 @@
               <br />
               <a title="标签视频11">标签视频11</a>
             </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="标签视频12" />
-              </a>
-              <br />
-              <a title="标签视频12">标签视频12</a>
-            </div>
           </div>
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
     </div>
   </div>
 </template>
@@ -130,34 +113,34 @@ export default {
 .tag-part {
   position: inherit;
 }
-.tag-list-top:after{
-    content:"";
-    display:block;
-    clear:both;
+.tag-list-top:after {
+  content: "";
+  display: block;
+  clear: both;
 }
-.tag-list-top{
-    white-space: nowrap;
+.tag-list-top {
+  white-space: nowrap;
 }
-.tag-name{
-    font-size: 30px;
+.tag-name {
+  font-size: 30px;
 }
-.tag-header{
-    margin-left: 10px;
+.tag-header {
+  margin-left: 10px;
 }
-.top-left{
-    display: inline-block;
-    margin-left: 50px;
+.top-left {
+  display: inline-block;
+  margin-left: 50px;
 }
-.bottom{
-    float:left;
+.bottom {
+  float: left;
 }
-.normal-item{
-    float:left;
-    border:200px;
-    margin-left: 50px;
+.normal-item {
+  float: left;
+  border: 200px;
+  margin-left: 50px;
 }
-.top-right{
-    display: inline-block;
-    margin-right: 10px;
+.top-right {
+  display: inline-block;
+  margin-right: 10px;
 }
 </style>

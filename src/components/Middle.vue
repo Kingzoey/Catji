@@ -3,7 +3,10 @@
     <div class="card">
       <header class="hot-header">
         <br />
-        <span class="hot-name">最热</span>
+        <div class="icon"></div>
+        <span class="hot-name">
+          <font-awesome-icon :icon="['fas', 'fire-alt']" />&nbsp;最 热
+        </span>
       </header>
       <div class="hot-list-top">
         <div class="top-left">
@@ -31,13 +34,6 @@
               <br />
               <a title="最热视频3">最热视频3</a>
             </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频4" />
-              </a>
-              <br />
-              <a title="最热视频4">最热视频4</a>
-            </div>
           </div>
           <div class="top-right-line2">
             <div class="normal-item">
@@ -53,13 +49,6 @@
               </a>
               <br />
               <a title="最热视频6">最热视频6</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频7" />
-              </a>
-              <br />
-              <a title="最热视频7">最热视频7</a>
             </div>
           </div>
         </div>
@@ -93,17 +82,11 @@
               <br />
               <a title="最热视频11">最热视频11</a>
             </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频12" />
-              </a>
-              <br />
-              <a title="最热视频12">最热视频12</a>
-            </div>
           </div>
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
     </div>
   </div>
 </template>

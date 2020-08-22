@@ -7,9 +7,7 @@
             <img :src="this.$store.state.user.avatar" width="30" height="30" />
           </div>
           <div class="setting_right" @click="uploadHeadImg">
-            <div class="caption">
-                更改头像
-            </div>
+            <div class="caption">更改头像</div>
           </div>
           <input type="file" accept="image/*" @change="handleFile" class="hiddenInput" />
         </div>
@@ -21,7 +19,7 @@
         <textarea class="username" placeholder="王大橘" rows="1" type="textarea" validateevent="true"></textarea>
       </li>
       <li class="user">
-        <font-awesome-icon :icon="['fas', 'transgender']" />
+        <font-awesome-icon :icon="['fas', 'venus-mars']" />
         <label for="sex">性别：</label>
         <!--
         <select name="sex">
@@ -31,7 +29,7 @@
         
         </select>
         -->
-        <div class="el-radio-group">
+        <div class="el-radio-group" style="display: inline-block;">
           <label class="el-radio-button">
             <input type="radio" class="el-radio-button__orig-radio" value="男" />
             <span class="el-radio-button__inner">
@@ -49,7 +47,7 @@
           <label class="el-radio-button">
             <input type="radio" class="el-radio-button__orig-radio" value="保密" />
             <span class="el-radio-button__inner">
-              保密
+              密
               <font-awesome-icon :icon="['fas', 'mask']" />
             </span>
           </label>
@@ -69,7 +67,7 @@
       </li>
       <li class="user birthclass">
         <font-awesome-icon :icon="['fas', 'calendar']" />
-        <label for="birthday">生日：</label>    
+        <label for="birthday">生日：</label>
         <textarea
           class="birthday"
           placeholder="2000-01-01"
@@ -129,7 +127,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 * {
   list-style: none;
 }
@@ -194,7 +192,7 @@ export default {
   resize: none;
   vertical-align: text-top;
   padding: 5px 7px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .birthday {
   width: 618px;
@@ -202,7 +200,7 @@ export default {
   resize: none;
   vertical-align: text-top;
   padding: 5px 7px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .email {
   width: 618px;
@@ -210,7 +208,7 @@ export default {
   resize: none;
   vertical-align: text-top;
   padding: 5px 7px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .signal {
   width: 618px;
@@ -218,7 +216,7 @@ export default {
   resize: none;
   vertical-align: text-top;
   padding: 5px 7px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 .user {
@@ -253,8 +251,8 @@ export default {
   border: none;
   outline: none;
 }
-.caption :hover{
-    color:pink;
+.caption :hover {
+  color: pink;
 }
 .save {
   margin-left: 200px;
