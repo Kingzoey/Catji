@@ -205,4 +205,8 @@ input {
   width: 100%;
   height: 100%;
 }
+.rank-list{
+	width:250px;
+	background-color:rgba(255, 255, 255, 0.5);
+}
 </style>
