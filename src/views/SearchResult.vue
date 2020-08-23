@@ -1,6 +1,13 @@
 <template>
   <div class="SearchResult">
     <NavBar />
+    <div class="logo">
+      <div class="grad">
+        <router-link to="/" class="head-logo">
+          <img src="../assets/logo_demo2_00.png" title style: width="30%" />
+        </router-link>
+      </div>
+    </div>
     <div class="container">
       <span class="name">搜索结果</span>
       <div class="nav">
@@ -56,6 +63,14 @@ export default {
 </script>
 
 <style scoped>
+.logo
+{
+  margin-left: 40%;
+}
+.SearchResult component
+{
+  display: inline;
+}
 .container {
   width: 1000px;
   margin: 0 auto;
@@ -63,10 +78,11 @@ export default {
 
 .name {
   display: inline-block;
-  color: #212121;
+  color:#00a1d6;
   vertical-align: bottom;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 80px;
+  margin-bottom: 20px;
 }
 
 .nav-header {
