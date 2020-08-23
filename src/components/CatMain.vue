@@ -44,21 +44,6 @@
     </div>
 
     <!--话题头部主导航-->
-    <div class="m-main-nav">
-      <li>
-        <a class="cur" href="/cat" title="猫咪介绍">猫咪介绍</a>
-      </li>
-      <li>
-        <a href="/cat" title="猫咪动态" :class="className" v-on:click="func1()">猫咪动态</a>
-      </li>
-      
-      <li>
-        <a href="/cat" title="猫咪视频">猫咪视频</a>
-      </li>
-      <li>
-        <a href="/cat" title="猫咪Tag">猫咪Tag</a>
-      </li>
-    </div>
     <!--/话题头部主导航-->
   </div>
 </template>
@@ -67,13 +52,7 @@
 import DLAM from "@/assets/DLAM.jpg";
 export default {
     name: "CatMain",
-    methods: {
-      func1(){
-        var div1=document.getElementsByClassName("m-main-nav");
-        var a1=div1.getElementsByTagName("li")[1].getElementsByTagName("a");
-        a1.className="cur";
-      },
-    },
+    methods: {},
     data() {
       return {
         className:"none",
