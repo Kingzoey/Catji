@@ -14,7 +14,7 @@
       </li>
       <br />
       <li class="user">
-        <font-awesome-icon :icon="['fas', 'user']" />
+        <font-awesome-icon :icon="['fas', 'user']" />&nbsp;
         <label for="username">昵称：</label>
         <textarea class="username" placeholder="王大橘" rows="1" type="textarea" validateevent="true"></textarea>
       </li>
@@ -31,21 +31,21 @@
         -->
         <div class="el-radio-group" style="display: inline-block;">
           <label class="el-radio-button">
-            <input type="radio" class="el-radio-button__orig-radio" value="男" />
+            <input type="radio" class="el-radio-button__orig-radio" value="男" name="gender" />
             <span class="el-radio-button__inner">
               男
               <font-awesome-icon :icon="['fas', 'mars']" />
             </span>
           </label>
           <label class="el-radio-button">
-            <input type="radio" class="el-radio-button__orig-radio" value="女" />
+            <input type="radio" class="el-radio-button__orig-radio" value="女" name="gender" />
             <span class="el-radio-button__inner">
               女
               <font-awesome-icon :icon="['fas', 'venus']" />
             </span>
           </label>
           <label class="el-radio-button">
-            <input type="radio" class="el-radio-button__orig-radio" value="保密" />
+            <input type="radio" class="el-radio-button__orig-radio" value="保密" name="gender" />
             <span class="el-radio-button__inner">
               密
               <font-awesome-icon :icon="['fas', 'mask']" />
@@ -54,7 +54,7 @@
         </div>
       </li>
       <li class="user">
-        <font-awesome-icon :icon="['fas', 'pen']" />
+        <font-awesome-icon :icon="['fas', 'pen']" />&nbsp;
         <label for="signal">签名：</label>
         <textarea
           class="signal"
@@ -66,7 +66,7 @@
         ></textarea>
       </li>
       <li class="user birthclass">
-        <font-awesome-icon :icon="['fas', 'calendar']" />
+        <font-awesome-icon :icon="['fas', 'birthday-cake']" />&nbsp;&nbsp;
         <label for="birthday">生日：</label>
         <textarea
           class="birthday"
@@ -77,7 +77,7 @@
         ></textarea>
       </li>
       <li class="user emailclass">
-        <font-awesome-icon :icon="['fas', 'at']" />
+        <font-awesome-icon :icon="['fas', 'at']" />&nbsp;
         <label for="email">邮箱：</label>
         <textarea
           class="email"
@@ -128,9 +128,17 @@ export default {
 </script>
 
 <style scoped>
+* {
+  list-style: none;
+}
+
 .MineInfo {
   margin-top: 50px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+  font-size: 18px;
 }
+
 .item_bock {
   display: flex;
   align-items: center;
