@@ -110,6 +110,7 @@ input[type="text"] {
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+   margin-top: 10px;
 }
 .toolbar[data-v-d130ef7a] {
   margin-top: 12px;
