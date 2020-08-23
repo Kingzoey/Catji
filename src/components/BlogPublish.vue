@@ -6,10 +6,12 @@
       </div>
       <br />
       <br />
-      <div data-v-d130ef7a class="toolbar">
+      <div data-v-d130ef7a class="toolbar" style="color:rgba(155, 153, 153, 0.41);font-size: 30px;"> 
+        <font-awesome-icon :icon="['fas', 'laugh']" /> 
         <!-- 要将父布局的position设置为relative，父布局将无法包裹input -->
         <div style="position: relative;">
-          <!--设置input的position为absolute，使其不按文档流排版，并设置其包裹整个布局 -->
+        
+         <!--设置input的position为absolute，使其不按文档流排版，并设置其包裹整个布局 -->
           <!-- 设置opactity为0，使input变透明 -->
           <!-- 只接受jpg，gif和png格式 -->
           <input
@@ -22,7 +24,7 @@
           <!-- 自定义按钮效果 -->
           <div style="text-align: top">
             <span style="font-size: 12px;"></span>
-            <font-awesome-icon :icon="['fas', 'laugh']" />
+            
             <img
               id="upload"
               src="https://wx1.sinaimg.cn/mw690/00825r6Igy1ght4e6p77wj300z00z0ih.jpg"
