@@ -17,12 +17,12 @@
             style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
             type="file"
             accept="image/gif, image/jpg, image/png"
-         
             multiple
           />
           <!-- 自定义按钮效果 -->
           <div style="text-align: top">
             <span style="font-size: 12px;"></span>
+            <font-awesome-icon :icon="['fas', 'laugh']" />
             <img
               id="upload"
               src="https://wx1.sinaimg.cn/mw690/00825r6Igy1ght4e6p77wj300z00z0ih.jpg"
@@ -49,9 +49,8 @@
 <script>
 //import uploadpicture from "@/assets/uploadpicture.png";
 export default {
-    name: "BlogPublish",
-
-}
+  name: "BlogPublish",
+};
 /*function showImg(obj) {
   var files = obj.files;
   // document.getElementById("imgContainer").innerHTML = getImgsByUrl(files)
