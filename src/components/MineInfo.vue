@@ -128,14 +128,8 @@ export default {
 </script>
 
 <style scoped>
-* {
-  list-style: none;
-}
 .MineInfo {
   margin-top: 50px;
-  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
-    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
-  font-size: 18px;
 }
 .item_bock {
   display: flex;
