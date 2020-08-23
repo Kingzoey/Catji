@@ -195,11 +195,8 @@ export default {
 .rank-list {
   width: 265px;
   position: inherit;
-  margin-top: 40px;
-  margin-left: 20px;
   padding-left: 10px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
+  height: 100%;
 }
 
 .rank-header {

@@ -1,7 +1,8 @@
 <template>
   <div data-v-420e12aa data-v-c25fd0ba class="live-panel">
     <p data-v-420e12aa class="title">
-      <span data-v-420e12aa class="tc-black ls-0">推荐猫猫🐱</span>
+      <br />
+      <span data-v-420e12aa class="tc-black ls-0" style="padding-left:20px;">推荐猫猫🐱</span>
       <span data-v-420e12aa class="count fs-14 ls-0">（10）</span>
     </p>
     <div data-v-420e12aa class="more-button c-pointer">
@@ -10,6 +11,7 @@
         href="//link.bilibili.com/p/center/index#/user-center/follow/1"
         target="_blank"
         class="more tc-slate"
+         style="padding-left:20px;"
       >更多</a>
     </div>
     <div data-v-420e12aa class="live-up-list">
@@ -269,11 +271,10 @@
 </script>
 
 <style scoped>
-
 .adaptive-scroll[data-v-08ab5c2b] {
-	-webkit-box-flex: 1;
-	-ms-flex: 1;
-	flex: 1;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
 .live-panel {
@@ -283,95 +284,89 @@
 }
 
 .live-panel-item .live-up-img[data-v-2284ddc9] {
-	display: block;
-	width: 38px;
-	height: 38px;
-	border-radius: 22px;
-	position: relative;
-	background-color: #fff;
-	margin: 1px;
-	margin-right: 11px;
-	-ms-flex-negative: 0;
-	flex-shrink: 0;
-	background-size: cover;
-	background-color: #ddd;
-	-webkit-box-shadow: 0 0 0 1px #f25d8e;
-	box-shadow: 0 0 0 1px #f25d8e;
-	border: 1px solid #fff;
+  display: block;
+  width: 38px;
+  height: 38px;
+  border-radius: 22px;
+  position: relative;
+  background-color: #fff;
+  margin: 1px;
+  margin-right: 11px;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  background-size: cover;
+  background-color: #ddd;
+  -webkit-box-shadow: 0 0 0 1px #f25d8e;
+  box-shadow: 0 0 0 1px #f25d8e;
+  border: 1px solid #fff;
 }
 
-
 .live-panel-item[data-v-2284ddc9]:first-child {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 .live-panel-item[data-v-2284ddc9] {
-	display: block;
-	position: relative;
-	margin-left: 16px;
-	height: 44px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: start;
-	-ms-flex-pack: start;
-	justify-content: flex-start;
+  display: block;
+  position: relative;
+  margin-left: 16px;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
 .live-panel-item[data-v-2284ddc9] {
-	display: block;
-	position: relative;
-	margin-left: 16px;
-	height: 44px;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: start;
-	-ms-flex-pack: start;
-	justify-content: flex-start;
+  display: block;
+  position: relative;
+  margin-left: 16px;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
 }
 
-
 .live-panel-item[data-v-2284ddc9]:first-child {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 .live-panel .title[data-v-420e12aa] {
-	font-size: 16px;
-	line-height: 22px;
+  font-size: 16px;
+  line-height: 22px;
 }
-
 
 .live-panel .more-button .more[data-v-420e12aa] {
-	font-size: 12px;
-	letter-spacing: 0;
+  font-size: 12px;
+  letter-spacing: 0;
 }
-
 
 .c-pointer {
-	cursor: pointer;
+  cursor: pointer;
 }
-
 
 .tc-slate {
-	color: #99a2aa;
+  color: #99a2aa;
 }
 
-
 .live-panel-item .live-detail .up-name[data-v-2284ddc9] {
-	font-size: 14px;
-	color: #222;
-	line-height: 20px;
-	word-break: break-all;
-	word-break: break-word;
-	text-overflow: ellipsis;
-	max-height: 20px;
+  font-size: 14px;
+  color: #222;
+  line-height: 20px;
+  word-break: break-all;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  max-height: 20px;
 }
 
 </style>
