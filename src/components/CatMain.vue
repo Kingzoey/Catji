@@ -100,8 +100,8 @@ export default {
 }
 .info
 {
-    
-    margin-left: 840px;
+
+  margin-left: 700px;
 }
 .m-main-nav
 {

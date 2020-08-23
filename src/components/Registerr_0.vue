@@ -14,15 +14,14 @@
       <div class="register clearfix">
         <h2>注 册</h2>
         <form action="#" method="post">
-          <input type="text" placeholder="请输入用户名" id="re_username" />
-          <input type="text" placeholder="请输入姓名" id="re_name" />
-          <input type="text" placeholder="请输入年龄" id="re_age" />
-          <input type="password" placeholder="请输入密码" id="re_password" />
-          <input type="password" placeholder="请输入确认密码" id="re_repassword" />
+          <input type="text" placeholder="请输入用户名" v-model="nickname" />
+          <input type="text" placeholder="请输入邮箱" v-model="email" />
+          <input type="password" placeholder="请输入密码" v-model="password1" />
+          <input type="password" placeholder="再次输入以确认密码" v-model="password2" />
         </form>
         <div class="send-button">
           <form>
-            <input type="button" value="免费注册" id="register" />
+            <input type="button" value="注册" @click="register()" />
           </form>
         </div>
       </div>
@@ -31,32 +30,56 @@
 </template>
 
 <script>
+import { register } from "../api";
 export default {
   name: "Registerr_0",
+  data() {
+    return {
+      nickname: "",
+      email: "",
+      password1: "",
+      password2: "",
+    };
+  },
+  methods: {
+    async register() {
+      if (this.password1 !== this.password2) {
+        return;
+      }
+      let res = await register(this.nickname, this.email, "", this.password1);
+      let usid = res.data;
+      console.log(usid);
+      this.$store.state.user.usid = usid;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .some-class {
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
+  text-align: center;
+  display: block;
+  width: 60%;
+  padding: 10px 0;
+  font-size: 16px;
+  font-weight: 100;
+  background-color: transparent;
+  color: #ccc;
+  border: 1px solid rgba(238, 238, 238, 0.41);
+  border-width: thin;
   cursor: pointer;
-  margin-top: 100px;
-  margin-left: 150px;
-  width: 150px;
-  height: 50px;
-  background-image: linear-gradient(to top, #d8d9db 0%, #fff 80%, #fdfdfd 100%);
-  border-radius: 30px;
-  border: 1px solid #8f9092;
-  transition: all 0.2s ease;
-  font-family: "Source Sans Pro", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  text-shadow: 0 1px #fff;
-  color: #606060;
+  outline: none;
+  transition: 0.5s all;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.some-class:hover {
+  background-color: rgb(0, 0, 0);
+  border: 1px solid #fff;
+  color: #fff;
+  transition: 0.5s all;
+  text-decoration: none;
 }
 
 .loginn {
@@ -256,10 +279,6 @@ input[type="password"] {
 
 .login a {
   color: #ccc;
-}
-
-.login a:hover {
-  color: #000;
 }
 
 .registerr {

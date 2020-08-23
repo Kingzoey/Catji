@@ -1,37 +1,99 @@
 <template>
 	<div class="page">
-		<NavBar />
 		<div class="container clearfix">
 			<div class="left">
 				<BlogCard />
 			</div>
-			<div class="right">
-				<UListt />
-			</div>
 			<div class="no-more"><img src="../assets/end.png" class="end-img">
-				
+			</div>
+			<div data-v-37d58309="" data-v-c25fd0ba="" class="back-top" style="right: 0px;" @click="goTop">
+				<i class="el-icon-creat-top goTopIcon"></i>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
-	import BlogCard from "@/components/BlogCard.vue";
-	import NavBar from "@/components/NavBar.vue";
-	import UListt from "@/components/UListt.vue";
+	import BlogCard from "@/components/MyBlogCard.vue";
 	export default {
 		name: "Blog",
 		components: {
-			NavBar,
-			UListt,
 			BlogCard,
 		},
+		data() {
+
+			return {
+				scrollTop: "",
+				goTopShow: false
+
+			};
+
+		},
+		watch: {
+			scrollTop() {
+
+				if (this.scrollTop > 500) {
+					this.goTopShow = true;
+
+				} else {
+					this.goTopShow = false;
+
+				}
+
+			}
+
+		},
+		methods: {
+			handleScroll() {
+				this.scrollTop =
+					window.pageYOffset ||
+					document.documentElement.scrollTop ||
+					document.body.scrollTop;
+
+				if (this.scrollTop > 500) {
+					this.goTopShow = true;
+
+				}
+
+			},
+			goTop() {
+
+				let timer = null,
+					_that = this;
+				cancelAnimationFrame(timer);
+				timer = requestAnimationFrame(function fn() {
+
+					if (_that.scrollTop > 0) {
+						_that.scrollTop -= 250;
+						document.body.scrollTop = document.documentElement.scrollTop =
+							_that.scrollTop;
+						timer = requestAnimationFrame(fn);
+
+					} else {
+						cancelAnimationFrame(timer);
+						_that.goTopShow = false;
+
+					}
+
+				});
+
+			}
+
+		},
+		mounted() {
+			window.addEventListener("scroll", this.handleScroll);
+
+		},
+		destroyed() {
+			window.removeEventListener("scroll", this.handleScroll);
+
+		}
 	};
 </script>
 
 <style scoped>
 	.page {
-		background-color: antiquewhite;
+		background-color: #79D2FF;
 	}
 
 	.container {
@@ -44,6 +106,7 @@
 	.left {
 		width: 900px;
 		float: left;
+		margin-left:25px;
 	}
 
 	.right {
@@ -70,4 +133,16 @@
 		margin-inline-end: 0px;
 	}
 
+	.back-top[data-v-37d58309] {
+		position: fixed;
+		bottom: 50px;
+		width: 150px;
+		height: 174px;
+		cursor: pointer;
+		z-index: 998;
+		background-position: 0 0;
+		text-align: center;
+		background-image: url(//s2.hdslb.com/bfs/static/blive/blfe-dynamic-web/static/img/rocket_top.bcc748c3.png);
+		background-repeat: no-repeat;
+	}
 </style>

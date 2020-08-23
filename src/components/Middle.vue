@@ -1,146 +1,193 @@
 <template>
-  <div class="hot-part">
-    <div class="card">
-      <header class="hot-header">
-        <br />
-        <span class="hot-name">最热</span>
-      </header>
-      <div class="hot-list-top">
-        <div class="top-left">
-          <div class="big-item">
-            <a class="cover" href="#" target="_blank">
-              <img :src="test1" height="208" width="370" alt="最热视频1" />
-            </a>
-            <br />
-            <a title="最热视频1">最热视频1</a>
+  <div class="home-bank">
+    <!-- <header class="bank-header">
+      <span class="name">最热视频</span>
+    </header> -->
+    <div class="bank-body clearfix">
+      <div class="top">
+        <div class="banner-warp">
+          <div class="banner">
+            <router-link :to="/video/ + recom_star.vid">
+              <img :src="recom_star.cover" :alt="recom_star.name" />
+              <span :title="recom_star.name">{{recom_star.name}}</span>
+            </router-link>
           </div>
         </div>
-        <div class="top-right">
-          <div class="top-right-line1">
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频2" />
-              </a>
-              <br />
-              <a title="最热视频2">最热视频2</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频3" />
-              </a>
-              <br />
-              <a title="最热视频3">最热视频3</a>
-            </div>
-            
-          </div>
-          <div class="top-right-line2">
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频5" />
-              </a>
-              <br />
-              <a title="最热视频5">最热视频5</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频6" />
-              </a>
-              <br />
-              <a title="最热视频6">最热视频6</a>
-            </div>
-           
-          </div>
-        </div>
-        <div class="bottom">
-          <div class="bottom-line1">
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频8" />
-              </a>
-              <br />
-              <a title="最热视频8">最热视频8</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频9" />
-              </a>
-              <br />
-              <a title="最热视频9">最热视频9</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频10" />
-              </a>
-              <br />
-              <a title="最热视频10">最热视频10</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最热视频11" />
-              </a>
-              <br />
-              <a title="最热视频11">最热视频11</a>
-            </div>
-           
-          </div>
+        <div class="subbanner-warp">
+          <ul>
+            <li class="subbanner" v-for="item in recom_others" :key="item.vid">
+              <router-link :to="/video/ + recom_star.vid">
+                <img :src="recom_star.cover" :alt="recom_star.name" />
+                <span :title="recom_star.name">{{recom_star.name}}</span>
+              </router-link>
+            </li>
+          </ul>
         </div>
       </div>
-      <br /><br />
+      <div class="bottom">
+        <div class="subbanner" v-for="item in recom_others" :key="item.vid">
+          <router-link :to="/video/ + recom_star.vid">
+            <img :src="recom_star.cover" :alt="recom_star.name" />
+            <span :title="recom_star.name">{{recom_star.name}}</span>
+          </router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
-
-
 <script>
-import test1 from "@/assets/test.png";
 export default {
   name: "Middle",
+  computed: {
+    recom_star() {
+      return this.recommends[0];
+    },
+    recom_others() {
+      return [].slice.apply(this.recommends, [1]);
+    },
+  },
   data() {
     return {
-      test1: test1,
+      recommends: [
+        {
+          vid: 1,
+          name: "好康视频",
+          cover: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwgNBwcHBwcHBw0HBwcHBw8ICQcNFREWFhURFRMYKCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALEBHAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2oBtKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKAAAAAAAAAAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAAigAAAAAAAAAAAICgAAAAAAAAAAAAAAAAgKAAAAAAAAAAACKAAACKgKAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAICgAAAAAAAIoAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKAAAIAP/Z",
+          url: "www.baidu.com",
+        },
+        {
+          vid: 2,
+          name: "好康视频2",
+          cover: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwgNBwcHBwcHBw0HBwcHBw8ICQcNFREWFhURFRMYKCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALEBHAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2oBtKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKAAAAAAAAAAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAAigAAAAAAAAAAAICgAAAAAAAAAAAAAAAAgKAAAAAAAAAAACKAAACKgKAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAICgAAAAAAAIoAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKAAAIAP/Z",
+          url: "www.baidu.com",
+        },
+        {
+          vid: 3,
+          name: "好康视频3",
+          cover: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwgNBwcHBwcHBw0HBwcHBw8ICQcNFREWFhURFRMYKCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALEBHAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2oBtKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKAAAAAAAAAAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAAigAAAAAAAAAAAICgAAAAAAAAAAAAAAAAgKAAAAAAAAAAACKAAACKgKAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAICgAAAAAAAIoAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKAAAIAP/Z",
+          url: "www.baidu.com",
+        },
+        {
+          vid: 4,
+          name: "好康视频4",
+          cover: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwgNBwcHBwcHBw0HBwcHBw8ICQcNFREWFhURFRMYKCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALEBHAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2oBtKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKAAAAAAAAAAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAAigAAAAAAAAAAAICgAAAAAAAAAAAAAAAAgKAAAAAAAAAAACKAAACKgKAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAICgAAAAAAAIoAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKAAAIAP/Z",
+          url: "www.baidu.com",
+        },
+        {
+          vid: 5,
+          name: "好康视频5",
+          cover: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwgNBwcHBwcHBw0HBwcHBw8ICQcNFREWFhURFRMYKCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALEBHAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2oBtKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKAAAAAAAAAAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAAigAAAAAAAAAAAICgAAAAAAAAAAAAAAAAgKAAAAAAAAAAACKAAACKgKAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAICgAAAAAAAIoAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKAAAIAP/Z",
+          url: "www.baidu.com",
+        },
+        {
+          vid: 6,
+          name: "好康视频6",
+          cover: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwgNBwcHBwcHBw0HBwcHBw8ICQcNFREWFhURFRMYKCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALEBHAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2oBtKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKAAAAAAAAAAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAAigAAAAAAAAAAAICgAAAAAAAAAAAAAAAAgKAAAAAAAAAAACKAAACKgKAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAICgAAAAAAAIoAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKAAAIAP/Z",
+          url: "www.baidu.com",
+        },
+        {
+          vid: 7,
+          name: "好康视频7",
+          cover: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgIBwgNBwcHBwcHBw0HBwcHBw8ICQcNFREWFhURFRMYKCggGBolGxMTITEhJSkrLi4uFx8zODMsNygtLisBCgoKBQUFDgUFDisZExkrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALEBHAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAAAQf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQC/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A2oBtKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgKAAAAAAAAAAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKgKAAAAAAAAAAAAAAAAAAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAACAoAAAAAAAAACKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACKAAAioCgAAAAAAAAAAAAAAAIoAAAAAigAAAAAAAAAAAICgAAAAAAAAAAAAAAAAgKAAAAAAAAAAACKAAACKgKAAAAAAAAAAAAAAAAAAAAAAigAAAAAAAAAAAICgAAAAAAAIoAAAAAAACAoAAAAAAAAAAAIoAAAIqAoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIKAAAIAP/Z",
+          url: "www.baidu.com",
+        },
+      ],
     };
   },
 };
 </script>
 
-<style>
-.card {
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
-}
-.hot-part {
-  position: inherit;
-}
-.hot-list-top:after {
-  content: "";
+<style scoped>
+img {
   display: block;
-  clear: both;
 }
-.hot-list-top {
+
+.home-bank {
+}
+
+.bank-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  margin-bottom: 16px;
+}
+
+.bank-body {
+}
+
+.name {
+  display: inline-block;
+  color: #212121;
+  vertical-align: bottom;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.top {
   white-space: nowrap;
 }
-.hot-name {
-  font-size: 30px;
-}
-.hot-header {
-  margin-left: 10px;
-}
-.top-left {
+
+.banner-warp {
   display: inline-block;
-  margin: -31px;
+  vertical-align: top;
+  height: 256px;
+  width: 372px;
+  overflow: hidden;
 }
+
+.subbanner-warp {
+  display: inline-block;
+  vertical-align: top;
+  width: 567px;
+  margin-left: 20px;
+  overflow: hidden;
+}
+
+.subbanner-warp ul {
+  white-space: normal;
+}
+
+.subbanner {
+  display: inline-block;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.subbanner:nth-of-type(3n) {
+  margin-right: 0;
+}
+
+.subbanner img {
+  height: 90px;
+  width: 175px;
+}
+
+.subbanner span {
+  display: block;
+  width: 160px;
+  height: 18px;
+  line-height: 18px;
+  overflow: hidden;
+}
+
+.banner img {
+  height: 208px;
+  width: 400px;
+}
+
+.banner span {
+  display: block;
+  width: 160px;
+  height: 18px;
+  line-height: 18px;
+  overflow: hidden;
+}
+
 .bottom {
   float: left;
-}
-.normal-item {
-  float: left;
-  width: 12em;
-  border: 200px;
-  margin-left: 50px;
-}
-.top-right {
-  display: inline-block;
-  margin-right: 10px;
+  overflow: hidden;
 }
 </style>

@@ -2,6 +2,13 @@
   <div @mousemove="parallax">
     <NavBar />
     <div class="bg" :style="{'background-position-x': tx+'px'}"></div>
+    <div class="logo">
+      <div class="grad">
+        <router-link to="/" class="head-logo">
+          <img src="../assets/logo_demo2_00.png" title style: width="30%" />
+        </router-link>
+      </div>
+    </div>
     <div class="container">
       <div class="search-wrap">
         <div class="search-bar clearfix">
@@ -19,7 +26,9 @@
       </div>
       <div class="body">
         <div class="rank-list">
-          <span class="name">搜索历史</span>
+          <span class="name">
+            <font-awesome-icon :icon="['fas', 'history']" />&nbsp;搜索历史
+          </span>
           <div class="rank-wrap" v-for="(item, index) in history" :key="item">
             <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
             <router-link :to="{path:'/searchResult',query:{q:item}}" class="link">
@@ -28,7 +37,9 @@
           </div>
         </div>
         <div class="rank-list">
-          <span class="name">热搜榜</span>
+          <span class="name">
+            <font-awesome-icon :icon="['fas', 'fire-alt']" />&nbsp;热搜榜
+          </span>
           <div class="rank-wrap" v-for="(item, index) in hotlist" :key="item">
             <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
             <router-link :to="{path:'/searchResult',query:{q:item}}" class="link">
@@ -142,7 +153,7 @@ input {
   margin: 50px 200px;
 }
 .search-wrap {
-  padding-top: 50px;
+  padding-top: 180px;
 }
 .rank-wrap {
   margin-bottom: 15px;
@@ -181,7 +192,30 @@ input {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .searchButton:hover {
   background: #00b5e5;
 }
+
+.grad {
+  pointer-events: none;
+  text-align:center;
+  position: absolute;
+  top: 20px;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rank-wrap :hover {
+  color:#00a1d6;
+}
+
+/*
+.rank-list{
+	width:250px;
+	background-color:rgba(255, 255, 255, 0.5);
+  opacity:0.5;
+}
+*/
 </style>

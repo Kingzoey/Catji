@@ -10,5 +10,14 @@ module.exports = {
         port: 8080, // 端口号
         open: false, //配置自动启动浏览器
         hotOnly: true, // 热更新
-    }
+        proxy: {
+            '/api': {
+                target: 'http://localhost:7843/',
+                changeOrigin: true,
+                // pathRewrite: {
+                //     '^/abcdef': 'abcdef'
+                // }
+            }
+        }
+    },
 }
