@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import test1 from "@/assets/test.png";
+import test1 from "@/assets/test1.png";
 export default {
   name: "Middle",
   data() {
