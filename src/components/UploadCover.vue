@@ -49,6 +49,9 @@ export default {
 </script>
 
 <style scoped>
+.cover-warp{
+  margin:0 auto;
+}
 .header {
   font-size: 16px;
   line-height: 16px;
@@ -88,4 +91,5 @@ export default {
   font-style: normal;
   margin-top: 6px;
 }
+
 </style>
