@@ -30,9 +30,9 @@
 </template>
 
 <script>
-import { register } from "../api";
+import { register } from "../api/Users";
 export default {
-  name: "Registerr_0",
+  name: "Registerr",
   data() {
     return {
       nickname: "",
@@ -43,13 +43,18 @@ export default {
   },
   methods: {
     async register() {
-      if (this.password1 !== this.password2) {
+      if (
+        !this.password1 ||
+        !this.nickname ||
+        !this.email ||
+        this.password1 !== this.password2
+      ) {
         return;
       }
       let res = await register(this.nickname, this.email, "", this.password1);
-      let usid = res.data;
-      console.log(usid);
+      let usid = res;
       this.$store.state.user.usid = usid;
+      this.$router.push({ path: "/" });
     },
   },
 };
