@@ -42,26 +42,28 @@ export default {
 }
 
 .left {
-  width: 540px;
+  width: 600px;
   height: 500px;
   float: left;
-  /* background-color:white */
 }
 
 .UploadInfo{
   margin-top: 20px;
-  background-color:white
+  background-color:white;
+  border-radius: 10px;
 }
 
 .UploadCover{
-  background-color:white
+  background-color:white;
+  border-radius: 10px;
 }
 
 .right {
-  width: 300px;
+  width: 350px;
   height: 535px;
   float: left;
   margin-left:50px;
-  background-color:white
+  background-color:white;
+  border-radius: 10px;
 }
 </style>

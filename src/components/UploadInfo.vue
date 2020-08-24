@@ -179,4 +179,8 @@ input[type="text"] {
   transition: 0.5s all;
   text-decoration: none;
 }
+
+.register clearfix{
+  margin:0 auto
+}
 </style>

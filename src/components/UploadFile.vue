@@ -64,7 +64,8 @@ export default {
 </script>
 <style scoped>
 .file-warp {
-  float: right;
+  /* float: right; */
+  margin:0 auto;
   width: 300px;
 }
 .header {
