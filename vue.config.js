@@ -12,11 +12,11 @@ module.exports = {
         hotOnly: true, // 热更新
         proxy: {
             '/api': {
-                target: 'http://localhost:7843/',
+                target: 'http://myweb1008.xyz:12340/',
                 changeOrigin: true,
-                // pathRewrite: {
-                //     '^/abcdef': 'abcdef'
-                // }
+                pathRewrite: {
+                    '^/api': 'api'
+                }
             }
         }
     },
