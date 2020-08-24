@@ -383,6 +383,7 @@
 .tc-black {
   font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+  font-weight: bold;
 }
 
 .more-button {

@@ -10,15 +10,18 @@
     </div>
     <div class="bottom">
       <a class="number-part c-pointer f-left" href="http://localhost:8080/">
-        <p class="numbers fs-14">3</p>
+        <p class="numbersa fs-14">5</p>
+        <span class="icon-info-a"><font-awesome-icon :icon="['fas', 'heart']" />&nbsp;</span>
         <p class="text tc-slate fs-12 ls-0">关注</p>
       </a>
       <a class="number-part c-pointer f-left" href="http://localhost:8080/">
-        <p class="numbers fs-14">0</p>
+        <p class="numbersb fs-14">2</p>
+        <span class="icon-info-b"><font-awesome-icon :icon="['fas', 'heart']" />&nbsp;</span>
         <p class="text tc-slate fs-12 ls-0">粉丝</p>
       </a>
       <a class="number-part c-pointer f-left" href="http://localhost:8080/">
-        <p class="numbers fs-14">1</p>
+        <p class="numbersc fs-14">0</p>
+        <span class="icon-info-c"><font-awesome-icon :icon="['fas', 'blog']" />&nbsp;</span>
         <p class="text tc-slate fs-12 ls-0">动态</p>
       </a>
     </div>
@@ -34,6 +37,19 @@
 </script>
 
 <style scoped>
+
+.icon-info-a {
+  color: pink;
+}
+
+.icon-info-b {
+  color: cornflowerblue;
+}
+
+.icon-info-c {
+  color: orange;
+}
+
 .content {
   width: 244px;
   height: 220px;
@@ -46,7 +62,7 @@
   width: 244px;
   height: 64px;
   background: center/cover no-repeat;
-  background-image: url(../assets/userinfo.jpg);
+  background-image: url(../assets/userinfo4.png);
 }
 
 .content .user-name {
@@ -83,22 +99,54 @@
 .content .bottom .number-part .text {
   font-size: 14px;
   color: #99a2aa;
-  padding-top: 5px;
+  padding-top: 0px;
   font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
 }
 
-.content .bottom .number-part .numbers {
+.content .bottom .number-part .numbersa {
   font-size: 16px;
   letter-spacing: 0;
-  padding-top: 25px;
+  padding-top: 12px;
   font-weight: bold;
   line-height: 19px;
   color: #222;
 }
-.content .bottom .number-part .numbers:hover {
+
+.content .bottom .number-part .numbersb {
+  font-size: 16px;
+  letter-spacing: 0;
+  padding-top: 12px;
+  font-weight: bold;
+  line-height: 19px;
+  color: #222;
+}
+
+.content .bottom .number-part .numbersc {
+  font-size: 16px;
+  letter-spacing: 0;
+  padding-top: 12px;
+  font-weight: bold;
+  line-height: 19px;
+  color: #222;
+}
+
+.content .bottom .number-part .numbersa:hover {
+  color: pink;
+}
+
+.content .bottom .number-part .numbersb:hover {
   color: cornflowerblue;
 }
+
+.content .bottom .number-part .numbersc:hover {
+  color: orange;
+}
+
+.content .bottom .number-part .text:hover {
+  color: pink;
+}
+
 .content .user-head {
   position: absolute;
   width: 56px;
