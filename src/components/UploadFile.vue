@@ -72,6 +72,7 @@ export default {
   font-size: 16px;
   color: #333;
   font-weight: 400;
+  padding-top: 5px;
 }
 .file-box {
   width: 298px;

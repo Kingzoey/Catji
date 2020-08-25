@@ -62,6 +62,8 @@ export default {
   font-size: 22px;
   line-height: 22px;
   margin-bottom: 20px;
+  padding-top: 10px;
+  margin-left: 20px;
   font-weight: 500;
   color: #333;
 }
@@ -70,6 +72,8 @@ export default {
   float: left;
   width: 192px;
   height: 106px;
+  margin-left: 20px;
+  margin-bottom:10px;
   border-radius: 4px;
   overflow: hidden;
 }

@@ -1,37 +1,29 @@
 <template>
   <div class="register clearfix">
-    <p>
-      <span class="header">
+      <div class="header">
         <em style="color:red;font-size:15px;"></em>&nbsp;
         <font-awesome-icon :icon="['fas', 'hat-cowboy']" />&nbsp;标题
-      </span>
-      <span>可输入20个字</span>
-    </p>
-
+      </div>  
+      <!-- <span>可输入20个字</span> -->
     <form action="#" method="post">
+      <input type="text" placeholder="   可输入20个字" id="re_username" />
       <br />
-      <input type="text" placeholder="可输入20个字" id="re_username" />
       <br />
+      <br />
+      
+      <div class="header">
+        <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;&nbsp;&nbsp;&nbsp;标签
+      </div>
+      <!-- <span>添加标签增加关联！</span> -->
+      <input type="text" placeholder="   创建标签" id="re_username" />
       <br />
       <br />
       <br />
 
-      <span class="header">
-        <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;&nbsp;标签
-      </span>
-      <span>添加标签增加关联！</span>
-
-      <input type="text" placeholder="创建标签" id="re_username" />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
       <div class="header">
         <font-awesome-icon :icon="['fas', 'book']" />&nbsp;&nbsp;&nbsp;简介
       </div>
-
-      <input type="text" placeholder="介绍一下内容" id="re_username" />
+      <input type="text" placeholder="   介绍一下内容" id="re_username" />
     </form>
     <div class="send-button">
       <form>
@@ -53,6 +45,8 @@ export default {
   font-size: 20px;
   color: #333;
   font-weight: 400;
+  margin-left: 20px;
+  padding-top: 10px;
 }
 .dropdown {
   position: relative;
@@ -155,6 +149,7 @@ input[type="text"] {
 
 .send-button {
   margin-bottom: 20px;
+  margin-left: 20px;
 }
 
 .send-button input[type="button"] {
@@ -181,6 +176,7 @@ input[type="text"] {
 }
 
 .register clearfix{
-  margin:0 auto
+  margin:0 auto;
+  height: 400px;
 }
 </style>

@@ -3,7 +3,7 @@
     <NavBar />
     <div class="container clearfix">
       <div class="left">
-        <UserInfo class="userinfo" />
+        <CatUserInfo class="catuserinfo" />
         <UListt />
       </div>
       <div class="right">
@@ -18,13 +18,13 @@
 import CatBlogCard from "@/components/CatSpaceBlogCard.vue";
 import BlogPublish from "@/components/BlogPublish.vue";
 import NavBar from "@/components/NavBar.vue";
-import UserInfo from "@/components/UserInfo.vue";
+import CatUserInfo from "@/components/CatUserInfo.vue";
 import UListt from "@/components/UListt.vue";
 export default {
   name: "Blog",
   components: {
     NavBar,
-    UserInfo,
+    CatUserInfo,
     UListt,
     BlogPublish,
     CatBlogCard,
@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
 .page {
-  background-color: antiquewhite;
+  background-color: rgb(232, 248, 255);
 }
 
 .container {
@@ -50,9 +50,9 @@ export default {
 .right {
   width: 900px;
   margin-left: 8px;
-  float: left;
+  float: right;
 }
-.userinfo {
+.catuserinfo {
   margin-top: 8px;
 }
 </style>

@@ -62,7 +62,7 @@
   width: 244px;
   height: 64px;
   background: center/cover no-repeat;
-  background-image: url(../assets/userinfo7.png);
+  background-image: url(../assets/userinfo4.png);
 }
 
 .content .user-name {
