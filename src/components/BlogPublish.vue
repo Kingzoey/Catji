@@ -6,8 +6,9 @@
       </div>
       <br />
       <br />
-      <div data-v-d130ef7a class="toolbar" style="color:rgba(155, 153, 153, 0.41);font-size: 30px;"> 
-        <font-awesome-icon :icon="['fas', 'laugh']" /> 
+      <div data-v-d130ef7a class="toolbar" style="position: relative;left:-800;color:#fb7299;font-size: 30px;"> 
+        <font-awesome-icon :icon="['fas', 'laugh']" />  &emsp;
+        <font-awesome-icon :icon="['fas', 'hashtag']" /> &emsp;&emsp;
         <!-- 要将父布局的position设置为relative，父布局将无法包裹input -->
         <div style="position: relative;">
         
@@ -25,11 +26,7 @@
           <div style="text-align: top">
             <span style="font-size: 12px;"></span>
             
-            <img
-              id="upload"
-              src="https://wx1.sinaimg.cn/mw690/00825r6Igy1ght4e6p77wj300z00z0ih.jpg"
-              style="width: 40px; height: 40px; vertical-align: middle;"
-            />
+            <font-awesome-icon :icon="['fas', 'camera']" /> 
           </div>
         </div>
         <div id="imgContainer" style="margin-top: 10px;"></div>
@@ -92,7 +89,7 @@ export default {
 
 <style scoped>
 input[type="text"] {
-  width: 93.4%;
+  width: 80%;
   margin-bottom: 20px;
   padding: 10px;
   float: left;
@@ -115,19 +112,12 @@ input[type="text"] {
 }
 .toolbar[data-v-d130ef7a] {
   margin-top: 12px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+ display: -webkit-flex; /* Safari */
+    -webkit-justify-content: space-around; /* Safari 6.1+ */
+    display: flex;
+    justify-content: space-around;
   align-items: center;
+  
 }
 
 .publish-launcher[data-v-8a5dd7f0] {
