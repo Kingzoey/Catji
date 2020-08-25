@@ -2,7 +2,7 @@
   <div>
     <NavBar />
     <div class="container clearfix">
-      <div class="left">
+      <div class="left" :style="{'position':'relative','top':leftPanelTop+'px'}">
         <div class="user">
           <div class="avatar">
             <img :src="this.$store.state.user.avatar" alt />
@@ -53,10 +53,26 @@ export default {
   components: {
     NavBar,
   },
-  methods: {},
+  mounted() {
+    console.log(this.$route.params.usid);
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll() {
+      this.scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+
+      if (this.scrollTop > 0) {
+        this.leftPanelTop = Math.max(0, this.scrollTop - 100);
+      }
+    },
+  },
   data() {
     return {
       on: 0,
+      leftPanelTop: 0,
       tablist: [
         {
           name: "欢迎",
@@ -101,9 +117,6 @@ export default {
       ],
     };
   },
-  mounted() {
-    console.log(this.$route.params.usid);
-  },
 };
 </script>
 
@@ -112,6 +125,7 @@ export default {
   width: 1200px;
   margin: 100px auto 0;
   border: 1px solid #ddd;
+  box-sizing: content-box;
 }
 
 .left {
@@ -123,10 +137,8 @@ export default {
 }
 
 .right {
-  width: 954px;
+  width: 955px;
   float: right;
-  margin: 0 -1px;
-  border-left: 1px solid #ddd;
 }
 
 .user {
@@ -157,9 +169,9 @@ export default {
   margin: 8px auto 0;
   text-align: center;
   font-size: 18px;
-  font-family: Michroma,'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
 }
-
 
 .tab {
   display: block;
@@ -167,20 +179,20 @@ export default {
 }
 
 .tab :hover {
-    color: #5dceea;
+  color: #5dceea;
 }
 
 .tab {
-	float: left !important;
-	overflow: visible;
-	padding: 0 3px;
-	border: none;
-	font-weight: normal;
-	font-size: 18px;
-	font-family: Michroma,'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;
-	cursor: default;
+  float: left !important;
+  overflow: visible;
+  padding: 0 3px;
+  border: none;
+  font-weight: normal;
+  font-size: 18px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+  cursor: default;
 }
-
 
 .stat {
   margin: 16px auto 8px;
@@ -192,7 +204,8 @@ export default {
   text-align: center;
   float: left;
   font-size: 16px;
-  font-family:Michroma,'Segoe UI Light','Segoe UI','Segoe UI WP','Microsoft Jhenghei','微软雅黑',sans-serif,Times;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
 }
 
 .stat-number {
@@ -217,10 +230,9 @@ export default {
   overflow: visible;
 }
 
-.tab-item.on a{
+.tab-item.on a {
   color: pink;
 }
-
 
 .tab-item a {
   overflow: visible;
@@ -231,7 +243,7 @@ export default {
   display: inline-block;
   height: 36px;
   margin-right: 4px;
-  color:#999;
+  color: #999;
 }
 
 .tab-item a svg {
