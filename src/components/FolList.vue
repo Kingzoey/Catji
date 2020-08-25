@@ -270,7 +270,8 @@
 .live-panel {
   background-color: white;
   border-radius: 4px;
-  margin-top: 8px;
+  margin-top: 5px;
+  margin-left: 8px;
 }
 
 .live-panel-item .live-up-img[data-v-2284ddc9] {
@@ -351,12 +352,22 @@
 
 .live-panel-item .live-detail .up-name[data-v-2284ddc9] {
   font-size: 14px;
-  color: #222;
   line-height: 20px;
   word-break: break-all;
   word-break: break-word;
   text-overflow: ellipsis;
   max-height: 20px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+  font-weight: bold;
+}
+
+.live-detail :hover {
+  color: cornflowerblue;
+}
+
+.up-name:hover {
+  color: pink;
 }
 
 .tc-black svg {

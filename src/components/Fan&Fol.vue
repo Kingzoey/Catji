@@ -74,7 +74,6 @@ list-style:none;
 }
 
 .tab {
-	
 	overflow: visible;
 	padding: 0 300px;
 	border: none;
@@ -90,6 +89,8 @@ list-style:none;
   margin: 16px auto;
   padding: 0 0 0 16px;
   overflow: visible;
+  display: block;
+  
 }
 
 .tab-item.on a{

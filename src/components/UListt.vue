@@ -368,12 +368,18 @@
 
 .live-panel-item .live-detail .up-name[data-v-2284ddc9] {
   font-size: 14px;
-  color: #222;
   line-height: 20px;
   word-break: break-all;
   word-break: break-word;
   text-overflow: ellipsis;
   max-height: 20px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+  font-weight: bold;
+}
+
+.live-detail :hover {
+  color: cornflowerblue;
 }
 
 .tc-black svg {
@@ -384,6 +390,10 @@
   font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
   font-weight: bold;
+}
+
+.up-name:hover {
+  color: pink;
 }
 
 .more-button {
