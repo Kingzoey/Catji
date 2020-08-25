@@ -21,7 +21,7 @@
             <font-awesome-icon :icon="['fas', 'user']" />
             {{vi.upname}}
             </a>
-            <a class="attention-btn" @click="follow(vi.vid)">+ 关注</a>
+            <a class="attention-btn" @click="follow(vi.vid)">取消收藏</a>
           </div>
         </div>
       </li>
@@ -37,32 +37,33 @@ export default {
       video: [
         {
           vid: 1,
+          vtitle: "同济人气猫咪",
+          upname: "王四锤", //上传视频up主
+          cover:
+            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=187649172,1956357065&fm=26&gp=0.jpg", //封面
+        },
+        {
+          vid: 2,
           vtitle: "可爱猫咪日常搞笑合集",
           upname: "王大锤", //上传视频up主
           cover:
             "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2338360597,1299861243&fm=26&gp=0.jpg", //封面
         },
         {
-          vid: 2,
+          vid: 3,
           vtitle: "这么可爱的猫咪你下得去手",
           upname: "王二锤", //上传视频up主
           cover:
             "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3294506463,533319956&fm=26&gp=0.jpg", //封面
         },
         {
-          vid: 3,
+          vid: 4,
           vtitle: "云吸猫",
           upname: "王三锤", //上传视频up主
           cover:
             "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=338026201,811635179&fm=26&gp=0.jpg", //封面
         },
-        {
-          vid: 4,
-          vtitle: "同济人气猫咪",
-          upname: "王四锤", //上传视频up主
-          cover:
-            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=187649172,1956357065&fm=26&gp=0.jpg", //封面
-        },
+        
         {
           vid: 5,
           vtitle: "小猫咪叫人起床",
@@ -75,7 +76,7 @@ export default {
   },
   methods: {
     follow() {
-      window.alert("关注成功!(狗头)");
+      window.alert("取消成功!(狗头)");
     },
   },
 };
@@ -149,7 +150,7 @@ export default {
 }
 
 .attention-btn {
-  width: 64px;
+  width: 80px;
   height: 24px;
   text-align: center;
   background: rgb(223, 37, 37);

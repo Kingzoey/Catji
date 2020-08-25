@@ -21,7 +21,7 @@
             <font-awesome-icon :icon="['fas', 'user']" />
             {{vi.upname}}
             </a>
-            <a class="attention-btn" @click="follow(vi.vid)">+ 关注</a>
+            <a class="attention-btn" @click="follow(vi.vid)">删除视频</a>
           </div>
         </div>
       </li>
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     follow() {
-      window.alert("关注成功!(狗头)");
+      window.alert("删除成功!(狗头)");
     },
   },
 };
@@ -149,7 +149,7 @@ export default {
 }
 
 .attention-btn {
-  width: 64px;
+  width: 80px;
   height: 24px;
   text-align: center;
   background: orange;
