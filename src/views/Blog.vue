@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <NavBar />
+	<NavBar />
     <div class="container clearfix">
       <div class="left">
         <UserInfo class="userinfo" />
@@ -45,12 +45,12 @@ export default {
 }
 .left {
   width: 244px;
-  float: left;
+  float:left;
 }
 .right {
   width: 900px;
   margin-left: 8px;
-  float: left;
+  float: right;
 }
 .userinfo {
   margin-top: 8px;
