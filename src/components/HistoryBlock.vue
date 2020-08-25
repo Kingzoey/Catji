@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>历史记录</h2>
     <ul>
       <li class="vi-item" v-for="vi in video" :key="vi.vid">
         <div class="v-cover">
