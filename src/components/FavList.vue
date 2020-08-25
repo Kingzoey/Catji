@@ -1,6 +1,8 @@
 <template>
-  <div>
-      <h2>我的收藏</h2>
+  <div class="all">
+    <p class="title-fav">
+      <font-awesome-icon :icon="['fas', 'folder']" />&nbsp;我的收藏
+    </p>
     <ul>
       <li class="vi-item" v-for="vi in video" :key="vi.vid">
         <div class="v-cover">
@@ -15,7 +17,10 @@
             <router-link :to="/video/ + vi.vid" :title="vi.vtitle" class="title">{{vi.vtitle}}</router-link>
           </div>
           <div class="desc">
+            <a class="visit-up-space" href="https://space.bilibili.com/168598">
+            <font-awesome-icon :icon="['fas', 'user']" />
             {{vi.upname}}
+            </a>
             <a class="attention-btn" @click="follow(vi.vid)">+ 关注</a>
           </div>
         </div>
@@ -77,6 +82,17 @@ export default {
 </script>
 
 <style scoped>
+.title-fav {
+  color:rgb(223, 37, 37);
+  font-size: 20px;
+  padding-left: 5px;
+  padding-top: 2px;
+}
+
+.title-fav :hover {
+  color: pink;
+}
+
 .vi-item {
   position: relative;
   padding: 20px 0 10px 102px;
@@ -123,20 +139,29 @@ export default {
 .desc {
   margin-bottom: 14px;
   width: 750px;
-  font-size: 12px;
+  font-size: 14px;
   color: #6d757a;
   line-height: 16px;
 }
+
+.desc :hover {
+  color: pink;
+}
+
 .attention-btn {
   width: 64px;
   height: 24px;
   text-align: center;
-  background: #00a1d6;
+  background: rgb(223, 37, 37);
   color: #fff;
   line-height: 24px;
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
+}
+
+.headline :hover {
+  color:rgb(223, 37, 37);
 }
 </style>
