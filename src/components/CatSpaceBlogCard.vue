@@ -222,7 +222,7 @@
 		background-repeat: no-repeat;
 		background-position: right top;
 		background-size: 700px;
-		background-image:url(../assets/blogcardtop3.png)
+		background-image:url(../assets/blogcardtop2.png)
 	}
 
 	.user-head {

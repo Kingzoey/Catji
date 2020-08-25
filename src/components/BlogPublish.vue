@@ -2,7 +2,7 @@
   <div>
     <div data-v-d130ef7a class="publish-panel">
       <div>
-        <input type="text" placeholder="有什么想和大家分享的？" id="re_username" />
+        <input type="text" placeholder="云上的吸猫，你我共享" id="re_username" />
       </div>
       <br />
       <br />

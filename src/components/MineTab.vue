@@ -11,8 +11,7 @@
                 @mouseenter="hover = index"
                 @mouseleave="hover = on"
                 >{{item.name}}
-                </li>
-                
+                </li>         
             </ul>
       </div>
       <component :is="tabs[on].component"></component>
