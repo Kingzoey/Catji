@@ -42,7 +42,7 @@
           <li>
             <router-link to="/favorite">收藏</router-link>
           </li>
-          <li class="tougao">
+          <li class="upload">
             <router-link to="/upload">投稿</router-link>
           </li>
         </ul>
@@ -119,9 +119,13 @@ export default {
   color: aliceblue;
 }
 
-.nav ul li.tougao {
+.nav ul li.upload {
   height: 55px;
   background: pink;
   border-radius: 0 0 15px 15px;
+}
+
+.upload a {
+  color: #fff !important;
 }
 </style>
