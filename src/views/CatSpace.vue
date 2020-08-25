@@ -8,14 +8,14 @@
       </div>
       <div class="right">
         <BlogPublish /> 
-        <BlogCard />
+        <CatBlogCard />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import BlogCard from "@/components/BlogCard.vue";
+import CatBlogCard from "@/components/CatSpaceBlogCard.vue";
 import BlogPublish from "@/components/BlogPublish.vue";
 import NavBar from "@/components/NavBar.vue";
 import UserInfo from "@/components/UserInfo.vue";
@@ -27,7 +27,7 @@ export default {
     UserInfo,
     UListt,
     BlogPublish,
-    BlogCard,
+    CatBlogCard,
   },
 };
 </script>

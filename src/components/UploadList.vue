@@ -1,7 +1,7 @@
 <template>
   <div class="all">
-    <p class="title-his">
-      <font-awesome-icon :icon="['fas', 'history']" />&nbsp;观看历史
+    <p class="title-upl">
+      <font-awesome-icon :icon="['fas', 'upload']" />&nbsp;我的投稿
     </p>
     <ul>
       <li class="vi-item" v-for="vi in video" :key="vi.vid">
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: "HistoryBlock",
+  name: "UploadList",
   data() {
     return {
       video: [
@@ -82,14 +82,14 @@ export default {
 </script>
 
 <style scoped>
-.title-his {
-  color:#00a1d6;
+.title-upl {
+  color:orange;
   font-size: 20px;
   padding-left: 5px;
   padding-top: 2px;
 }
 
-.title-his :hover {
+.title-upl :hover {
   color: pink;
 }
 
@@ -144,10 +144,6 @@ export default {
   line-height: 16px;
 }
 
-.visit-up-space a:hover {
-  color:pink;
-}
-
 .desc :hover {
   color: pink;
 }
@@ -156,7 +152,7 @@ export default {
   width: 64px;
   height: 24px;
   text-align: center;
-  background: #00a1d6;
+  background: orange;
   color: #fff;
   line-height: 24px;
   border-radius: 4px;
@@ -166,6 +162,6 @@ export default {
 }
 
 .headline :hover {
-  color:#00a1d6;
+  color:orange;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-  <div class="login">
+  <div>
     <NavBar />
-    <Loginn style="background-color: #f0f0f0;"></Loginn>
+    <Loginn />
   </div>
 </template>
 

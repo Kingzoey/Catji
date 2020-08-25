@@ -1,18 +1,24 @@
 <template>
   <div data-v-420e12aa data-v-c25fd0ba class="live-panel">
-    <p data-v-420e12aa class="title">
-      <br />
-      <span data-v-420e12aa class="tc-black ls-0" style="padding-left:20px;">推荐猫猫🐱</span>
-      <span data-v-420e12aa class="count fs-14 ls-0">（10）</span>
-    </p>
-    <div data-v-420e12aa class="more-button c-pointer">
-      <a
-        data-v-420e12aa
-        href="//link.bilibili.com/p/center/index#/user-center/follow/1"
-        target="_blank"
-        class="more tc-slate"
-         style="padding-left:20px;"
-      >更多</a>
+    <div class="two-to-one">
+      <p data-v-420e12aa class="title">
+        <br />
+        <span data-v-420e12aa class="tc-black ls-0" style="padding-left:20px;">
+          <font-awesome-icon :icon="['fas', 'cat']" />&nbsp;&nbsp;推荐猫猫🐱
+        </span>
+        <span data-v-420e12aa class="count fs-14 ls-0"></span>
+      </p>
+      <div data-v-420e12aa class="more-button c-pointer">
+        <a
+          data-v-420e12aa
+          href="//link.bilibili.com/p/center/index#/user-center/follow/1"
+          target="_blank"
+          class="more tc-slate"
+          style="padding-left:20px;"
+        >
+          <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;更多&nbsp;
+        </a>
+      </div>
     </div>
     <div data-v-420e12aa class="live-up-list">
       <div
@@ -261,8 +267,9 @@
         >
           <div data-v-2284ddc9 class="up-name line-clamp-1" data-userinfo-popup-inited="true">丸喵喵</div>
           <div data-v-2284ddc9 class="live-name line-clamp-2">保证和封面一样</div>
-        </a>
+        </a>  
       </div>
+      <br />
     </div>
   </div>
 </template>
@@ -369,4 +376,28 @@
   max-height: 20px;
 }
 
+.tc-black svg {
+  color: pink;
+}
+
+.tc-black {
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+  font-weight: bold;
+}
+
+.more-button {
+  display: block;
+  position: relative;
+  left: 175px;
+}
+
+.more tc-slate {
+  display: block;
+  float: right;
+}
+
+.more-button :hover {
+  color: pink;
+}
 </style>

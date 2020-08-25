@@ -24,7 +24,42 @@
       </li>
       <li>
         <router-link to="/game">
-          <div class="item">游戏页/game</div>
+          <div class="item">游戏页/game(待开发)</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/tag">
+          <div class="item">Tag页/tag(微博式tag，无法页内切换)</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/tagg">
+          <div class="item">Tagg页/tagg(可页内切换，tag样式可改进)</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/cat">
+          <div class="item">猫咪主页/cat</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/search">
+          <div class="item">搜索页/search</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/searchresult">
+          <div class="item">搜索结果页/searchresult</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/blog">
+          <div class="item">动态页/blog</div>
+        </router-link>
+      </li>
+      <li>
+        <router-link to="/catspace">
+          <div class="item">猫咪广场页/catspace</div>
         </router-link>
       </li>
       <!-- <li>

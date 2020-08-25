@@ -81,7 +81,7 @@ export default {
         {
           name: "我的收藏",
           iconname: "folder",
-          tab: () => import("@/components/HistoryBlock.vue"),
+          tab: () => import("@/components/FavList.vue"),
         },
         {
           name: "观看历史",
@@ -91,7 +91,7 @@ export default {
         {
           name: "投稿管理",
           iconname: "upload",
-          tab: () => import("@/components/HistoryBlock.vue"),
+          tab: () => import("@/components/UploadList.vue"),
         },
         {
           name: "数据中心",
