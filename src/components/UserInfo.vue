@@ -12,17 +12,17 @@
       <a class="number-part c-pointer f-left" href="http://localhost:8080/">
         <p class="numbersa fs-14">5</p>
         <span class="icon-info-a"><font-awesome-icon :icon="['fas', 'heart']" />&nbsp;</span>
-        <p class="text tc-slate fs-12 ls-0">关注</p>
+        <p class="texta tc-slate fs-12 ls-0">关注</p>
       </a>
       <a class="number-part c-pointer f-left" href="http://localhost:8080/">
         <p class="numbersb fs-14">2</p>
         <span class="icon-info-b"><font-awesome-icon :icon="['fas', 'heart']" />&nbsp;</span>
-        <p class="text tc-slate fs-12 ls-0">粉丝</p>
+        <p class="textb tc-slate fs-12 ls-0">粉丝</p>
       </a>
       <a class="number-part c-pointer f-left" href="http://localhost:8080/">
         <p class="numbersc fs-14">0</p>
         <span class="icon-info-c"><font-awesome-icon :icon="['fas', 'blog']" />&nbsp;</span>
-        <p class="text tc-slate fs-12 ls-0">动态</p>
+        <p class="textc tc-slate fs-12 ls-0">动态</p>
       </a>
     </div>
     <img
@@ -96,7 +96,23 @@
   text-align: center;
 }
 
-.content .bottom .number-part .text {
+.content .bottom .number-part .texta {
+  font-size: 14px;
+  color: #99a2aa;
+  padding-top: 0px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+}
+
+.content .bottom .number-part .textb {
+  font-size: 14px;
+  color: #99a2aa;
+  padding-top: 0px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+}
+
+.content .bottom .number-part .textc {
   font-size: 14px;
   color: #99a2aa;
   padding-top: 0px;
@@ -143,8 +159,16 @@
   color: orange;
 }
 
-.content .bottom .number-part .text:hover {
+.content .bottom .number-part .texta:hover {
   color: pink;
+}
+
+.content .bottom .number-part .textb:hover {
+  color: cornflowerblue;
+}
+
+.content .bottom .number-part .textc:hover {
+  color: orange;
 }
 
 .content .user-head {
