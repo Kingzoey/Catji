@@ -21,7 +21,10 @@
             <font-awesome-icon :icon="['fas', 'user']" />
             {{vi.upname}}
             </a>
-            <a class="attention-btn" @click="follow(vi.vid)">取消收藏</a>
+            <a class="attention-btn" @click="follow(vi.vid)">+ 关注</a>
+            
+            <a class="attention-a" @click="del(vi.vid)">取消收藏</a>
+            
           </div>
         </div>
       </li>
@@ -77,12 +80,15 @@ export default {
   methods: {
     follow() {
       window.alert("取消成功!(狗头)");
+    },del() {
+      window.alert("已删除!");
     },
   },
 };
 </script>
 
 <style scoped>
+
 .title-fav {
   color:rgb(223, 37, 37);
   font-size: 20px;
@@ -160,6 +166,19 @@ export default {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
+}
+.attention-a{
+  width: 80px;
+  height: 24px;
+  text-align: center;
+  background: rgb(223, 37, 37);
+  color: #fff;
+  line-height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
 }
 
 .headline :hover {
