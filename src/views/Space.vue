@@ -76,7 +76,7 @@ export default {
         {
           name: "关注 / 粉丝列表",
           iconname: "list",
-          tab: () => import("@/views/About.vue"),
+          tab: () => import("@/components/Fan&Fol.vue"),
         },
         {
           name: "我的收藏",
