@@ -6,7 +6,7 @@
       </div>
       <br />
       <br />
-      <div data-v-d130ef7a class="toolbar" style="position: relative;left:-800;color:antiquewhite;font-size: 30px;"> 
+      <div data-v-d130ef7a class="toolbar" style="position: relative;left:-800;color:rgb(232, 248, 255);font-size: 30px;"> 
         <font-awesome-icon :icon="['fas', 'laugh']" />  &emsp;
         <font-awesome-icon :icon="['fas', 'hashtag']" /> &emsp;&emsp;
         <!-- 要将父布局的position设置为relative，父布局将无法包裹input -->
@@ -48,7 +48,7 @@
 <script>
 //import uploadpicture from "@/assets/uploadpicture.png";
 export default {
-  name: "BlogPublish",
+  name: "BlogPublishCat",
 };
 /*function showImg(obj) {
   var files = obj.files;
@@ -136,7 +136,7 @@ input[type="text"] {
   width: 70px;
   height: 32px;
   outline: none;
-  background-color: antiquewhite;
+  background-color: rgb(232, 248, 255);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -144,4 +144,5 @@ input[type="text"] {
   margin-right: 24px;
   margin-bottom: 20px;
 }
+
 </style>

@@ -7,7 +7,7 @@
         <UListt />
       </div>
       <div class="right">
-        <BlogPublish /> 
+        <BlogPublishCat /> 
         <CatBlogCard />
       </div>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 import CatBlogCard from "@/components/CatSpaceBlogCard.vue";
-import BlogPublish from "@/components/BlogPublish.vue";
+import BlogPublishCat from "@/components/BlogPublishCat.vue";
 import NavBar from "@/components/NavBar.vue";
 import CatUserInfo from "@/components/CatUserInfo.vue";
 import UListt from "@/components/UListt.vue";
@@ -26,7 +26,7 @@ export default {
     NavBar,
     CatUserInfo,
     UListt,
-    BlogPublish,
+    BlogPublishCat,
     CatBlogCard,
   },
 };
