@@ -1,7 +1,7 @@
 <template>
 <div>
     <div class="container">
-        <div class="tab">
+        <div class="tab" clearfix>
           <ul>
             <li class="tab-item"
               :class="{on:index==on}"
@@ -75,7 +75,7 @@ list-style:none;
 
 .tab {
 	overflow: visible;
-	padding: 0 300px;
+	padding: 0 953px;
 	border: none;
 	font-weight: normal;
 	font-size: 18px;
@@ -90,7 +90,7 @@ list-style:none;
   padding: 0 0 0 16px;
   overflow: visible;
   display: block;
-  
+  float: left;
 }
 
 .tab-item.on a{
