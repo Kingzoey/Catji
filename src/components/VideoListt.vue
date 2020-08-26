@@ -1,6 +1,7 @@
 <template>
   <div class="total">
     <div class="line1">
+      <br />
       <div class="normal-item">
         <a class="cover" href="#" target="_blank">
           <img :src="test1" height="90" width="175" alt="视频1" />
@@ -148,13 +149,6 @@
         </a>
         <br />
         <a title="视频20">视频20</a>
-      </div>
-      <div class="normal-item">
-        <a class="cover" href="#" target="_blank">
-          <img :src="test1" height="90" width="175" alt="视频20" />
-        </a>
-        <br />
-        <a title="视频21">视频21</a>
       </div>
     </div>
     <div class="cb-page">
@@ -307,7 +301,7 @@ export default {
       tot_page: 10,
       jmp_page: "",
       comment_num: 9999,
-      test1: test1,     
+      test1: test1,
     };
   },
   methods: {
@@ -319,15 +313,19 @@ export default {
     },
   },
 };
-  
 </script>
 
 <style scoped>
-
 .normal-item {
   float: left;
   border: 200px;
-  margin-left: 70px;
+  margin-left: 38px;
+  margin-right: 36.5px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 2px;
 }
 
 .cb-send {
@@ -589,9 +587,11 @@ export default {
 
 .cb-page .jump {
   float: right;
-  color: #99a2aa;
+  color: rgb(17, 16, 17);
   line-height: 36px;
+  font-size: 14px;
 }
+
 .cb-page .jump input {
   margin: 0 5px;
   margin-top: 0px;

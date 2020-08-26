@@ -2,23 +2,73 @@
   <div>
     <ul>
       <li class="user-item" v-for="user in users" :key="user.usid">
-        <div class="up-face">
-          <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
-            <div class="lazy-img">
-              <img :src="user.avatar" />
+        <div class="all-up">
+          <div >
+
+            <div class='left'>
+              <div class="up-face">
+                <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
+                  <div class="lazy-img">
+                    <img :src="user.avatar" />
+                  </div>
+                </router-link>
+              </div>
+              <div class="info-wrap">
+                <div class="headline">
+                  <router-link
+                    :to="/space/ + user.usid"
+                    :title="user.name"
+                    class="title"
+                  >{{user.name}}</router-link>
+                  <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
+                </div>
+                <div class="up-info clearfix">
+                  <span style="color: pink">
+                    <font-awesome-icon :icon="['fas', 'upload']" />
+                    &nbsp;稿件：{{user.work_num}}
+                  </span>
+                  <span style="color: cornflowerblue">
+                    <font-awesome-icon :icon="['fas', 'user']" />
+                    &nbsp;粉丝：{{user.follow_num}}
+                  </span>
+                </div>
+                <div class="desc">{{user.desc}}</div>
+              </div>
             </div>
-          </router-link>
-        </div>
-        <div class="info-wrap">
-          <div class="headline">
-            <router-link :to="/space/ + user.usid" :title="user.name" class="title">{{user.name}}</router-link>
-            <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
+
+             <div class='right'>
+              <div class="up-face">
+                <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
+                  <div class="lazy-img">
+                    <img :src="user.avatar" />
+                  </div>
+                </router-link>
+              </div>
+              <div class="info-wrap">
+                <div class="headline">
+                  <router-link
+                    :to="/space/ + user.usid"
+                    :title="user.name"
+                    class="title"
+                  >{{user.name}}</router-link>
+                  <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
+                </div>
+                <div class="up-info clearfix">
+                  <span style="color: pink">
+                    <font-awesome-icon :icon="['fas', 'upload']" />
+                    &nbsp;稿件：{{user.work_num}}
+                  </span>
+                  <span style="color: cornflowerblue">
+                    <font-awesome-icon :icon="['fas', 'user']" />
+                    &nbsp;粉丝：{{user.follow_num}}
+                  </span>
+                </div>
+                <div class="desc">{{user.desc}}</div>
+              </div>
+            </div>
+
+
           </div>
-          <div class="up-info clearfix">
-            <span>稿件：{{user.work_num}}</span>
-            <span>粉丝：{{user.follow_num}}</span>
-          </div>
-          <div class="desc">{{user.desc}}</div>
         </div>
       </li>
     </ul>
@@ -67,17 +117,62 @@ export default {
 </script>
 
 <style scoped>
+.all-up {
+  padding-left: 0px;
+  
+  
+width:100%;
+}
+
+.info-wrap {
+  padding-top: 7.5px;
+}
+
 .user-item {
   position: relative;
-  padding: 20px 0 20px 102px;
-  border-bottom: 1px solid #e5e9ef;
+  padding: 1px 0 10px 2px;
+  border-bottom: 0px solid #e5e9ef;
   z-index: 1;
+}
+.list {
+  position: relative;
+  padding: 20px 0 20px 102px;
+  background: aliceblue;
+  border-radius: 30px;
+  padding-left: 185px;
+  opacity: 0.7;
+}
+.left{
+ position: relative;
+  padding: 20px 0 20px 102px;
+  background: aliceblue;
+  border-radius: 30px;
+  padding-left: 185px;
+  opacity: 0.7;
+  float:left;
+  width:45%;
+  border-bottom: 1px solid #c6d6ee;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.right{
+ position: relative;
+  padding: 20px 0 20px 102px;
+  background: aliceblue;
+  border-radius: 30px;
+  padding-left: 185px;
+  opacity: 0.7;
+  float:right;
+  width:45%;
+  border-bottom: 1px solid #c6d6ee;
+  margin-top: 10px;
+  margin-right: 20px;
 }
 .up-face {
   position: absolute;
   width: 90px;
   height: 90px;
-  left: 0;
+  left: 78px;
   top: 20px;
 }
 .face-img {
@@ -128,19 +223,24 @@ export default {
 }
 .up-info {
   margin-bottom: 10px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
 }
 .up-info > span {
   float: left;
   margin-right: 15px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 12px;
-  color: #6d757a;
+  font-weight: 100;
+  color: #240b0b;
 }
 .desc {
   margin-bottom: 14px;
   width: 750px;
   font-size: 12px;
-  color: #6d757a;
+  color: #292814;
   line-height: 16px;
+  font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
+    "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
 }
 </style>

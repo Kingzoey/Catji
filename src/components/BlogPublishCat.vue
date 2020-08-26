@@ -1,14 +1,12 @@
 <template>
   <div>
     <div data-v-d130ef7a class="publish-panel">
-      <div class="text">
-      <textarea style="border:0;border-radius:0px;background-color:rgba(238, 238, 238, 0.41);width: 880px;height: 130px;padding: 10px;resize: none;" placeholder="云上的吸猫，你我共享"></textarea>
-      <br />
-     
+      <div>
+        <input type="text" placeholder="云上的吸猫，你我共享" id="re_username" />
       </div>
-       <br /> <br /> <br /> <br /> <br />
       <br />
-      <div data-v-d130ef7a class="toolbar" style="position: relative;left:-800;color:antiquewhite;font-size: 30px;"> 
+      <br />
+      <div data-v-d130ef7a class="toolbar" style="position: relative;left:-800;color:rgb(232, 248, 255);font-size: 30px;"> 
         <font-awesome-icon :icon="['fas', 'laugh']" />  &emsp;
         <font-awesome-icon :icon="['fas', 'hashtag']" /> &emsp;&emsp;
         <!-- 要将父布局的position设置为relative，父布局将无法包裹input -->
@@ -50,7 +48,7 @@
 <script>
 //import uploadpicture from "@/assets/uploadpicture.png";
 export default {
-  name: "BlogPublish",
+  name: "BlogPublishCat",
 };
 /*function showImg(obj) {
   var files = obj.files;
@@ -90,9 +88,9 @@ export default {
 </script>
 
 <style scoped>
-.text {
+input[type="text"] {
   width: 80%;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   padding: 10px;
   float: left;
   background-color: transparent;
@@ -105,7 +103,6 @@ export default {
 
 .publish-panel[data-v-d130ef7a] {
   position: relative;
-  height: 200px;
   width: 100%;
   background-color: #fff;
   padding: 0;
@@ -139,7 +136,7 @@ export default {
   width: 70px;
   height: 32px;
   outline: none;
-  background-color: antiquewhite;
+  background-color: rgb(232, 248, 255);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -147,4 +144,5 @@ export default {
   margin-right: 24px;
   margin-bottom: 20px;
 }
+
 </style>

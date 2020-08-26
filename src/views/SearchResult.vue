@@ -24,9 +24,9 @@
         </div>
       </div>
     <div class="container">
-      <span class="name">搜索结果</span>
+      <span class="name"></span>
       <div class="nav">
-        <ul class="nav-switch">
+        <ul class="nav-switch" >
           <li
             v-for="(item, index) in tabs"
             :key="item.name"
@@ -111,6 +111,7 @@ export default {
 
 .nav-switch {
   position: relative;
+  
 }
 
 .nav-switch-item {
@@ -202,7 +203,7 @@ input {
   background: url("../assets/test1.png") repeat;
   height: 200%;
   width: 100%;
-  filter: blur(3px);
+  filter: blur(3px) ;
   background-size: cover;
   z-index: -1;
 }
