@@ -150,9 +150,10 @@ width:100%;
   padding-left: 185px;
   opacity: 0.7;
   float:left;
-  width: 50%;
+  width:45%;
   border-bottom: 1px solid #c6d6ee;
-  
+  margin-top: 10px;
+  margin-left: 20px;
 }
 .right{
  position: relative;
@@ -162,8 +163,10 @@ width:100%;
   padding-left: 185px;
   opacity: 0.7;
   float:right;
-  width:50%;
- border-bottom: 1px solid #c6d6ee;
+  width:45%;
+  border-bottom: 1px solid #c6d6ee;
+  margin-top: 10px;
+  margin-right: 20px;
 }
 .up-face {
   position: absolute;
