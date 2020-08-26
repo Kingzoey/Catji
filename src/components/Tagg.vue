@@ -7,7 +7,10 @@
     objectid="1022:2315223416241c875fe8526024a1716f70fd69"
   >
     <div class="card-topic-a" node-type="topicSmall">
-      <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3113236089,387341124&fm=26&gp=0.jpg" class="spic" />
+      <img
+        src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3113236089,387341124&fm=26&gp=0.jpg"
+        class="spic"
+      />
       <div class="info">
         <div class="title">
           <h1>
@@ -119,7 +122,6 @@ export default {
 </script>
 
 <style scoped>
-
 * {
   margin: 5;
   padding: 0;
@@ -182,8 +184,7 @@ export default {
 
 /*change*/
 
-.m-main-nav
-{
+.m-main-nav {
   text-align: center;
   margin-bottom: 100px;
 }
@@ -448,6 +449,6 @@ fieldset,
 }
 
 .tagg {
-  background-color: rgb(232, 248, 255);;
+  background-color: rgb(232, 248, 255);
 }
 </style>

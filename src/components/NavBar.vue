@@ -3,24 +3,45 @@
     <div class="header">
       <div class="nav">
         <ul>
-          <li><router-link to="/">首页</router-link></li>
-          <li><router-link to="/login">登录</router-link></li>
-          <li><router-link to="/register">注册</router-link></li>
-          <li><router-link to="/search">
+          <li>
+            <router-link to="/">首页</router-link>
+          </li>
+          <li>
+            <router-link to="/login">登录</router-link>
+          </li>
+          <li>
+            <router-link to="/register">注册</router-link>
+          </li>
+          <li>
+            <router-link to="/search">
               <font-awesome-icon :icon="['fas', 'search']" />
-            </router-link></li>
+            </router-link>
+          </li>
         </ul>
       </div>
       <div class="nav">
         <ul>
-          <li><router-link to="/space">
-              <font-awesome-icon :icon="['fas', 'user']" />
-            </router-link></li>
-          <li><router-link to="/message">消息</router-link></li>
-          <li><router-link to="/blog">动态</router-link></li>
-          <li><router-link to="/favorite">收藏</router-link></li>
+          <li>
+            <router-link to="/space">
+              <template v-if="this.$store.state.user.usid">{{this.$store.state.user.name}}</template>
+              <font-awesome-icon v-else :icon="['fas', 'user']" />
+            </router-link>
+          </li>
+          <li v-if="this.$store.state.user.usid">
+            <router-link :to="{path:'/logout',query:{src:'/'}}">注销</router-link>
+          </li>
+          <li>
+            <router-link to="/message">消息</router-link>
+          </li>
+          <li>
+            <router-link to="/blog">动态</router-link>
+          </li>
+          <li>
+            <router-link to="/favorite">收藏</router-link>
+          </li>
           <li class="upload">
-            <router-link to="/upload">投稿</router-link></li>
+            <router-link to="/upload">投稿</router-link>
+          </li>
         </ul>
       </div>
     </div>

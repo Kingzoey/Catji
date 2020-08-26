@@ -1,5 +1,5 @@
 <template>
-  <div class="total">
+  <div class="total clearfix">
     <div class="total-v">
       <div class="line1">
         <br />

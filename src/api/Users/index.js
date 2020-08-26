@@ -13,3 +13,9 @@ export async function login(email, phone, password) {
     });
     return res;
 }
+
+export async function logout() {
+    // let res = await axios.post('/api/Users/logout');
+    let res = Promise.resolve();
+    return res;
+}
