@@ -1,10 +1,12 @@
 <template>
   <div>
     <div data-v-d130ef7a class="publish-panel">
-      <div>
-        <input type="text" placeholder="云上的吸猫，你我共享" id="re_username" />
-      </div>
+      <div class="text">
+      <textarea style="border:0;border-radius:0px;background-color:#fff;width: 860px;height: 110px;padding: 10px;resize: none;margin-left:9.8px;" placeholder="云上的吸猫，你我共享"></textarea>
       <br />
+     
+      </div>
+       <br /> <br /> <br /> <br /> <br />
       <br />
       <div data-v-d130ef7a class="toolbar" style="position: relative;left:-800;color:rgb(232, 248, 255);font-size: 30px;"> 
         <font-awesome-icon :icon="['fas', 'laugh']" />  &emsp;
@@ -88,21 +90,22 @@ export default {
 </script>
 
 <style scoped>
-input[type="text"] {
+.text {
   width: 80%;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   padding: 10px;
   float: left;
   background-color: transparent;
   border: none;
   font-size: 15px;
-  border-bottom: 1px solid rgba(238, 238, 238, 0.41);
+  border-bottom: 1px solid #fff;
   outline: none;
   color: rgb(22, 22, 22);
 }
 
 .publish-panel[data-v-d130ef7a] {
   position: relative;
+  height: 200px;
   width: 100%;
   background-color: #fff;
   padding: 0;
@@ -143,6 +146,6 @@ input[type="text"] {
   cursor: pointer;
   margin-right: 24px;
   margin-bottom: 20px;
+  font-weight: bold;
 }
-
 </style>

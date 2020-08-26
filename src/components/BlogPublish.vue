@@ -2,7 +2,7 @@
   <div>
     <div data-v-d130ef7a class="publish-panel">
       <div class="text">
-      <textarea style="border:0;border-radius:0px;background-color:rgba(238, 238, 238, 0.41);width: 880px;height: 130px;padding: 10px;resize: none;" placeholder="云上的吸猫，你我共享"></textarea>
+      <textarea style="border:0;border-radius:0px;background-color:#fff;width: 860px;height: 110px;padding: 10px;resize: none;margin-left:9.8px;" placeholder="云上的吸猫，你我共享"></textarea>
       <br />
      
       </div>
@@ -98,7 +98,7 @@ export default {
   background-color: transparent;
   border: none;
   font-size: 15px;
-  border-bottom: 1px solid rgba(238, 238, 238, 0.41);
+  border-bottom: 1px solid #fff;
   outline: none;
   color: rgb(22, 22, 22);
 }
@@ -146,5 +146,6 @@ export default {
   cursor: pointer;
   margin-right: 24px;
   margin-bottom: 20px;
+  font-weight: bold;
 }
 </style>
