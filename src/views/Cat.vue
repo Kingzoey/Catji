@@ -1,7 +1,7 @@
 <template>
   <div class="cat">
     <NavBar2></NavBar2>
-    <CatMain style="background-color: #fbfbfb;"></CatMain>
+    <CatMain style="background-color: rgb(232, 248, 255);"></CatMain>
     <div class="m-main-nav">
       <div class="nav">
         <ul class="nav-switch">
