@@ -24,7 +24,7 @@
                 </div>
                 <div class="up-info clearfix">
                   <span style="color: pink">
-                    <font-awesome-icon :icon="['fas', 'upload']" />
+                    <font-awesome-icon :icon="['fas', 'video']" />
                     &nbsp;稿件：{{user.work_num}}
                   </span>
                   <span style="color: cornflowerblue">

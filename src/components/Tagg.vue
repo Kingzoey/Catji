@@ -101,12 +101,12 @@ export default {
       tablist: [
         {
           name: "视频",
-          iconname: "child",
+          iconname: "video",
           tab: () => import("@/components/VideoListtSearch.vue"),
         },
         {
           name: "动态",
-          iconname: "heart",
+          iconname: "blog",
           tab: () => import("@/components/BlogCardSearch.vue"),
         },
       ],
