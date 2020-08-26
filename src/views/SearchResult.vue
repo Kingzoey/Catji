@@ -63,7 +63,7 @@ export default {
       on: 0,
       hover: 0,
       tabs: [
-        { name: "视频", component: () => import("../components/VideoListt.vue") },
+        { name: "视频", component: () => import("../components/VideoListtSearchResult.vue") },
         { name: "用户", component: () => import("../components/ListView.vue") },
         { name: "猫咪", component: () => import("../components/ListView.vue") },
         { name: "标签", component: () => import("../components/TagList.vue") },

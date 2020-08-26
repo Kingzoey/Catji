@@ -29,7 +29,7 @@
       </li>
       <li>
         <router-link to="/tag">
-          <div class="item">Tag页/tag(微博式tag，无法页内切换)</div>
+          <div class="item">Tag页/tag(F式tag悬空版)</div>
         </router-link>
       </li>
       <li>

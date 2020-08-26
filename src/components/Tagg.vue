@@ -180,7 +180,7 @@ export default {
   margin-right: 200px;
 }
 
-/*修改*/
+/*change*/
 
 .m-main-nav
 {
