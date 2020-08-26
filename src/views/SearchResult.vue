@@ -24,7 +24,7 @@
         </div>
       </div>
     <div class="container">
-      <span class="name">搜索结果</span>
+      <span class="name"></span>
       <div class="nav">
         <ul class="nav-switch" >
           <li

@@ -34,6 +34,9 @@
   padding: 10px 10px;
   border-radius: 15px;
   display: inline-block;
+  background: rgb(210, 232, 252);
+  opacity: 0.6;
+  margin-left: 75px;
 }
 
 .rectangle1 {
