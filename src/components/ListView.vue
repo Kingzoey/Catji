@@ -3,29 +3,71 @@
     <ul>
       <li class="user-item" v-for="user in users" :key="user.usid">
         <div class="all-up">
-          <div class="list">
-            <div class="up-face">
-              <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
-                <div class="lazy-img">
-                  <img :src="user.avatar" />
+          <div >
+
+            <div class='left'>
+              <div class="up-face">
+                <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
+                  <div class="lazy-img">
+                    <img :src="user.avatar" />
+                  </div>
+                </router-link>
+              </div>
+              <div class="info-wrap">
+                <div class="headline">
+                  <router-link
+                    :to="/space/ + user.usid"
+                    :title="user.name"
+                    class="title"
+                  >{{user.name}}</router-link>
+                  <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
                 </div>
-              </router-link>
-            </div>
-            <div class="info-wrap">
-              <div class="headline">
-                <router-link
-                  :to="/space/ + user.usid"
-                  :title="user.name"
-                  class="title"
-                >{{user.name}}</router-link>
-                <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
+                <div class="up-info clearfix">
+                  <span style="color: pink">
+                    <font-awesome-icon :icon="['fas', 'upload']" />
+                    &nbsp;稿件：{{user.work_num}}
+                  </span>
+                  <span style="color: cornflowerblue">
+                    <font-awesome-icon :icon="['fas', 'user']" />
+                    &nbsp;粉丝：{{user.follow_num}}
+                  </span>
+                </div>
+                <div class="desc">{{user.desc}}</div>
               </div>
-              <div class="up-info clearfix">
-                <span style="color: pink"><font-awesome-icon :icon="['fas', 'upload']" />&nbsp;稿件：{{user.work_num}}</span>
-                <span style="color: cornflowerblue"><font-awesome-icon :icon="['fas', 'user']" />&nbsp;粉丝：{{user.follow_num}}</span>
-              </div>
-              <div class="desc">{{user.desc}}</div>
             </div>
+
+             <div class='right'>
+              <div class="up-face">
+                <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
+                  <div class="lazy-img">
+                    <img :src="user.avatar" />
+                  </div>
+                </router-link>
+              </div>
+              <div class="info-wrap">
+                <div class="headline">
+                  <router-link
+                    :to="/space/ + user.usid"
+                    :title="user.name"
+                    class="title"
+                  >{{user.name}}</router-link>
+                  <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
+                </div>
+                <div class="up-info clearfix">
+                  <span style="color: pink">
+                    <font-awesome-icon :icon="['fas', 'upload']" />
+                    &nbsp;稿件：{{user.work_num}}
+                  </span>
+                  <span style="color: cornflowerblue">
+                    <font-awesome-icon :icon="['fas', 'user']" />
+                    &nbsp;粉丝：{{user.follow_num}}
+                  </span>
+                </div>
+                <div class="desc">{{user.desc}}</div>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </li>
@@ -77,6 +119,9 @@ export default {
 <style scoped>
 .all-up {
   padding-left: 0px;
+  
+  
+width:100%;
 }
 
 .info-wrap {
@@ -85,8 +130,8 @@ export default {
 
 .user-item {
   position: relative;
-  padding: 10px 0 10px 2px;
-  border-bottom: 1px solid #e5e9ef;
+  padding: 1px 0 10px 2px;
+  border-bottom: 0px solid #e5e9ef;
   z-index: 1;
 }
 .list {
@@ -96,6 +141,29 @@ export default {
   border-radius: 30px;
   padding-left: 185px;
   opacity: 0.7;
+}
+.left{
+ position: relative;
+  padding: 20px 0 20px 102px;
+  background: aliceblue;
+  border-radius: 30px;
+  padding-left: 185px;
+  opacity: 0.7;
+  float:left;
+  width: 50%;
+  border-bottom: 1px solid #c6d6ee;
+  
+}
+.right{
+ position: relative;
+  padding: 20px 0 20px 102px;
+  background: aliceblue;
+  border-radius: 30px;
+  padding-left: 185px;
+  opacity: 0.7;
+  float:right;
+  width:50%;
+ border-bottom: 1px solid #c6d6ee;
 }
 .up-face {
   position: absolute;
