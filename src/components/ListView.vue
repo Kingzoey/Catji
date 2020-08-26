@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <ul>
+  <div >
+    <ul >
       <li class="user-item" v-for="user in users" :key="user.usid">
         <div class="up-face">
           <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
@@ -134,13 +134,13 @@ export default {
   margin-right: 15px;
   font-size: 12px;
   line-height: 12px;
-  color: #6d757a;
+  color:#eb1414;
 }
 .desc {
   margin-bottom: 14px;
   width: 750px;
   font-size: 12px;
-  color: #6d757a;
+  color: #cfcd39;
   line-height: 16px;
 }
 </style>
