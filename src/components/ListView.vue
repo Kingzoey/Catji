@@ -1,24 +1,26 @@
 <template>
-  <div >
-    <ul >
+  <div>
+    <ul>
       <li class="user-item" v-for="user in users" :key="user.usid">
-        <div class="up-face">
-          <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
-            <div class="lazy-img">
-              <img :src="user.avatar" />
+        <div class="list">
+          <div class="up-face">
+            <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
+              <div class="lazy-img">
+                <img :src="user.avatar" />
+              </div>
+            </router-link>
+          </div>
+          <div class="info-wrap">
+            <div class="headline">
+              <router-link :to="/space/ + user.usid" :title="user.name" class="title">{{user.name}}</router-link>
+              <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
             </div>
-          </router-link>
-        </div>
-        <div class="info-wrap">
-          <div class="headline">
-            <router-link :to="/space/ + user.usid" :title="user.name" class="title">{{user.name}}</router-link>
-            <a class="attention-btn" @click="follow(user.usid)">+ 关注</a>
+            <div class="up-info clearfix">
+              <span>稿件：{{user.work_num}}</span>
+              <span>粉丝：{{user.follow_num}}</span>
+            </div>
+            <div class="desc">{{user.desc}}</div>
           </div>
-          <div class="up-info clearfix">
-            <span>稿件：{{user.work_num}}</span>
-            <span>粉丝：{{user.follow_num}}</span>
-          </div>
-          <div class="desc">{{user.desc}}</div>
         </div>
       </li>
     </ul>
@@ -72,6 +74,14 @@ export default {
   padding: 20px 0 20px 102px;
   border-bottom: 1px solid #e5e9ef;
   z-index: 1;
+ 
+}
+.list{
+  position: relative;
+  padding: 20px 0 20px 102px;
+  background:  #fb7299;
+   border-radius: 30px;
+
 }
 .up-face {
   position: absolute;
@@ -134,13 +144,13 @@ export default {
   margin-right: 15px;
   font-size: 12px;
   line-height: 12px;
-  color:#eb1414;
+  color: #240b0b;
 }
 .desc {
   margin-bottom: 14px;
   width: 750px;
   font-size: 12px;
-  color: #cfcd39;
+  color: #292814;
   line-height: 16px;
 }
 </style>

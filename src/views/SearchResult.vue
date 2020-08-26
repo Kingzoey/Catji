@@ -203,7 +203,7 @@ input {
   background: url("../assets/test1.png") repeat;
   height: 200%;
   width: 100%;
-  filter: blur(2px) grayscale(10%);
+  filter: blur(3px) ;
   background-size: cover;
   z-index: -1;
 }
