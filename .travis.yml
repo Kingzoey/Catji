@@ -27,6 +27,8 @@ script:
   - npm run build-gh
   - cd ./dist
   - cp index.html 404.html
+  - touch CNAME
+  - echo "catji.site" > CNAME
   - git init
   - git config --global user.name "Kingzoey"
   - git config --global user.email "729650614@qq.com"

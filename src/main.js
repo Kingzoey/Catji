@@ -12,8 +12,8 @@ Vue.use(VueVideoPlayer)
 
 // 开发环境暂时使用vue.config.js里面指定的本地代理访问后端
 // 待后端解决跨域问题这里再改
-if (process.env.NODE_ENV != 'development')
-    axios.defaults.baseURL = "http://myweb1008.xyz:12340/";
+// if (process.env.NODE_ENV != 'development')
+axios.defaults.baseURL = "http://myweb1008.xyz:12340/";
 
 // 图标查询地址: https://fontawesome.com/icons?d=gallery&q=cat&m=free
 // 使用方法:
