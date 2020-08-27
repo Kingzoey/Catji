@@ -1,6 +1,6 @@
 // vue.config.js
 module.exports = {
-    publicPath: process.env.NODE_ENV == 'gh-pages' ? '/Catji/' : '/',
+    publicPath: process.env.NODE_ENV == 'gh-pages' ? '/' : '/',
     devServer: {
         overlay: { // 让浏览器 overlay 同时显示警告和错误
             warnings: true,
