@@ -8,15 +8,12 @@ module.exports = {
         },
         host: "localhost",
         port: 8080, // 端口号
-        open: false, //配置自动启动浏览器
+        open: true, //配置自动启动浏览器
         hotOnly: true, // 热更新
         proxy: {
             '/api': {
                 target: 'http://myweb1008.xyz:12340/',
                 changeOrigin: true,
-                pathRewrite: {
-                    '^/api': 'api'
-                }
             }
         }
     },
