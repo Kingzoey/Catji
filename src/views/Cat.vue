@@ -34,7 +34,7 @@ export default {
     },
     computed: {
       anthorx() {
-        return 228 + this.hover * 505;
+        return 160 + this.hover * 370;
       },
     },
     data() {
@@ -57,8 +57,12 @@ export default {
 };
 </script>
 
-
 <style scoped>
+.cat
+{
+  margin-left: 200px;
+  margin-right: 200px;
+}
 .container {
   width: 1000px;
   margin: 0 auto;
