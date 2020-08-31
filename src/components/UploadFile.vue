@@ -69,14 +69,14 @@ export default {
   width: 300px;
 }
 .header {
-  font-size: 16px;
+  font-size: 20px;
   color: #333;
   font-weight: 400;
   padding-top: 5px;
 }
 .file-box {
   width: 298px;
-  height: 400px;
+  height: 500px;
   text-align: center;
   padding: 80px 10px 32px;
   position: relative;
@@ -102,7 +102,7 @@ export default {
 }
 
 .tips-warp {
-  font-size: 12px;
+  font-size: 15px;
   margin: 2px 0 10px;
 }
 .file-preview {

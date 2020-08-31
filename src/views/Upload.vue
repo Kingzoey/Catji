@@ -60,7 +60,7 @@ export default {
 
 .right {
   width: 350px;
-  height: 535px;
+  height: 631.8px;
   float: left;
   margin-left:50px;
   background-color:white;

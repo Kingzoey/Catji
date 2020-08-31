@@ -1,21 +1,30 @@
 <template>
   <div class="register clearfix">
-      <div class="header">
-        <em style="color:red;font-size:15px;"></em>&nbsp;
-        <font-awesome-icon :icon="['fas', 'hat-cowboy']" />&nbsp;标题
-      </div>  
-      <!-- <span>可输入20个字</span> -->
+    <div class="header">
+      <em style="color:red;font-size:15px;"></em>&nbsp;
+      <font-awesome-icon :icon="['fas', 'hat-cowboy']" />&nbsp;标题
+    </div>
+    <!-- <span>可输入20个字</span> -->
     <form action="#" method="post">
       <input type="text" placeholder="   可输入20个字" id="re_username" />
       <br />
       <br />
       <br />
-      
+
       <div class="header">
         <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;&nbsp;&nbsp;&nbsp;标签
       </div>
       <!-- <span>添加标签增加关联！</span> -->
       <input type="text" placeholder="   创建标签" id="re_username" />
+      <br />
+      <br />
+      <br />
+
+      <div class="header">
+        <font-awesome-icon :icon="['fas', 'cat']" />&nbsp;&nbsp;&nbsp;&nbsp;猫咪标签
+      </div>
+      <!-- <span>添加标签增加关联！</span> -->
+      <input type="text" placeholder="   创建猫咪标签" id="re_username" />
       <br />
       <br />
       <br />
@@ -62,6 +71,9 @@ export default {
 }
 .dropdown:hover .dropdown-content {
   display: block;
+}
+.send-button {
+  text-align:center;
 }
 .some-class {
   user-select: none;
@@ -165,6 +177,7 @@ input[type="text"] {
   outline: none;
   transition: 0.5s all;
   text-decoration: none;
+  border-radius: 4px;
 }
 
 .send-button input[type="button"]:hover {
@@ -175,8 +188,8 @@ input[type="text"] {
   text-decoration: none;
 }
 
-.register clearfix{
-  margin:0 auto;
+.register clearfix {
+  margin: 0 auto;
   height: 400px;
 }
 </style>
