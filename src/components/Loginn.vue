@@ -5,8 +5,8 @@
       <div class="login">
         <h2>登 录</h2>
         <form action="#" method="post">
-          <input type="text" name="Userame" placeholder="请输入用户名" />
-          <input type="password" name="Password" placeholder="请输入密码" />
+          <input type="text" name="Userame" placeholder="请输入用户名" v-model="nickname" />
+          <input type="password" name="Password" placeholder="请输入密码" v-model="password" />
         </form>
         <ul class="tick">
           <li>
@@ -19,7 +19,7 @@
         </ul>
         <div class="send-button">
           <form>
-            <input type="button" value="登 录" />
+            <input type="button" value="登 录" @click="onLogin()" />
           </form>
         </div>
         <a href="#">记住密码?</a>
@@ -58,6 +58,35 @@
     </div>
   </div>
 </template>
+
+<script>
+import { login } from "../api";
+export default {
+  name: "loginn",
+  data() {
+    return {
+      nickname: "",
+      password: "",
+    };
+  },
+  methods: {
+    async onLogin() {
+      if (
+        this.nickname.trim().length == 0 ||
+        this.password.trim().length == 0
+      ) {
+        return;
+      }
+      var res = await login(this.nickname, "", "", this.password);
+      if (res.status == "ok") {
+        let usid = res.data.usid;
+        this.$store.state.user.usid = usid;
+        this.$router.push({ path: "/" });
+      }
+    },
+  },
+};
+</script>
 
 <style scoped>
 .login-warp {
@@ -289,7 +318,6 @@ input[type="password"] {
 .login a:hover {
   color: #fff;
 }
-
 
 .register {
   width: 44%;

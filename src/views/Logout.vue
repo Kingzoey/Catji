@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { logout } from "@/api/Users";
+import { logout } from "@/api";
 export default {
   props: { src: String },
   async mounted() {

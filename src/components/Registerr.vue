@@ -21,7 +21,7 @@
         </form>
         <div class="send-button">
           <form>
-            <input type="button" value="注册" @click="register()" />
+            <input type="button" value="注册" @click="onRegister()" />
           </form>
         </div>
       </div>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { register } from "../api/Users";
+import { register } from "@/api";
 export default {
   name: "Registerr",
   data() {
@@ -42,7 +42,7 @@ export default {
     };
   },
   methods: {
-    async register() {
+    async onRegister() {
       if (
         !this.password1 ||
         !this.nickname ||
@@ -52,9 +52,11 @@ export default {
         return;
       }
       let res = await register(this.nickname, this.email, "", this.password1);
-      let usid = res;
-      this.$store.state.user.usid = usid;
-      this.$router.push({ path: "/" });
+      if (res.status == "ok") {
+        let usid = res.data.usid;
+        this.$store.state.user.usid = usid;
+        this.$router.push({ path: "/" });
+      }
     },
   },
 };
