@@ -51,19 +51,13 @@ const routes = [{
 		import('../views/Search.vue')
 },
 {
-	path: '/space',
+	path: '/space/:usid?',
 	name: 'Space',
 	component: () =>
 		import('../views/Space.vue')
 },
 {
-	path: '/space/:usid',
-	name: 'Space',
-	component: () =>
-		import('../views/Space.vue')
-},
-{
-	path: '/message/:usid',
+	path: '/message/:usid?',
 	name: 'Message',
 	component: () =>
 		import('../views/Message.vue')
@@ -80,12 +74,6 @@ const routes = [{
 	component: () =>
 		import('../views/CatSpace.vue')
 },
-// 收藏夹放在个人空间里
-// {
-//   path: '/favorite/:usid',
-//   name: 'Favorite',
-//   component: () => import('../views/Favorite.vue')
-// },
 {
 	path: '/upload',
 	name: 'Upload',
@@ -134,23 +122,11 @@ const routes = [{
 	component: () =>
 		import('../views/UInfo.vue')
 },
-// {
-// 	path: '/mine',
-// 	name: 'Mine',
-// 	component: () =>
-// 		import('../views/Mine.vue')
-// },
 {
 	path: '/mine0',
 	name: 'Mine0',
 	component: () =>
 		import('../views/Mine0.vue')
-},
-{
-	path: '/catspace',
-	name: 'CatSpace',
-	component: () =>
-		import('../views/CatSpace.vue')
 },
 {
 	path: '/myblog',
