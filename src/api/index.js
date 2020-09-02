@@ -1,6 +1,15 @@
 import axios from 'axios';
 // import qs from 'querystring';
 
+axios.defaults.baseURL = "https://myweb1008.xyz:12340";
+
+axios.defaults.withCredentials = true;
+
+var debug = false;
+if (debug) {
+    axios.defaults.baseURL = "http://localhost:7843";
+}
+
 export const hotSearch = () => axios.get('/api/searchhistories/hotlist');
 
 export const searchHistory = (usid) => axios.get('/api/searchhistories/content', {
