@@ -1,34 +1,24 @@
 <template>
   <div class="cover-warp">
-    <h1 class="title">
+    <div class="title">
       <font-awesome-icon :icon="['fas', 'upload']" />&nbsp;投稿信息
-    </h1>
+    </div>
     <div class="cover clearfix">
       <div class="cover-pic">
-        <div style="position: relative;">
-          <input
-            id="upload-input"
-            style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
-            type="file"
-            accept="image/gif, image/jpg, image/png"
-            multiple
-          />
-          <!-- 自定义按钮效果 -->
-          <div style="text-align: top">
-            <span style="font-size: 12px;"></span>
-            <img
-              id="upload"
-              src="@/assets/uploadCover.png"
-              style="width: 200px; height: 100px; vertical-align: middle;"
-            />
-          </div>
-        </div>
+        <img :src="coverUrl" width="192" height="106" @click="onClick" />
+        <input
+          type="file"
+          accept=".gif, .jpg, .png"
+          @change="onUpload"
+          ref="input"
+          style="display:none;"
+          id="cover"
+        />
       </div>
       <div class="cover-tips">
-        <p class="header">
-          <em style="color:red;font-size:18px;"></em>&nbsp;
+        <div class="header">
           <font-awesome-icon :icon="['fas', 'images']" />&nbsp;封面
-        </p>
+        </div>
         <em>JPG、JEPG、PNG格式图片需要小于10M</em>
         <em>GIF格式图片需要小于3M，建议时长小于3s</em>
       </div>
@@ -38,19 +28,39 @@
 
 <script>
 import no_cover from "@/assets/uploadCover.png";
+
 export default {
-  name: "Middle",
   data() {
     return {
       coverUrl: no_cover,
     };
   },
+  methods: {
+    onClick() {
+      this.$refs.input.click();
+    },
+    async onUpload(e) {
+      var file = e.target.files[0];
+      console.log(file);
+      await this.preview(file);
+      this.$emit("update:cover", file);
+    },
+    async preview(file) {
+      var reader = new FileReader();
+      var vue = this;
+      reader.onload = function (e) {
+        vue.coverUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+  },
 };
 </script>
 
 <style scoped>
-.cover-warp{
-  margin:0 auto;
+.cover-warp {
+  margin: 0 auto;
+  padding: 15px;
 }
 .header {
   font-size: 16px;
@@ -59,26 +69,19 @@ export default {
 }
 
 .title {
-  font-size: 22px;
-  line-height: 22px;
-  margin-bottom: 20px;
-  padding-top: 10px;
-  margin-left: 20px;
-  font-weight: 500;
+  font-size: 20px;
   color: #333;
+  font-weight: 400;
+  margin-bottom: 20px;
+  line-height: 22px;
 }
 
 .cover-pic {
   float: left;
   width: 192px;
   height: 106px;
-  margin-left: 20px;
-  margin-bottom:10px;
   border-radius: 4px;
   overflow: hidden;
-}
-
-.clickable {
   cursor: pointer;
 }
 
@@ -95,5 +98,4 @@ export default {
   font-style: normal;
   margin-top: 6px;
 }
-
 </style>

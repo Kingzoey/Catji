@@ -13,7 +13,14 @@
         {{file.name}}
       </div>
     </div>
-    <el-upload drag :show-file-list="false" :on-change="handleChange" :auto-upload="false">
+    <el-upload
+      drag
+      action
+      :show-file-list="false"
+      :on-change="handleChange"
+      :auto-upload="false"
+      accept=".mp4, .wmv, .avi"
+    >
       <div class="file-box">
         <div class="upload-icon">
           <img src="@/assets/upload.png" style="vertical-align: middle;" />
@@ -38,22 +45,23 @@
 </template>
 <script>
 export default {
-  name: "Middle",
   data() {
     return {
       file: {},
     };
   },
   methods: {
-    handleChange(file) {
+    handleChange(e) {
+      var file = e.raw;
       this.file = file;
+      this.$emit("update:video", file);
     },
   },
 };
 </script>
 
 <style>
-input[type="file"] {
+.file-warp input[type="file"] {
   display: none;
 }
 .file-name {
@@ -69,18 +77,15 @@ input[type="file"] {
   white-space: nowrap;
 }
 .file-warp {
-  /* float: right; */
-  margin: 0 auto;
   width: 300px;
+  padding: 15px;
 }
 .file-header {
   font-size: 20px;
   color: #333;
   font-weight: 400;
-  padding-top: 5px;
 }
 .file-box {
-  width: 298px;
   text-align: center;
   padding: 80px 10px 32px;
   position: relative;
@@ -123,12 +128,8 @@ input[type="file"] {
 .tips-more {
   font-size: 12px;
   color: #999;
-  width: 280px;
-  height: 90px;
-  margin: 20px 0 78px;
+  margin: 20px 0 70px;
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 70px;
 }
 
 .upload-btn {
