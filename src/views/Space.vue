@@ -5,20 +5,20 @@
       <div class="left" :style="{'position':'relative','top':leftPanelTop+'px'}">
         <div class="user">
           <div class="avatar">
-            <img :src="this.$store.state.user.avatar" alt />
+            <img :src="displayUser.avatar" alt />
           </div>
-          <div class="name">{{this.$store.state.user.name}}</div>
+          <div class="name">{{displayUser.nickname}}</div>
           <div class="stat clearfix">
             <a class="stat-item">
-              <p class="stat-number">{{this.$store.state.user.followee_num}}</p>
+              <p class="stat-number">{{displayUser.followee_num}}</p>
               <p class="stat-label">关注</p>
             </a>
             <a class="stat-item">
-              <p class="stat-number">{{this.$store.state.user.follower_num}}</p>
+              <p class="stat-number">{{displayUser.follower_num}}</p>
               <p class="stat-label">粉丝</p>
             </a>
             <a class="stat-item">
-              <p class="stat-number">{{this.$store.state.user.upload_num}}</p>
+              <p class="stat-number">{{displayUser.upload_num}}</p>
               <p class="stat-label">动态</p>
             </a>
           </div>
@@ -69,7 +69,7 @@ export default {
       let res = await userInfo(usid);
       res = res.data;
       if (res.status == "ok") {
-        this.displayUser = res.data;
+        this.displayUser = { ...res.data };
       }
     } catch (e) {
       this.$message.error("网络错误: " + e.response.data.status);
