@@ -7,10 +7,20 @@ import { logout } from "@/api";
 export default {
   props: { src: String },
   async mounted() {
-    await logout();
-    this.$store.state.user = {};
-    let src = this.$route.query.src;
-    this.$router.push(src);
+    try {
+      var res = await logout();
+      if (res.status == "ok" || res.status == "not login") {
+        this.$store.state.user = {};
+        let src = this.$route.query.src;
+        this.$router.push(src);
+      }
+    } catch (e) {
+      if (e.response.data.status == "not login") {
+        this.$store.state.user = {};
+        let src = this.$route.query.src;
+        this.$router.push(src);
+      }
+    }
   },
 };
 </script>
