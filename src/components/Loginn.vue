@@ -81,9 +81,16 @@ export default {
         let res = await login(nickname, "", "", password);
         res = res.data;
         if (res.status == "ok") {
-          let usid = res.data.usid;
-          this.$store.state.user.usid = usid;
-          this.$router.push({ path: "/" });
+          try {
+            let infores = await loginInfo();
+            infores = infores.data;
+            if (infores.status == "ok") {
+              this.$store.state.user = infores.data;
+              this.$router.push({ path: "/" });
+            }
+          } catch (e) {
+            this.$message.error("网络错误: " + e.response.data.status);
+          }
         }
       } catch (e) {
         let res = e.response.data;
