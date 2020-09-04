@@ -1,28 +1,23 @@
 <template>
   <div class="registerr">
-    <h1 class="registerr_title">Catji——同济猫咪分享社区</h1>
+    <h1>Catji——同济猫咪分享社区</h1>
     <div class="container clearfix">
-      <div class="login clearfix">
+      <div class="login">
         <h2>登 录</h2>
         <div class="send-button">
           <router-link to="/login" class="some-class">
             <span>立即登录</span>
           </router-link>
         </div>
-        <div class="social-icons"></div>
       </div>
-      <div class="register clearfix">
+      <div class="register">
         <h2>注 册</h2>
-        <form action="#" method="post">
-          <input type="text" placeholder="请输入用户名" v-model="nickname" />
-          <input type="text" placeholder="请输入邮箱" v-model="email" />
-          <input type="password" placeholder="请输入密码" v-model="password1" />
-          <input type="password" placeholder="再次输入以确认密码" v-model="password2" />
-        </form>
+        <input type="text" placeholder="请输入用户名" v-model="nickname" />
+        <input type="text" placeholder="请输入邮箱" v-model="email" />
+        <input type="password" placeholder="请输入密码" v-model="password1" />
+        <input type="password" placeholder="再次输入以确认密码" v-model="password2" />
         <div class="send-button">
-          <form>
-            <input type="button" value="注册" @click="onRegister()" />
-          </form>
+          <input type="button" value="注册" @click="onRegister()" />
         </div>
       </div>
     </div>
@@ -43,19 +38,40 @@ export default {
   },
   methods: {
     async onRegister() {
-      if (
-        !this.password1 ||
-        !this.nickname ||
-        !this.email ||
-        this.password1 !== this.password2
-      ) {
+      var password1 = this.password1.trim(),
+        password2 = this.password2.trim(),
+        nickname = this.nickname.trim(),
+        email = this.email.trim();
+      if (!nickname) {
+        this.$message.error("用户名不能为空");
         return;
       }
-      let res = await register(this.nickname, this.email, "", this.password1);
-      if (res.status == "ok") {
-        let usid = res.data.usid;
-        this.$store.state.user.usid = usid;
-        this.$router.push({ path: "/" });
+      if (!email) {
+        this.$message.error("邮箱地址不能为空");
+        return;
+      }
+      if (!password1) {
+        this.$message.error("密码不能为空");
+        return;
+      }
+      if (password1 !== password2) {
+        this.$message.error("两次输入的密码不一致");
+        return;
+      }
+      try {
+        let res = await register(nickname, email, "", password1);
+        if (res.status == "ok") {
+          let usid = res.data.usid;
+          this.$store.state.user.usid = usid;
+          this.$store.state.user.name = nickname;
+          this.$store.state.user.follower_num = 0;
+          this.$store.state.user.followee_num = 0;
+          this.$store.state.user.upload_num = 0;
+          this.$router.push({ path: "/" });
+        }
+      } catch (e) {
+        let res = e.response.data;
+        this.$message.error("网络错误: " + res.status);
       }
     },
   },
@@ -122,9 +138,6 @@ h1 {
   border: 2px ridge rgba(238, 238, 238, 0.13);
   border-radius: 5px;
   box-shadow: 0 -5px 10px 1px rgba(16, 16, 16, 0.57);
-  border-bottom: none;
-  border-bottom-left-radius: initial;
-  border-bottom-right-radius: initial;
 }
 
 .login {
@@ -140,107 +153,6 @@ h2 {
   color: #fff;
   font-weight: 100;
   margin-bottom: 20px;
-}
-
-ul.tick {
-  list-style: none;
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-ul.tick li input[type="checkbox"] {
-  display: none;
-}
-
-ul.tick li input[type="checkbox"] + label {
-  position: relative;
-  padding-left: 30px;
-  border: #f0f8ff;
-  display: inline-block;
-  font-size: 13px;
-  color: #eee;
-}
-
-ul.tick li input[type="checkbox"] + label span:first-child {
-  width: 17px;
-  height: 17px;
-  display: inline-block;
-  border: 1px solid #eee;
-  position: absolute;
-  top: -3px;
-  left: 0;
-  bottom: 4px;
-}
-
-ul.tick li input[type="checkbox"]:checked + label span:first-child:before {
-  content: "";
-  background: url(../assets/tick.png) no-repeat;
-  position: absolute;
-  left: 3px;
-  top: 3px;
-  font-size: 10px;
-  width: 10px;
-  height: 10px;
-}
-
-.social-icons {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.social-icons p {
-  color: #ccc;
-  margin-bottom: 15px;
-}
-
-.social-icons ul li {
-  float: left;
-  width: 32.9%;
-}
-.copyrights {
-  text-indent: -9999px;
-  height: 0;
-  line-height: 0;
-  font-size: 0;
-  overflow: hidden;
-}
-li.twt {
-  margin: 0 2px;
-}
-
-.social-icons ul li a {
-  display: block;
-}
-
-.social-icons ul li a span {
-  vertical-align: middle;
-  color: #fff;
-  font-size: 15px;
-}
-
-.social-icons ul li span.icons {
-  width: 30px;
-  height: 30px;
-  display: inline-block;
-}
-
-.social-icons ul li.weixin span.icons {
-  background: url("../assets/weixin.png") no-repeat;
-  background-size: 100%;
-}
-.social-icons ul li.qq span.icons {
-  background: url("../assets/QQ.png") no-repeat;
-  background-size: 100%;
-}
-.social-icons ul li.weibo span.icons {
-  background: url("../assets/weibo.png") no-repeat;
-  background-size: 100%;
-}
-
-.social-icons ul li a:hover span.icons {
-  transform: rotatey(360deg);
-  transition: 0.5s all;
 }
 
 input[type="text"],
@@ -322,21 +234,5 @@ input[type="password"] {
 
 .register_from {
   margin-top: 100px;
-}
-
-.footer {
-  text-align: center;
-  margin: 100px 20px 20px;
-}
-.footer p {
-  color: #ccc;
-  line-height: 25px;
-}
-.footer a {
-  color: #ccc;
-  text-decoration: none;
-}
-.footer a:hover {
-  color: #fff;
 }
 </style>
