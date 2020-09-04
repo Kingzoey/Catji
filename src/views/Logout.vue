@@ -8,17 +8,23 @@ export default {
   props: { src: String },
   async mounted() {
     try {
-      var res = await logout();
-      if (res.status == "ok" || res.status == "not login") {
+      let res = await logout();
+      res = res.data;
+      if (res.status == "ok") {
         this.$store.state.user = {};
-        let src = this.$route.query.src;
-        this.$router.push(src);
+        let src = this.$route.query.src || "/";
+        this.$router.push({ path: src });
+      } else {
+        this.$message.error("网络错误");
       }
     } catch (e) {
-      if (e.response.data.status == "not login") {
+      let res = e.response.data;
+      if (res.status == "not login") {
         this.$store.state.user = {};
-        let src = this.$route.query.src;
-        this.$router.push(src);
+        let src = this.$route.query.src || "/";
+        this.$router.push({ path: src });
+      } else {
+        this.$message.error("网络错误");
       }
     }
   },

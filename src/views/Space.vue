@@ -5,20 +5,20 @@
       <div class="left" :style="{'position':'relative','top':leftPanelTop+'px'}">
         <div class="user">
           <div class="avatar">
-            <img :src="this.$store.state.user.avatar" alt />
+            <img :src="displayUser.avatar" alt />
           </div>
-          <div class="name">{{this.$store.state.user.name}}</div>
+          <div class="name">{{displayUser.nickname}}</div>
           <div class="stat clearfix">
             <a class="stat-item">
-              <p class="stat-number">{{this.$store.state.user.followee_num}}</p>
+              <p class="stat-number">{{displayUser.followee_num}}</p>
               <p class="stat-label">关注</p>
             </a>
             <a class="stat-item">
-              <p class="stat-number">{{this.$store.state.user.follower_num}}</p>
+              <p class="stat-number">{{displayUser.follower_num}}</p>
               <p class="stat-label">粉丝</p>
             </a>
             <a class="stat-item">
-              <p class="stat-number">{{this.$store.state.user.upload_num}}</p>
+              <p class="stat-number">{{displayUser.upload_num}}</p>
               <p class="stat-label">动态</p>
             </a>
           </div>
@@ -48,14 +48,35 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import { userInfo } from "../api";
 export default {
   name: "Space",
   components: {
     NavBar,
   },
-  mounted() {
-    console.log(this.$route.params.usid);
+  async beforeMount() {
     window.addEventListener("scroll", this.handleScroll);
+    let usid;
+    if (this.$route.params.usid) {
+      usid = this.$route.params.usid;
+    } else if (this.$store.state.user.usid) {
+      usid = this.$store.state.user.usid;
+    } else {
+      this.$message.error("用户信息有误");
+      return;
+    }
+    try {
+      let res = await userInfo(usid);
+      res = res.data;
+      if (res.status == "ok") {
+        this.displayUser = { ...res.data };
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.response.data.status);
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     handleScroll() {
@@ -115,6 +136,14 @@ export default {
           tab: () => import("@/views/Login.vue"),
         },
       ],
+      displayUser: {
+        usid: 0,
+        nickname: "获取中",
+        avatar: "",
+        follower_num: 0,
+        followee_num: 0,
+        upload_num: 0,
+      },
     };
   },
 };

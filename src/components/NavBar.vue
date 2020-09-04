@@ -1,15 +1,15 @@
 <template>
-  <div class="header-box">
+  <div class="header-wrap">
     <div class="header">
       <div class="nav">
         <ul>
           <li>
             <router-link to="/">首页</router-link>
           </li>
-          <li>
+          <li v-if="!this.$store.state.user.usid">
             <router-link to="/login">登录</router-link>
           </li>
-          <li>
+          <li v-if="!this.$store.state.user.usid">
             <router-link to="/register">注册</router-link>
           </li>
           <li>
@@ -23,21 +23,24 @@
         <ul>
           <li>
             <router-link to="/space">
-              <template v-if="this.$store.state.user.usid">{{this.$store.state.user.name}}</template>
+              <template v-if="this.$store.state.user.usid">{{this.$store.state.user.nickname}}</template>
               <font-awesome-icon v-else :icon="['fas', 'user']" />
             </router-link>
           </li>
           <li v-if="this.$store.state.user.usid">
             <router-link :to="{path:'/logout',query:{src:'/'}}">注销</router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/message">消息</router-link>
-          </li>
+          </li>-->
           <li>
             <router-link to="/blog">动态</router-link>
           </li>
           <li>
-            <router-link to="/favorite">收藏</router-link>
+            <router-link to="/space/favorite">收藏</router-link>
+          </li>
+          <li>
+            <router-link to="/space/history">历史</router-link>
           </li>
           <li class="upload">
             <router-link to="/upload">投稿</router-link>
@@ -51,11 +54,12 @@
 <script>
 export default {
   name: "NavBar",
+  mounted() {},
 };
 </script>
 
 <style scoped>
-.header-box {
+.header-wrap {
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
 }
@@ -69,7 +73,7 @@ export default {
   justify-content: space-between;
 }
 
-.header-box,
+.header-wrap,
 .header,
 .nav-left ul,
 .nav-right ul {
