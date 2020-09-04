@@ -51,16 +51,21 @@ export default {
       if (!this.coverFile || !this.videoInfo || !this.videoFile) {
         return;
       }
-      var res = await uploadVideo(
-        this.videoInfo.title,
-        this.videoInfo.desc,
-        this.coverFile,
-        this.videoFile,
-        ["tag1", "tag2", "tag3"],
-        ["catag1", "catag2", "catag3"]
-      );
-      if (res.status == "ok") {
-        console.log("ok");
+      try {
+        let res = await uploadVideo(
+          this.videoInfo.title,
+          this.videoInfo.desc,
+          this.coverFile,
+          this.videoFile,
+          ["tag1", "tag2", "tag3"],
+          ["catag1", "catag2", "catag3"]
+        );
+        res = res.data;
+        if (res.status == "ok") {
+          this.$router.push({ path: "/" });
+        }
+      } catch (e) {
+        this.$message.error("上传失败: " + e.response.data.status);
       }
     },
   },

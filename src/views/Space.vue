@@ -48,14 +48,35 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import { userInfo } from "../api";
 export default {
   name: "Space",
   components: {
     NavBar,
   },
-  mounted() {
-    console.log(this.$route.params.usid);
+  async beforeMount() {
     window.addEventListener("scroll", this.handleScroll);
+    let usid;
+    if (this.$route.params.usid) {
+      usid = this.$route.params.usid;
+    } else if (this.$store.state.user.usid) {
+      usid = this.$store.state.user.usid;
+    } else {
+      this.$message.error("用户信息有误");
+      return;
+    }
+    try {
+      let res = await userInfo(usid);
+      res = res.data;
+      if (res.status == "ok") {
+        this.displayUser = res.data;
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.response.data.status);
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     handleScroll() {
@@ -115,6 +136,14 @@ export default {
           tab: () => import("@/views/Login.vue"),
         },
       ],
+      displayUser: {
+        usid: 0,
+        nickname: "获取中",
+        avatar: "",
+        follower_num: 0,
+        followee_num: 0,
+        upload_num: 0,
+      },
     };
   },
 };
