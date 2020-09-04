@@ -4,10 +4,8 @@
     <div class="container clearfix">
       <div class="login">
         <h2>登 录</h2>
-        <form action="#" method="post">
-          <input type="text" name="Userame" placeholder="请输入用户名" v-model="nickname" />
-          <input type="password" name="Password" placeholder="请输入密码" v-model="password" />
-        </form>
+        <input type="text" name="Userame" placeholder="请输入用户名" v-model="nickname" />
+        <input type="password" name="Password" placeholder="请输入密码" v-model="password" />
         <ul class="tick">
           <li>
             <input type="checkbox" id="brand1" />
@@ -18,9 +16,7 @@
           </li>
         </ul>
         <div class="send-button">
-          <form>
-            <input type="button" value="登 录" @click="onLogin()" />
-          </form>
+          <input type="button" value="登 录" @click="onLogin" />
         </div>
         <a href="#">记住密码?</a>
         <div class="social">
@@ -49,7 +45,7 @@
         </div>
         <div class="clear"></div>
       </div>
-      <div class="register clearfix">
+      <div class="register">
         <h2>注 册</h2>
         <router-link to="/register" class="some-class">
           <span>立即注册</span>
@@ -60,7 +56,7 @@
 </template>
 
 <script>
-import { login } from "../api";
+import { login, loginInfo } from "../api";
 export default {
   name: "loginn",
   data() {
@@ -71,17 +67,40 @@ export default {
   },
   methods: {
     async onLogin() {
-      if (
-        this.nickname.trim().length == 0 ||
-        this.password.trim().length == 0
-      ) {
+      var password = this.password.trim(),
+        nickname = this.nickname.trim();
+      if (!nickname) {
+        this.$message.error("用户名不能为空");
         return;
       }
-      var res = await login(this.nickname, "", "", this.password);
-      if (res.status == "ok") {
-        let usid = res.data.usid;
-        this.$store.state.user.usid = usid;
-        this.$router.push({ path: "/" });
+      if (!password) {
+        this.$message.error("密码不能为空");
+        return;
+      }
+      try {
+        let res = await login(nickname, "", "", password);
+        res = res.data;
+        if (res.status == "ok") {
+          let usid = res.data.usid;
+          this.$store.state.user.usid = usid;
+          this.$router.push({ path: "/" });
+        }
+      } catch (e) {
+        let res = e.response.data;
+        if (res.status == "already login") {
+          try {
+            let infores = await loginInfo();
+            infores = infores.data;
+            if (infores.status == "ok") {
+              this.$store.state.user = infores.data;
+              this.$router.push({ path: "/" });
+            }
+          } catch (e) {
+            this.$message.error("网络错误: " + e.response.data.status);
+          }
+        } else {
+          this.$message.error("网络错误: " + res.status);
+        }
       }
     },
   },
@@ -113,10 +132,6 @@ export default {
   cursor: pointer;
   outline: none;
   transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
   text-decoration: none;
 }
 
@@ -125,10 +140,6 @@ export default {
   border: 1px solid #fff;
   color: #fff;
   transition: 0.5s all;
-  -webkit-transition: 0.5s all;
-  -moz-transition: 0.5s all;
-  -o-transition: 0.5s all;
-  -ms-transition: 0.5s all;
   text-decoration: none;
 }
 
