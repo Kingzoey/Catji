@@ -4,7 +4,8 @@
       <li class="user">
         <div class="item_bock head_p">
           <div class="head_img">
-            <img :src="this.$store.state.user.avatar" width="30" height="30" />
+            <!--<img :src="this.$store.state.user.avatar" width="30" height="30" /><-->
+			<img :src="displayUser.avatar" width="30" height="30" />
           </div>
           <div class="setting_right" @click="uploadHeadImg">
             <div class="caption">更改头像</div>
@@ -16,7 +17,7 @@
       <li class="user">
         <font-awesome-icon :icon="['fas', 'user']" />&nbsp;
         <label for="username">昵称：</label>
-        <textarea class="username" placeholder="王大橘" rows="1" type="textarea" validateevent="true"></textarea>
+        <textarea class="username" :placeholder="displayUser.nickname" rows="1" type="textarea" validateevent="true"></textarea>
       </li>
       <li class="user">
         <font-awesome-icon :icon="['fas', 'venus-mars']" />
@@ -58,7 +59,7 @@
         <label for="signal">签名：</label>
         <textarea
           class="signal"
-          placeholder="设置您的签名"
+          :placeholder="displayUser.signature"
           rows="2"
           autocomplete="off"
           type="textarea"
@@ -70,7 +71,7 @@
         <label for="birthday">生日：</label>
         <textarea
           class="birthday"
-          placeholder="2000-01-01"
+          :placeholder="displayUser.birthday"
           rows="1"
           type="textarea"
           validateevent="true"
@@ -81,7 +82,7 @@
         <label for="email">邮箱：</label>
         <textarea
           class="email"
-          placeholder="Catji@example.xxx"
+          :placeholder="displayUser.email"
           rows="1"
           type="textarea"
           validateevent="true"
@@ -95,15 +96,43 @@
 </template>
 
 <script>
-import test1 from "@/assets/test1.png";
+import { userInfo } from "../api";
 export default {
   name: "Middle",
+  async beforeMount() {
+    window.addEventListener("scroll", this.handleScroll);
+    let usid;
+    if (this.$route.params.usid) {
+      usid = this.$route.params.usid;
+    } else if (this.$store.state.user.usid) {
+      usid = this.$store.state.user.usid;
+    } else {
+      this.$message.error("用户信息有误");
+      return;
+    }
+    try {
+      let res = await userInfo(usid);
+      res = res.data;
+      if (res.status == "ok") {
+        this.displayUser = { ...res.data };
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.response.data.status);
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   data() {
     return {
-      userInfo: {
-        avatar: "@/assets/test.png",
+      displayUser: {
+        usid: 0,
+        nickname: "获取中",
+        avatar: "",
+        birthday:"获取中" ,
+		signature: "获取中",
+		email: "获取中",
       },
-      test1: test1,
     };
   },
 
