@@ -1,6 +1,15 @@
 import axios from 'axios';
 // import qs from 'querystring';
 
+axios.defaults.baseURL = "https://myweb1008.xyz:12340";
+
+axios.defaults.withCredentials = true;
+
+var debug = false;
+if (debug) {
+    axios.defaults.baseURL = "http://localhost:7843";
+}
+
 export const hotSearch = () => axios.get('/api/searchhistories/hotlist');
 
 export const searchHistory = (usid) => axios.get('/api/searchhistories/content', {
@@ -133,10 +142,13 @@ export const searchTag = (keyword, page) => axios.get('/api/tags/search', {
     params: { keyword, page: page || 0 }
 });
 
-/**
- * @param {HTMLFormElement} formdata 
- */
-export const uploadVideo = (formdata) => {
-    // 这里不太确定
-    return axios.post('/api/videos/release', formdata);
+export const uploadVideo = (title, desc, coverFile, videoFile, tags, catags) => {
+    var formData = new FormData();
+    formData.append('title', title);
+    formData.append('desc', desc);
+    formData.append('cover', coverFile);
+    formData.append('video', videoFile);
+    tags.forEach(tag => formData.append('tags', tag));
+    catags.forEach(catag => formData.append('catags', catag));
+    return axios.post('/api/videos/release', formData);
 }

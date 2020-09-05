@@ -124,6 +124,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
+// import videoInfo from "@/api";
 export default {
   name: "Video",
   components: {
@@ -132,6 +133,12 @@ export default {
   },
   beforeMount() {
     console.log(this.$route.params.vid);
+    //videoInfoApi(100000)
+    //     .then(
+    //       if(res.status==='ok'){
+    //this.videoInfo = res.data;
+    //       }
+    //     )
   },
   data() {
     return {
@@ -230,7 +237,9 @@ export default {
       },
     };
   },
-  methods: {},
+  methods: {
+
+  },
 };
 </script>
 

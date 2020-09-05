@@ -83,12 +83,18 @@
 
 <script>
 import test1 from "@/assets/test.png";
+// import { hotTag } from "@/api";
+// import { hotVideo } from "@/api";
+// import { newVideo } from "@/api";
 export default {
   name: "Middle",
   data() {
     return {
       test1: test1,
     };
+  },
+  methods: {
+    
   },
 };
 </script>

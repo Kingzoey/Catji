@@ -2,10 +2,10 @@
 // 导航栏 - Home页专用
 //
 <template>
-  <div class="header-box">
+  <div class="header-wrap">
     <div class="grad">
       <router-link to="/" class="head-logo">
-        <img src="../assets/logo_demo2_00.png" title style />
+        <img src="../assets/logo_demo2_00.png" />
       </router-link>
     </div>
     <div class="header">
@@ -14,10 +14,10 @@
           <li>
             <router-link to="/">首页</router-link>
           </li>
-          <li>
+          <li v-if="!this.$store.state.user.usid">
             <router-link to="/login">登录</router-link>
           </li>
-          <li>
+          <li v-if="!this.$store.state.user.usid">
             <router-link to="/register">注册</router-link>
           </li>
           <li>
@@ -30,17 +30,24 @@
         <ul style="float: right;">
           <li>
             <router-link to="/space">
-              <font-awesome-icon :icon="['fas', 'user']" />
+              <template v-if="this.$store.state.user.usid">{{this.$store.state.user.nickname}}</template>
+              <font-awesome-icon v-else :icon="['fas', 'user']" />
             </router-link>
           </li>
-          <li>
-            <router-link to="/message">消息</router-link>
+          <li v-if="this.$store.state.user.usid">
+            <router-link :to="{path:'/logout',query:{src:'/'}}">注销</router-link>
           </li>
+          <!-- <li>
+            <router-link to="/message">消息</router-link>
+          </li>-->
           <li>
             <router-link to="/blog">动态</router-link>
           </li>
           <li>
-            <router-link to="/favorite">收藏</router-link>
+            <router-link to="/space/favorite">收藏</router-link>
+          </li>
+          <li>
+            <router-link to="/space/history">历史</router-link>
           </li>
           <li class="upload">
             <router-link to="/upload">投稿</router-link>
@@ -58,7 +65,7 @@ export default {
 </script>
 
 <style scoped>
-.header-box {
+.header-wrap {
   width: 100%;
   height: 100px;
   background: url("../assets/Nav11.jpg");

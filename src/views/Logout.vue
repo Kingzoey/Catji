@@ -7,10 +7,26 @@ import { logout } from "@/api";
 export default {
   props: { src: String },
   async mounted() {
-    await logout();
-    this.$store.state.user = {};
-    let src = this.$route.query.src;
-    this.$router.push(src);
+    try {
+      let res = await logout();
+      res = res.data;
+      if (res.status == "ok") {
+        this.$store.state.user = {};
+        let src = this.$route.query.src || "/";
+        this.$router.push({ path: src });
+      } else {
+        this.$message.error("网络错误");
+      }
+    } catch (e) {
+      let res = e.response.data;
+      if (res.status == "not login") {
+        this.$store.state.user = {};
+        let src = this.$route.query.src || "/";
+        this.$router.push({ path: src });
+      } else {
+        this.$message.error("网络错误");
+      }
+    }
   },
 };
 </script>

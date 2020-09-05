@@ -1,19 +1,17 @@
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import axios from 'axios';
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import VueVideoPlayer from 'vue-video-player'
-import 'video.js/dist/video-js.css'
 // import 'vue-video-player/src/custom-theme.css'
-Vue.use(VueVideoPlayer)
+import 'video.js/dist/video-js.css'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
-// 开发环境暂时使用vue.config.js里面指定的本地代理访问后端
-// 待后端解决跨域问题这里再改
-// if (process.env.NODE_ENV != 'development')
-axios.defaults.baseURL = "http://myweb1008.xyz:12340/";
+Vue.use(VueVideoPlayer)
+Vue.use(Element)
 
 // 图标查询地址: https://fontawesome.com/icons?d=gallery&q=cat&m=free
 // 使用方法:
@@ -22,10 +20,9 @@ axios.defaults.baseURL = "http://myweb1008.xyz:12340/";
 // 3. 在需要放置图标的地方这样写 <font-awesome-icon :icon="['fas', 'cat']" />
 // ! 这样可以保证没用到的图标不会被打包进入最终发布文件里
 // 更多参考: https://github.com/FortAwesome/vue-fontawesome#installation
-import { faCamera, faChild, faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase, faBlog, faStore, faRocket, faPen, faCalendar, faAt, faTransgender, faMars, faVenus, faMask, faListOl, faVenusMars, faFireAlt, faHashtag, faNewspaper, faImages, faBook, faFile, faHatCowboy, faBirthdayCake, faLaugh, faHeart, faVideo } from '@fortawesome/free-solid-svg-icons'
-import { faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus, faTrashAlt, faFire } from '@fortawesome/free-solid-svg-icons'
-library.add(faCamera, faChild, faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase, faBlog, faStore, faRocket, faPen, faCalendar, faAt, faTransgender, faMars, faVenus, faMask, faListOl, faVenusMars, faFireAlt, faHashtag, faNewspaper, faImages, faBook, faFile, faHatCowboy, faBirthdayCake, faLaugh, faHeart, faVideo)
-library.add(faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus, faTrashAlt, faFire)
+import { faCamera, faChild, faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase, faBlog, faStore, faRocket, faPen, faCalendar, faAt, faTransgender, faMars, faVenus, faMask, faListOl, faVenusMars, faFireAlt, faHashtag, faNewspaper, faImages, faBook, faFile, faHatCowboy, faBirthdayCake, faLaugh, faHeart, faVideo, faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus, faTrashAlt, faFire } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faCamera, faChild, faUser, faSearch, faCat, faDog, faList, faBookmark, faEdit, faSmile, faHistory, faFolder, faUpload, faDatabase, faBlog, faStore, faRocket, faPen, faCalendar, faAt, faTransgender, faMars, faVenus, faMask, faListOl, faVenusMars, faFireAlt, faHashtag, faNewspaper, faImages, faBook, faFile, faHatCowboy, faBirthdayCake, faLaugh, faHeart, faVideo, faChevronDown, faChevronUp, faThumbsUp, faStar, faShareSquare, faCommentAlt, faEnvelope, faPlus, faTrashAlt, faFire)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
