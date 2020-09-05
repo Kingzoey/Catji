@@ -29,6 +29,55 @@
   </div>
 </template>
 
+<!--
+<script>
+import { hotTag } from "../api";
+export default {
+  name: "hotTag",
+  data() {
+    return {
+      videoNewList: [
+        {
+          vid: 视频1id,
+          name: "视频1名字",
+          cover: "视频1缩略图url",
+          up: {
+            usid: 视频1up主id,
+            name: "视频1up主名字",
+          },
+        },
+        {
+          vid: 视频2id,
+          name: "视频2名字",
+          cover: "视频2缩略图url",
+          up: {
+            usid: 视频2up主id,
+            name: "视频2up主名字",
+          },
+        },
+        {
+          vid: 视频10id,
+          name: "视频10名字",
+          cover: "视频10缩略图url",
+          up: {
+            usid: 视频10up主id,
+            name: "视频10up主名字",
+          },
+        },
+      ],
+    };
+  },
+  methods: {
+    async onLogin() {
+      if (res.status == "ok") {
+        this.hotTag = res.data;
+      }
+    },
+  },
+};
+</script>
+-->
+
 <script>
 export default {
   name: "Top1",

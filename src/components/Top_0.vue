@@ -29,6 +29,55 @@
   </div>
 </template>
 
+<!--
+<script>
+import { newVideo } from "../api";
+export default {
+  name: "newVideo",
+  data() {
+    return {
+      videoNewList: [
+        {
+          vid: 视频1id,
+          name: "视频1名字",
+          cover: "视频1缩略图url",
+          up: {
+            usid: 视频1up主id,
+            name: "视频1up主名字",
+          },
+        },
+        {
+          vid: 视频2id,
+          name: "视频2名字",
+          cover: "视频2缩略图url",
+          up: {
+            usid: 视频2up主id,
+            name: "视频2up主名字",
+          },
+        },
+        {
+          vid: 视频10id,
+          name: "视频10名字",
+          cover: "视频10缩略图url",
+          up: {
+            usid: 视频10up主id,
+            name: "视频10up主名字",
+          },
+        },
+      ],
+    };
+  },
+  methods: {
+    async onLogin() {
+      if (res.status == "ok") {
+        this.newVideo = res.data;
+      }
+    },
+  },
+};
+</script>
+-->
+
 <script>
 export default {
   name: "Top0",
@@ -45,19 +94,22 @@ export default {
           id: 100000,
           url: "/video/100000",
           title: "测试视频",
-          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941662933&di=02eb9ee99e2faed834a0440cf987261c&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F5387dc9f52dab.jpg",
+          cover:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941662933&di=02eb9ee99e2faed834a0440cf987261c&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F5387dc9f52dab.jpg",
         },
         {
           id: 100001,
           url: "/video/100001",
           title: "测试视频",
-          cover: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=214406322,2797989572&fm=26&gp=0.jpg",
+          cover:
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=214406322,2797989572&fm=26&gp=0.jpg",
         },
         {
           id: 100002,
           url: "/video/100002",
           title: "测试视频",
-          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941738757&di=576825c2745610f477bcd5a630126832&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2FyL4o6YTVuyEU3bAohgXhDycIUQKn8164e%3DwiDv%3DxcIRsT1539407290894.jpeg",
+          cover:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941738757&di=576825c2745610f477bcd5a630126832&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2FyL4o6YTVuyEU3bAohgXhDycIUQKn8164e%3DwiDv%3DxcIRsT1539407290894.jpeg",
         },
         {
           id: 100003,
