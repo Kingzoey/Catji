@@ -11,6 +11,8 @@ export const hotTag = () => axios.get('/api/tags/hotlist');
 
 export const hotUser = () => axios.get('/api/users/hotlist');
 
+export const hotCat = () => axios.get('/api/cats/hotlist');
+
 export const hotVideo = () => axios.get('/api/videos/hotlist');
 
 export const newVideo = () => axios.get('/api/videos/newlist');
