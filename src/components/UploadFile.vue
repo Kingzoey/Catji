@@ -15,7 +15,8 @@
     </div>
     <el-upload
       drag
-      action
+      style="width:100%;"
+      action="#"
       :show-file-list="false"
       :on-change="handleChange"
       :auto-upload="false"
@@ -61,6 +62,13 @@ export default {
 </script>
 
 <style>
+.el-upload-dragger {
+  width: auto !important;
+  height: auto !important;
+}
+</style>
+
+<style scoped>
 .file-warp input[type="file"] {
   display: none;
 }
@@ -77,7 +85,7 @@ export default {
   white-space: nowrap;
 }
 .file-warp {
-  width: 300px;
+  width: 330px;
   padding: 15px;
 }
 .file-header {
@@ -86,17 +94,13 @@ export default {
   font-weight: 400;
 }
 .file-box {
+  width: 300px;
   text-align: center;
   padding: 80px 10px 32px;
   position: relative;
-  border: 1px dashed #d9d9d9;
   background-color: #fff;
-  border-radius: 6px;
   overflow: hidden;
   cursor: pointer;
-}
-.file-box:hover {
-  border-color: #999;
 }
 
 .upload-icon {
