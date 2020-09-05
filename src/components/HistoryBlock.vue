@@ -32,6 +32,7 @@
 </template>
 
 <script>
+//import  { watchHistory } from "../api";
 export default {
   name: "HistoryBlock",
   data() {
@@ -78,7 +79,7 @@ export default {
   },
   methods: {
     follow() {
-      window.alert("删除成功!(狗头)");
+      window.alert("关注成功!(狗头)");
     },del() {
       window.alert("已删除!");
     },

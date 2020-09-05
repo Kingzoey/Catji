@@ -170,8 +170,7 @@ export default {
   float: right;
 }
 
-.user {
-}
+
 
 .avatar {
   margin: 7px auto 0;
