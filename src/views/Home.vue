@@ -74,6 +74,7 @@ export default {
 .bank {
   margin-top: 30px;
   display: flex;
+  justify-content: center;
   height: 420px;
   overflow: hidden;
 }
