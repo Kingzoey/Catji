@@ -4,7 +4,7 @@
       <ul class="nav">
         <li class="logo">
           <router-link to="/">
-            <img height="40" src="../assets/logo_demo2_00.png" />
+            <img height="75" src="../assets/logo_demo2_00.png" />
           </router-link>
         </li>
         <li v-if="!this.$store.state.user.usid">
@@ -12,6 +12,9 @@
         </li>
         <li v-if="!this.$store.state.user.usid">
           <router-link to="/register">注册</router-link>
+        </li>
+        <li v-if="this.$store.state.user.usid">
+          <router-link to="/catspace">猫咪广场</router-link>
         </li>
         <li>
           <router-link to="/search">
@@ -50,6 +53,10 @@
 </template>
 
 <style scoped>
+.logo {
+  margin-top: 7px;
+}
+
 .header-wrap {
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);

@@ -17,6 +17,9 @@
           <li v-if="!this.$store.state.user.usid">
             <router-link to="/register">注册</router-link>
           </li>
+          <li v-if="this.$store.state.user.usid">
+            <router-link to="/catspace">猫咪广场</router-link>
+          </li>
           <li>
             <router-link to="/search">
               <font-awesome-icon :icon="['fas', 'search']" />
