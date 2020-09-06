@@ -1,32 +1,75 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
+<script>
+export default {
+  name: "app",
+  created() {
+    this.$store.commit("loadUser");
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+/* 以下是全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border-box意思是将元素的height,width视为算上边框宽度之后的值 */
+}
+
+html {
+  color: #505050;
+  font: 12px -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial,
+    PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica,
+    Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #222;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+a {
+  color: #222;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  -webkit-text-decoration-skip: objects;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+a,
+a:hover {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+input,
+button {
+  border-style: none;
+  padding: 0;
+}
+
+/* 用来清除浮动的class */
+.clearfix::after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  font-size: 0;
 }
 </style>

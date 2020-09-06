@@ -1,0 +1,41 @@
+# Note: you should set Environment Variables here or 'Settings' on travis-ci.org
+env:
+  global:
+    - GH_REF: github.com/Kingzoey/Catji.git
+    
+branches:
+  only:
+    - dev
+
+language: node_js
+
+node_js:
+  - "node"
+
+cache:
+  directories:
+    - node_modules
+
+sudo: false
+
+install:
+  - npm install
+
+# before_script:
+
+script: 
+  - npm run build-gh
+  - cd ./dist
+  - cp index.html 404.html
+  - touch CNAME
+  - echo "catji.site" > CNAME
+  - git init
+  - git config --global user.name "Kingzoey"
+  - git config --global user.email "729650614@qq.com"
+  - git add . -f
+  - git commit -m "Travis CI Auto Builder"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+
+# after_script:
+
+
