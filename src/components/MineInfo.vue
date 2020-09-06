@@ -51,6 +51,12 @@
         <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
       </el-form-item>
       <el-form-item>
+        <template slot="label">
+          <font-awesome-icon :icon="['fas', 'key']" />&nbsp;密码
+        </template>
+        <el-input v-model="form.password" type="password" placeholder="请输入密码"></el-input>
+      </el-form-item>
+      <el-form-item>
         <el-button type="primary" @click="onSubmit">更新个人信息</el-button>
         <el-button @click="onReset">重置</el-button>
       </el-form-item>
@@ -131,6 +137,7 @@ export default {
           signature: this.form.signature,
           birthday: Math.floor(this.form.birthday / 1000),
           email: this.form.email,
+          password: this.form.password,
         });
         res = res.data;
         if (res.status === "ok") {
