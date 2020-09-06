@@ -57,9 +57,6 @@ ul {
   list-style: none;
 }
 
-[type="button"],
-[type="reset"],
-[type="submit"],
 input,
 button {
   border-style: none;

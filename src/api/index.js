@@ -61,20 +61,34 @@ export const followings = (usid, page) => axios.get('/api/follows/following', {
     params: { usid, page: page || 0 }
 });
 
-/**
- * @param {string|Blob} avatarFile 
- */
-export const changeAvatar = (avatarFile) => {
-    // 不知道能不能用, 谁来调试一下
-    var formdata = new FormData();
-    formdata.append('avatar', avatarFile);
-    return axios.get('/api/users/changeavatar', formdata);
-}
+// /**
+//  * @param {string|Blob} avatarFile 
+//  */
+// export const changeAvatar = (avatarFile) => {
+//     // 不知道能不能用, 谁来调试一下
+//     return axios.get('/api/users/changeavatar', formdata);
+// }
 
-// 或许可以改成可选参数
-export const updateInfo = (usid, email, tel, nickname, password, gender, birthday, signature, cat_id) => axios.post('/api/users/updateinfo', {
-    usid, email, tel, nickname, password, gender, birthday, signature, cat_id
-});
+/**
+ * @param {Object} params - 请求参数
+ * @param {Number} params.usid - 用户id
+ * @param {String} [params.email] - 用户邮箱
+ * @param {String} [params.tel] - 用户手机号
+ * @param {String} [params.nickname] - 用户名
+ * @param {String} [params.password] - 用户密码
+ * @param {String} [params.gender] - 男/女/?
+ * @param {Date} [params.birthday] - 用户生日
+ * @param {String} [params.signature] - 个性签名
+ * @param {Blob} [params.avatar] - 头像文件
+ * @param {String} [params.cat_id] - 绑定的猫Tag的id
+ */
+export const updateInfo = (params) => {
+    var formdata = new FormData();
+    for (const param in params) {
+        formdata.append(param, params[param]);
+    }
+    return axios.post('/api/users/updateinfo', formdata);
+}
 
 export const myFavorite = (page) => axios.get('/api/favorites/info', {
     params: { page: page || 0 }
