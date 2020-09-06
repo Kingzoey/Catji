@@ -24,7 +24,7 @@
           </router-link>
         </div>
       </div>
-      <router-link :to="item.url" class="link" v-else>
+      <router-link :to="/video/ + item.vid" class="link" v-else>
         <p :vname="item.vname" class="vname">{{item.vname}}</p>
       </router-link>
     </div>
