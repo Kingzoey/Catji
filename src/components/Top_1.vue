@@ -313,12 +313,8 @@ export default {
   background: #00a1d6;
 }
 
-.title,
-.preview {
-  /* width: 235px; */
-}
-
 .title {
+  width: 235px;
   font-size: 14px;
   line-height: 20px;
   overflow: hidden;
@@ -331,6 +327,10 @@ export default {
   display: flex;
   position: relative;
   font-weight: 500;
+}
+
+.preview .title {
+  width: auto;
 }
 
 .pic {
