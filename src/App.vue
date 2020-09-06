@@ -7,6 +7,9 @@
 <script>
 export default {
   name: "app",
+  created() {
+    this.$store.commit("loadUser");
+  },
 };
 </script>
 

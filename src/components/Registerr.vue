@@ -63,11 +63,13 @@ export default {
         res = res.data;
         if (res.status === "ok") {
           let usid = res.data.usid;
-          this.$store.state.user.usid = usid;
-          this.$store.state.user.nickname = nickname;
-          this.$store.state.user.follower_num = 0;
-          this.$store.state.user.followee_num = 0;
-          this.$store.state.user.upload_num = 0;
+          this.$store.commit("login", {
+            usid,
+            nickname,
+            follower_num: 0,
+            followee_num: 0,
+            upload_num: 0,
+          });
           this.$router.push({ path: "/" });
         } else {
           this.$message.error("网络错误: " + res.status);

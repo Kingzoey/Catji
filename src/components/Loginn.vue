@@ -85,7 +85,7 @@ export default {
             let infores = await loginInfo();
             infores = infores.data;
             if (infores.status == "ok") {
-              this.$store.state.user = infores.data;
+              this.$store.commit("login", infores.data);
               this.$router.push({ path: "/" });
             }
           } catch (e) {
@@ -99,7 +99,7 @@ export default {
             let infores = await loginInfo();
             infores = infores.data;
             if (infores.status == "ok") {
-              this.$store.state.user = infores.data;
+              this.$store.commit("login", infores.data);
               this.$router.push({ path: "/" });
             }
           } catch (e) {
