@@ -5,10 +5,21 @@
 </template>
 
 <script>
+import { loginInfo } from "./api";
 export default {
   name: "app",
-  created() {
-    this.$store.commit("loadUser");
+  async created() {
+    try {
+      var res = await loginInfo();
+      res = res.data;
+      if (res.status === "ok") {
+        this.$store.commit("login", res.data);
+      } else {
+        this.$store.commit("logout");
+      }
+    } catch (e) {
+      this.$store.commit("logout");
+    }
   },
 };
 </script>

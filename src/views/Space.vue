@@ -5,22 +5,22 @@
       <div class="left" :style="{'position':'relative','top':leftPanelTop+'px'}">
         <div class="user">
           <div class="avatar">
-            <img :src="displayUser.avatar" alt />
+            <img :src="displayUser.avatar" />
           </div>
           <div class="name">{{displayUser.nickname}}</div>
           <div class="stat clearfix">
-            <a class="stat-item">
+            <router-link class="stat-item" :to="'/space/' + usid + '/fan'">
               <p class="stat-number">{{displayUser.followee_num}}</p>
               <p class="stat-label">关注</p>
-            </a>
-            <a class="stat-item">
+            </router-link>
+            <router-link class="stat-item" :to="'/space/' + usid + '/fan'">
               <p class="stat-number">{{displayUser.follower_num}}</p>
               <p class="stat-label">粉丝</p>
-            </a>
-            <a class="stat-item">
+            </router-link>
+            <router-link class="stat-item" :to="'/space/' + usid + '/blog'">
               <p class="stat-number">{{displayUser.upload_num}}</p>
               <p class="stat-label">动态</p>
-            </a>
+            </router-link>
           </div>
         </div>
         <div class="tab">
@@ -31,7 +31,7 @@
               v-for="(tab, index) in tablist"
               :key="tab.name"
             >
-              <a href="javascript:void(0);" @click="subpage = index">
+              <a href="javascript:void(0);" @click="direct(index)">
                 <font-awesome-icon :icon="['fas', tab.iconname]" />
                 {{tab.name}}
               </a>
@@ -109,6 +109,14 @@ export default {
 
       if (this.scrollTop > 0) {
         this.leftPanelTop = Math.max(0, this.scrollTop - 100);
+      }
+    },
+    direct(index) {
+      var to = "/space/" + this.usid + "/" + this.tablist[index].subname;
+      if (this.$route.path != to) {
+        this.$router.push({
+          path: to,
+        });
       }
     },
   },
