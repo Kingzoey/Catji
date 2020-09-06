@@ -10,6 +10,7 @@
         <UploadFile @update:video="updateFile" />
       </div>
     </div>
+    <br />
   </div>
 </template>
 

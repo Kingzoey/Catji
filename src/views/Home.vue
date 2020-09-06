@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <NavBar />
     <div class="container">
       <div class="bank clearfix">
@@ -64,16 +64,17 @@ export default {
 </script>
 <style scoped>
 .home {
+  background-color: rgb(232, 248, 255);
 }
 
 .container {
   width: 1200px;
   margin: 0 auto;
-  background-color: rgb(232, 248, 255);
 }
 .bank {
   margin-top: 30px;
   display: flex;
+  justify-content: center;
   height: 420px;
   overflow: hidden;
 }

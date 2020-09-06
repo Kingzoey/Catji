@@ -315,7 +315,7 @@ export default {
 
 .title,
 .preview {
-  width: 235px;
+  /* width: 235px; */
 }
 
 .title {

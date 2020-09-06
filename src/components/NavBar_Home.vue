@@ -11,9 +11,6 @@
     <div class="header">
       <div class="nav">
         <ul>
-          <li>
-            <router-link to="/">首页</router-link>
-          </li>
           <li v-if="!this.$store.state.user.usid">
             <router-link to="/login">登录</router-link>
           </li>
@@ -92,7 +89,7 @@ export default {
   background: linear-gradient(rgba(0, 0, 0, 0.4), transparent);
 }
 .nav {
-  width: 1000px;
+  width: 1200px;
   height: 48px;
   margin: 0 auto;
 }

@@ -7,6 +7,9 @@
 <script>
 export default {
   name: "app",
+  created() {
+    this.$store.commit("loadUser");
+  },
 };
 </script>
 
@@ -54,9 +57,6 @@ ul {
   list-style: none;
 }
 
-[type="button"],
-[type="reset"],
-[type="submit"],
 input,
 button {
   border-style: none;

@@ -19,7 +19,7 @@
           </router-link>
         </div>
         <div class="txt">
-          <router-link :to="item.url" class="link">
+          <router-link :to="/video/ + item.vid" class="link">
             <p :vname="item.vname" class="vname">{{item.vname}}</p>
           </router-link>
         </div>
@@ -171,7 +171,7 @@ export default {
         {
           vid: 100002,
           vname: "视频2名字",
-          cover: "视频2缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941155445&di=e58ab47ab0ce3bc63bcb7fef72b6a810&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn12%2F706%2Fw439h267%2F20180425%2F43b9-fzqvvsc0513897.jpg",
           up: {
             usid: 100002,
             name: "视频2up主名字",
@@ -180,7 +180,7 @@ export default {
         {
           vid: 100003,
           vname: "视频3名字",
-          cover: "视频3缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941218871&di=8ebf233fed68b2a3eb4adfd7aa32c8a1&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2F902397dda144ad34bc9ecc61daa20cf431ad8537.jpg",
           up: {
             usid: 100003,
             name: "视频3up主名字",
@@ -216,112 +216,112 @@ export default {
       ],
       userHotList: [
         {
-          vid: 100001,
+          vid: 200001,
           vname: "视频1名字",
-          cover: "视频1缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941282696&di=c245f8e62a8f4be08d548ae6e1703e45&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn20119%2F654%2Fw1417h837%2F20181219%2F8fc7-hqnkypr2320016.jpg",
           up: {
-            usid: 100002,
+            usid: 200002,
             name: "视频1up主名字",
           },
         },
         {
-          vid: 100002,
+          vid: 200002,
           vname: "视频2名字",
-          cover: "视频2缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941424682&di=f5f95958fe8a3f3acee1c362e4cc72b8&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn20119%2F562%2Fw1365h797%2F20181219%2F5e2f-hqnkypr2319426.jpg",
           up: {
-            usid: 100002,
+            usid: 200002,
             name: "视频2up主名字",
           },
         },
         {
-          vid: 100003,
+          vid: 200003,
           vname: "视频3名字",
-          cover: "视频3缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941471341&di=2f8639aafd145b636077eacfe21e14ff&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2F%3DykIFDXIIxHUvclD8ZohjAw7TycyPIB5Mvhl00AVn6xKw1538847570291.jpeg",
           up: {
-            usid: 100003,
+            usid: 200003,
             name: "视频3up主名字",
           },
         },
         {
-          vid: 100004,
+          vid: 200004,
           vname: "视频4名字",
           cover: "视频4缩略图url",
           up: {
-            usid: 100004,
+            usid: 200004,
             name: "视频4up主名字",
           },
         },
         {
-          vid: 100005,
+          vid: 200005,
           vname: "视频5名字",
           cover: "视频5缩略图url",
           up: {
-            usid: 100005,
+            usid: 200005,
             name: "视频5up主名字",
           },
         },
         {
-          vid: 100006,
+          vid: 200006,
           vname: "视频6名字",
           cover: "视频6缩略图url",
           up: {
-            usid: 100006,
+            usid: 200006,
             name: "视频6up主名字",
           },
         },
       ],
       nekoHotList: [
         {
-          vid: 100001,
+          vid: 300001,
           vname: "视频1名字",
-          cover: "视频1缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941520818&di=1e96a49d50fc232d9cc56d6027157c25&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180205%2F8f51222f9aed4a53989ac6a73c347af9.jpeg",
           up: {
-            usid: 100001,
+            usid: 300001,
             name: "视频1up主名字",
           },
         },
         {
-          vid: 100002,
+          vid: 300002,
           vname: "视频2名字",
-          cover: "视频2缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941578261&di=c3639c91222a5f4133721b978f3d334b&imgtype=0&src=http%3A%2F%2Fdpic.tiankong.com%2Ffs%2F07%2FQJ8890236932.jpg",
           up: {
-            usid: 100002,
+            usid: 300002,
             name: "视频2up主名字",
           },
         },
         {
-          vid: 100003,
+          vid: 300003,
           vname: "视频3名字",
-          cover: "视频3缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941625700&di=379f84c958a69b47b4bbe19c77d34eea&imgtype=0&src=http%3A%2F%2Fimg5.pcpop.com%2FArticleImages%2F730x547%2F3%2F3686%2F003686983.jpg",
           up: {
-            usid: 100003,
+            usid: 300003,
             name: "视频3up主名字",
           },
         },
         {
-          vid: 100004,
+          vid: 300004,
           vname: "视频4名字",
           cover: "视频4缩略图url",
           up: {
-            usid: 100004,
+            usid: 300004,
             name: "视频4up主名字",
           },
         },
         {
-          vid: 100005,
+          vid: 300005,
           vname: "视频5名字",
           cover: "视频5缩略图url",
           up: {
-            usid: 100005,
+            usid: 300005,
             name: "视频5up主名字",
           },
         },
         {
-          vid: 100006,
+          vid: 300006,
           vname: "视频6名字",
           cover: "视频6缩略图url",
           up: {
-            usid: 100006,
+            usid: 300006,
             name: "视频6up主名字",
           },
         },
@@ -448,6 +448,10 @@ export default {
   display: flex;
   position: relative;
   font-weight: 500;
+}
+
+.preview .title {
+  width: auto;
 }
 
 .pic {
