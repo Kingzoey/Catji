@@ -3,12 +3,12 @@
     <el-form ref="form" :model="form" label-width="100px">
       <div class="item_block head_p">
         <div class="head_img">
-          <img :src="form.avatar" width="30" height="30" />
+          <img :src="pic" width="30" height="30" />
         </div>
         <div class="setting_right" @click="uploadHeadImg">
           <span class="caption">更改头像</span>
         </div>
-        <input type="file" accept="image/*" @change="handleFile" class="hiddenInput" />
+        <input type="file" accept="image/*" @change="handleChange" class="hiddenInput" />
       </div>
       <el-form-item>
         <template slot="label">
@@ -77,6 +77,7 @@ export default {
       res = res.data;
       if (res.status === "ok") {
         this.form = this.origin = { ...res.data };
+        this.pic = res.data.avatar;
       }
     } catch (e) {
       this.$message.error("网络错误: " + e.response.data.status);
@@ -86,22 +87,29 @@ export default {
     return {
       origin: {},
       form: {},
+      pic: "",
     };
   },
 
   methods: {
     // 打开图片上传
-    uploadHeadImg: function () {
+    uploadHeadImg() {
       this.$el.querySelector(".hiddenInput").click();
     },
     // 将头像显示
-    handleFile: function (e) {
+    handleChange(e) {
+      console.log(e);
       let $target = e.target || e.srcElement;
       let file = $target.files[0];
+      this.preview(file);
+      this.form.avatar = file;
+    },
+    preview(file) {
       var reader = new FileReader();
-      reader.onload = (data) => {
-        let res = data.target || data.srcElement;
-        this.form.avatar = res.result;
+      reader.onload = (ev) => {
+        console.log(ev);
+        let res = ev.target || ev.srcElement;
+        this.pic = res.result;
       };
       reader.readAsDataURL(file);
     },
@@ -121,6 +129,7 @@ export default {
     },
     onReset() {
       this.form = { ...this.origin };
+      this.pic = this.origin.avatar;
     },
   },
 };

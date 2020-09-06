@@ -49,13 +49,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "NavBar",
-  mounted() {},
-};
-</script>
-
 <style scoped>
 .header-wrap {
   background: #fff;
