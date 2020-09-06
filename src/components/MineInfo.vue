@@ -52,7 +52,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">更新个人信息</el-button>
-        <el-button @click="onSubmit">取消</el-button>
+        <el-button @click="onReset">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -76,7 +76,7 @@ export default {
       let res = await userInfo(usid);
       res = res.data;
       if (res.status === "ok") {
-        this.form = { ...res.data };
+        this.form = this.origin = { ...res.data };
       }
     } catch (e) {
       this.$message.error("网络错误: " + e.response.data.status);
@@ -84,15 +84,8 @@ export default {
   },
   data() {
     return {
-      form: {
-        usid: 0,
-        nickname: "",
-        gender: "",
-        avatar: "",
-        birthday: "",
-        signature: "",
-        email: "",
-      },
+      origin: {},
+      form: {},
     };
   },
 
@@ -114,16 +107,20 @@ export default {
     },
     async onSubmit() {
       try {
+        console.log({ ...this.form });
         let res = await updateInfo({ ...this.form });
         res = res.data;
         if (res.status === "ok") {
-          console.log(res.data);
+          this.$message.info("更新完成");
         } else {
           this.$message.error("网络错误: " + res.status);
         }
       } catch (e) {
         this.$message.error("网络错误: " + e.response.data.status);
       }
+    },
+    onReset() {
+      this.form = { ...this.origin };
     },
   },
 };
