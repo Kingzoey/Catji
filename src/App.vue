@@ -31,6 +31,7 @@ html {
 }
 
 body {
+  min-width: 1226px;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica,
     Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
   font-size: 12px;
@@ -61,6 +62,10 @@ input,
 button {
   border-style: none;
   padding: 0;
+}
+
+#app {
+  position: relative;
 }
 
 /* 用来清除浮动的class */
