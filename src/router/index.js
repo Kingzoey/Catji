@@ -51,7 +51,7 @@ const routes = [{
 		import('../views/Search.vue')
 },
 {
-	path: '/space/:usid?',
+	path: '/space/:usid(\\d+)?/:sub?',
 	name: 'Space',
 	component: () =>
 		import('../views/Space.vue')

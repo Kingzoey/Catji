@@ -27,11 +27,11 @@
           <ul>
             <li
               class="tab-item"
-              :class="{on:index==on}"
+              :class="{on:index==subpage}"
               v-for="(tab, index) in tablist"
               :key="tab.name"
             >
-              <a href="javascript:void(0);" @click="on = index">
+              <a href="javascript:void(0);" @click="subpage = index">
                 <font-awesome-icon :icon="['fas', tab.iconname]" />
                 {{tab.name}}
               </a>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="right">
-        <component :is="tablist[on].tab"></component>
+        <component :is="tablist[subpage].tab"></component>
       </div>
     </div>
   </div>
@@ -54,19 +54,28 @@ export default {
   components: {
     NavBar,
   },
-  async beforeMount() {
+  created() {
+    this.usid =
+      Number.parseInt(this.$route.params.usid) ||
+      this.$store.state.user.usid ||
+      null;
+    this.subpage = Math.max(
+      this.tablist
+        .map((tabitem) => tabitem.subname)
+        .indexOf(this.$route.params.sub),
+      0
+    );
+    // console.log(this.usid);
+    // console.log(this.subpage);
+  },
+  async mounted() {
     window.addEventListener("scroll", this.handleScroll);
-    let usid;
-    if (this.$route.params.usid) {
-      usid = this.$route.params.usid;
-    } else if (this.$store.state.user.usid) {
-      usid = this.$store.state.user.usid;
-    } else {
+    if (!this.usid) {
       this.$message.error("用户信息有误");
       return;
     }
     try {
-      let res = await userInfo(usid);
+      let res = await userInfo(this.usid);
       res = res.data;
       if (res.status == "ok") {
         this.displayUser = { ...res.data };
@@ -77,6 +86,19 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
+  },
+  beforeRouteUpdate(to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+    this.usid =
+      Number.parseInt(to.params.usid) || this.$store.state.user.usid || null;
+    this.subpage = Math.max(
+      this.tablist.map((tabitem) => tabitem.subname).indexOf(to.params.sub),
+      0
+    );
+    next();
   },
   methods: {
     handleScroll() {
@@ -92,45 +114,54 @@ export default {
   },
   data() {
     return {
-      on: 0,
+      usid: null,
+      subpage: 0,
       leftPanelTop: 0,
       tablist: [
         {
+          subname: "welcome",
           name: "欢迎",
           iconname: "smile",
           tab: () => import("@/views/Test.vue"),
         },
         {
+          subname: "info",
           name: "个人资料",
           iconname: "edit",
           tab: () => import("@/components/MineInfo.vue"),
         },
         {
+          subname: "blog",
           name: "个人动态",
           iconname: "blog",
           tab: () => import("@/views/MyBlog.vue"),
         },
         {
+          subname: "fan",
           name: "关注 / 粉丝列表",
           iconname: "list",
           tab: () => import("@/components/Fan&Fol.vue"),
         },
         {
+          subname: "favorite",
           name: "我的收藏",
           iconname: "folder",
           tab: () => import("@/components/FavList.vue"),
         },
         {
+          subname: "history",
           name: "观看历史",
           iconname: "history",
           tab: () => import("@/components/HistoryBlock.vue"),
         },
         {
+          subname: "upload",
           name: "投稿管理",
           iconname: "upload",
           tab: () => import("@/components/UploadList.vue"),
         },
         {
+          subname: "stat",
           name: "数据中心",
           iconname: "rocket",
           tab: () => import("@/views/Login.vue"),
@@ -169,8 +200,6 @@ export default {
   width: 955px;
   float: right;
 }
-
-
 
 .avatar {
   margin: 7px auto 0;
