@@ -133,11 +133,17 @@ export const blogContent = (only_cat) => axios.get('/api/blogs/content', {
 });
 
 /**
- * @param {HTMLFormElement} formdata 
+ * 上传动态
+ * @param {String} content - 动态内容
+ * @param {Blob[]} images - 附带图片(<=9)
+ * @param {bool} is_public - 是否公开
  */
-export const postBlog = (formdata) => {
-    // 这里不太确定
-    return axios.post('/api/blogs/release', formdata);
+export const postBlog = (content, images, is_public) => {
+    var formData = new FormData();
+    formData.append('content', content);
+    images.forEach(image => formData.append('images', image));
+    formData.uploadVideo('is_public', is_public);
+    return axios.post('/api/blogs/release', formData);
 };
 
 export const searchVideo = (keyword, page) => axios.get('/api/videos/search', {
