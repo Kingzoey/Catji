@@ -109,7 +109,7 @@ export default {
         var res = await newVideo();
         res = res.data;
         if (res.status === "ok") {
-          this.nekoHotList = res.data;
+          this.videoNewList = res.data;
         } else {
           this.$message.error("网络错误: " + res.status);
         }
