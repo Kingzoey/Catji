@@ -8,7 +8,7 @@
         <div class="tab-switch-item" :class="{on : on == 0}" @click="handleNew">最新</div>
       </div>
     </header>
-    <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.vid">
+    <div class="rank-wrap" v-for="(item, index) in curNewlist" :key="item.vid">
       <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
       <div class="preview" v-if="index < 3">
         <div class="pic">
@@ -34,7 +34,7 @@ import { newVideo } from '../api';
 export default {
   name: "Top_0",
   computed: {
-    curHotlist() {
+    curNewlist() {
       return this.videoNewList;
     },
   },
