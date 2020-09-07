@@ -124,21 +124,32 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
-// import videoInfo from "@/api";
+import { videoInfo } from "../api";
 export default {
   name: "Video",
   components: {
     NavBar,
     VideoComment,
   },
-  beforeMount() {
-    console.log(this.$route.params.vid);
-    //videoInfoApi(100000)
-    //     .then(
-    //       if(res.status==='ok'){
-    //this.videoInfo = res.data;
-    //       }
-    //     )
+  async mounted() {
+    let vid = this.$route.params.vid;
+    console.log(vid);
+    if (!vid) {
+      this.$message.error("视频信息错误");
+      return;
+    }
+
+    try {
+      let res = await videoInfo(vid);
+      res = res.data;
+      if (res.status === "ok") {
+        this.video = { ...res.data };
+      } else {
+        this.$message.error("网络错误: " + res.status);
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.response.data.status);
+    }
   },
   data() {
     return {
@@ -237,9 +248,7 @@ export default {
       },
     };
   },
-  methods: {
-
-  },
+  methods: {},
 };
 </script>
 
