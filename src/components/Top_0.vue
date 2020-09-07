@@ -35,13 +35,13 @@ export default {
   name: "Top_0",
   computed: {
     curHotlist() {
-      return this.videoHotList;
+      return this.videoNewList;
     },
   },
   data() {
     return {
       on: 0,
-      videoHotList: [
+      videoNewList: [
         {
           vid: 100001,
           name: "视频1名字",
