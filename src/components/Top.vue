@@ -387,6 +387,7 @@ export default {
   width: 265px;
   position: inherit;
   padding-left: 10px;
+  padding-right: 10px;
   height: 100%;
 }
 
@@ -434,9 +435,8 @@ export default {
 .rank-wrap {
   display: flex;
   position: relative;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .number {
@@ -456,7 +456,7 @@ export default {
 }
 
 .vname {
-  width: 235px;
+  width: 225px;
   font-size: 14px;
   line-height: 20px;
   overflow: hidden;
@@ -465,7 +465,7 @@ export default {
 }
 
 .preview {
-  width: 235px;
+  width: 225px;
   display: flex;
   position: relative;
   font-weight: 500;
@@ -473,6 +473,9 @@ export default {
 
 .preview .vname {
   width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pic {
@@ -483,9 +486,11 @@ export default {
   width: 112px;
   height: 63px;
   border-radius: 2px;
+  display: block;
 }
 
 .txt {
   margin-left: 12px;
+  width: 105px;
 }
 </style>
