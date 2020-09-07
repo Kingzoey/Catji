@@ -5,240 +5,118 @@
         <font-awesome-icon :icon="['fas', 'list-ol']" />&nbsp;TOP
       </span>
       <div class="more tab-switch">
-        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">最新</div>
+        <div class="tab-switch-item" :class="{on : on == 0}" @click="handleNew">最新</div>
       </div>
     </header>
-    <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
+    <div class="rank-wrap" v-for="(item, index) in curNewlist" :key="item.vid">
       <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
       <div class="preview" v-if="index < 3">
         <div class="pic">
-          <router-link :to="item.url" class="link">
-            <img :src="item.cover" :alt="item.title" />
+          <router-link :to="/video/ + item.vid" class="link">
+            <img :src="item.cover" :alt="item.name" />
           </router-link>
         </div>
         <div class="txt">
-          <router-link :to="item.url" class="link">
-            <p :title="item.title" class="title">{{item.title}}</p>
+          <router-link :to="/video/ + item.vid" class="link">
+            <p :title="item.name" class="vname">{{item.name}}</p>
           </router-link>
         </div>
       </div>
-      <router-link :to="item.url" class="link" v-else>
-        <p :title="item.title" class="title">{{item.title}}</p>
+      <router-link :to="/video/ + item.vid" class="link" v-else>
+        <p :title="item.name" class="vname">{{item.name}}</p>
       </router-link>
     </div>
   </div>
 </template>
 
-<!--
 <script>
-import { newVideo } from "../api";
+import { newVideo } from '../api';
 export default {
-  name: "newVideo",
+  name: "Top_0",
+  computed: {
+    curNewlist() {
+      return this.videoNewList;
+    },
+  },
   data() {
     return {
+      on: 0,
       videoNewList: [
         {
-          vid: 视频1id,
+          vid: 100001,
           name: "视频1名字",
-          cover: "视频1缩略图url",
+          cover:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941662933&di=02eb9ee99e2faed834a0440cf987261c&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F5387dc9f52dab.jpg",
           up: {
-            usid: 视频1up主id,
+            usid: 100001,
             name: "视频1up主名字",
           },
         },
         {
-          vid: 视频2id,
+          vid: 100002,
           name: "视频2名字",
-          cover: "视频2缩略图url",
+          cover:
+            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=214406322,2797989572&fm=26&gp=0.jpg",
           up: {
-            usid: 视频2up主id,
+            usid: 100002,
             name: "视频2up主名字",
           },
         },
         {
-          vid: 视频10id,
-          name: "视频10名字",
-          cover: "视频10缩略图url",
+          vid: 100003,
+          name: "视频3名字",
+          cover:
+            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941218871&di=8ebf233fed68b2a3eb4adfd7aa32c8a1&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2F902397dda144ad34bc9ecc61daa20cf431ad8537.jpg",
           up: {
-            usid: 视频10up主id,
-            name: "视频10up主名字",
+            usid: 100003,
+            name: "视频3up主名字",
+          },
+        },
+        {
+          vid: 100004,
+          name: "视频4名字",
+          cover: "视频4缩略图url",
+          up: {
+            usid: 100004,
+            name: "视频4up主名字",
+          },
+        },
+        {
+          vid: 100005,
+          name: "视频5名字",
+          cover: "视频5缩略图url",
+          up: {
+            usid: 100005,
+            name: "视频5up主名字",
+          },
+        },
+        {
+          vid: 100006,
+          name: "视频6名字",
+          cover: "视频6缩略图url",
+          up: {
+            usid: 100006,
+            name: "视频6up主名字",
           },
         },
       ],
     };
   },
   methods: {
-    async onLogin() {
-      if (res.status == "ok") {
-        this.newVideo = res.data;
+    async handleNew() {
+      this.on = 0;
+      try {
+        var res = await newVideo();
+        res = res.data;
+        if (res.status === "ok") {
+          this.nekoHotList = res.data;
+        } else {
+          this.$message.error("网络错误: " + res.status);
+        }
+      } catch (e) {
+        this.$message.error("网络错误: " + e.response.data.status);
       }
     },
-  },
-};
-</script>
--->
-
-<script>
-export default {
-  name: "Top0",
-  computed: {
-    curHotlist() {
-      return this.videoHotList;
-    },
-  },
-  data() {
-    return {
-      on: 0,
-      videoHotList: [
-        {
-          id: 100000,
-          url: "/video/100000",
-          title: "测试视频",
-          cover:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941662933&di=02eb9ee99e2faed834a0440cf987261c&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F5387dc9f52dab.jpg",
-        },
-        {
-          id: 100001,
-          url: "/video/100001",
-          title: "测试视频",
-          cover:
-            "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=214406322,2797989572&fm=26&gp=0.jpg",
-        },
-        {
-          id: 100002,
-          url: "/video/100002",
-          title: "测试视频",
-          cover:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941738757&di=576825c2745610f477bcd5a630126832&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2FyL4o6YTVuyEU3bAohgXhDycIUQKn8164e%3DwiDv%3DxcIRsT1539407290894.jpeg",
-        },
-        {
-          id: 100003,
-          url: "/video/100003",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100004,
-          url: "/video/100004",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100005,
-          url: "/video/100005",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-        {
-          id: 100006,
-          url: "/video/100006",
-          title: "测试视频",
-          cover: "https://www.baidu.com/img/flexible/logo/pc/result.png",
-        },
-      ],
-      userHotList: [
-        {
-          id: 100000,
-          url: "/space/100000",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100001,
-          url: "/space/100001",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100002,
-          url: "/space/100002",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100003,
-          url: "/space/100003",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100004,
-          url: "/space/100004",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100005,
-          url: "/space/100005",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100006,
-          url: "/space/100006",
-          title: "测试用户",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-      ],
-      nekoHotList: [
-        {
-          id: 100000,
-          url: "/cat/100000",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100001,
-          url: "/cat/100001",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100002,
-          url: "/cat/100002",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100003,
-          url: "/cat/100003",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100004,
-          url: "/cat/100004",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100005,
-          url: "/cat/100005",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-        {
-          id: 100006,
-          url: "/cat/100006",
-          title: "测试猫咪",
-          cover:
-            "https://www.baidu.com/s?wd=%E4%BB%8A%E6%97%A5%E6%96%B0%E9%B2%9C%E4%BA%8B&tn=SE_Pclogo_6ysd4c7a&sa=ire_dl_gh_logo&rsv_dl=igh_logo_pc",
-        },
-      ],
-    };
   },
 };
 </script>
@@ -316,7 +194,7 @@ export default {
   background: #00a1d6;
 }
 
-.title {
+.vname {
   width: 235px;
   font-size: 14px;
   line-height: 20px;
@@ -332,7 +210,7 @@ export default {
   font-weight: 500;
 }
 
-.preview .title {
+.preview .vname {
   width: auto;
 }
 
