@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { userInfo } from "../api";
 import NavBar from "@/components/NavBar.vue";
 export default {
   name: "Space",
@@ -73,14 +74,24 @@ export default {
       this.$message.error("用户信息有误");
       return;
     }
-    this.$store.commit("cacheGetMineInfo", {
-      onSuccess: (me) => {
-        this.displayUser = { ...me };
-      },
-      onFailed: (err) => {
-        console.log(err);
-      },
-    });
+    if (this.usid == this.$store.state.user.usid) {
+      this.$store.commit("cacheGetMineInfo", {
+        onSuccess: (me) => {
+          this.displayUser = { ...me };
+        },
+        onFailed: (err) => {
+          console.log(err);
+        },
+      });
+      return;
+    }
+    userInfo(this.usid)
+      .then((res) => {
+        this.displayUser = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err.response.data.status);
+      });
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);

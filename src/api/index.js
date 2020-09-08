@@ -56,9 +56,6 @@ export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
     params: { usid, offset: page * 10 || 0 }
 });
 
-export const follow = (usid) => axios.post('/api/follows/follow', {
-    params: { usid }
-});
 
 export const followers = (usid, page) => axios.get('/api/follows/followers', {
     params: { usid, offset: (page || 0) * 10 }
@@ -181,3 +178,31 @@ export const uploadVideo = (title, desc, coverFile, videoFile, tags, catags) => 
     catags.forEach(catag => formData.append('catags', catag));
     return axios.post('/api/videos/release', formData);
 }
+
+export const likeVideo = (vid) => axios.post('/api/Likevideos/addLikeV', { vid });
+
+export const unlikeVideo = (vid) => axios.post('/api/Likevideos/unlikev', { vid });
+
+export const likeBlog = (bid) => axios.post('/api/Likeblogs/addLikeB', { bid });
+
+export const unlikeBlog = (bid) => axios.post('/api/Likeblogs/unLikeB', { bid });
+
+export const likeVideoComment = (vcid) => axios.post('/api/Likevideocomments/addLikeVc', { vcid });
+
+export const unlikeVideoComment = (vcid) => axios.post('/api/Likevideocomments/unLikeVc', { vcid });
+
+export const likeBlogComment = (bcid) => axios.post('/api/Likeblogcomments/addLikeBc', { bcid });
+
+export const unlikeBlogComment = (bcid) => axios.post('/api/Likeblogcomments/unLikeBc', { bcid });
+
+export const follow = (usid) => axios.post('/api/follows/follow', { usid });
+
+export const unfollow = (usid) => axios.post('/api/follows/unfollow', { usid });
+
+export const block = (usid) => axios.post('/api/blocks/block', { usid });
+
+export const unblock = (usid) => axios.post('/api/blocks/unblock', { usid });
+
+export const favoriteVideo = (vid) => axios.post('/api/favorites/addfav', { vid });
+
+export const unfavoriteVideo = (vid) => axios.post('/api/favorites/unfav', { vid });

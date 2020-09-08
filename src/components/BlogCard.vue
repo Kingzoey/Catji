@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="card" v-for="blog in blogs" :key="blog.bid">
+    <div class="card" v-for="(blog, index) in blogs" :key="blog.bid">
       <router-link
         :to="/space/ + blog.up.usid"
         :style="'background-image:url('+blog.up.avatar+')'"
-        class="user-head c-pointer"
+        class="user-head"
       ></router-link>
       <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
-          <router-link :to="/space/ + blog.up.usid" class="c-pointer">{{blog.up.name}}</router-link>
+          <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
           <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
         </div>
         <div class="card-content">
-          <div class="text p-rel description">
+          <div class="text description">
             <div class="content">
               <div class="content-full">{{blog.content}}</div>
             </div>
@@ -22,20 +22,20 @@
           <BlogCardImage :images="blog.images" />
         </div>
         <div class="button-bar tc-slate">
-          <div class="single-button c-pointer" @click="forward(blog.bid)">
+          <div class="single-button" @click="forward(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'share-square']" />
               <span class="text-offset">{{blog.transmit_num||'转发'}}</span>
             </span>
           </div>
-          <div class="single-button c-pointer" @click="comment(blog.bid)">
+          <div class="single-button" @click="comment(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'comment-alt']" />
               <i class="bp-svg-icon single-icon comment"></i>
               <span class="text-offset">{{blog.comment_num||'评论'}}</span>
             </span>
           </div>
-          <div class="single-button c-pointer p-rel" @click="like(blog.bid)">
+          <div class="single-button" :class="{on:blog.ilike>0}" @click="like(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'thumbs-up']" />
               <span class="text-offset">{{blog.like_num||'点赞'}}</span>
@@ -50,7 +50,13 @@
 </template>
 
 <script>
-import { blogContent } from "../api";
+import {
+  blogContent,
+  likeBlog,
+  unlikeBlog,
+  // likeBlogComment,
+  // unlikeBlogComment,
+} from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
 export default {
   name: "BlogCard",
@@ -58,14 +64,37 @@ export default {
     BlogCardImage,
   },
   methods: {
-    forward(bid) {
-      window.alert(bid);
+    forward(index) {
+      this.$message.info("转载功能正在完善中...");
+      index;
     },
-    comment(bid) {
-      window.alert(bid);
+    comment(index) {
+      this.$message.info("评论功能正在完善中...");
+      index;
     },
-    like(bid) {
-      window.alert(bid);
+    like(index) {
+      let blog = this.blogs[index];
+      if (blog.ilike) {
+        unlikeBlog(blog.bid)
+          .then(() => {
+            blog.ilike = blog.ilike ? 0 : 1;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Not already liked!") {
+              blog.ilike = 0;
+            }
+          });
+      } else {
+        likeBlog(blog.bid)
+          .then(() => {
+            blog.ilike = blog.ilike ? 0 : 1;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Already liked!") {
+              blog.ilike = 1;
+            }
+          });
+      }
     },
     format(timestamp, fmt) {
       var date = new Date(timestamp);
@@ -103,7 +132,7 @@ export default {
         {
           bid: 0,
           content: "获取中",
-          create_time: Date.now() / 1000,
+          create_time: Math.floor(Date.now() / 1000),
           like_num: 0,
           transmit_num: 0,
           comment_num: 0,
@@ -113,6 +142,7 @@ export default {
             avatar: "//static.hdslb.com/images/member/noface.gif",
           },
           images: [],
+          ilike: 0,
         },
       ],
     };
@@ -214,11 +244,12 @@ export default {
 
 .single-button {
   display: inline-block;
-  width: 92px;
+  margin-right: 70px;
   font-size: 12px;
   cursor: pointer;
 }
 
+.on,
 .single-button:hover {
   color: #fb7299;
 }

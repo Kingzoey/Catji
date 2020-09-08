@@ -105,6 +105,7 @@ export default {
   },
   data() {
     return {
+      usid: 0,
       user: {
         usid: 0,
         nickname: "获取中",
@@ -123,19 +124,19 @@ export default {
       ],
     };
   },
+  created() {
+    this.usid =
+      Number.parseInt(this.$route.params.usid) ||
+      this.$store.state.user.usid ||
+      null;
+  },
   async mounted() {
     if (!this.$store.state.user.usid) {
       this.$message.error("用户未登录");
       return;
     }
-    let usid = this.$store.state.user.usid;
-    this.$store.commit("cacheGetMineInfo", {
-      onSuccess: (me) => {
-        this.user = me;
-      },
-    });
     try {
-      let res = await blogInfo(usid, 0);
+      let res = await blogInfo(this.usid, 0);
       res = res.data;
       if (res.status === "ok") {
         this.blogs = res.data;
