@@ -32,7 +32,9 @@
 </template>
 
 <script>
+import {  myWork } from "../api"
 export default {
+  
   name: "UploadList",
   data() {
     return {
@@ -82,6 +84,25 @@ export default {
      del() {
       window.alert("已删除!");
     },
+  },
+     beforeMount() {
+    myWork() // 函数调用返回的是Promise
+      .then((res) => {
+        res = res.data;
+        console.log(res);
+        if (res.status === "ok") {
+          this.video = res.data; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
+          console.log(res);
+       
+        } else {
+          // ...
+          console.log("请求错误，错误信息 :" + res.status);
+        }
+      })
+      .catch((err) => {
+        console.log("网络失败");
+        console.log(err);
+      }); // 这里和1.1一样写处理函数
   },
 };
 </script>
@@ -164,6 +185,7 @@ export default {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
+  float:right;
 }
 .attention-a{
   width: 80px;
