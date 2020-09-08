@@ -8,86 +8,89 @@
         </span>
       </header>
       <div class="new-list-top clearfix">
-        <div class="top-left">
-          <div class="big-item">
-            <a class="cover" href="#" target="_blank">
-              <img :src="test1" height="208" width="370" alt="最新视频1" />
-            </a>
-            <a title="最新视频1">最新视频1</a>
-          </div>
-        </div>
-        <div class="top-right">
-          <div class="top-right-line1 clearfix">
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频2" />
-              </a>
-              <a title="最新视频2">最新视频2</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频3" />
-              </a>
-              <a title="最新视频3">最新视频3</a>
+        <template v-for="(item, index) in curHotlist">
+          <div :key="item.vid" class="top-left" v-if="index < 1">
+            <div class="big-item">
+              <div class="cover">
+                <router-link :to="/video/ + item.vid" class="link" target="_blank">
+                  <img :src="item.cover" height="208" width="370" :alt="item.name" />
+                </router-link>
+              </div>
+              <div class="txt">
+                <router-link :to="/video/ + item.vid" class="link">
+                  <p :title="item.name" class="vname">{{item.name}}</p>
+                </router-link>
+              </div>
             </div>
           </div>
-          <div class="top-right-line2 clearfix">
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频5" />
-              </a>
-              <a title="最新视频5">最新视频5</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频6" />
-              </a>
-              <a title="最新视频6">最新视频6</a>
-            </div>
-          </div>
-        </div>
-        <div class="bottom">
-          <div class="bottom-line1">
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频8" />
-              </a>
-              <a title="最新视频8">最新视频8</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频9" />
-              </a>
-              <a title="最新视频9">最新视频9</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频10" />
-              </a>
-              <a title="最新视频10">最新视频10</a>
-            </div>
-            <div class="normal-item">
-              <a class="cover" href="#" target="_blank">
-                <img :src="test1" height="90" width="175" alt="最新视频11" />
-              </a>
-              <a title="最新视频11">最新视频11</a>
+          <div :key="item.vid" class="top-right-1" v-else-if="index < 3">
+            <div class="top-right-line1 clearfix">
+              <div class="normal-item-1">
+                <div class="cover">
+                  <router-link :to="/video/ + item.vid" class="link" target="_blank">
+                    <img :src="item.cover" height="90" width="175" :alt="item.name" />
+                  </router-link>
+                </div>
+                <div class="txt">
+                  <router-link :to="/video/ + item.vid" class="link">
+                    <p :title="item.name" class="vname">{{item.name}}</p>
+                  </router-link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+          <div :key="item.vid" class="top-right-2" v-else-if="index < 5">
+            <div class="top-right-line2 clearfix">
+              <div class="normal-item-2">
+                <div class="cover">
+                  <router-link :to="/video/ + item.vid" class="link" target="_blank">
+                    <img :src="item.cover" height="90" width="175" :alt="item.name" />
+                  </router-link>
+                </div>
+                <div class="txt">
+                  <router-link :to="/video/ + item.vid" class="link">
+                    <p :title="item.name" class="vname">{{item.name}}</p>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div :key="item.vid" class="bottom" v-else>
+            <div class="bottom-line1">
+              <div class="normal-item">
+                <div class="cover">
+                  <router-link :to="/video/ + item.vid" class="link" target="_blank">
+                    <img :src="item.cover" height="90" width="175" :alt="item.name" />
+                  </router-link>
+                </div>
+                <div class="txt">
+                  <router-link :to="/video/ + item.vid" class="link">
+                    <p :title="item.name" class="vname">{{item.name}}</p>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import test1 from "@/assets/test.png";
-//import { hotVideo, newVideo, hotTag } from "../api";
+import { hotVideo, newVideo, hotTag } from "../api";
 
 export default {
   name: "Middle",
+  computed: {
+    curHotlist() {
+      if (this.on === 0) return this.videoHotList;
+      else if (this.on === 1) return this.videoNewList;
+      else return this.tagHotList;
+    },
+  },
   data() {
     return {
-      test1: test1,
       videoHotList: [
         {
           vid: 100001,
@@ -122,7 +125,7 @@ export default {
         {
           vid: 100004,
           name: "视频4名字",
-          cover: "视频4缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941662933&di=02eb9ee99e2faed834a0440cf987261c&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F5387dc9f52dab.jpg",
           up: {
             usid: 100004,
             name: "视频4up主名字",
@@ -131,7 +134,7 @@ export default {
         {
           vid: 100005,
           name: "视频5名字",
-          cover: "视频5缩略图url",
+          cover: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=214406322,2797989572&fm=26&gp=0.jpg",
           up: {
             usid: 100005,
             name: "视频5up主名字",
@@ -140,10 +143,37 @@ export default {
         {
           vid: 100006,
           name: "视频6名字",
-          cover: "视频6缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941738757&di=576825c2745610f477bcd5a630126832&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2FyL4o6YTVuyEU3bAohgXhDycIUQKn8164e%3DwiDv%3DxcIRsT1539407290894.jpeg",
           up: {
             usid: 100006,
             name: "视频6up主名字",
+          },
+        },
+        {
+          vid: 100007,
+          name: "视频7名字",
+          cover: "视频7缩略图url",
+          up: {
+            usid: 100007,
+            name: "视频7up主名字",
+          },
+        },
+        {
+          vid: 100008,
+          name: "视频8名字",
+          cover: "视频8缩略图url",
+          up: {
+            usid: 100008,
+            name: "视频8up主名字",
+          },
+        },
+        {
+          vid: 100009,
+          name: "视频9名字",
+          cover: "视频9缩略图url",
+          up: {
+            usid: 100009,
+            name: "视频9up主名字",
           },
         },
       ],
@@ -205,6 +235,33 @@ export default {
             name: "视频6up主名字",
           },
         },
+        {
+          vid: 100007,
+          name: "视频7名字",
+          cover: "视频7缩略图url",
+          up: {
+            usid: 100007,
+            name: "视频7up主名字",
+          },
+        },
+        {
+          vid: 100008,
+          name: "视频8名字",
+          cover: "视频8缩略图url",
+          up: {
+            usid: 100008,
+            name: "视频8up主名字",
+          },
+        },
+        {
+          vid: 100009,
+          name: "视频9名字",
+          cover: "视频9缩略图url",
+          up: {
+            usid: 100009,
+            name: "视频9up主名字",
+          },
+        },
       ],
       tagHotList: [
         {
@@ -240,7 +297,7 @@ export default {
         {
           vid: 100004,
           name: "视频4名字",
-          cover: "视频4缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941662933&di=02eb9ee99e2faed834a0440cf987261c&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F5387dc9f52dab.jpg",
           up: {
             usid: 100004,
             name: "视频4up主名字",
@@ -249,7 +306,7 @@ export default {
         {
           vid: 100005,
           name: "视频5名字",
-          cover: "视频5缩略图url",
+          cover: "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=214406322,2797989572&fm=26&gp=0.jpg",
           up: {
             usid: 100005,
             name: "视频5up主名字",
@@ -258,17 +315,43 @@ export default {
         {
           vid: 100006,
           name: "视频6名字",
-          cover: "视频6缩略图url",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941738757&di=576825c2745610f477bcd5a630126832&imgtype=0&src=http%3A%2F%2Fdingyue.nosdn.127.net%2FyL4o6YTVuyEU3bAohgXhDycIUQKn8164e%3DwiDv%3DxcIRsT1539407290894.jpeg",
           up: {
             usid: 100006,
             name: "视频6up主名字",
+          },
+        },
+        {
+          vid: 100007,
+          name: "视频7名字",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941091089&di=1cd618b392ce4b29afd2b8ff41d6ea35&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Ffront%2F447%2Fw1280h767%2F20181030%2FCFGZ-hnaivxq6767210.jpg",
+          up: {
+            usid: 100007,
+            name: "视频7up主名字",
+          },
+        },
+        {
+          vid: 100008,
+          name: "视频8名字",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941155445&di=e58ab47ab0ce3bc63bcb7fef72b6a810&imgtype=0&src=http%3A%2F%2Fn.sinaimg.cn%2Fsinacn12%2F706%2Fw439h267%2F20180425%2F43b9-fzqvvsc0513897.jpg",
+          up: {
+            usid: 100008,
+            name: "视频8up主名字",
+          },
+        },
+        {
+          vid: 100009,
+          name: "视频9名字",
+          cover: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941218871&di=8ebf233fed68b2a3eb4adfd7aa32c8a1&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fbaike%2Fpic%2Fitem%2F902397dda144ad34bc9ecc61daa20cf431ad8537.jpg",
+          up: {
+            usid: 100009,
+            name: "视频9up主名字",
           },
         },
       ],
     };
   },
   methods: {
-    /*
     async handleVideo() {
       this.on = 0;
       try {
@@ -311,7 +394,6 @@ export default {
         this.$message.error("网络错误: " + e.response.data.status);
       }
     },
-    */
   },
 };
 </script>
@@ -355,7 +437,12 @@ export default {
   width: 195px;
   height: 118px;
 }
-.top-right {
+.top-right-1 {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
+}
+.top-right-2 {
   display: inline-block;
   vertical-align: top;
   margin-left: 20px;
