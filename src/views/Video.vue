@@ -124,7 +124,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
-// import videoInfo from "@/api";
+import {videoInfo} from "@/api";
 export default {
   name: "Video",
   components: {
@@ -133,13 +133,44 @@ export default {
   },
   beforeMount() {
     console.log(this.$route.params.vid);
-    //videoInfoApi(100000)
-    //     .then(
-    //       if(res.status==='ok'){
-    //this.videoInfo = res.data;
-    //       }
-    //     )
+    videoInfo(100000)
+        .then(res=>{
+          if(res.status==='ok'){
+              this.videoInfo = res.data;
+          }else{
+            console.log('请求错误, 错误信息: ' + res.status);
+          }
+        })
+        .catch(err=>{
+          console.log('请求失败了');
+          console.log(err);}
+        )
+    videoInfo(100001)
+        .then(res=>{
+          if(res.status==='ok'){
+              this.videoInfo = res.data;
+          }else{
+            console.log('请求错误, 错误信息: ' + res.status);
+          }
+        })
+        .catch(err=>{
+          console.log('请求失败了');
+          console.log(err);}
+        )
+    videoInfo(100002)
+        .then(res=>{
+          if(res.status==='ok'){
+              this.videoInfo = res.data;
+          }else{
+            console.log('请求错误, 错误信息: ' + res.status);
+          }
+        })
+        .catch(err=>{
+          console.log('请求失败了');
+          console.log(err);}
+        )
   },
+
   data() {
     return {
       expand: false, // 视频描述部分的"展开"按钮
