@@ -11,7 +11,7 @@
           v-for="(image,index) in images"
           :key="index"
         >
-          <div class="img-content" :style="'background-image: url('+image.url+');'"></div>
+          <div class="img-content" :style="'background-image: url('+image+');'"></div>
         </li>
       </ul>
     </div>
