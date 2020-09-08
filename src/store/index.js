@@ -12,7 +12,8 @@ export default new Vuex.Store({
       follower_num: 0,
       followee_num: 0,
       upload_num: 0,
-    }
+    },
+    me: {}
   },
   mutations: {
     // 页面刷新时防止信息丢失可以掉用本地存储获取用户信息
@@ -34,8 +35,13 @@ export default new Vuex.Store({
       // 清除状态
       state.user = {}
       // 清除本地存储
-      localStorage.clear()
-    }
+      localStorage.removeItem('user');
+      localStorage.removeItem('me');
+    },
+    mineInfo(state, info) {
+      state.me = info;
+      localStorage.setItem('me', JSON.stringify(state.me));
+    },
   },
   actions: {
   },

@@ -71,13 +71,28 @@ export default {
   async mounted() {
     let usid;
     if (this.$route.params.usid) {
-      usid = this.$route.params.usid;
+      usid = Number.parseInt(this.$route.params.usid);
     } else if (this.$store.state.user.usid) {
       usid = this.$store.state.user.usid;
     } else {
       this.$message.error("用户信息有误");
       return;
     }
+
+    if (usid === this.$store.state.me.usid) {
+      this.form = this.origin = {
+        usid: this.$store.state.me.usid,
+        nickname: this.$store.state.me.nickname,
+        avatar: this.$store.state.me.avatar,
+        gender: this.$store.state.me.gender,
+        signature: this.$store.state.me.signature,
+        birthday: new Date(this.$store.state.me.birthday * 1000),
+        email: this.$store.state.me.email,
+      };
+      this.pic = this.$store.state.me.avatar;
+      return;
+    }
+
     try {
       let res = await userInfo(usid);
       res = res.data;
@@ -92,6 +107,8 @@ export default {
           email: res.data.email,
         };
         this.pic = res.data.avatar;
+      } else {
+        this.$message.error("网络错误: " + res.status);
       }
     } catch (e) {
       this.$message.error("网络错误: " + e.response.data.status);
@@ -112,7 +129,7 @@ export default {
     },
     // 将头像显示
     handleChange(e) {
-      console.log(e);
+      // console.log(e);
       let $target = e.target || e.srcElement;
       let file = $target.files[0];
       this.preview(file);
@@ -121,7 +138,7 @@ export default {
     preview(file) {
       var reader = new FileReader();
       reader.onload = (ev) => {
-        console.log(ev);
+        // console.log(ev);
         let res = ev.target || ev.srcElement;
         this.pic = res.result;
       };

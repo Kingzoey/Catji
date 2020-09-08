@@ -30,14 +30,14 @@ export default {
       on: 0,
       tablist: [
         {
-          name: "我的粉丝",
-          iconname: "child",
-          tab: () => import("@/components/FanList.vue"),
-        },
-        {
           name: "我的关注",
           iconname: "heart",
           tab: () => import("@/components/FolList.vue"),
+        },
+        {
+          name: "我的粉丝",
+          iconname: "child",
+          tab: () => import("@/components/FanList.vue"),
         },
       ],
     };

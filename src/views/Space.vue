@@ -9,7 +9,7 @@
           </div>
           <div class="name">{{displayUser.nickname}}</div>
           <div class="stat clearfix">
-            <router-link class="stat-item" :to="'/space/' + usid + '/fan'">
+            <router-link class="stat-item" :to="'/space/' + usid + '/fol'">
               <p class="stat-number">{{displayUser.followee_num}}</p>
               <p class="stat-label">关注</p>
             </router-link>
@@ -65,8 +65,6 @@ export default {
         .indexOf(this.$route.params.sub),
       0
     );
-    // console.log(this.usid);
-    // console.log(this.subpage);
   },
   async mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -79,6 +77,9 @@ export default {
       res = res.data;
       if (res.status == "ok") {
         this.displayUser = { ...res.data };
+        this.$store.commit("mineInfo", res.data);
+      } else {
+        this.$message.error("网络错误: " + res.status);
       }
     } catch (e) {
       this.$message.error("网络错误: " + e.response.data.status);
