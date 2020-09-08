@@ -56,11 +56,11 @@ export const follow = (usid) => axios.post('/api/follows/follow', {
 });
 
 export const followers = (usid, page) => axios.get('/api/follows/followers', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
 
 export const followings = (usid, page) => axios.get('/api/follows/following', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
 
 // /**

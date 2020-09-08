@@ -11,15 +11,15 @@
           <div class="stat clearfix">
             <router-link class="stat-item" :to="'/space/' + usid + '/fol'">
               <p class="stat-number">{{displayUser.followee_num}}</p>
-              <p class="stat-label">关注</p>
+              <p class="stat-label" :class="{on: tablist[subpage].subpath=='fol'}">关注</p>
             </router-link>
             <router-link class="stat-item" :to="'/space/' + usid + '/fan'">
               <p class="stat-number">{{displayUser.follower_num}}</p>
-              <p class="stat-label">粉丝</p>
+              <p class="stat-label" :class="{on: tablist[subpage].subpath=='fan'}">粉丝</p>
             </router-link>
             <router-link class="stat-item" :to="'/space/' + usid + '/blog'">
               <p class="stat-number">{{displayUser.upload_num}}</p>
-              <p class="stat-label">动态</p>
+              <p class="stat-label" :class="{on: tablist[subpage].subpath=='blog'}">动态</p>
             </router-link>
           </div>
         </div>
@@ -29,7 +29,7 @@
               <li
                 class="tab-item"
                 :class="{on:index==subpage}"
-                v-if="tab.showInList"
+                v-if="tab.show() && tab.showInList()"
                 :key="tab.subpath"
               >
                 <a href="javascript:void(0);" @click="direct(index)">
@@ -73,7 +73,6 @@ export default {
       this.$message.error("用户信息有误");
       return;
     }
-
     this.$store.commit("cacheGetMineInfo", (res) => {
       this.displayUser = { ...res };
     });
@@ -125,63 +124,72 @@ export default {
           name: "欢迎",
           iconname: "smile",
           tab: () => import("@/subviews/Test.vue"),
-          showInList: true,
+          show: () => true,
+          showInList: () => true,
         },
         {
           subpath: "info",
           name: "个人资料",
           iconname: "edit",
           tab: () => import("@/subviews/MineInfo.vue"),
-          showInList: true,
+          show: () => this.usid == this.$store.state.user.usid,
+          showInList: () => true,
         },
         {
           subpath: "blog",
           name: "个人动态",
           iconname: "blog",
           tab: () => import("@/subviews/MyBlog.vue"),
-          showInList: true,
+          show: () => true,
+          showInList: () => true,
         },
         {
           subpath: "fol",
           name: "关注列表",
           iconname: "list",
           tab: () => import("@/subviews/FolList.vue"),
-          showInList: false,
+          show: () => true,
+          showInList: () => false,
         },
         {
           subpath: "fan",
           name: "粉丝列表",
           iconname: "list",
           tab: () => import("@/subviews/FanList.vue"),
-          showInList: false,
+          show: () => true,
+          showInList: () => false,
         },
         {
           subpath: "favorite",
           name: "我的收藏",
           iconname: "folder",
           tab: () => import("@/subviews/FavList.vue"),
-          showInList: true,
+          show: () => true,
+          showInList: () => true,
         },
         {
           subpath: "history",
           name: "观看历史",
           iconname: "history",
           tab: () => import("@/subviews/HistoryBlock.vue"),
-          showInList: true,
+          show: () => true,
+          showInList: () => true,
         },
         {
           subpath: "upload",
           name: "投稿管理",
           iconname: "upload",
           tab: () => import("@/subviews/UploadList.vue"),
-          showInList: true,
+          show: () => true,
+          showInList: () => true,
         },
         {
           subpath: "stat",
           name: "数据中心",
           iconname: "rocket",
           tab: () => import("@/subviews/Stat.vue"),
-          showInList: true,
+          show: () => true,
+          showInList: () => true,
         },
       ],
       displayUser: {
@@ -292,6 +300,11 @@ export default {
   font-size: 16px;
   color: #99a2aa;
   padding-top: 9px;
+}
+
+.stat-label.on,
+.stat-label:hover {
+  color: pink;
 }
 
 .tab {
