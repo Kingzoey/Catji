@@ -1,3 +1,7 @@
+// 
+// 9.8 这个二级嵌套很不方便路由
+// 暂时没用到
+// 
 <template>
   <div>
     <div class="container">
@@ -32,12 +36,12 @@ export default {
         {
           name: "我的关注",
           iconname: "heart",
-          tab: () => import("@/components/FolList.vue"),
+          tab: () => import("@/subviews/FolList.vue"),
         },
         {
           name: "我的粉丝",
           iconname: "child",
-          tab: () => import("@/components/FanList.vue"),
+          tab: () => import("@/subviews/FanList.vue"),
         },
       ],
     };

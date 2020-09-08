@@ -25,17 +25,19 @@
         </div>
         <div class="tab">
           <ul>
-            <li
-              class="tab-item"
-              :class="{on:index==subpage}"
-              v-for="(tab, index) in tablist"
-              :key="tab.name"
-            >
-              <a href="javascript:void(0);" @click="direct(index)">
-                <font-awesome-icon :icon="['fas', tab.iconname]" />
-                {{tab.name}}
-              </a>
-            </li>
+            <template v-for="(tab, index) in tablist">
+              <li
+                class="tab-item"
+                :class="{on:index==subpage}"
+                v-if="tab.showInList"
+                :key="tab.subpath"
+              >
+                <a href="javascript:void(0);" @click="direct(index)">
+                  <font-awesome-icon :icon="['fas', tab.iconname]" />
+                  {{tab.name}}
+                </a>
+              </li>
+            </template>
           </ul>
         </div>
       </div>
@@ -60,7 +62,7 @@ export default {
       null;
     this.subpage = Math.max(
       this.tablist
-        .map((tabitem) => tabitem.subname)
+        .map((tabitem) => tabitem.subpath)
         .indexOf(this.$route.params.sub),
       0
     );
@@ -87,7 +89,7 @@ export default {
     this.usid =
       Number.parseInt(to.params.usid) || this.$store.state.user.usid || null;
     this.subpage = Math.max(
-      this.tablist.map((tabitem) => tabitem.subname).indexOf(to.params.sub),
+      this.tablist.map((tabitem) => tabitem.subpath).indexOf(to.params.sub),
       0
     );
     next();
@@ -104,7 +106,7 @@ export default {
       }
     },
     direct(index) {
-      var to = "/space/" + this.usid + "/" + this.tablist[index].subname;
+      var to = "/space/" + this.usid + "/" + this.tablist[index].subpath;
       if (this.$route.path != to) {
         this.$router.push({
           path: to,
@@ -119,52 +121,67 @@ export default {
       leftPanelTop: 0,
       tablist: [
         {
-          subname: "welcome",
+          subpath: "welcome",
           name: "欢迎",
           iconname: "smile",
           tab: () => import("@/subviews/Test.vue"),
+          showInList: true,
         },
         {
-          subname: "info",
+          subpath: "info",
           name: "个人资料",
           iconname: "edit",
           tab: () => import("@/subviews/MineInfo.vue"),
+          showInList: true,
         },
         {
-          subname: "blog",
+          subpath: "blog",
           name: "个人动态",
           iconname: "blog",
           tab: () => import("@/subviews/MyBlog.vue"),
+          showInList: true,
         },
         {
-          subname: "fan",
-          name: "关注 / 粉丝列表",
+          subpath: "fol",
+          name: "关注列表",
           iconname: "list",
-          tab: () => import("@/subviews/Fan&Fol.vue"),
+          tab: () => import("@/subviews/FolList.vue"),
+          showInList: false,
         },
         {
-          subname: "favorite",
+          subpath: "fan",
+          name: "粉丝列表",
+          iconname: "list",
+          tab: () => import("@/subviews/FanList.vue"),
+          showInList: false,
+        },
+        {
+          subpath: "favorite",
           name: "我的收藏",
           iconname: "folder",
           tab: () => import("@/subviews/FavList.vue"),
+          showInList: true,
         },
         {
-          subname: "history",
+          subpath: "history",
           name: "观看历史",
           iconname: "history",
           tab: () => import("@/subviews/HistoryBlock.vue"),
+          showInList: true,
         },
         {
-          subname: "upload",
+          subpath: "upload",
           name: "投稿管理",
           iconname: "upload",
           tab: () => import("@/subviews/UploadList.vue"),
+          showInList: true,
         },
         {
-          subname: "stat",
+          subpath: "stat",
           name: "数据中心",
           iconname: "rocket",
           tab: () => import("@/subviews/Stat.vue"),
+          showInList: true,
         },
       ],
       displayUser: {
