@@ -14,6 +14,7 @@ export default {
       res = res.data;
       if (res.status === "ok") {
         this.$store.commit("login", res.data);
+        this.$message.info("欢迎用户 " + res.data.nickname + " 回到 Catji");
       } else {
         this.$store.commit("logout");
       }
