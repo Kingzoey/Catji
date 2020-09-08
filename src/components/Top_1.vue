@@ -109,7 +109,7 @@ export default {
         var res = await hotTag();
         res = res.data;
         if (res.status === "ok") {
-          this.nekoHotList = res.data;
+          this.tagHotList = res.data;
         } else {
           this.$message.error("网络错误: " + res.status);
         }

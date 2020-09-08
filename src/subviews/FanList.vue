@@ -1,41 +1,40 @@
 <template>
-  <div class="recom-wrap">
-    <div class="header">
-      <div class="title">
-        <span class="tc-black">
-          <font-awesome-icon :icon="['fas', 'cat']" />&nbsp;&nbsp;猫猫推荐
-          <!-- 🐱 -->
-        </span>
+  <div class="live-panel">
+    <div class="live-up-list">
+      <div class="live-panel-item live-up" style="margin-bottom: 20px;" v-if="dataList.length==0">
+        <router-link
+          to="/"
+          class="live-up-img"
+          style="background-image: url('//static.hdslb.com/images/member/noface.gif');"
+        ></router-link>
+        <router-link to="/" class="live-detail ls-0">
+          <div class="up-name line-clamp-1">竟然一个粉丝都没有</div>
+          <div class="live-name line-clamp-2">去首页看看吧</div>
+        </router-link>
       </div>
-      <!-- 我们好像没有地方可以跳转... -->
-      <router-link to="/" class="more tc-slate" style="line-height: 23px;">
-        <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;更多
-      </router-link>
-    </div>
-    <div class="recom-up-list">
       <div
-        class="recom-wrap-item"
+        class="live-panel-item live-up"
         style="margin-bottom: 20px;"
         v-for="item in dataList"
         :key="item.usid"
       >
         <router-link
           :to="/space/ + item.usid"
-          class="recom-up-img"
+          class="live-up-img"
           :style="'background-image: url(' + item.avatar + ');'"
         ></router-link>
-        <router-link :to="/space/ + item.usid" class="recom-detail">
-          <div class="up-name">{{item.name}}</div>
-          <div>{{item.signature}}</div>
+        <router-link :to="/space/ + item.usid" class="live-detail ls-0">
+          <div class="up-name line-clamp-1">{{item.nickname}}</div>
+          <div class="live-name line-clamp-2">{{item.signature}}</div>
         </router-link>
+        <el-button type="danger" style="margin: auto 10px auto auto;" @click="cancelFollow">取消关注</el-button>
       </div>
-      <br />
     </div>
   </div>
 </template>
 
 <script>
-import { hotUser } from "../api";
+import { followings } from "../api";
 export default {
   data() {
     return {
@@ -43,10 +42,14 @@ export default {
     };
   },
   async mounted() {
+    let usid = this.$route.params.usid;
+    if (!usid) {
+      this.$message.error("用户信息错误");
+      return;
+    }
     try {
-      let res = await hotUser();
+      let res = await followings(usid);
       res = res.data;
-      console.log(res);
       if (res.status === "ok") {
         this.dataList = res.data;
       } else {
@@ -56,7 +59,6 @@ export default {
       this.$message.error("网络错误: " + e.response.data.status);
     }
   },
-  methods: {},
 };
 </script>
 
@@ -65,14 +67,14 @@ export default {
   flex: 1;
 }
 
-.recom-wrap {
+.live-panel {
   background-color: white;
   border-radius: 4px;
-  margin-top: 8px;
-  padding: 5px;
+  margin-top: 5px;
+  margin-left: 8px;
 }
 
-.recom-up-img {
+.live-panel-item .live-up-img {
   display: block;
   width: 38px;
   height: 38px;
@@ -88,25 +90,44 @@ export default {
   border: 1px solid #fff;
 }
 
-.recom-wrap-item:first-child {
+.live-panel-item:first-child {
   margin-top: 10px;
 }
 
-.recom-wrap-item {
+.live-panel-item {
   display: block;
   position: relative;
   margin-left: 16px;
   height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.recom-wrap .title {
-  font-size: 16px;
+.live-panel-item {
+  display: block;
+  position: relative;
+  margin-left: 16px;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
-.more-button .more {
+.live-panel-item:first-child {
+  margin-top: 10px;
+}
+
+.live-panel .title {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.live-panel .more-button .more {
   font-size: 12px;
   letter-spacing: 0;
 }
@@ -119,7 +140,7 @@ export default {
   color: #99a2aa;
 }
 
-.recom-detail .up-name {
+.live-panel-item .live-detail .up-name {
   font-size: 14px;
   line-height: 20px;
   word-break: break-all;
@@ -131,8 +152,12 @@ export default {
   font-weight: bold;
 }
 
-.recom-detail :hover {
+.live-detail :hover {
   color: cornflowerblue;
+}
+
+.up-name:hover {
+  color: pink;
 }
 
 .tc-black svg {
@@ -145,23 +170,18 @@ export default {
   font-weight: bold;
 }
 
-.up-name:hover {
-  color: pink;
+.more-button {
+  display: block;
+  position: relative;
+  left: 175px;
 }
 
-.more {
+.more tc-slate {
   display: block;
   float: right;
 }
 
 .more-button :hover {
   color: pink;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  margin: 5px;
 }
 </style>

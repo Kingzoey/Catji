@@ -45,6 +45,11 @@ export const videoInfo = (vid) => axios.get('/api/videos/info', {
 
 export const userInfo = (usid) => axios.get('/api/users/info', {
     params: { usid }
+}).then(res => {
+    if (res.data.status === 'ok') {
+        res.data.data.birthday = new Date(res.data.data.birthday * 1000);
+    }
+    return res;
 });
 
 export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
@@ -56,11 +61,11 @@ export const follow = (usid) => axios.post('/api/follows/follow', {
 });
 
 export const followers = (usid, page) => axios.get('/api/follows/followers', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
 
 export const followings = (usid, page) => axios.get('/api/follows/following', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
 
 // /**
@@ -86,8 +91,12 @@ export const followings = (usid, page) => axios.get('/api/follows/following', {
  */
 export const updateInfo = (params) => {
     var formdata = new FormData();
-    for (const param in params) {
-        formdata.append(param, params[param]);
+    for (const key in params) {
+        if (key === 'birthday') {
+            formdata.append(key, params[key] / 1000);
+        } else {
+            formdata.append(key, params[key]);
+        }
     }
     return axios.post('/api/users/updateinfo', formdata);
 }
@@ -133,11 +142,17 @@ export const blogContent = (only_cat) => axios.get('/api/blogs/content', {
 });
 
 /**
- * @param {HTMLFormElement} formdata 
+ * 上传动态
+ * @param {String} content - 动态内容
+ * @param {Blob[]} images - 附带图片(<=9)
+ * @param {bool} is_public - 是否公开
  */
-export const postBlog = (formdata) => {
-    // 这里不太确定
-    return axios.post('/api/blogs/release', formdata);
+export const postBlog = (content, images, is_public) => {
+    var formData = new FormData();
+    formData.append('content', content);
+    images.forEach(image => formData.append('images', image));
+    formData.uploadVideo('is_public', is_public);
+    return axios.post('/api/blogs/release', formData);
 };
 
 export const searchVideo = (keyword, page) => axios.get('/api/videos/search', {

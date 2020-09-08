@@ -176,7 +176,6 @@ export default {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
-  float: right;
 }
 .headline :hover {
   color:orange;

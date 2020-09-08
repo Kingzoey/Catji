@@ -1,6 +1,6 @@
 <template>
   <div class="userlistt">
-  <NavBar2></NavBar2>
+    <NavBar2></NavBar2>
     <UserListt style="background-color: #fbfbfb;"></UserListt>
   </div>
 </template>

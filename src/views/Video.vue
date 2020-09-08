@@ -124,7 +124,7 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
-import { videoInfo } from "../api";
+import { videoInfo } from "@/api";
 export default {
   name: "Video",
   components: {
@@ -152,6 +152,7 @@ export default {
       this.$message.error("网络错误: " + e.response.data.status);
     }
   },
+
   data() {
     return {
       expand: false, // 视频描述部分的"展开"按钮

@@ -1,6 +1,6 @@
 <template>
   <div class="mine-Info">
-    <el-form ref="form" :model="form" label-width="100px">
+    <el-form label-width="100px">
       <div class="item_block head_p">
         <div class="head_img">
           <img :src="pic" width="30" height="30" />
@@ -65,43 +65,58 @@
 </template>
 
 <script>
-import { userInfo, updateInfo } from "../api";
+import { updateInfo } from "../api";
 export default {
   name: "Middle",
   async mounted() {
-    let usid;
-    if (this.$route.params.usid) {
-      usid = this.$route.params.usid;
-    } else if (this.$store.state.user.usid) {
-      usid = this.$store.state.user.usid;
-    } else {
-      this.$message.error("用户信息有误");
-      return;
-    }
-    try {
-      let res = await userInfo(usid);
-      res = res.data;
-      if (res.status === "ok") {
-        this.form = this.origin = {
-          usid: res.data.usid,
-          nickname: res.data.nickname,
-          avatar: res.data.avatar,
-          gender: res.data.gender,
-          signature: res.data.signature,
-          birthday: new Date(res.data.birthday * 1000),
-          email: res.data.email,
-        };
-        this.pic = res.data.avatar;
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.response.data.status);
-    }
+    // let usid;
+    // if (this.$route.params.usid) {
+    //   usid = Number.parseInt(this.$route.params.usid);
+    // } else if (this.$store.state.user.usid) {
+    //   usid = this.$store.state.user.usid;
+    // } else {
+    //   this.$message.error("用户信息有误");
+    //   return;
+    // }
+
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (me) => {
+        this.form = me;
+        this.pic = me.avatar;
+        this.origin = JSON.stringify(me);
+      },
+      onFailed: (e) => {
+        this.$message.error("网络错误: " + e.response.data.status);
+      },
+    });
+    return;
+
+    // try {
+    //   let res = await userInfo(usid);
+    //   res = res.data;
+    //   if (res.status === "ok") {
+    //     this.form = this.origin = {
+    //       usid: res.data.usid,
+    //       nickname: res.data.nickname,
+    //       avatar: res.data.avatar,
+    //       gender: res.data.gender,
+    //       signature: res.data.signature,
+    //       birthday: new Date(res.data.birthday * 1000),
+    //       email: res.data.email,
+    //     };
+    //     this.pic = res.data.avatar;
+    //   } else {
+    //     this.$message.error("网络错误: " + res.status);
+    //   }
+    // } catch (e) {
+    //   this.$message.error("网络错误: " + e.response.data.status);
+    // }
   },
   data() {
     return {
-      origin: {},
+      origin: "",
       form: {},
-      pic: "",
+      pic: "", // 预览用
     };
   },
 
@@ -112,7 +127,6 @@ export default {
     },
     // 将头像显示
     handleChange(e) {
-      console.log(e);
       let $target = e.target || e.srcElement;
       let file = $target.files[0];
       this.preview(file);
@@ -121,28 +135,49 @@ export default {
     preview(file) {
       var reader = new FileReader();
       reader.onload = (ev) => {
-        console.log(ev);
         let res = ev.target || ev.srcElement;
         this.pic = res.result;
       };
       reader.readAsDataURL(file);
     },
     async onSubmit() {
+      let diff = {};
+      let origin = JSON.parse(this.origin);
+      origin.birthday = new Date(origin.birthday);
+
+      for (const key in this.form) {
+        let oldValue = origin[key];
+        let newValue = this.form[key];
+        if (oldValue instanceof Date) {
+          if (+newValue !== +oldValue) {
+            diff[key] = newValue;
+          }
+        } else if (newValue !== oldValue) {
+          diff[key] = newValue;
+        }
+      }
+
+      if (Object.entries(diff).length === 0) {
+        this.$message.info("没有要更新的内容");
+        return;
+      }
+
       try {
-        let res = await updateInfo({
-          avatar: this.form.avatar,
-          usid: this.form.usid,
-          nickname: this.form.nickname,
-          gender: this.form.gender,
-          signature: this.form.signature,
-          birthday: Math.floor(this.form.birthday / 1000),
-          email: this.form.email,
-          password: this.form.password,
-        });
+        let res = await updateInfo(diff);
         res = res.data;
         if (res.status === "ok") {
-          this.origin = { ...this.form };
           this.$message.info("更新完成");
+          this.$store.commit("cacheGetMineInfo", {
+            onSuccess: (me) => {
+              this.origin = JSON.stringify(me);
+              this.form = me;
+              this.pic = me.avatar;
+            },
+            onFailed: (e) => {
+              this.$message.error("网络错误: " + e.response.data.status);
+            },
+            noCache: true,
+          });
         } else {
           this.$message.error("网络错误: " + res.status);
         }
@@ -151,8 +186,8 @@ export default {
       }
     },
     onReset() {
-      this.form = { ...this.origin };
-      this.pic = this.origin.avatar;
+      this.form = JSON.parse(this.origin);
+      this.pic = this.form.avatar;
     },
   },
 };
