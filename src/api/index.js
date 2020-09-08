@@ -151,7 +151,7 @@ export const postBlog = (content, images, is_public) => {
     var formData = new FormData();
     formData.append('content', content);
     images.forEach(image => formData.append('images', image));
-    formData.append('is_public', is_public);
+    formData.append('is_public', (is_public ? 1 : 0));
     return axios.post('/api/blogs/release', formData);
 };
 
