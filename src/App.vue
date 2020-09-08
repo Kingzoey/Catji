@@ -10,6 +10,7 @@ export default {
   name: "app",
   async created() {
     try {
+      // 用cookie尝试登录
       var res = await loginInfo();
       res = res.data;
       if (res.status === "ok") {
@@ -19,6 +20,7 @@ export default {
         this.$store.commit("logout");
       }
     } catch (e) {
+      // 失败说明cookie过期
       this.$store.commit("logout");
     }
   },

@@ -48,7 +48,6 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import { userInfo } from "../api";
 export default {
   name: "Space",
   components: {
@@ -72,18 +71,10 @@ export default {
       this.$message.error("用户信息有误");
       return;
     }
-    try {
-      let res = await userInfo(this.usid);
-      res = res.data;
-      if (res.status == "ok") {
-        this.displayUser = { ...res.data };
-        this.$store.commit("mineInfo", res.data);
-      } else {
-        this.$message.error("网络错误: " + res.status);
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.response.data.status);
-    }
+
+    this.$store.commit("cacheGetMineInfo", (res) => {
+      this.displayUser = { ...res };
+    });
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -131,49 +122,49 @@ export default {
           subname: "welcome",
           name: "欢迎",
           iconname: "smile",
-          tab: () => import("@/views/Test.vue"),
+          tab: () => import("@/subviews/Test.vue"),
         },
         {
           subname: "info",
           name: "个人资料",
           iconname: "edit",
-          tab: () => import("@/components/MineInfo.vue"),
+          tab: () => import("@/subviews/MineInfo.vue"),
         },
         {
           subname: "blog",
           name: "个人动态",
           iconname: "blog",
-          tab: () => import("@/views/MyBlog.vue"),
+          tab: () => import("@/subviews/MyBlog.vue"),
         },
         {
           subname: "fan",
           name: "关注 / 粉丝列表",
           iconname: "list",
-          tab: () => import("@/components/Fan&Fol.vue"),
+          tab: () => import("@/subviews/Fan&Fol.vue"),
         },
         {
           subname: "favorite",
           name: "我的收藏",
           iconname: "folder",
-          tab: () => import("@/components/FavList.vue"),
+          tab: () => import("@/subviews/FavList.vue"),
         },
         {
           subname: "history",
           name: "观看历史",
           iconname: "history",
-          tab: () => import("@/components/HistoryBlock.vue"),
+          tab: () => import("@/subviews/HistoryBlock.vue"),
         },
         {
           subname: "upload",
           name: "投稿管理",
           iconname: "upload",
-          tab: () => import("@/components/UploadList.vue"),
+          tab: () => import("@/subviews/UploadList.vue"),
         },
         {
           subname: "stat",
           name: "数据中心",
           iconname: "rocket",
-          tab: () => import("@/views/Login.vue"),
+          tab: () => import("@/subviews/Stat.vue"),
         },
       ],
       displayUser: {

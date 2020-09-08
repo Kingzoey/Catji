@@ -1,36 +1,36 @@
 <template>
   <div class="content" style>
-    <div class="user-pic" style="background-image"></div>
+    <div class="user-pic"></div>
     <div class="name-test">
       <router-link
         class="user-name tc-black c-pointer"
-        :to="'/space/' + this.user.usid"
-      >{{this.user.nickname}}</router-link>
+        :to="'/space/' + user.usid"
+      >{{user.nickname}}</router-link>
     </div>
     <div class="bottom">
-      <router-link class="number-part c-pointer f-left" :to="'/space/' + this.user.usid + '/fol'">
-        <p class="numbersa fs-14">{{this.user.follow_num}}</p>
-        <span class="icon-info-router-link">
+      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/fol'">
+        <p class="numbersa fs-14">{{user.followee_num}}</p>
+        <span class="icon-info-a">
           <font-awesome-icon :icon="['fas', 'heart']" />&nbsp;
         </span>
         <p class="texta tc-slate fs-12 ls-0">关注</p>
       </router-link>
-      <router-link class="number-part c-pointer f-left" :to="'/space/' + this.user.usid + '/fol'">
-        <p class="numbersb fs-14">{{this.user.fan_num}}</p>
+      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/fan'">
+        <p class="numbersb fs-14">{{user.follower_num}}</p>
         <span class="icon-info-b">
           <font-awesome-icon :icon="['fas', 'heart']" />&nbsp;
         </span>
         <p class="textb tc-slate fs-12 ls-0">粉丝</p>
       </router-link>
-      <router-link class="number-part c-pointer f-left" :to="'/space/' + this.user.usid + '/fol'">
-        <p class="numbersc fs-14">{{this.user.blog_num}}</p>
+      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/upload'">
+        <p class="numbersc fs-14">{{user.upload_num}}</p>
         <span class="icon-info-c">
           <font-awesome-icon :icon="['fas', 'blog']" />&nbsp;
         </span>
-        <p class="textc tc-slate fs-12 ls-0">动态</p>
+        <p class="textc tc-slate fs-12 ls-0">投稿</p>
       </router-link>
     </div>
-    <img src="../assets/Cat_example.jpg" class="user-head c-pointer" />
+    <img :src="user.avatar" class="user-head c-pointer" />
   </div>
 </template>
 
@@ -43,19 +43,23 @@ export default {
         usid: 0,
         nickname: "获取中...",
         avatar: "",
-        follow_num: 0,
-        fan_num: 0,
-        blog_num: 0,
+        followee_num: 0,
+        follower_num: 0,
+        upload_num: 0,
       },
     };
   },
   mounted() {
+    console.log("userinfo mounted");
     var usid = this.$store.state.user.usid;
     if (!usid) {
       this.$message.error("用户未登录");
       return;
     }
-    this.user = { ...this.$store.state.user };
+    this.$store.commit("cacheGetMineInfo", (res) => {
+      this.user = { ...res };
+      console.log(res);
+    });
   },
 };
 </script>

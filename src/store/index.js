@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { userInfo } from '../api';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -16,31 +17,45 @@ export default new Vuex.Store({
     me: {}
   },
   mutations: {
-    // 页面刷新时防止信息丢失可以掉用本地存储获取用户信息
-    loadUser(state) {
-      let user = localStorage.getItem('user')
-      if (user) {
-        state.user = JSON.parse(user)
-      }
-    },
+    // // 页面刷新时防止信息丢失可以掉用本地存储获取用户信息
+    // loadUser(state) {
+    //   let user = localStorage.getItem('user')
+    //   if (user) {
+    //     state.user = JSON.parse(user)
+    //   }
+    // },
     // 登录
     login(state, user) {
       // 保存登录状态
       state.user = user
       // 存储到本地存储
-      localStorage.setItem('user', JSON.stringify(state.user))
+      // localStorage.setItem('user', JSON.stringify(state.user))
     },
     // 退出登录
     logout(state) {
       // 清除状态
       state.user = {}
       // 清除本地存储
-      localStorage.removeItem('user');
-      localStorage.removeItem('me');
+      // localStorage.removeItem('user');
+      // localStorage.removeItem('me');
     },
-    mineInfo(state, info) {
-      state.me = info;
-      localStorage.setItem('me', JSON.stringify(state.me));
+    cacheGetMineInfo(state, onSuccess, onFailed) {
+      if (state.me.usid) {
+        onSuccess(state.me);
+      } else {
+        userInfo(state.user.usid)
+          .then(res => {
+            res = res.data;
+            if (res.status === "ok") {
+              state.me = res.data;
+              // localStorage.setItem('me', JSON.stringify(res.data));
+              onSuccess(state.me);
+            } else {
+              onFailed(res);
+            }
+          })
+          .catch(onFailed)
+      }
     },
   },
   actions: {
