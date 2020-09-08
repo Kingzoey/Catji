@@ -1,5 +1,5 @@
 <template>
-  <div class="content" style>
+  <div class="content">
     <div class="user-pic"></div>
     <div class="name-test">
       <router-link
@@ -58,7 +58,6 @@ export default {
     this.$store.commit("cacheGetMineInfo", {
       onSuccess: (res) => {
         this.user = { ...res };
-        console.log(res);
       },
     });
   },
@@ -84,6 +83,7 @@ export default {
   position: relative;
   background-color: white;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .content .user-pic {

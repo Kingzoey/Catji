@@ -124,51 +124,33 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
-import {videoInfo} from "@/api";
+import { videoInfo } from "@/api";
 export default {
   name: "Video",
   components: {
     NavBar,
     VideoComment,
   },
-  beforeMount() {
-    console.log(this.$route.params.vid);
-    videoInfo(100000)
-        .then(res=>{
-          if(res.status==='ok'){
-              this.videoInfo = res.data;
-          }else{
-            console.log('请求错误, 错误信息: ' + res.status);
-          }
-        })
-        .catch(err=>{
-          console.log('请求失败了');
-          console.log(err);}
-        )
-    videoInfo(100001)
-        .then(res=>{
-          if(res.status==='ok'){
-              this.videoInfo = res.data;
-          }else{
-            console.log('请求错误, 错误信息: ' + res.status);
-          }
-        })
-        .catch(err=>{
-          console.log('请求失败了');
-          console.log(err);}
-        )
-    videoInfo(100002)
-        .then(res=>{
-          if(res.status==='ok'){
-              this.videoInfo = res.data;
-          }else{
-            console.log('请求错误, 错误信息: ' + res.status);
-          }
-        })
-        .catch(err=>{
-          console.log('请求失败了');
-          console.log(err);}
-        )
+  async mounted() {
+    let vid = this.$route.params.vid;
+    if (!vid) {
+      this.$message.error("视频信息错误");
+      return;
+    }
+
+    try {
+      let res = await videoInfo(vid);
+      res = res.data;
+      if (res.status === "ok") {
+        this.video = { ...res.data };
+        this.playerOptions.sources[0].src = this.video.url;
+        this.playerOptions.poster = this.video.cover;
+      } else {
+        this.$message.error("网络错误: " + res.status);
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.response.data.status);
+    }
   },
 
   data() {
