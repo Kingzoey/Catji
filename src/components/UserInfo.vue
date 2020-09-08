@@ -50,7 +50,6 @@ export default {
     };
   },
   mounted() {
-    console.log("userinfo mounted");
     var usid = this.$store.state.user.usid;
     if (!usid) {
       this.$message.error("用户未登录");
