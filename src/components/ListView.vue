@@ -3,9 +3,8 @@
     <ul>
       <li class="user-item" v-for="user in users" :key="user.usid">
         <div class="all-up">
-          <div >
-
-            <div class='left'>
+          <div>
+            <div class="left">
               <div class="up-face">
                 <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
                   <div class="lazy-img">
@@ -36,7 +35,7 @@
               </div>
             </div>
 
-             <div class='right'>
+            <div class="right">
               <div class="up-face">
                 <router-link :to="/space/ + user.usid" :title="user.name" class="face-img">
                   <div class="lazy-img">
@@ -66,8 +65,6 @@
                 <div class="desc">{{user.desc}}</div>
               </div>
             </div>
-
-
           </div>
         </div>
       </li>
@@ -119,9 +116,8 @@ export default {
 <style scoped>
 .all-up {
   padding-left: 0px;
-  
-  
-width:100%;
+
+  width: 100%;
 }
 
 .info-wrap {
@@ -142,28 +138,28 @@ width:100%;
   padding-left: 185px;
   opacity: 0.7;
 }
-.left{
- position: relative;
+.left {
+  position: relative;
   padding: 20px 0 20px 102px;
   background: aliceblue;
   border-radius: 30px;
   padding-left: 185px;
   opacity: 0.7;
-  float:left;
-  width:45%;
+  float: left;
+  width: 45%;
   border-bottom: 1px solid #c6d6ee;
   margin-top: 10px;
   margin-left: 20px;
 }
-.right{
- position: relative;
+.right {
+  position: relative;
   padding: 20px 0 20px 102px;
   background: aliceblue;
   border-radius: 30px;
   padding-left: 185px;
   opacity: 0.7;
-  float:right;
-  width:45%;
+  float: right;
+  width: 45%;
   border-bottom: 1px solid #c6d6ee;
   margin-top: 10px;
   margin-right: 20px;
@@ -236,7 +232,7 @@ width:100%;
 }
 .desc {
   margin-bottom: 14px;
-  width: 750px;
+  width: 544px;
   font-size: 12px;
   color: #292814;
   line-height: 16px;

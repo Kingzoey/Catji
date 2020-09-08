@@ -137,7 +137,7 @@ input {
   position: absolute;
   top: 0;
   background: url("../assets/test3.png") repeat;
-  height: 100%;
+  height: 110%;
   width: 100%;
   filter: blur(2px);
   background-size: cover;
