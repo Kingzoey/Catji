@@ -20,6 +20,8 @@ export const hotTag = () => axios.get('/api/tags/hotlist');
 
 export const hotUser = () => axios.get('/api/users/hotlist');
 
+export const hotCat = () => axios.get('/api/cats/hotlist');
+
 export const hotVideo = () => axios.get('/api/videos/hotlist');
 
 export const newVideo = () => axios.get('/api/videos/newlist');
@@ -43,6 +45,11 @@ export const videoInfo = (vid) => axios.get('/api/videos/info', {
 
 export const userInfo = (usid) => axios.get('/api/users/info', {
     params: { usid }
+}).then(res => {
+    if (res.data.status === 'ok') {
+        res.data.data.birthday = new Date(res.data.data.birthday * 1000);
+    }
+    return res;
 });
 
 export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
@@ -54,27 +61,45 @@ export const follow = (usid) => axios.post('/api/follows/follow', {
 });
 
 export const followers = (usid, page) => axios.get('/api/follows/followers', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
 
 export const followings = (usid, page) => axios.get('/api/follows/following', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
+
+// /**
+//  * @param {string|Blob} avatarFile 
+//  */
+// export const changeAvatar = (avatarFile) => {
+//     // 不知道能不能用, 谁来调试一下
+//     return axios.get('/api/users/changeavatar', formdata);
+// }
 
 /**
- * @param {string|Blob} avatarFile 
+ * @param {Object} params - 请求参数
+ * @param {Number} params.usid - 用户id
+ * @param {String} [params.email] - 用户邮箱
+ * @param {String} [params.tel] - 用户手机号
+ * @param {String} [params.nickname] - 用户名
+ * @param {String} [params.password] - 用户密码
+ * @param {String} [params.gender] - 男/女/?
+ * @param {Date} [params.birthday] - 用户生日
+ * @param {String} [params.signature] - 个性签名
+ * @param {Blob} [params.avatar] - 头像文件
+ * @param {String} [params.cat_id] - 绑定的猫Tag的id
  */
-export const changeAvatar = (avatarFile) => {
-    // 不知道能不能用, 谁来调试一下
+export const updateInfo = (params) => {
     var formdata = new FormData();
-    formdata.append('avatar', avatarFile);
-    return axios.get('/api/users/changeavatar', formdata);
+    for (const key in params) {
+        if (key === 'birthday') {
+            formdata.append(key, params[key] / 1000);
+        } else {
+            formdata.append(key, params[key]);
+        }
+    }
+    return axios.post('/api/users/updateinfo', formdata);
 }
-
-// 或许可以改成可选参数
-export const updateInfo = (usid, email, tel, nickname, password, gender, birthday, signature, cat_id) => axios.post('/api/users/updateinfo', {
-    usid, email, tel, nickname, password, gender, birthday, signature, cat_id
-});
 
 export const myFavorite = (page) => axios.get('/api/favorites/info', {
     params: { page: page || 0 }
@@ -117,11 +142,17 @@ export const blogContent = (only_cat) => axios.get('/api/blogs/content', {
 });
 
 /**
- * @param {HTMLFormElement} formdata 
+ * 上传动态
+ * @param {String} content - 动态内容
+ * @param {Blob[]} images - 附带图片(<=9)
+ * @param {bool} is_public - 是否公开
  */
-export const postBlog = (formdata) => {
-    // 这里不太确定
-    return axios.post('/api/blogs/release', formdata);
+export const postBlog = (content, images, is_public) => {
+    var formData = new FormData();
+    formData.append('content', content);
+    images.forEach(image => formData.append('images', image));
+    formData.uploadVideo('is_public', is_public);
+    return axios.post('/api/blogs/release', formData);
 };
 
 export const searchVideo = (keyword, page) => axios.get('/api/videos/search', {

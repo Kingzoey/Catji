@@ -10,18 +10,17 @@
           <div class="info-meta">
             <span class="meta-view" :title="video.view_num + '次播放'">{{video.view_num}}播放 ·</span>
             <span class="meta-comment" :title="video.comment_num + '条评论'">{{video.comment_num}}评论</span>
-            <span class="meta-time">{{video.upload_time}}</span>
+            <span class="meta-time">{{format(video.upload_time*1000,'yyyy-MM-dd')}}</span>
           </div>
         </div>
         <div class="player-warp">
-          <!-- <video-player
+          <video-player
             class="video-player-box"
             ref="videoPlayer"
             :options="playerOptions"
             :playsinline="true"
             customEventName="customstatechangedeventname"
-          ></video-player>-->
-          <!-- @play="onPlayerPlay($event)"
+            @play="onPlayerPlay($event)"
             @pause="onPlayerPause($event)"
             @ended="onPlayerEnded($event)"
             @waiting="onPlayerWaiting($event)"
@@ -31,7 +30,8 @@
             @canplay="onPlayerCanplay($event)"
             @canplaythrough="onPlayerCanplaythrough($event)"
             @statechanged="playerStateChanged($event)"
-          @ready="playerReadied"-->
+            @ready="playerReadied"
+          ></video-player>
         </div>
         <div class="toolbar">
           <span class="like" :title="video.like_num + '次点赞'">
@@ -175,30 +175,24 @@ export default {
     return {
       expand: false, // 视频描述部分的"展开"按钮
       video: {
-        vid: 100000,
-        title: "震惊！某上海985大学假期竟对学生做出这种要求",
-        desc:
-          "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-        cover: "//static.hdslb.com/images/member/noface.gif",
-        view_num: 9999,
-        comment_num: 9999,
-        upload_time: "2020-02-02 12:00:01",
-        url:
-          "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-        like_num: 8888,
-        favorite_num: 7777,
-        share_num: 6666,
-        tags: [
-          { name: "震惊", tag_id: 1 },
-          { name: "985", tag_id: 2 },
-          { name: "这是一个很长很长很长很长很长的tag", tag_id: 3 },
-        ],
+        vid: 0,
+        title: "加载中...",
+        desc: "加载中...",
+        cover: "",
+        view_num: 0,
+        comment_num: 0,
+        upload_time: 0,
+        url: "",
+        like_num: 0,
+        favorite_num: 0,
+        share_num: 0,
+        tags: [{ name: "加载中...", tag_id: 0 }],
         up: {
-          usid: 1,
-          name: "王小明",
-          desc: "21岁, 是学生",
-          follow_num: 9876,
-          avatar: "//static.hdslb.com/images/member/noface.gif",
+          usid: 0,
+          name: "加载中...",
+          desc: "加载中...",
+          follow_num: 0,
+          avatar: "",
         },
       },
       recs: [
@@ -261,15 +255,43 @@ export default {
         sources: [
           {
             // type: "video/mp4",
-            // src: this.video.url,
+            src: "",
           },
         ],
-        poster: "/static/images/author.jpg",
+        poster: "",
       },
     };
   },
   methods: {
-
+    format(timestamp, fmt) {
+      var date = new Date(timestamp);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds(), //毫秒
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+        }
+      }
+      return fmt;
+    },
   },
 };
 </script>

@@ -1,43 +1,71 @@
 <template>
   <div class="content" style>
-    <div class="user-pic" style="background-image"></div>
+    <div class="user-pic"></div>
     <div class="name-test">
-      <a
+      <router-link
         class="user-name tc-black c-pointer"
-        data-userinfo-popup-inited="true"
-        href="http://localhost:8080/"
-      >王大橘</a>
+        :to="'/space/' + user.usid"
+      >{{user.nickname}}</router-link>
     </div>
     <div class="bottom">
-      <a class="number-part c-pointer f-left" href="http://localhost:8080/">
-        <p class="numbersa fs-14">5</p>
-        <span class="icon-info-a"><font-awesome-icon :icon="['fas', 'heart']" />&nbsp;</span>
+      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/fol'">
+        <p class="numbersa fs-14">{{user.followee_num}}</p>
+        <span class="icon-info-a">
+          <font-awesome-icon :icon="['fas', 'heart']" />&nbsp;
+        </span>
         <p class="texta tc-slate fs-12 ls-0">关注</p>
-      </a>
-      <a class="number-part c-pointer f-left" href="http://localhost:8080/">
-        <p class="numbersb fs-14">2</p>
-        <span class="icon-info-b"><font-awesome-icon :icon="['fas', 'heart']" />&nbsp;</span>
+      </router-link>
+      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/fan'">
+        <p class="numbersb fs-14">{{user.follower_num}}</p>
+        <span class="icon-info-b">
+          <font-awesome-icon :icon="['fas', 'heart']" />&nbsp;
+        </span>
         <p class="textb tc-slate fs-12 ls-0">粉丝</p>
-      </a>
-      <a class="number-part c-pointer f-left" href="http://localhost:8080/">
-        <p class="numbersc fs-14">0</p>
-        <span class="icon-info-c"><font-awesome-icon :icon="['fas', 'blog']" />&nbsp;</span>
-        <p class="textc tc-slate fs-12 ls-0">动态</p>
-      </a>
+      </router-link>
+      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/upload'">
+        <p class="numbersc fs-14">{{user.upload_num}}</p>
+        <span class="icon-info-c">
+          <font-awesome-icon :icon="['fas', 'blog']" />&nbsp;
+        </span>
+        <p class="textc tc-slate fs-12 ls-0">投稿</p>
+      </router-link>
     </div>
-    <img
-      src="../assets/Cat_example.jpg"
-      class="user-head c-pointer"
-      data-userinfo-popup-inited="true"
-    />
+    <img :src="user.avatar" class="user-head c-pointer" />
   </div>
 </template>
 
 <script>
+export default {
+  name: "UserInfo",
+  data() {
+    return {
+      user: {
+        usid: 0,
+        nickname: "获取中...",
+        avatar: "",
+        followee_num: 0,
+        follower_num: 0,
+        upload_num: 0,
+      },
+    };
+  },
+  mounted() {
+    var usid = this.$store.state.user.usid;
+    if (!usid) {
+      this.$message.error("用户未登录");
+      return;
+    }
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (res) => {
+        this.user = { ...res };
+        console.log(res);
+      },
+    });
+  },
+};
 </script>
 
 <style scoped>
-
 .icon-info-a {
   color: pink;
 }
@@ -76,8 +104,8 @@
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
 }
 
-.name-test :hover{
-	color: pink;
+.name-test :hover {
+  color: pink;
 }
 
 .content .user-name :hover {

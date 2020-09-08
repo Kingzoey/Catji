@@ -1,13 +1,13 @@
 <template>
   <div class="page">
-	<NavBar />
+    <NavBar />
     <div class="container clearfix">
       <div class="left">
         <UserInfo class="userinfo" />
         <UListt />
       </div>
       <div class="right">
-        <BlogPublish /> 
+        <BlogPublish />
         <BlogCard />
       </div>
     </div>
@@ -45,7 +45,7 @@ export default {
 }
 .left {
   width: 244px;
-  float:left;
+  float: left;
 }
 .right {
   width: 900px;

@@ -5,42 +5,44 @@
       <div class="left" :style="{'position':'relative','top':leftPanelTop+'px'}">
         <div class="user">
           <div class="avatar">
-            <img :src="displayUser.avatar" alt />
+            <img :src="displayUser.avatar" />
           </div>
           <div class="name">{{displayUser.nickname}}</div>
           <div class="stat clearfix">
-            <a class="stat-item">
+            <router-link class="stat-item" :to="'/space/' + usid + '/fol'">
               <p class="stat-number">{{displayUser.followee_num}}</p>
-              <p class="stat-label">关注</p>
-            </a>
-            <a class="stat-item">
+              <p class="stat-label" :class="{on: tablist[subpage].subpath=='fol'}">关注</p>
+            </router-link>
+            <router-link class="stat-item" :to="'/space/' + usid + '/fan'">
               <p class="stat-number">{{displayUser.follower_num}}</p>
-              <p class="stat-label">粉丝</p>
-            </a>
-            <a class="stat-item">
+              <p class="stat-label" :class="{on: tablist[subpage].subpath=='fan'}">粉丝</p>
+            </router-link>
+            <router-link class="stat-item" :to="'/space/' + usid + '/blog'">
               <p class="stat-number">{{displayUser.upload_num}}</p>
-              <p class="stat-label">动态</p>
-            </a>
+              <p class="stat-label" :class="{on: tablist[subpage].subpath=='blog'}">动态</p>
+            </router-link>
           </div>
         </div>
         <div class="tab">
           <ul>
-            <li
-              class="tab-item"
-              :class="{on:index==on}"
-              v-for="(tab, index) in tablist"
-              :key="tab.name"
-            >
-              <a href="javascript:void(0);" @click="on = index">
-                <font-awesome-icon :icon="['fas', tab.iconname]" />
-                {{tab.name}}
-              </a>
-            </li>
+            <template v-for="(tab, index) in tablist">
+              <li
+                class="tab-item"
+                :class="{on:index==subpage}"
+                v-if="tab.show() && tab.showInList()"
+                :key="tab.subpath"
+              >
+                <a href="javascript:void(0);" @click="direct(index)">
+                  <font-awesome-icon :icon="['fas', tab.iconname]" />
+                  {{tab.name}}
+                </a>
+              </li>
+            </template>
           </ul>
         </div>
       </div>
       <div class="right">
-        <component :is="tablist[on].tab"></component>
+        <component :is="tablist[subpage].tab"></component>
       </div>
     </div>
   </div>
@@ -48,35 +50,53 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import { userInfo } from "../api";
 export default {
   name: "Space",
   components: {
     NavBar,
   },
-  async beforeMount() {
+  created() {
+    this.usid =
+      Number.parseInt(this.$route.params.usid) ||
+      this.$store.state.user.usid ||
+      null;
+    this.subpage = Math.max(
+      this.tablist
+        .map((tabitem) => tabitem.subpath)
+        .indexOf(this.$route.params.sub),
+      0
+    );
+  },
+  mounted() {
     window.addEventListener("scroll", this.handleScroll);
-    let usid;
-    if (this.$route.params.usid) {
-      usid = this.$route.params.usid;
-    } else if (this.$store.state.user.usid) {
-      usid = this.$store.state.user.usid;
-    } else {
+    if (!this.usid) {
       this.$message.error("用户信息有误");
       return;
     }
-    try {
-      let res = await userInfo(usid);
-      res = res.data;
-      if (res.status == "ok") {
-        this.displayUser = { ...res.data };
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.response.data.status);
-    }
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (me) => {
+        this.displayUser = { ...me };
+      },
+      onFailed: (err) => {
+        console.log(err);
+      },
+    });
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
+  },
+  beforeRouteUpdate(to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+    this.usid =
+      Number.parseInt(to.params.usid) || this.$store.state.user.usid || null;
+    this.subpage = Math.max(
+      this.tablist.map((tabitem) => tabitem.subpath).indexOf(to.params.sub),
+      0
+    );
+    next();
   },
   methods: {
     handleScroll() {
@@ -89,51 +109,92 @@ export default {
         this.leftPanelTop = Math.max(0, this.scrollTop - 100);
       }
     },
+    direct(index) {
+      var to = "/space/" + this.usid + "/" + this.tablist[index].subpath;
+      if (this.$route.path != to) {
+        this.$router.push({
+          path: to,
+        });
+      }
+    },
   },
   data() {
     return {
-      on: 0,
+      usid: null,
+      subpage: 0,
       leftPanelTop: 0,
       tablist: [
         {
+          subpath: "welcome",
           name: "欢迎",
           iconname: "smile",
-          tab: () => import("@/views/Test.vue"),
+          tab: () => import("@/subviews/Test.vue"),
+          show: () => true,
+          showInList: () => true,
         },
         {
+          subpath: "info",
           name: "个人资料",
           iconname: "edit",
-          tab: () => import("@/components/MineInfo.vue"),
+          tab: () => import("@/subviews/MineInfo.vue"),
+          show: () => this.usid == this.$store.state.user.usid,
+          showInList: () => true,
         },
         {
+          subpath: "blog",
           name: "个人动态",
           iconname: "blog",
-          tab: () => import("@/views/MyBlog.vue"),
+          tab: () => import("@/subviews/MyBlog.vue"),
+          show: () => true,
+          showInList: () => true,
         },
         {
-          name: "关注 / 粉丝列表",
+          subpath: "fol",
+          name: "关注列表",
           iconname: "list",
-          tab: () => import("@/components/Fan&Fol.vue"),
+          tab: () => import("@/subviews/FolList.vue"),
+          show: () => true,
+          showInList: () => false,
         },
         {
+          subpath: "fan",
+          name: "粉丝列表",
+          iconname: "list",
+          tab: () => import("@/subviews/FanList.vue"),
+          show: () => true,
+          showInList: () => false,
+        },
+        {
+          subpath: "favorite",
           name: "我的收藏",
           iconname: "folder",
-          tab: () => import("@/components/FavList.vue"),
+          tab: () => import("@/subviews/FavList.vue"),
+          show: () => true,
+          showInList: () => true,
         },
         {
+          subpath: "history",
           name: "观看历史",
           iconname: "history",
-          tab: () => import("@/components/HistoryBlock.vue"),
+          tab: () => import("@/subviews/HistoryBlock.vue"),
+          show: () => true,
+          showInList: () => true,
         },
         {
+          subpath: "upload",
           name: "投稿管理",
           iconname: "upload",
-          tab: () => import("@/components/UploadList.vue"),
+          tab: () => import("@/subviews/UploadList.vue"),
+          show: () => true,
+          showInList: () => true,
         },
         {
+          subpath: "stat",
           name: "数据中心",
           iconname: "rocket",
-          tab: () => import("@/views/Login.vue"),
+          tab: () => import("@/subviews/Stat.vue"),
+          show: () => true,
+          showInList: () => true,
         },
       ],
       displayUser: {
@@ -168,9 +229,6 @@ export default {
 .right {
   width: 955px;
   float: right;
-}
-
-.user {
 }
 
 .avatar {
@@ -247,6 +305,11 @@ export default {
   font-size: 16px;
   color: #99a2aa;
   padding-top: 9px;
+}
+
+.stat-label.on,
+.stat-label:hover {
+  color: pink;
 }
 
 .tab {
