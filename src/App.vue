@@ -10,7 +10,9 @@ export default {
   name: "app",
   async created() {
     try {
-      // 用cookie尝试登录
+      // 先使用localstorage的数据
+      this.$store.state.user = JSON.parse(localStorage.getItem("user"));
+      // 然后用cookie尝试登录
       var res = await loginInfo();
       res = res.data;
       if (res.status === "ok") {

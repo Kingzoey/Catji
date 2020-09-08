@@ -67,15 +67,21 @@ export default {
       0
     );
   },
-  async mounted() {
+  mounted() {
     window.addEventListener("scroll", this.handleScroll);
     if (!this.usid) {
       this.$message.error("用户信息有误");
       return;
     }
-    this.$store.commit("cacheGetMineInfo", (res) => {
-      this.displayUser = { ...res };
-    });
+    this.$store.commit(
+      "cacheGetMineInfo",
+      (me) => {
+        this.displayUser = { ...me };
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);

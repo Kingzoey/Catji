@@ -6,15 +6,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: {
-      usid: 0,
-      nickname: "未登录",
-      avatar: '',
-      follower_num: 0,
-      followee_num: 0,
-      upload_num: 0,
-    },
-    me: {}
+    user: {},
+    me: {},
+    pending: false,
+    waitOnSuccess: [],
+    waitOnFailed: []
   },
   mutations: {
     // // 页面刷新时防止信息丢失可以掉用本地存储获取用户信息
@@ -29,32 +25,48 @@ export default new Vuex.Store({
       // 保存登录状态
       state.user = user
       // 存储到本地存储
-      // localStorage.setItem('user', JSON.stringify(state.user))
+      localStorage.setItem('user', JSON.stringify(state.user))
     },
     // 退出登录
     logout(state) {
       // 清除状态
       state.user = {}
+      state.me = {}
       // 清除本地存储
-      // localStorage.removeItem('user');
-      // localStorage.removeItem('me');
+      localStorage.removeItem('user');
+      localStorage.removeItem('me');
     },
     cacheGetMineInfo(state, onSuccess, onFailed) {
       if (state.me.usid) {
+        console.log('cached')
         onSuccess(state.me);
-      } else {
+        return;
+      }
+
+      state.waitOnSuccess.push(onSuccess);
+      state.waitOnFailed.push(onFailed);
+
+      if (!state.pending) {
+        state.pending = true;
         userInfo(state.user.usid)
           .then(res => {
+            state.pending = false;
             res = res.data;
             if (res.status === "ok") {
               state.me = res.data;
-              // localStorage.setItem('me', JSON.stringify(res.data));
-              onSuccess(state.me);
+              localStorage.setItem('me', JSON.stringify(res.data));
+              state.waitOnSuccess.splice(0).forEach(onSucc => onSucc(res.data));
+              state.waitOnFailed.splice(0);
             } else {
-              onFailed(res);
+              state.waitOnSuccess.splice(0);
+              state.waitOnFailed.splice(0).forEach(onFail => onFail(res.status));
             }
           })
-          .catch(onFailed)
+          .catch(e => {
+            state.pending = false;
+            state.waitOnSuccess.splice(0);
+            state.waitOnFailed.splice(0).forEach(onFail => onFail(e.response.data.status));
+          })
       }
     },
   },

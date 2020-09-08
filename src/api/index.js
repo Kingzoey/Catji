@@ -45,6 +45,11 @@ export const videoInfo = (vid) => axios.get('/api/videos/info', {
 
 export const userInfo = (usid) => axios.get('/api/users/info', {
     params: { usid }
+}).then(res => {
+    if (res.data.status === 'ok') {
+        res.data.data.birthday = new Date(res.data.data.birthday * 1000);
+    }
+    return res;
 });
 
 export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
@@ -86,8 +91,12 @@ export const followings = (usid, page) => axios.get('/api/follows/following', {
  */
 export const updateInfo = (params) => {
     var formdata = new FormData();
-    for (const param in params) {
-        formdata.append(param, params[param]);
+    for (const key in params) {
+        if (key === 'birthday') {
+            formdata.append(key, params[key] / 1000);
+        } else {
+            formdata.append(key, params[key]);
+        }
     }
     return axios.post('/api/users/updateinfo', formdata);
 }
