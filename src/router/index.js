@@ -86,12 +86,12 @@ const routes = [{
 	component: () =>
 		import('../views/Video.vue')
 },
-{
-	path: '/videolist',
-	name: 'videolist',
-	component: () =>
-		import('../views/VideoList.vue')
-},
+// {
+// 	path: '/videolist',
+// 	name: 'videolist',
+// 	component: () =>
+// 		import('../views/VideoList.vue')
+// },
 {
 	path: '/searchResult',
 	name: 'SearchResult',
@@ -99,47 +99,47 @@ const routes = [{
 		import('../views/SearchResult.vue')
 },
 {
-	path: '/cat',
+	path: '/cat/:cat_id',
 	name: 'Cat',
 	component: () =>
 		import('../views/Cat.vue')
 },
-{
-	path: '/userlist',
-	name: 'UserList',
-	component: () =>
-		import('../views/UserList.vue')
-},
-{
-	path: '/ulist',
-	name: 'UList',
-	component: () =>
-		import('../views/UList.vue')
-},
-{
-	path: '/uinfo',
-	name: 'UInfo',
-	component: () =>
-		import('../views/UInfo.vue')
-},
-{
-	path: '/mine0',
-	name: 'Mine0',
-	component: () =>
-		import('../views/Mine0.vue')
-},
-{
-	path: '/myblog',
-	name: 'MyBlog',
-	component: () =>
-		import('../views/MyBlog.vue')
-},
-{
-	path: '/game',
-	name: 'Game',
-	component: () =>
-		import('../views/Game.vue')
-}
+	// {
+	// 	path: '/userlist',
+	// 	name: 'UserList',
+	// 	component: () =>
+	// 		import('../views/UserList.vue')
+	// },
+	// {
+	// 	path: '/ulist',
+	// 	name: 'UList',
+	// 	component: () =>
+	// 		import('../views/UList.vue')
+	// },
+	// {
+	// 	path: '/uinfo',
+	// 	name: 'UInfo',
+	// 	component: () =>
+	// 		import('../views/UInfo.vue')
+	// },
+	// {
+	// 	path: '/mine0',
+	// 	name: 'Mine0',
+	// 	component: () =>
+	// 		import('../views/Mine0.vue')
+	// },
+	// {
+	// 	path: '/myblog',
+	// 	name: 'MyBlog',
+	// 	component: () =>
+	// 		import('../views/MyBlog.vue')
+	// },
+	// {
+	// 	path: '/game',
+	// 	name: 'Game',
+	// 	component: () =>
+	// 		import('../views/Game.vue')
+	// }
 ]
 
 const router = new VueRouter({
