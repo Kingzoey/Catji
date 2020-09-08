@@ -202,6 +202,7 @@ export default {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
+  float:right;
 }
 .headline :hover {
   color: #00a1d6;
