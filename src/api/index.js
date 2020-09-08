@@ -53,7 +53,7 @@ export const userInfo = (usid) => axios.get('/api/users/info', {
 });
 
 export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: page * 10 || 0 }
 });
 
 export const follow = (usid) => axios.post('/api/follows/follow', {

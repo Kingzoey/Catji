@@ -103,7 +103,7 @@ export default {
         {
           bid: 0,
           content: "获取中",
-          create_time: new Date(Date.now()),
+          create_time: Date.now() / 1000,
           like_num: 0,
           transmit_num: 0,
           comment_num: 0,
@@ -136,7 +136,6 @@ export default {
 <style scoped>
 .card {
   position: relative;
-  top: ;
   border-radius: 4px;
   min-width: 632px;
   background: #fff;

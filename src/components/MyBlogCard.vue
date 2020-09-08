@@ -2,16 +2,16 @@
   <div>
     <div class="card" v-for="blog in blogs" :key="blog.bid">
       <router-link
-        :to="/space/ + blog.up.usid"
-        :style="'background-image:url('+blog.up.avatar+')'"
+        :to="/space/ + user.usid"
+        :style="'background-image:url('+user.avatar+')'"
         class="user-head c-pointer"
       ></router-link>
-      <div class="main-content" style="padding-bottom: 0px;">
+      <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
-          <router-link :to="/space/ + blog.up.usid" class="c-pointer">{{blog.up.name}}</router-link>
+          <router-link :to="/space/ + user.usid" class="c-pointer">{{user.nickname}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
-          <span class="detail-link tc-slate">{{blog.time}}</span>
+          <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
         </div>
         <div class="delete" @click="deletemine(blog.bid)">
           <font-awesome-icon :icon="['fas', 'trash-alt']" />
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { blogInfo } from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
 export default {
   name: "BlogCard",
@@ -72,158 +73,79 @@ export default {
     deletemine(bid) {
       window.alert(bid);
     },
+    format(timestamp, fmt) {
+      var date = new Date(timestamp);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds(), //毫秒
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+        }
+      }
+      return fmt;
+    },
   },
   data() {
     return {
+      user: {
+        usid: 0,
+        nickname: "获取中",
+        avatar: "//static.hdslb.com/images/member/noface.gif",
+      },
       blogs: [
         {
-          bid: 1,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小明",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
+          bid: 0,
+          content: "获取中",
+          create_time: Date.now() / 1000,
+          like_num: 0,
+          transmit_num: 0,
+          comment_num: 0,
           images: [],
-        },
-        {
-          bid: 2,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小红",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 3,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小绿",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 4,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小蓝",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 5,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小橘",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 6,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小粉",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
         },
       ],
     };
+  },
+  async mounted() {
+    if (!this.$store.state.user.usid) {
+      this.$message.error("用户未登录");
+      return;
+    }
+    let usid = this.$store.state.user.usid;
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (me) => {
+        this.user = me;
+      },
+    });
+    try {
+      let res = await blogInfo(usid, 0);
+      res = res.data;
+      if (res.status === "ok") {
+        this.blogs = res.data;
+        console.log(this.blogs);
+      } else {
+        this.$message.error("网络错误: " + res.status);
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.data.response.status);
+    }
   },
 };
 </script>
@@ -231,7 +153,6 @@ export default {
 <style scoped>
 .card {
   position: relative;
-  top: 0;
   border-radius: 4px;
   min-width: 632px;
   background: #fff;
