@@ -59,6 +59,9 @@ export default {
       this.$message.error("网络错误: " + e.response.data.status);
     }
   },
+  methods: {
+    cancelFollow() {},
+  },
 };
 </script>
 

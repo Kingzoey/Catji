@@ -36,9 +36,10 @@ export default new Vuex.Store({
       localStorage.removeItem('user');
       localStorage.removeItem('me');
     },
-    cacheGetMineInfo(state, onSuccess, onFailed) {
-      if (state.me.usid) {
-        console.log('cached')
+    cacheGetMineInfo(state, payload) {
+      const { onSuccess, onFailed, noCache } = payload;
+
+      if (!noCache && state.me.usid) {
         onSuccess(state.me);
         return;
       }
@@ -55,11 +56,11 @@ export default new Vuex.Store({
             if (res.status === "ok") {
               state.me = res.data;
               localStorage.setItem('me', JSON.stringify(res.data));
-              state.waitOnSuccess.splice(0).forEach(onSucc => onSucc(res.data));
+              state.waitOnSuccess.splice(0).forEach(onSucc => onSucc && onSucc(res.data));
               state.waitOnFailed.splice(0);
             } else {
               state.waitOnSuccess.splice(0);
-              state.waitOnFailed.splice(0).forEach(onFail => onFail(res.status));
+              state.waitOnFailed.splice(0).forEach(onFail => onFail && onFail(res.status));
             }
           })
           .catch(e => {

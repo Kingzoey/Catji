@@ -73,15 +73,14 @@ export default {
       this.$message.error("用户信息有误");
       return;
     }
-    this.$store.commit(
-      "cacheGetMineInfo",
-      (me) => {
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (me) => {
         this.displayUser = { ...me };
       },
-      (err) => {
+      onFailed: (err) => {
         console.log(err);
-      }
-    );
+      },
+    });
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);

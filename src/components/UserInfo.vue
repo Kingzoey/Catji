@@ -56,9 +56,11 @@ export default {
       this.$message.error("用户未登录");
       return;
     }
-    this.$store.commit("cacheGetMineInfo", (res) => {
-      this.user = { ...res };
-      console.log(res);
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (res) => {
+        this.user = { ...res };
+        console.log(res);
+      },
     });
   },
 };

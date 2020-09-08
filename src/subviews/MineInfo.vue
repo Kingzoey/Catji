@@ -79,25 +79,16 @@ export default {
     //   return;
     // }
 
-    this.$store.commit(
-      "cacheGetMineInfo",
-      (me) => {
-        this.origin = JSON.stringify(me);
-        this.form = {
-          usid: me.usid,
-          nickname: me.nickname,
-          avatar: me.avatar,
-          gender: me.gender,
-          signature: me.signature,
-          birthday: me.birthday,
-          email: me.email,
-        };
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (me) => {
+        this.form = me;
         this.pic = me.avatar;
+        this.origin = JSON.stringify(me);
       },
-      (e) => {
+      onFailed: (e) => {
         this.$message.error("网络错误: " + e.response.data.status);
-      }
-    );
+      },
+    });
     return;
 
     // try {
@@ -152,10 +143,17 @@ export default {
     async onSubmit() {
       let diff = {};
       let origin = JSON.parse(this.origin);
+      origin.birthday = new Date(origin.birthday);
 
       for (const key in this.form) {
-        if (this.form[key] !== origin[key]) {
-          diff[key] = this.form[key];
+        let oldValue = origin[key];
+        let newValue = this.form[key];
+        if (oldValue instanceof Date) {
+          if (+newValue !== +oldValue) {
+            diff[key] = newValue;
+          }
+        } else if (newValue !== oldValue) {
+          diff[key] = newValue;
         }
       }
 
@@ -168,8 +166,18 @@ export default {
         let res = await updateInfo(diff);
         res = res.data;
         if (res.status === "ok") {
-          this.origin = JSON.stringify(this.form);
           this.$message.info("更新完成");
+          this.$store.commit("cacheGetMineInfo", {
+            onSuccess: (me) => {
+              this.origin = JSON.stringify(me);
+              this.form = me;
+              this.pic = me.avatar;
+            },
+            onFailed: (e) => {
+              this.$message.error("网络错误: " + e.response.data.status);
+            },
+            noCache: true,
+          });
         } else {
           this.$message.error("网络错误: " + res.status);
         }
