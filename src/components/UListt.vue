@@ -46,7 +46,6 @@ export default {
     try {
       let res = await hotUser();
       res = res.data;
-      console.log(res);
       if (res.status === "ok") {
         this.dataList = res.data;
       } else {

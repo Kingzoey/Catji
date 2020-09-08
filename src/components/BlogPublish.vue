@@ -1,100 +1,112 @@
 <template>
-  <div>
-    <div data-v-d130ef7a class="publish-panel">
-      <div class="text">
-      <textarea style="border:0;border-radius:0px;background-color:#fff;width: 860px;height: 110px;padding: 10px;resize: none;margin-left:9.8px;" placeholder="云上的吸猫，你我共享"></textarea>
-      <br />
-     
-      </div>
-       <br /> <br /> <br /> <br /> <br />
-      <br />
-      <div data-v-d130ef7a class="toolbar" style="position: relative;left:-800;color:antiquewhite;font-size: 30px;"> 
-        <font-awesome-icon :icon="['fas', 'laugh']" />  &emsp;
-        <font-awesome-icon :icon="['fas', 'hashtag']" /> &emsp;&emsp;
+  <div class="publish-wrap">
+    <div class="content">
+      <el-input type="textarea" placeholder="云上的吸猫，你我共享" v-model="blog.content" action="#"></el-input>
+    </div>
+    <div class="bottom-bar">
+      <div class="toolbar">
+        <div class="tool-btn emoji" @click="handleEmoji">
+          <font-awesome-icon :icon="['fas', 'laugh']" />&emsp;
+        </div>
+        <div class="tool-btn tag" @click="handleTag">
+          <font-awesome-icon :icon="['fas', 'hashtag']" />&emsp;&emsp;
+        </div>
         <!-- 要将父布局的position设置为relative，父布局将无法包裹input -->
-        <div style="position: relative;">
-        
-         <!--设置input的position为absolute，使其不按文档流排版，并设置其包裹整个布局 -->
+        <div class="tool-btn image">
+          <!--设置input的position为absolute，使其不按文档流排版，并设置其包裹整个布局 -->
           <!-- 设置opactity为0，使input变透明 -->
           <!-- 只接受jpg，gif和png格式 -->
-          <input
-            id="upload-input"
-            style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
-            type="file"
+          <el-upload
+            action="javascript:void(0);"
+            :auto-upload="false"
             accept="image/gif, image/jpg, image/png"
             multiple
-          />
-          <!-- 自定义按钮效果 -->
-          <div style="text-align: top">
-            <span style="font-size: 12px;"></span>
-            
-            <font-awesome-icon :icon="['fas', 'camera']" /> 
-          </div>
+            :limit="9"
+            :file-list="blog.images"
+            :show-file-list="false"
+            list-type="picture"
+            :on-change="handleChange"
+          >
+            <font-awesome-icon :icon="['fas', 'camera']" />
+          </el-upload>
+          <!-- <input
+          style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
+          type="file"
+          />-->
         </div>
-        <div id="imgContainer" style="margin-top: 10px;"></div>
-
-        <!---->
-        <!---->
       </div>
-      <!---->
-      <div data-v-8a5dd7f0 data-v-d130ef7a class="publish-launcher">
-        <button data-v-8a5dd7f0 class="publish-btn d-i-block bp-v-middle disabled">发布</button>
-        <!---->
+      <div class="submit-btn">
+        <button class="publish-btn" @click="onSubmit">发布</button>
       </div>
     </div>
-
-    <!---->
+    <div class="img-container">
+      <span
+        style="margin-right: 10px;"
+        v-for="(file, index) in blog.images"
+        :key="file.url"
+        @click="handleClick(index)"
+      >
+        <el-avatar shape="square" :size="100" fit="contain" :src="file.url" />
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
-//import uploadpicture from "@/assets/uploadpicture.png";
+import { postBlog } from "../api";
 export default {
   name: "BlogPublish",
-};
-/*function showImg(obj) {
-  var files = obj.files;
-  // document.getElementById("imgContainer").innerHTML = getImgsByUrl(files)
-  getImgsByFileReader(document.getElementById("imgContainer"), files);
-}*/
-
-// 使用window.URL.createObjectURL(file)读取file实例并显示图片
-/*function getImgsByUrl(files) {
-  var elements = "";
-  for (var i = 0; i < files.length; i++) {
-    var url = window.URL.createObjectURL(files[i]);
-    elements +=
-      "<img src='" +
-      url +
-      "' style='width: 40px; height: 40px; vertical-align: middle; margin-right: 5px;' />";
-  }
-  return elements;
-}*/
-
-// 使用FileReader读取file实例并显示图片
-/*function getImgsByFileReader(el, files) {
-  for (var i = 0; i < files.length; i++) {
-    let img = document.createElement("img");
-    img.setAttribute(
-      "style",
-      "width: 40px; height: 40px; vertical-align: middle; margin-right: 5px;"
-    );
-    el.appendChild(img);
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      img.src = e.target.result;
+  data() {
+    return {
+      blog: {
+        content: "",
+        images: [],
+      },
     };
-    reader.readAsDataURL(files[i]);
-  }
-}*/
+  },
+  methods: {
+    handleChange(file, fileList) {
+      this.blog.images = fileList;
+    },
+    handleClick(index) {
+      console.log(index);
+      this.blog.images.splice(index, 1);
+    },
+    handleEmoji() {
+      this.$message.info("表情正在添加中");
+    },
+    handleTag() {
+      this.blog.content += "#在此处添加tag#";
+    },
+    async onSubmit() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("没有登录不能发表动态");
+        return;
+      }
+      if (this.blog.content.length === 0) {
+        this.$message.error("动态内容不能为空");
+        return;
+      }
+      let rawImages = this.blog.images.map((image) => image.raw);
+      try {
+        let res = await postBlog(this.blog.content, rawImages, true);
+        res = res.data;
+        if (res.status === "ok") {
+          this.blog = {};
+          this.$message.info("动态发表成功");
+        } else {
+          this.$message.error("网络错误: " + res.status);
+        }
+      } catch (e) {
+        this.$message.error("网络错误: " + e.response.data.status);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-.text {
-  width: 80%;
-  margin-bottom: 50px;
-  padding: 10px;
-  float: left;
+.content {
   background-color: transparent;
   border: none;
   font-size: 15px;
@@ -103,49 +115,53 @@ export default {
   color: rgb(22, 22, 22);
 }
 
-.publish-panel[data-v-d130ef7a] {
+.publish-wrap {
   position: relative;
-  height: 200px;
-  width: 100%;
   background-color: #fff;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-   margin-top: 10px;
+  padding: 10px;
+  border-radius: 4px;
 }
-.toolbar[data-v-d130ef7a] {
-  margin-top: 12px;
- display: -webkit-flex; /* Safari */
-    -webkit-justify-content: space-around; /* Safari 6.1+ */
-    display: flex;
-    justify-content: space-around;
-  align-items: center;
-  
-}
-
-.publish-launcher[data-v-8a5dd7f0] {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.toolbar {
+  font-size: 30px;
   display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
+}
+
+.submit-btn {
+  display: flex;
   justify-content: flex-end;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
 }
 
-.publish-btn[data-v-8a5dd7f0] {
+.publish-btn {
   width: 70px;
   height: 32px;
   outline: none;
-  background-color: antiquewhite;
+  background-color: pink;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-right: 24px;
-  margin-bottom: 20px;
   font-weight: bold;
+}
+
+.bottom-bar {
+  margin-top: 10px;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.tool-btn:hover {
+  color: rgb(255, 232, 155);
+}
+.tool-btn {
+  color: #f8c59b;
+  margin-right: 15px;
+  cursor: pointer;
+  transition: color 0.5s;
+}
+
+.img-container {
+  margin-top: 10px;
 }
 </style>

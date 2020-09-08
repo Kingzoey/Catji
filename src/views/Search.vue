@@ -5,7 +5,7 @@
     <div class="logo">
       <div class="grad">
         <router-link to="/" class="head-logo">
-          <img src="../assets/logo_demo2_00.png" title style: width="30%" />
+          <img src="../assets/logo_demo2_00.png" title style="width:30%;" />
         </router-link>
       </div>
     </div>
@@ -199,16 +199,16 @@ input {
 
 .grad {
   pointer-events: none;
-  text-align:center;
+  text-align: center;
   position: absolute;
   top: 20px;
   z-index: 0;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .rank-wrap :hover {
-  color:#00a1d6;
+  color: #00a1d6;
 }
 
 /*
