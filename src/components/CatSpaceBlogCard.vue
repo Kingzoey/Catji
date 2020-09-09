@@ -151,7 +151,7 @@ export default {
   },
   async mounted() {
     try {
-      let res = await blogContent(false);
+      let res = await blogContent(true);
       res = res.data;
       if (res.status === "ok") {
         this.blogs = res.data;

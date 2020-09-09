@@ -13,36 +13,34 @@
             <span class="meta-time">{{format(video.upload_time*1000,'yyyy-MM-dd')}}</span>
           </div>
         </div>
-        <div class="player-warp">
+        <div class="player-wrap">
           <video-player
-            class="video-player-box"
+            class="vjs-custom-skin"
             ref="videoPlayer"
             :options="playerOptions"
             :playsinline="true"
-            customEventName="customstatechangedeventname"
-            @play="onPlayerPlay($event)"
-            @pause="onPlayerPause($event)"
-            @ended="onPlayerEnded($event)"
-            @waiting="onPlayerWaiting($event)"
-            @playing="onPlayerPlaying($event)"
-            @loadeddata="onPlayerLoadeddata($event)"
-            @timeupdate="onPlayerTimeupdate($event)"
-            @canplay="onPlayerCanplay($event)"
-            @canplaythrough="onPlayerCanplaythrough($event)"
-            @statechanged="playerStateChanged($event)"
-            @ready="playerReadied"
           ></video-player>
         </div>
         <div class="toolbar">
-          <span class="like" :title="video.like_num + '次点赞'">
+          <span
+            class="like"
+            :title="video.like_num + '次点赞'"
+            :class="{on:video.ilike==1}"
+            @click="like"
+          >
             <font-awesome-icon :icon="['fas', 'thumbs-up']" />
             {{video.like_num}}
           </span>
-          <span class="favorite" :title="video.favorite_num + '次收藏'">
+          <span
+            class="favorite"
+            :title="video.favorite_num + '次收藏'"
+            :class="{on:video.ifavorite==1}"
+            @click="favorite"
+          >
             <font-awesome-icon :icon="['fas', 'star']" />
             {{video.favorite_num}}
           </span>
-          <span class="share" :title="video.share_num + '次分享'">
+          <span class="share" :title="video.share_num + '次分享'" @click="share">
             <font-awesome-icon :icon="['fas', 'share-square']" />
             {{video.share_num}}
           </span>
@@ -85,9 +83,13 @@
           </div>
           <!-- 关注up, 右下 -->
           <div class="up-btns">
-            <div class="up-follow">
-              <span>
+            <div class="up-follow" :class="{on:video.up.ifollow}" @click="onFollow">
+              <span v-if="!video.up.ifollow">
                 <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注
+                <span>{{video.up.follow_num}}</span>
+              </span>
+              <span v-else>
+                已关注
                 <span>{{video.up.follow_num}}</span>
               </span>
             </div>
@@ -124,14 +126,14 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
-import { videoInfo } from "@/api";
+import { videoInfo, follow, unfollow, likeVideo, unlikeVideo } from "../api";
 export default {
   name: "Video",
   components: {
     NavBar,
     VideoComment,
   },
-  async mounted() {
+  async beforeMount() {
     let vid = this.$route.params.vid;
     if (!vid) {
       this.$message.error("视频信息错误");
@@ -143,7 +145,9 @@ export default {
       res = res.data;
       if (res.status === "ok") {
         this.video = { ...res.data };
-        this.playerOptions.sources[0].src = this.video.url;
+        let src = this.video.url;
+        this.playerOptions.sources[0].type = "video/" + src.split(".").pop();
+        this.playerOptions.sources[0].src = src;
         this.playerOptions.poster = this.video.cover;
       } else {
         this.$message.error("网络错误: " + res.status);
@@ -152,7 +156,6 @@ export default {
       this.$message.error("网络错误: " + e.response.data.status);
     }
   },
-
   data() {
     return {
       expand: false, // 视频描述部分的"展开"按钮
@@ -175,72 +178,52 @@ export default {
           desc: "加载中...",
           follow_num: 0,
           avatar: "",
+          ifollow: 0,
         },
+        ilike: 0,
+        ifavorite: 0,
       },
       recs: [
         {
-          vid: 100000,
-          title: "震惊！某上海985大学假期竟对学生做出这种要求",
-          desc:
-            "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-          cover: "//static.hdslb.com/images/member/noface.gif",
-          view_num: 9999,
-          comment_num: 9999,
-          upload_time: "2020-02-02 12:00:01",
-          like_num: 8888,
-          favorite_num: 7777,
+          vid: 0,
+          title: "推荐获取中",
+          desc: "推荐获取中",
+          cover: "",
+          view_num: 0,
+          comment_num: 0,
+          upload_time: 0,
+          like_num: 0,
+          favorite_num: 0,
           up: {
-            usid: 1,
-            name: "王小明",
-          },
-        },
-        {
-          vid: 100001,
-          title: "震惊！某上海985大学假期竟对学生做出这种要求",
-          desc:
-            "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-          cover: "//static.hdslb.com/images/member/noface.gif",
-          view_num: 9999,
-          comment_num: 9999,
-          upload_time: "2020-02-02 12:00:01",
-          like_num: 8888,
-          favorite_num: 7777,
-          up: {
-            usid: 1,
-            name: "王小明",
-          },
-        },
-        {
-          vid: 100002,
-          title: "震惊！某上海985大学假期竟对学生做出这种要求",
-          desc:
-            "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-          cover: "//static.hdslb.com/images/member/noface.gif",
-          view_num: 9999,
-          comment_num: 9999,
-          upload_time: "2020-02-02 12:00:01",
-          like_num: 8888,
-          favorite_num: 7777,
-          up: {
-            usid: 1,
-            name: "王小明",
+            usid: 0,
+            name: "获取中",
           },
         },
       ],
-      liked: false,
-      favorited: false,
       playerOptions: {
-        // videojs options
-        muted: true,
-        language: "en",
-        playbackRates: [0.7, 1.0, 1.5, 2.0],
+        autoplay: false, //如果true,浏览器准备好时开始回放。
+        muted: false, // 默认情况下将会消除任何音频。
+        loop: false, // 导致视频一结束就重新开始。
+        playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
+        // preload: "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
+        language: "zh-CN",
+        // aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
+        fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [
           {
-            // type: "video/mp4",
-            src: "",
+            type: "video/mp4", //这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
+            src: "", //url地址
           },
         ],
-        poster: "",
+        poster: "", //你的封面地址
+        // width: document.documentElement.clientWidth, //播放器宽度
+        notSupportedMessage: "此视频暂无法播放，请稍后再试", //允许覆盖Video.js无法播放媒体源时显示的默认信息。
+        controlBar: {
+          timeDivider: true,
+          durationDisplay: true,
+          remainingTimeDisplay: false,
+          fullscreenToggle: true, //全屏按钮
+        },
       },
     };
   },
@@ -274,6 +257,65 @@ export default {
       }
       return fmt;
     },
+    onFollow() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能关注up主");
+        return;
+      }
+
+      let up = this.video.up;
+      if (up.ifollow) {
+        unfollow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            up.follow_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Not already liked!") {
+              up.ifollow = 0;
+            }
+          });
+      } else {
+        follow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            up.follow_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已经关注此人") {
+              up.ifollow = 1;
+            }
+          });
+      }
+    },
+    like() {
+      let video = this.video;
+      if (video.ilike) {
+        unlikeVideo(video.vid)
+          .then(() => {
+            video.ilike = video.ilike ? 0 : 1;
+            video.like_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Not already liked!") {
+              video.ilike = 0;
+            }
+          });
+      } else {
+        likeVideo(video.vid)
+          .then(() => {
+            video.ilike = video.ilike ? 0 : 1;
+            video.like_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Already liked!") {
+              video.ilike = 1;
+            }
+          });
+      }
+    },
+    favorite() {},
+    share() {},
   },
 };
 </script>
@@ -341,9 +383,8 @@ export default {
   margin-top: 16px;
 }
 
-.player-warp {
+.player-wrap {
   width: 763px;
-  height: 517px;
   overflow: hidden;
   background-color: #212121;
 }
@@ -523,6 +564,16 @@ export default {
 .up-follow:hover {
   background: #00b5e5;
   border-color: #00b5e5;
+}
+
+.up-follow.on {
+  background: #ff799f;
+  border-color: #ff6490;
+}
+
+.up-follow.on:hover {
+  background: #ff6490;
+  border-color: #ff6490;
 }
 
 .rec {
