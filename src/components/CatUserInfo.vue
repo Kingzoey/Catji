@@ -84,6 +84,7 @@ export default {
   position: relative;
   background-color: white;
   border-radius: 4px;
+  overflow: hidden;
 }
 
 .content .user-pic {

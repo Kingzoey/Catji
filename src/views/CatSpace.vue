@@ -7,7 +7,7 @@
         <UListt />
       </div>
       <div class="right">
-        <BlogPublishCat /> 
+        <BlogPublishCat style="margin-top: 8px;" />
         <CatBlogCard />
       </div>
     </div>
