@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="card" v-for="blog in blogs" :key="blog.bid">
+    <div class="card" v-for="(blog, index) in blogs" :key="blog.bid">
       <router-link
         :to="/space/ + user.usid"
         :style="'background-image:url('+user.avatar+')'"
-        class="user-head c-pointer"
+        class="user-head"
       ></router-link>
       <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
-          <router-link :to="/space/ + user.usid" class="c-pointer">{{user.nickname}}</router-link>
+          <router-link :to="/space/ + user.usid">{{user.nickname}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
           <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
@@ -17,7 +17,7 @@
           <font-awesome-icon :icon="['fas', 'trash-alt']" />
         </div>
         <div class="card-content">
-          <div class="text p-rel description">
+          <div class="text description">
             <div class="content">
               <div class="content-full">{{blog.content}}</div>
             </div>
@@ -25,20 +25,20 @@
           <BlogCardImage :images="blog.images" />
         </div>
         <div class="button-bar tc-slate">
-          <div class="single-button c-pointer" @click="forward(blog.bid)">
+          <div class="single-button" @click="forward(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'share-square']" />
               <span class="text-offset">{{blog.transmit_num||'转发'}}</span>
             </span>
           </div>
-          <div class="single-button c-pointer" @click="comment(blog.bid)">
+          <div class="single-button" @click="comment(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'comment-alt']" />
               <i class="bp-svg-icon single-icon comment"></i>
               <span class="text-offset">{{blog.comment_num||'评论'}}</span>
             </span>
           </div>
-          <div class="single-button c-pointer p-rel" @click="like(blog.bid)">
+          <div class="single-button" :class="{on:blog.ilike>0}" @click="like(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'thumbs-up']" />
               <span class="text-offset">{{blog.like_num||'点赞'}}</span>
@@ -53,7 +53,13 @@
 </template>
 
 <script>
-import { blogInfo } from "../api";
+import {
+  blogInfo,
+  likeBlog,
+  unlikeBlog,
+  // likeBlogComment,
+  // unlikeBlogComment,
+} from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
 export default {
   name: "BlogCard",
@@ -61,14 +67,39 @@ export default {
     BlogCardImage,
   },
   methods: {
-    forward(bid) {
-      window.alert(bid);
+    forward(index) {
+      this.$message.info("转载功能正在完善中...");
+      index;
     },
-    comment(bid) {
-      window.alert(bid);
+    comment(index) {
+      this.$message.info("评论功能正在完善中...");
+      index;
     },
-    like(bid) {
-      window.alert(bid);
+    like(index) {
+      let blog = this.blogs[index];
+      if (blog.ilike) {
+        unlikeBlog(blog.bid)
+          .then(() => {
+            blog.ilike = blog.ilike ? 0 : 1;
+            blog.like_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Not already liked!") {
+              blog.ilike = 0;
+            }
+          });
+      } else {
+        likeBlog(blog.bid)
+          .then(() => {
+            blog.ilike = blog.ilike ? 0 : 1;
+            blog.like_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Already liked!") {
+              blog.ilike = 1;
+            }
+          });
+      }
     },
     deletemine(bid) {
       window.alert(bid);
@@ -135,18 +166,25 @@ export default {
       this.$message.error("用户未登录");
       return;
     }
-    try {
-      let res = await blogInfo(this.usid, 0);
-      res = res.data;
-      if (res.status === "ok") {
-        this.blogs = res.data;
-        console.log(this.blogs);
-      } else {
-        this.$message.error("网络错误: " + res.status);
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.data.response.status);
-    }
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: async (me) => {
+        this.user = me;
+        try {
+          let res = await blogInfo(this.usid, 0);
+          res = res.data;
+          if (res.status === "ok") {
+            this.blogs = res.data;
+          } else {
+            this.$message.error("网络错误: " + res.status);
+          }
+        } catch (e) {
+          this.$message.error("网络错误: " + e.data.response.status);
+        }
+      },
+      onFailed: (status) => {
+        this.$message.error("网络错误: " + status);
+      },
+    });
   },
 };
 </script>
@@ -233,6 +271,7 @@ export default {
   cursor: pointer;
 }
 
+.on,
 .single-button:hover {
   color: #fb7299;
 }

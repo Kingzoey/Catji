@@ -78,6 +78,7 @@ export default {
         unlikeBlog(blog.bid)
           .then(() => {
             blog.ilike = blog.ilike ? 0 : 1;
+            blog.like_num--;
           })
           .catch((err) => {
             if (err.response.data.status === "Not already liked!") {
@@ -88,6 +89,7 @@ export default {
         likeBlog(blog.bid)
           .then(() => {
             blog.ilike = blog.ilike ? 0 : 1;
+            blog.like_num++;
           })
           .catch((err) => {
             if (err.response.data.status === "Already liked!") {
