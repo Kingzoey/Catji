@@ -69,12 +69,23 @@
         </div>
       </li>
     </ul>
+    <div class="page-wrap">
+      <Pager :onChange="getData"></Pager>
+    </div>
   </div>
 </template>
 
 <script>
+import Pager from "@/components/Pager.vue";
+import { searchCat } from "../api";
 export default {
   name: "ListView",
+  components: {
+    Pager,
+  },
+  props: {
+    query: String,
+  },
   data() {
     return {
       users: [
@@ -106,6 +117,15 @@ export default {
     };
   },
   methods: {
+    getData(page) {
+      searchCat(this.$props.query, page)
+        .then((res) => {
+          this.dataList = res.data.data;
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.response.data.status);
+        });
+    },
     follow() {
       window.alert("关注成功!(狗头)");
     },
@@ -116,7 +136,6 @@ export default {
 <style scoped>
 .all-up {
   padding-left: 0px;
-
   width: 100%;
 }
 
@@ -238,5 +257,10 @@ export default {
   line-height: 16px;
   font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+}
+.page-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 </style>

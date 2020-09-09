@@ -83,7 +83,7 @@
           </div>
           <!-- 关注up, 右下 -->
           <div class="up-btns">
-            <div class="up-follow" :class="{on:video.up.ifollow}" @click="onFollow">
+            <div class="up-follow" :class="{on:video.up.ifollow==1}" @click="onFollow">
               <span>
                 <template v-if="!video.up.ifollow">
                   <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注

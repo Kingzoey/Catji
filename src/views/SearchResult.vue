@@ -1,32 +1,32 @@
 <template>
   <div class="SearchResult">
     <NavBar />
-     <div class="bg" :style="{'background-position-x': tx+'px'}"></div>
+    <div class="bg" />
     <div class="logo">
       <div class="grad">
         <router-link to="/" class="head-logo">
-          <img src="../assets/logo_demo2_00.png" title style: width="30%" />
+          <img src="../assets/logo_demo2_00.png" />
         </router-link>
       </div>
     </div>
-        <div class="search-wrap">
-        <div class="search-bar clearfix">
-          <div class="input-warp">
-            <input type="text" v-model="query" placeholder="请输入关键字" autocomplete="off" />
-          </div>
-          <div class="search-btn">
-            <router-link :to="{path:'/searchResult',query:{q:query}}">
-              <button class="searchButton">
-                <font-awesome-icon :icon="['fas', 'search']" />&nbsp;搜索
-              </button>
-            </router-link>
-          </div>
+    <div class="search-wrap">
+      <div class="search-bar clearfix">
+        <div class="input-warp">
+          <input type="text" v-model="query" placeholder="请输入关键字" autocomplete="off" />
+        </div>
+        <div class="search-btn">
+          <router-link :to="{path:'/searchResult',query:{q:query}}">
+            <button class="searchButton">
+              <font-awesome-icon :icon="['fas', 'search']" />&nbsp;搜索
+            </button>
+          </router-link>
         </div>
       </div>
+    </div>
     <div class="container">
       <span class="name"></span>
       <div class="nav">
-        <ul class="nav-switch" >
+        <ul class="nav-switch">
           <li
             v-for="(item, index) in tabs"
             :key="item.name"
@@ -39,7 +39,7 @@
           <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
         </ul>
       </div>
-      <component :is="tabs[on].component"></component>
+      <component :is="tabs[on].component" :query="query"></component>
     </div>
   </div>
 </template>
@@ -47,7 +47,12 @@
 <script>
 // import SearchResultBar from "@/components/SearchResultBar.vue";
 // 这里的切换栏不单独分成组件了, 不然页面和组件之间的数据传递不好弄
+// import { searchVideo, searchUser, searchCat, searchTag } from "../api";
 import NavBar from "@/components/NavBar.vue";
+import VideoListtSearchResult from "@/components/VideoListtSearchResult.vue";
+import ListViewUser from "@/components/ListViewUser.vue";
+import ListViewCat from "@/components/ListViewCat.vue";
+import TagList from "@/components/TagList.vue";
 export default {
   name: "SearchResult",
   components: {
@@ -61,14 +66,18 @@ export default {
   data() {
     return {
       on: 0,
+      query: "",
       hover: 0,
       tabs: [
-        { name: "视频", component: () => import("../components/VideoListtSearchResult.vue") },
-        { name: "用户", component: () => import("../components/ListView.vue") },
-        { name: "猫咪", component: () => import("../components/ListView.vue") },
-        { name: "标签", component: () => import("../components/TagList.vue") },
+        { name: "视频", component: VideoListtSearchResult },
+        { name: "用户", component: ListViewUser },
+        { name: "猫咪", component: ListViewCat },
+        { name: "标签", component: TagList },
       ],
     };
+  },
+  beforeMount() {
+    this.query = this.$route.query.q;
   },
   mounted() {
     this.hover = this.on;
@@ -78,12 +87,10 @@ export default {
 </script>
 
 <style scoped>
-.logo
-{
+.logo {
   margin-left: 0%;
 }
-.SearchResult component
-{
+.SearchResult component {
   display: inline;
 }
 .container {
@@ -93,7 +100,7 @@ export default {
 
 .name {
   display: inline-block;
-  color:#00a1d6;
+  color: #00a1d6;
   vertical-align: bottom;
   font-size: 25px;
   line-height: 80px;
@@ -111,7 +118,6 @@ export default {
 
 .nav-switch {
   position: relative;
-  
 }
 
 .nav-switch-item {
@@ -156,10 +162,6 @@ export default {
   margin-bottom: 18px;
 }
 
-
-
-
-
 /*****************************/
 .search-bar {
   width: 430px;
@@ -203,7 +205,7 @@ input {
   background: url("../assets/test1.png") repeat;
   height: 300%;
   width: 100%;
-  filter: blur(3px) ;
+  filter: blur(3px);
   background-size: cover;
   z-index: -1;
 }
@@ -263,7 +265,7 @@ input {
 
 .grad {
   pointer-events: none;
-  text-align:center;
+  text-align: center;
   position: absolute;
   top: 20px;
   z-index: 0;
@@ -272,7 +274,6 @@ input {
 }
 
 .rank-wrap :hover {
-  color:#00a1d6;
+  color: #00a1d6;
 }
-
 </style>

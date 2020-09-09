@@ -4,7 +4,7 @@
       <span>{{comment_num}} 条评论</span>
     </div>
     <div class="comment-body">
-      <div class="cb-send" :class="{'no-login':!$store.state.user.a}">
+      <div class="cb-send" :class="{'no-login':!$store.state.user.usid}">
         <div class="send-avatar">
           <img v-if="!$store.state.user.avatar" src="//static.hdslb.com/images/member/noface.gif" />
           <router-link :to="/space/ + $store.state.user.usid" v-else>
@@ -18,7 +18,14 @@
               <router-link to="/login" class="baffle-login">登录</router-link>后发表评论 (・ω・)
             </div>
           </div>
-          <textarea cols="80" name="msg" rows="5" placeholder="发条友善的评论" class="send-textarea"></textarea>
+          <textarea
+            cols="80"
+            name="msg"
+            rows="5"
+            placeholder="发条友善的评论"
+            class="send-textarea"
+            v-model="content"
+          ></textarea>
           <button type="submit" class="send-submit">发表评论</button>
         </div>
       </div>
@@ -95,24 +102,6 @@
           <span>{{tot_page}}</span>页，
           跳至
           <input type="text" v-model="jmp_page" @keyup.enter="toPage(jmp_page)" />页
-        </div>
-      </div>
-      <div class="cb-send" :class="{'no-login':!$store.state.user.a}">
-        <div class="send-avatar">
-          <img v-if="!$store.state.user.avatar" src="//static.hdslb.com/images/member/noface.gif" />
-          <router-link :to="/space/ + $store.state.user.usid" v-else>
-            <img :src="$store.state.user.avatar" />
-          </router-link>
-        </div>
-        <div class="send-input">
-          <div class="baffle-wrap">
-            <div class="baffle">
-              请先
-              <router-link to="/login" class="baffle-login">登录</router-link>后发表评论 (・ω・)
-            </div>
-          </div>
-          <textarea cols="80" name="msg" rows="5" placeholder="发条友善的评论" class="send-textarea"></textarea>
-          <button type="submit" class="send-submit">发表评论</button>
         </div>
       </div>
     </div>
@@ -272,6 +261,10 @@ export default {
 }
 
 .baffle {
+  display: none;
+}
+
+.no-login .baffle {
   display: block;
   position: absolute;
   z-index: 102;
