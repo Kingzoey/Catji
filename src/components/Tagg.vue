@@ -105,7 +105,7 @@ export default {
         {
           name: "视频",
           iconname: "video",
-          tab: () => import("@/components/VideoListtSearch.vue"),
+          tab: () => import("@/components/VideoListtTagResult.vue"),
         },
         {
           name: "动态",

@@ -25,7 +25,7 @@
       <ul class="nav">
         <li>
           <router-link to="/space">
-            <font-awesome-icon :icon="['fas', 'user']" />
+            <font-awesome-icon :icon="['fas', 'user']" />&nbsp;
             <template v-if="this.$store.state.user.usid">{{this.$store.state.user.nickname}}</template>
           </router-link>
         </li>

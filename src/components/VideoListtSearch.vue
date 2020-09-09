@@ -176,6 +176,7 @@
 
 
 <script>
+import { tagVideos } from '../api';
 export default {
   name: "VideoComment",
   data() {
