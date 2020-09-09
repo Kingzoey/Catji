@@ -84,12 +84,11 @@
           <!-- 关注up, 右下 -->
           <div class="up-btns">
             <div class="up-follow" :class="{on:video.up.ifollow}" @click="onFollow">
-              <span v-if="!video.up.ifollow">
-                <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注
-                <span>{{video.up.follow_num}}</span>
-              </span>
-              <span v-else>
-                已关注
+              <span>
+                <template v-if="!video.up.ifollow">
+                  <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注
+                </template>
+                <template v-else>已关注&nbsp;&nbsp;</template>
                 <span>{{video.up.follow_num}}</span>
               </span>
             </div>
@@ -126,7 +125,15 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
-import { videoInfo, follow, unfollow, likeVideo, unlikeVideo } from "../api";
+import {
+  videoInfo,
+  follow,
+  unfollow,
+  likeVideo,
+  unlikeVideo,
+  favoriteVideo,
+  unfavoriteVideo,
+} from "../api";
 export default {
   name: "Video",
   components: {
@@ -271,7 +278,7 @@ export default {
             up.follow_num--;
           })
           .catch((err) => {
-            if (err.response.data.status === "Not already liked!") {
+            if (err.response.data.status === "未关注此人") {
               up.ifollow = 0;
             }
           });
@@ -297,7 +304,7 @@ export default {
             video.like_num--;
           })
           .catch((err) => {
-            if (err.response.data.status === "Not already liked!") {
+            if (err.response.data.status === "未点赞") {
               video.ilike = 0;
             }
           });
@@ -308,14 +315,41 @@ export default {
             video.like_num++;
           })
           .catch((err) => {
-            if (err.response.data.status === "Already liked!") {
+            if (err.response.data.status === "已点赞") {
               video.ilike = 1;
             }
           });
       }
     },
-    favorite() {},
-    share() {},
+    favorite() {
+      let video = this.video;
+      if (video.ifavorite) {
+        unfavoriteVideo(video.vid)
+          .then(() => {
+            video.ifavorite = video.ifavorite ? 0 : 1;
+            video.favorite_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未收藏") {
+              video.ifavorite = 0;
+            }
+          });
+      } else {
+        favoriteVideo(video.vid)
+          .then(() => {
+            video.ifavorite = video.ifavorite ? 0 : 1;
+            video.favorite_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已收藏") {
+              video.ifavorite = 1;
+            }
+          });
+      }
+    },
+    share() {
+      
+    },
   },
 };
 </script>
@@ -414,6 +448,10 @@ export default {
 }
 
 .toolbar span:hover {
+  color: #00a1d6;
+}
+
+.toolbar span.on {
   color: #00a1d6;
 }
 

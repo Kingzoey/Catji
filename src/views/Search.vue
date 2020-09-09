@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { searchHistory, hotSearch } from "../api";
 import NavBar from "@/components/NavBar.vue";
 export default {
   name: "Search",
@@ -69,29 +70,19 @@ export default {
     return {
       tx: 0,
       query: "",
-      hotlist: [
-        "吃饭1",
-        "吃饭吃饭2",
-        "吃饭吃饭吃饭3",
-        "吃饭吃饭4",
-        "吃饭吃饭吃饭吃饭5",
-        "吃饭吃饭吃饭吃饭吃饭吃饭6",
-        "吃饭吃饭吃饭吃饭7",
-        "吃饭吃饭吃饭8",
-        "吃饭吃饭吃饭9",
-      ],
-      history: [
-        "睡觉睡觉睡觉睡觉1",
-        "睡觉睡觉睡觉睡觉2",
-        "睡觉睡觉睡觉睡觉3",
-        "睡觉睡觉睡觉睡觉4",
-        "睡觉睡觉睡觉睡觉5",
-        "睡觉睡觉睡觉睡觉6",
-        "睡觉睡觉睡觉睡觉7",
-        "睡觉睡觉睡觉睡觉8",
-        "睡觉睡觉睡觉睡觉9",
-      ],
+      hotlist: ["吃饭1"],
+      history: ["睡觉睡觉睡觉睡觉1"],
     };
+  },
+  mounted() {
+    if (this.$store.state.user.usid) {
+      searchHistory(this.$store.state.user.usid).then((res) => {
+        this.history = res.data.data;
+      });
+    }
+    hotSearch().then((res) => {
+      this.hotlist = res.data.data;
+    });
   },
 };
 </script>
