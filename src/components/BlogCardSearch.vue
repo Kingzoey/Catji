@@ -1,20 +1,20 @@
 <template>
   <div>
-    <div class="card" v-for="blog in blogs" :key="blog.bid">
+    <div class="card" v-for="(blog, index) in blogs" :key="blog.bid">
       <router-link
         :to="/space/ + blog.up.usid"
         :style="'background-image:url('+blog.up.avatar+')'"
-        class="user-head c-pointer"
+        class="user-head"
       ></router-link>
-      <div class="main-content" style="padding-bottom: 0px;">
+      <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
-          <router-link :to="/space/ + blog.up.usid" class="c-pointer">{{blog.up.name}}</router-link>
+          <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
-          <span class="detail-link tc-slate">{{blog.time}}</span>
+          <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
         </div>
         <div class="card-content">
-          <div class="text p-rel description">
+          <div class="text description">
             <div class="content">
               <div class="content-full">{{blog.content}}</div>
             </div>
@@ -22,20 +22,20 @@
           <BlogCardImage :images="blog.images" />
         </div>
         <div class="button-bar tc-slate">
-          <div class="single-button c-pointer" @click="forward(blog.bid)">
+          <div class="single-button" @click="forward(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'share-square']" />
               <span class="text-offset">{{blog.transmit_num||'转发'}}</span>
             </span>
           </div>
-          <div class="single-button c-pointer" @click="comment(blog.bid)">
+          <div class="single-button" @click="comment(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'comment-alt']" />
               <i class="bp-svg-icon single-icon comment"></i>
               <span class="text-offset">{{blog.comment_num||'评论'}}</span>
             </span>
           </div>
-          <div class="single-button c-pointer p-rel" @click="like(blog.bid)">
+          <div class="single-button" :class="{on:blog.ilike>0}" @click="like(index)">
             <span class="text-bar">
               <font-awesome-icon :icon="['fas', 'thumbs-up']" />
               <span class="text-offset">{{blog.like_num||'点赞'}}</span>
@@ -50,175 +50,117 @@
 </template>
 
 <script>
-//import { tagBlogs } from '../api';
+import {
+  tagBlogs,
+  likeBlog,
+  unlikeBlog,
+  // likeBlogComment,
+  // unlikeBlogComment,
+} from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
 export default {
-  name: "BlogCard",
+  name: "BlogCardSearch",
   components: {
     BlogCardImage,
   },
   methods: {
-    forward(bid) {
-      window.alert(bid);
+    forward(index) {
+      this.$message.info("转载功能正在完善中...");
+      index;
     },
-    comment(bid) {
-      window.alert(bid);
+    comment(index) {
+      this.$message.info("评论功能正在完善中...");
+      index;
     },
-    like(bid) {
-      window.alert(bid);
+    like(index) {
+      let blog = this.blogs[index];
+      if (blog.ilike) {
+        unlikeBlog(blog.bid)
+          .then(() => {
+            blog.ilike = blog.ilike ? 0 : 1;
+            blog.like_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Not already liked!") {
+              blog.ilike = 0;
+            }
+          });
+      } else {
+        likeBlog(blog.bid)
+          .then(() => {
+            blog.ilike = blog.ilike ? 0 : 1;
+            blog.like_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "Already liked!") {
+              blog.ilike = 1;
+            }
+          });
+      }
+    },
+    format(timestamp, fmt) {
+      var date = new Date(timestamp);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds(), //毫秒
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+        }
+      }
+      return fmt;
     },
   },
   data() {
     return {
       blogs: [
         {
-          bid: 1,
-          time: "20200202",
-          content: "早上好",
+          bid: 0,
+          content: "获取中",
+          create_time: Math.floor(Date.now() / 1000),
+          like_num: 0,
+          transmit_num: 0,
+          comment_num: 0,
           up: {
-            usid: 1,
-            name: "王小明",
+            usid: 0,
+            name: "获取中",
             avatar: "//static.hdslb.com/images/member/noface.gif",
           },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
           images: [],
-        },
-        {
-          bid: 2,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小红",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 3,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小绿",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 4,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小蓝",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 5,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小橘",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
-        },
-        {
-          bid: 6,
-          time: "20200202",
-          content: "早上好",
-          up: {
-            usid: 1,
-            name: "王小粉",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          transmit_num: 123,
-          comment_num: 123,
-          like_num: 123,
-          images: [
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-            {
-              url: "//static.hdslb.com/images/member/noface.gif",
-            },
-          ],
+          ilike: 0,
         },
       ],
     };
+  },
+  async mounted() {
+    try {
+      let res = await tagBlogs(false);
+      res = res.data;
+      if (res.status === "ok") {
+        this.blogs = res.data;
+      } else {
+        this.$message.error("网络错误: " + res.status);
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.data.response.status);
+    }
   },
 };
 </script>
@@ -226,13 +168,10 @@ export default {
 <style scoped>
 .card {
   position: relative;
-  top: 1px;
   border-radius: 4px;
   min-width: 632px;
   background: #fff;
   margin-top: 8px;
-  margin-left: 200px;
-  margin-right: 200px;
   background-repeat: no-repeat;
   background-position: right top;
   background-size: 700px;
@@ -307,11 +246,12 @@ export default {
 
 .single-button {
   display: inline-block;
-  width: 92px;
+  margin-right: 70px;
   font-size: 12px;
   cursor: pointer;
 }
 
+.on,
 .single-button:hover {
   color: #fb7299;
 }
