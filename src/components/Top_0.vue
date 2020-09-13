@@ -118,6 +118,9 @@ export default {
       }
     },
   },
+  mounted(){
+    this.handleNew();
+  }
 };
 </script>
 

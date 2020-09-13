@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { hotTag } from '../api';
+import { hotTag } from "../api";
 export default {
   name: "Top_1",
   computed: {
@@ -117,6 +117,9 @@ export default {
         this.$message.error("网络错误: " + e.response.data.status);
       }
     },
+  },
+  mounted() {
+    this.handleTag();
   },
 };
 </script>

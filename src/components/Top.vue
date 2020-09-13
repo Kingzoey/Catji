@@ -268,6 +268,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.handleVideo();
+  },
 };
 </script>
 
