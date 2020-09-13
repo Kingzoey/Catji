@@ -64,6 +64,15 @@ export default {
     BlogCardImage,
   },
   methods: {
+    getData(page) {
+      tagBlogs(this.$props.query, page)
+        .then((res) => {
+          this.dataList = res.data.data;
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.response.data.status);
+        });
+    },
     forward(index) {
       this.$message.info("转载功能正在完善中...");
       index;
@@ -149,19 +158,11 @@ export default {
       ],
     };
   },
-  async mounted() {
-    try {
-      let res = await tagBlogs(false);
-      res = res.data;
-      if (res.status === "ok") {
-        this.blogs = res.data;
-      } else {
-        this.$message.error("网络错误: " + res.status);
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.data.response.status);
-    }
+  
+  mounted() {
+    this.getData(0);
   },
+ 
 };
 </script>
 
