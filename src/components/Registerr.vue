@@ -16,9 +16,19 @@
         <input type="text" placeholder="请输入邮箱" v-model="email" />
         <input type="password" placeholder="请输入密码" v-model="password1" />
         <input type="password" placeholder="再次输入以确认密码" v-model="password2" />
+        <ul class="tick">
+          <li>
+            <input type="checkbox" id="brand1" />
+            <label for="brand1">
+              <span style="margin-top: 5px"></span>
+              注册为猫咪账号
+            </label>
+          </li>
+        </ul>
         <div class="send-button">
           <input type="button" value="注册" @click="onRegister()" />
         </div>
+        
       </div>
     </div>
   </div>
@@ -239,5 +249,47 @@ input[type="password"] {
 
 .register_from {
   margin-top: 100px;
+}
+
+.tick {
+  list-style: none;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.tick li input[type="checkbox"] {
+  display: none;
+}
+
+.tick li input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 30px;
+  border: #f0f8ff;
+  display: inline-block;
+  font-size: 15px;
+  color: #eee;
+}
+
+.tick li input[type="checkbox"] + label span:first-child {
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  border: 1px solid #eee;
+  position: absolute;
+  top: -3px;
+  left: 0;
+  bottom: 4px;
+}
+
+.tick li input[type="checkbox"]:checked + label span:first-child:before {
+  content: "";
+  background: url(../assets/tick.png) no-repeat;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  font-size: 10px;
+  width: 10px;
+  height: 10px;
 }
 </style>

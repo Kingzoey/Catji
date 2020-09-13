@@ -10,7 +10,7 @@
           <li>
             <input type="checkbox" id="brand1" />
             <label for="brand1">
-              <span></span>
+              <span style="margin-top: 5px"></span>
               记住我
             </label>
           </li>
@@ -18,7 +18,7 @@
         <div class="send-button">
           <input type="button" value="登 录" @click="onLogin" />
         </div>
-        <a href="#">记住密码?</a>
+        <a href="#">忘记密码?</a>
         <div class="social">
           <p>- 其他方式登录 -</p>
           <ul>
@@ -205,7 +205,7 @@ h2 {
   padding-left: 30px;
   border: #f0f8ff;
   display: inline-block;
-  font-size: 13px;
+  font-size: 15px;
   color: #eee;
 }
 
