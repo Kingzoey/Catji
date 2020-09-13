@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { searchTag } from "../api";
 export default {
   data() {
     return {
@@ -34,14 +35,27 @@ export default {
     };
   },
   methods: {
+    getData(page) {
+      searchTag(this.$props.query, page)
+        .then((res) => {
+          this.dataList = res.data.data;
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.response.data.status);
+        });
+    },
     getColor(seed) {
       return "#" + ((seed * 100000007) % 0xffffff).toString(16);
     },
+    update() {},
+  },
+  mounted() {
+    this.getData(0);
   },
 };
 </script>
 
-<style>
+<style scoped>
 .tag-container {
   float: left;
   font-size: 20px;

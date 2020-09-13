@@ -15,12 +15,6 @@ const routes = [{
 		import('../views/Tag.vue')
 },
 {
-	path: '/tagg',
-	name: 'Tagg',
-	component: () =>
-		import('../views/Tag0.vue')
-},
-{
 	path: '/login',
 	name: 'Login',
 	component: () =>

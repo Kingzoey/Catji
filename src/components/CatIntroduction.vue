@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .introduction
 {
     margin-left: 50px;
