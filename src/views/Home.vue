@@ -4,7 +4,7 @@
     <div class="container">
       <div class="bank clearfix">
         <div class="left">
-          <Middle>
+          <Middle :getData="mid1">
             <template v-slot:header>
               <font-awesome-icon :icon="['fas', 'fire']" />&nbsp;热门视频
             </template>
@@ -16,7 +16,7 @@
       </div>
       <div class="bank clearfix">
         <div class="left">
-          <Middle>
+          <Middle :getData="mid2">
             <template v-slot:header>
               <font-awesome-icon :icon="['fas', 'newspaper']" />&nbsp;最新视频
             </template>
@@ -28,7 +28,7 @@
       </div>
       <div class="bank clearfix">
         <div class="left">
-          <Middle>
+          <Middle :getData="mid3">
             <template v-slot:header>
               <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;热门标签
             </template>
@@ -45,12 +45,12 @@
 
 
 <script>
-// @ is an alias to /src
+import { hotVideo, newVideo, hotTag } from "../api";
 import NavBar from "@/components/NavBar_Home.vue";
 import Top from "@/components/Top.vue";
 import Top_0 from "@/components/Top_0.vue";
 import Top_1 from "@/components/Top_1.vue";
-import Middle from "@/components/Middle2.vue";
+import Middle from "@/components/Middle.vue";
 export default {
   name: "Home",
   components: {
@@ -59,6 +59,13 @@ export default {
     Top_0,
     Top_1,
     Middle,
+  },
+  data() {
+    return {
+      mid1: hotVideo,
+      mid2: newVideo,
+      mid3: hotTag,
+    };
   },
 };
 </script>

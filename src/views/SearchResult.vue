@@ -15,11 +15,9 @@
           <input type="text" v-model="query" placeholder="请输入关键字" autocomplete="off" />
         </div>
         <div class="search-btn">
-          <router-link :to="{path:'/searchResult',query:{q:query}}">
-            <button class="searchButton">
-              <font-awesome-icon :icon="['fas', 'search']" />&nbsp;搜索
-            </button>
-          </router-link>
+          <button class="searchButton" @click="onSearch">
+            <font-awesome-icon :icon="['fas', 'search']" />&nbsp;搜索
+          </button>
         </div>
       </div>
     </div>
@@ -39,7 +37,7 @@
           <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
         </ul>
       </div>
-      <component :is="tabs[on].component" :query="query"></component>
+      <component :is="tabs[on].component" :query="query" ref="child"></component>
     </div>
   </div>
 </template>
@@ -82,7 +80,15 @@ export default {
   mounted() {
     this.hover = this.on;
   },
-  methods: {},
+  methods: {
+    onSearch() {
+      if (this.query == this.$route.query.q) {
+        return;
+      }
+      this.$router.push({ path: "/searchResult", query: { q: this.query } });
+      this.$refs.child.update();
+    },
+  },
 };
 </script>
 

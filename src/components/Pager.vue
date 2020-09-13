@@ -38,6 +38,9 @@ export default {
       this.cur_page = new_page;
       this.$props.onChange(this.cur_page - 1);
     },
+    reset() {
+      this.cur_page = 1;
+    },
   },
 };
 </script>

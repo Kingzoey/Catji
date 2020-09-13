@@ -25,7 +25,7 @@
       </li>
     </ul>
     <div class="page-wrap">
-      <Pager :onChange="getData"></Pager>
+      <Pager :onChange="getData" ref="pager"></Pager>
     </div>
   </div>
 </template>
@@ -99,6 +99,10 @@ export default {
         }
       }
       return fmt;
+    },
+    update() {
+      this.$refs.pager.reset();
+      this.getData(0);
     },
   },
   mounted() {
