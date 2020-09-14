@@ -111,7 +111,7 @@ export const myWork = (usid, page) => axios.get('/api/videos/own', {
 });
 
 export const tagInfo = (tag_id) => axios.get('/api/tags/info', {
-    params: { tagid }
+    params: { tag_id }
 })
 
 export const tagVideos = (tag_id, page) => axios.get('/api/tags/videos', {
