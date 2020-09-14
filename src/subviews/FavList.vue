@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { myFavorite } from "../api";
+import { myFavorite,unfavoriteVideo } from "../api";
 export default {
   name: "FavList",
   data() {
@@ -53,6 +53,19 @@ export default {
       window.alert("取消成功!(狗头)");
     },
     del() {
+      let video=this.video[0];
+      
+      unfavoriteVideo(video.vid)
+        .then(() => {
+          video.ifavorite = video.ifavorite ? 0 : 1;
+          video.favorite_num--;
+        })
+        .catch((err) => {
+          if (err.response.data.status === "未收藏") {
+            video.ifavorite = 0;
+          }
+        });
+      
       window.alert("已删除!");
     },
   },
