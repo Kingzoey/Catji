@@ -271,6 +271,10 @@ export default {
       }
 
       let up = this.video.up;
+      if (this.$store.state.user.usid==up.usid) {
+        this.$message.error("不能关注自己！");
+        return;
+      }
       if (up.ifollow) {
         unfollow(up.usid)
           .then(() => {

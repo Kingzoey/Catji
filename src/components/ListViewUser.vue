@@ -98,8 +98,13 @@ export default {
         this.$message.error("登录后才能关注up主");
         return;
       }
-
       let up = this.dataList[index];
+      if (this.$store.state.user.usid==up.usid) {
+        this.$message.error("不可以关注自己！");
+        return;
+      }
+
+      
       if (up.ifollow) {
         unfollow(up.usid)
           .then(() => {
