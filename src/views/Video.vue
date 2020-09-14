@@ -94,18 +94,18 @@
             </div>
           </div>
         </div>
-        <div class="rec">
+        <!-- <div class="rec">
           <div class="rec-head">视频推荐</div>
           <div class="rec-list">
-            <div class="rectem" v-for="rectem in recs" :key="rectem.vid">
+            <div class="rectem" v-for="rectem in recs" :key="rectem.vid"> -->
               <!-- 封面, 左侧 -->
-              <div class="rectem-cover">
+              <!-- <div class="rectem-cover">
                 <router-link :to="/video/ + rectem.vid">
                   <img :src="rectem.cover" width="168" height="95" />
                 </router-link>
-              </div>
+              </div> -->
               <!-- 信息, 右侧 -->
-              <div class="rectem-info">
+              <!-- <div class="rectem-info">
                 <div class="rectem-title">
                   <router-link :to="/video/ + rectem.vid">{{rectem.title}}</router-link>
                 </div>
@@ -116,7 +116,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
