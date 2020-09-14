@@ -98,12 +98,12 @@ export const updateInfo = (params) => {
     return axios.post('/api/users/updateinfo', formdata);
 }
 
-export const myFavorite = (page) => axios.get('/api/favorites/info', {
-    params: { page: page || 0 }
+export const favorite = (usid, page) => axios.get('/api/favorites/info', {
+    params: { usid, page: page || 0 }
 });
 
-export const watchHistory = (page) => axios.get('/api/watchhistories/info', {
-    params: { page: page || 0 }
+export const watchHistory = (usid, page) => axios.get('/api/watchhistories/info', {
+    params: { usid, page: page || 0 }
 });
 
 export const myWork = (usid, page) => axios.get('/api/videos/own', {

@@ -22,7 +22,6 @@
               {{vi.nickname}}
             </a>
             <a class="attention-btn" @click="follow(vi.vid)">+ 关注</a>
-
             <a class="attention-a" @click="del(vi.vid)">取消收藏</a>
           </div>
         </div>
@@ -32,7 +31,7 @@
 </template>
 
 <script>
-import { myFavorite,unfavoriteVideo } from "../api";
+import { favorite, favoriteVideo, unfavoriteVideo } from "../api";
 export default {
   name: "FavList",
   data() {
@@ -50,11 +49,13 @@ export default {
   },
   methods: {
     follow() {
-      window.alert("取消成功!(狗头)");
+      favoriteVideo()
+        .then(() => {})
+        .catch(() => {});
     },
     del() {
-      let video=this.video[0];
-      
+      let video = this.video[0];
+
       unfavoriteVideo(video.vid)
         .then(() => {
           video.ifavorite = video.ifavorite ? 0 : 1;
@@ -65,12 +66,12 @@ export default {
             video.ifavorite = 0;
           }
         });
-      
-      window.alert("已删除!");
     },
   },
-  beforeMount() {
-    myFavorite() // 函数调用返回的是Promise
+  mounted() {
+    let usid = this.$route.params.usid;
+    console.log(usid);
+    favorite(usid) // 函数调用返回的是Promise
       .then((res) => {
         res = res.data;
         console.log(res);

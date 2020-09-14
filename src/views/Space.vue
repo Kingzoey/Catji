@@ -177,7 +177,7 @@ export default {
         },
         {
           subpath: "favorite",
-          name: "我的收藏",
+          name: "收藏夹",
           iconname: "folder",
           tab: () => import("@/subviews/FavList.vue"),
           show: () => true,
