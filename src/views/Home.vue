@@ -11,7 +11,7 @@
           </Middle>
         </div>
         <div class="right">
-          <Top />
+          <TopCombine />
         </div>
       </div>
       <div class="bank clearfix">
@@ -23,7 +23,7 @@
           </Middle>
         </div>
         <div class="right">
-          <Top_0 />
+          <TopNewVideo />
         </div>
       </div>
       <div class="bank clearfix">
@@ -35,7 +35,7 @@
           </Middle>
         </div>
         <div class="right">
-          <Top_1 />
+          <TopTag />
         </div>
       </div>
     </div>
@@ -47,17 +47,17 @@
 <script>
 import { hotVideo, newVideo, hotTag } from "../api";
 import NavBar from "@/components/NavBar_Home.vue";
-import Top from "@/components/Top.vue";
-import Top_0 from "@/components/Top_0.vue";
-import Top_1 from "@/components/Top_1.vue";
+import TopCombine from "@/components/TopCombine.vue";
+import TopNewVideo from "@/components/TopNewVideo.vue";
+import TopTag from "@/components/TopTag.vue";
 import Middle from "@/components/Middle.vue";
 export default {
   name: "Home",
   components: {
     NavBar,
-    Top,
-    Top_0,
-    Top_1,
+    TopCombine,
+    TopNewVideo,
+    TopTag,
     Middle,
   },
   data() {

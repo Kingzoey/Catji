@@ -110,7 +110,7 @@ export const myWork = (usid, page) => axios.get('/api/videos/own', {
     params: { usid, page: page || 0 }
 });
 
-export const tagInfo = (tag_id) => axios.get('/api/tags/info', {
+export const tagInfo = (tag_id) => axios.get('/api/tags/name', {
     params: { tag_id }
 })
 

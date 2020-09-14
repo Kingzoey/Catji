@@ -110,10 +110,10 @@ export default {
 }
 .v-cover {
   position: absolute;
-  width: 100px;
+  width: 80px;
   height: 80px;
   padding: 0px;
-  left: 5px;
+  left: 10px;
   top: 9.8px;
 }
 .coverimg {

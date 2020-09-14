@@ -2,13 +2,10 @@
   <div class="rank-list">
     <header class="rank-header">
       <span class="name">
-        <font-awesome-icon :icon="['fas', 'list-ol']" />&nbsp;TOP
+        <font-awesome-icon :icon="['fas', 'list-ol']" />&nbsp;最新视频
       </span>
-      <div class="more tab-switch">
-        <div class="tab-switch-item" :class="{on : on == 0}" @click="handleNew">最新</div>
-      </div>
     </header>
-    <div class="rank-wrap" v-for="(item, index) in curNewlist" :key="item.vid">
+    <div class="rank-wrap" v-for="(item, index) in videoNewList" :key="item.vid">
       <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
       <div class="preview" v-if="index < 3">
         <div class="pic">
@@ -30,14 +27,8 @@
 </template>
 
 <script>
-import { newVideo } from '../api';
+import { newVideo } from "../api";
 export default {
-  name: "Top_0",
-  computed: {
-    curNewlist() {
-      return this.videoNewList;
-    },
-  },
   data() {
     return {
       on: 0,
@@ -118,9 +109,9 @@ export default {
       }
     },
   },
-  mounted(){
+  mounted() {
     this.handleNew();
-  }
+  },
 };
 </script>
 
@@ -138,6 +129,7 @@ export default {
   justify-content: space-between;
   height: 36px;
   margin-bottom: 16px;
+  padding-top: 10px;
 }
 
 .name {

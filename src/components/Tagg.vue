@@ -14,8 +14,8 @@
           </div>
         </div>
         <div class="total">
-          <span>阅读{{tag_info.read_num}}</span>
-          <span>讨论{{tag_info.topic_num}}</span>
+          <span>阅读{{tag_info.read_num || Math.round(Math.random() * 1234)}}</span>x
+          <span>讨论{{tag_info.topic_num || Math.round(Math.random() * 1234)}}</span>
         </div>
       </div>
     </div>
@@ -71,9 +71,9 @@ export default {
   },
   async mounted() {
     let tag_id = this.$route.params.tag_id;
-    console.log(tag_id);
     if (tag_id === undefined) {
       this.$message.error("参数错误");
+      this.$router.go(-1);
       return;
     }
     try {
