@@ -43,6 +43,38 @@
           </div>
         </div>
       </div>
+
+      <div class="cb-list">
+        <div class="item" v-for="item in blog.comments" :key="item.vcid">
+          <div class="item-right">
+            <div class="item-reply">
+              <div class="rtem" v-for="rtem in blog.comments" :key="rtem.vcid">
+                <!-- 头像, 上左 -->
+                <router-link class="rtem-avatar" :to="/space/ + rtem.user.usid">
+                  <img :src="rtem.user.avatar" />
+                </router-link>
+                <!-- 名字, 内容, 上右 -->
+                <div class="rtem-line">
+                  <router-link class="rtem-user" :to="/space/ + rtem.user.usid">{{rtem.user.name}}</router-link>
+                  <span class="rtem-text">{{rtem.content}}</span>
+                </div>
+                <!-- meta, 下方 -->
+                <div class="rtem-info">
+                  <span class="time">{{rtem.create_time}}</span>
+                  <span class="like">
+                    <font-awesome-icon :icon="['fas', 'thumbs-up']" />
+                    {{rtem.like_num}}
+                  </span>
+                  <span class="reply">
+                    <font-awesome-icon :icon="['fas', 'comment-alt']" />回复
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <br />
     </div>
     <br />
@@ -145,6 +177,103 @@ export default {
           },
           images: [],
           ilike: 0,
+        },
+      ],
+
+      comment_num: 9999,
+      comments: [
+        {
+          vcid: 1,
+          content: "好!",
+          user: {
+            usid: 1,
+            name: "王小明",
+            avatar: "//static.hdslb.com/images/member/noface.gif",
+          },
+          like_num: 987,
+          create_time: "2020-2-20 00:01",
+          replys: [
+            {
+              vcid: 11,
+              content: "好!",
+              user: {
+                usid: 1,
+                name: "王小明",
+                avatar: "//static.hdslb.com/images/member/noface.gif",
+              },
+              like_num: 987,
+              create_time: "2020-2-20 00:01",
+              replys: [],
+            },
+            {
+              vcid: 12,
+              content: "好!",
+              user: {
+                usid: 1,
+                name: "王小明",
+                avatar: "//static.hdslb.com/images/member/noface.gif",
+              },
+              like_num: 987,
+              create_time: "2020-2-20 00:01",
+              replys: [],
+            },
+            {
+              vcid: 13,
+              content: "好!",
+              user: {
+                usid: 1,
+                name: "王小明",
+                avatar: "//static.hdslb.com/images/member/noface.gif",
+              },
+              like_num: 987,
+              create_time: "2020-2-20 00:01",
+              replys: [],
+            },
+          ],
+        },
+        {
+          vcid: 2,
+          content: "好好!",
+          user: {
+            usid: 2,
+            name: "王小明",
+            avatar: "//static.hdslb.com/images/member/noface.gif",
+          },
+          like_num: 987,
+          create_time: "2020-2-20 00:01",
+        },
+        {
+          vcid: 3,
+          content: "好好好!",
+          user: {
+            usid: 3,
+            name: "王小明",
+            avatar: "//static.hdslb.com/images/member/noface.gif",
+          },
+          like_num: 987,
+          create_time: "2020-2-20 00:01",
+        },
+        {
+          vcid: 4,
+          content: "好好好好!",
+          user: {
+            usid: 4,
+            name: "王小明",
+            avatar: "//static.hdslb.com/images/member/noface.gif",
+          },
+          like_num: 987,
+          create_time: "2020-2-20 00:01",
+        },
+        {
+          vcid: 5,
+          content: "好好好好好!",
+          user: {
+            usid: 5,
+            name: "王小明",
+            avatar: "//static.hdslb.com/images/member/noface.gif",
+          },
+          like_num: 987,
+          create_time: "2020-2-20 00:01",
         },
       ],
     };
@@ -260,5 +389,118 @@ export default {
   position: relative;
   top: 1px;
   left: 3px;
+}
+
+.cb-list {
+  padding-top: 20px;
+  /* margin-left: 40px; */
+}
+
+.item-avatar img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.item-avatar {
+  float: left;
+  margin: 24px 0 0 5px;
+  position: relative;
+}
+
+.item-right {
+  position: relative;
+  margin-left: 85px;
+  padding: 22px 0 14px;
+  border-top: 1px solid #e5e9ef;
+}
+
+.item:last-child .item-right {
+  border-bottom: 1px solid #e5e9ef;
+}
+
+.item-user {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  padding-bottom: 4px;
+  display: block;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.item-info,
+.rtem-info {
+  color: #99a2aa;
+  line-height: 26px;
+  font-size: 12px;
+}
+
+.item-info span,
+.rtem-info span {
+  margin-right: 20px;
+}
+
+.item-info .like,
+.item-info .reply,
+.rtem-info .like,
+.rtem-info .reply {
+  cursor: pointer;
+}
+
+.item-info .like:hover svg,
+.item-info .reply:hover svg,
+.rtem-info .like:hover svg,
+.rtem-info .reply:hover svg {
+  color: #00a1d6;
+}
+
+/* .item-reply{
+
+} */
+
+.rtem {
+  padding: 10px 0;
+}
+
+.rtem-avatar {
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+  vertical-align: top;
+}
+
+.rtem-avatar img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.rtem-line {
+  display: inline-block;
+  width: calc(100% - 34px);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  padding-bottom: 4px;
+  word-wrap: break-word;
+  position: relative;
+}
+
+.rtem-user {
+  position: relative;
+  top: -1px;
+}
+
+.rtem-text {
+  margin-left: 18px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: pre-wrap;
+}
+
+.rtem-info {
+  margin-left: 34px;
 }
 </style>

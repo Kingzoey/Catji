@@ -92,9 +92,6 @@ export default {
   },
   data() {
     return {
-      cur_page: 1,
-      tot_page: 10,
-      jmp_page: "",
       comment_num: 9999,
       comments: [
         {

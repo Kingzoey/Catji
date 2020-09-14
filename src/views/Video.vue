@@ -97,15 +97,15 @@
         <!-- <div class="rec">
           <div class="rec-head">视频推荐</div>
           <div class="rec-list">
-            <div class="rectem" v-for="rectem in recs" :key="rectem.vid"> -->
-              <!-- 封面, 左侧 -->
-              <!-- <div class="rectem-cover">
+        <div class="rectem" v-for="rectem in recs" :key="rectem.vid">-->
+        <!-- 封面, 左侧 -->
+        <!-- <div class="rectem-cover">
                 <router-link :to="/video/ + rectem.vid">
                   <img :src="rectem.cover" width="168" height="95" />
                 </router-link>
-              </div> -->
-              <!-- 信息, 右侧 -->
-              <!-- <div class="rectem-info">
+        </div>-->
+        <!-- 信息, 右侧 -->
+        <!-- <div class="rectem-info">
                 <div class="rectem-title">
                   <router-link :to="/video/ + rectem.vid">{{rectem.title}}</router-link>
                 </div>
@@ -116,7 +116,7 @@
               </div>
             </div>
           </div>
-        </div> -->
+        </div>-->
       </div>
     </div>
   </div>
@@ -296,6 +296,10 @@ export default {
       }
     },
     like() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能点赞视频");
+        return;
+      }
       let video = this.video;
       if (video.ilike) {
         unlikeVideo(video.vid)
@@ -322,6 +326,10 @@ export default {
       }
     },
     favorite() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能收藏视频");
+        return;
+      }
       let video = this.video;
       if (video.ifavorite) {
         unfavoriteVideo(video.vid)
@@ -347,9 +355,7 @@ export default {
           });
       }
     },
-    share() {
-      
-    },
+    share() {},
   },
 };
 </script>
