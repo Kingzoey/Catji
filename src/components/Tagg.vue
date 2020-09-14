@@ -1,40 +1,35 @@
 
 <template>
   <!--话题结果-->
-  <div class="card-topic">
-    <div class="card-topic-a">
-      <img src class="spic" />
+  <div class="tagg-wrap">
+    <div class="card-topic">
+      <img class="spic" src="/img/logo_demo2_00.ee314634.png" />
       <div class="info">
         <div class="title">
-          <h1>
-            <a href="javascript:void(0);">#{{tag_info.name}}#</a>
-          </h1>
-          <div>
-            <a href="javascript:void(0);" class="s-btn-c">分享</a>
-          </div>
+          <h1>#{{tag_info.name}}#</h1>
         </div>
         <div class="total">
-          <span>阅读{{tag_info.read_num || Math.round(Math.random() * 1234)}}</span>x
-          <span>讨论{{tag_info.topic_num || Math.round(Math.random() * 1234)}}</span>
+          <span>阅读 {{tag_info.read_num || Math.round(Math.random() * 1234)}}</span>
+          <span>讨论 {{tag_info.topic_num || Math.round(Math.random() * 1234)}}</span>
         </div>
       </div>
     </div>
     <!--话题头部主导航-->
     <div class="container">
-      <ul class="tab clearfix">
+      <ul class="tab">
         <li
           class="tab-item"
           :class="{on:index==on}"
           v-for="(tab, index) in tablist"
           :key="tab.name"
         >
-          <a href="javascript:void(0);" @click="on = index">
+          <a @click="on = index">
             <font-awesome-icon :icon="['fas', tab.iconname]" />
             {{tab.name}}
           </a>
         </li>
       </ul>
-      <component :is="tablist[on].tab" :tag_id="this.$route.params.tag_id"></component>
+      <component :is="tablist[on].tab" :tag_id="Number(this.$route.params.tag_id)"></component>
     </div>
     <br />
   </div>
@@ -43,9 +38,6 @@
 <script>
 import { tagInfo } from "../api";
 export default {
-  name: "Space",
-  components: {},
-  methods: {},
   data() {
     return {
       on: 0,
@@ -78,6 +70,7 @@ export default {
     }
     try {
       let res = await tagInfo(tag_id);
+      res = res.data;
       if (res.status === "ok") {
         this.tag_info = res.data;
       } else {
@@ -91,15 +84,10 @@ export default {
 </script>
 
 <style scoped>
-* {
-  margin: 5;
-  padding: 0;
-  list-style: none;
-}
-
 .container {
-  padding: 50 50 50 50px;
-  margin: left 500px;
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
 .tab :hover {
@@ -112,12 +100,13 @@ export default {
   font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
   border-bottom: 1px solid rgb(232, 248, 255);
+  display: flex;
+  height: 40px;
+  align-content: center;
+  justify-content: space-around;
 }
 
 .tab-item {
-  margin: 16px auto;
-  padding: 0 0 0 448px;
-  overflow: visible;
   display: block;
   float: left;
 }
@@ -151,82 +140,45 @@ export default {
   margin-right: 200px;
 }
 
-/*change*/
-
-.m-main-nav {
-  text-align: center;
-  margin-bottom: 100px;
-}
-/* card */
-
-/* 璇濋 */
 .card-topic {
   background: #fff;
-}
-.card-topic .icon-ad {
-  vertical-align: -3px;
-  margin-left: 10px;
-}
-.card-topic-a .up-pic {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 97px;
-  height: 26px;
-  border: 1px solid #d9d9d9;
-  cursor: pointer;
-}
-.card-topic-a .up-pic a {
-  display: block;
-  text-align: center;
-  line-height: 26px;
-  color: #333;
-  background: #fff;
-}
-.card-topic-a .up-pic input {
-  width: 97px;
-  height: 26px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
-.card-topic-a {
-  padding: 26px 200px;
-  border-bottom: 1px solid rgb(232, 248, 255);
+  width: 1000px;
+  margin: 0 auto;
+  border-radius: 4px;
   position: relative;
+  padding: 10px;
 }
-.card-topic-a .spic,
-.card-topic-a .info {
+.spic,
+.info {
   display: inline-block;
   vertical-align: middle;
 }
-.card-topic-a .spic {
+.spic {
   border-radius: 3px;
   width: 70px;
   height: 70px;
   margin-right: 20px;
 }
-.card-topic-a .info .title {
+.title {
   margin-bottom: 5px;
   height: 28px;
 }
-.card-topic-a .info .title h1,
-.card-topic-a .info .title div {
+.title h1,
+.title div {
   float: left;
 }
-.card-topic-a .info .title h1 {
+.title h1 {
   margin-right: 20px;
   font-size: 22px;
   font-weight: bolder;
 }
-.card-topic-a .info .title .s-btn-c {
+.title .s-btn-c {
   margin-right: 20px;
 }
-.card-topic-a .info .title span {
+.title span {
   position: relative;
 }
-.card-topic-a .info .title span .btn-cancel {
+.title span .btn-cancel {
   position: absolute;
   top: 21px;
   left: 0;
@@ -234,19 +186,13 @@ export default {
   padding: 5px 19px;
   box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.2);
 }
-.card-topic-a .info .total {
+.total {
   font-size: 14px;
   color: #636363;
   margin-top: 10px;
 }
-.card-topic-a .info .total span {
+.total span {
   margin-right: 10px;
-}
-/* card-topic */
-.card-topic-lead {
-  padding: 16px;
-  font-size: 14px;
-  border-bottom: 1px solid rgb(232, 248, 255);
 }
 
 /* button */
@@ -266,7 +212,8 @@ export default {
   background: #fff;
 }
 
-.tagg {
+.tagg-wrap {
   background-color: rgb(232, 248, 255);
+  padding-top: 20px;
 }
 </style>

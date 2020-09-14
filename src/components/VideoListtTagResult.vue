@@ -14,11 +14,11 @@
           <div class="meta">
             <span class="watch_num" title="观看次数">
               <font-awesome-icon :icon="['fas', 'play']" />
-              {{item.view_num}}
+              {{item.watch_num}}
             </span>
             <span class="upload_time" title="上传时间">
               <font-awesome-icon :icon="['fas', 'clock']" />
-              {{format(item.upload_time,"yyyy-MM-dd")}}
+              {{format(item.create_time,"yyyy-MM-dd")}}
             </span>
           </div>
         </div>
