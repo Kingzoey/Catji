@@ -68,9 +68,12 @@ export default {
     BlogCardImage,
     Pager,
   },
+  props: {
+    tag_id: Number,
+  },
   methods: {
     getData(page) {
-      tagBlogs(this.$props.query, page)
+      tagBlogs(this.$props.tag_id, page)
         .then((res) => {
           this.dataList = res.data.data;
         })
@@ -163,11 +166,10 @@ export default {
       ],
     };
   },
-  
+
   mounted() {
     this.getData(0);
   },
- 
 };
 </script>
 

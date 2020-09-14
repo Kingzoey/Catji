@@ -7,16 +7,15 @@
       <div class="info">
         <div class="title">
           <h1>
-            <a href="javascript:void(0);">#Catji#</a>
+            <a href="javascript:void(0);">#{{tag_info.name}}#</a>
           </h1>
           <div>
             <a href="javascript:void(0);" class="s-btn-c">分享</a>
-            <a href class="s-btn-c">申请主持人</a>
           </div>
         </div>
         <div class="total">
-          <span>阅读45.2亿</span>
-          <span>讨论44.7万</span>
+          <span>阅读{{tag_info.read_num}}</span>
+          <span>讨论{{tag_info.topic_num}}</span>
         </div>
       </div>
     </div>
@@ -35,12 +34,14 @@
           </a>
         </li>
       </ul>
-      <component :is="tablist[on].tab"></component>
+      <component :is="tablist[on].tab" :tag_id="this.$route.params.tag_id"></component>
     </div>
+    <br />
   </div>
 </template>
 
 <script>
+import { tagInfo } from "../api";
 export default {
   name: "Space",
   components: {},
@@ -48,6 +49,12 @@ export default {
   data() {
     return {
       on: 0,
+      tag_info: {
+        tag_id: 0,
+        name: "",
+        read_num: 0,
+        topic_num: 0,
+      },
       tablist: [
         {
           name: "视频",
@@ -62,8 +69,23 @@ export default {
       ],
     };
   },
-  mounted() {
-    console.log(this.$route.params.usid);
+  async mounted() {
+    let tag_id = this.$route.params.tag_id;
+    console.log(tag_id);
+    if (tag_id === undefined) {
+      this.$message.error("参数错误");
+      return;
+    }
+    try {
+      let res = await tagInfo(tag_id);
+      if (res.status === "ok") {
+        this.tag_info = res.data;
+      } else {
+        this.$message.error("网络错误: " + res.status);
+      }
+    } catch (e) {
+      this.$message.error("网络错误: " + e.response.data.status);
+    }
   },
 };
 </script>

@@ -35,12 +35,11 @@
 import Pager from "@/components/Pager.vue";
 import { tagVideos } from "../api";
 export default {
-  name: "VideoList",
   components: {
     Pager,
   },
   props: {
-    query: String,
+    tag_id: Number,
   },
   data() {
     return {
@@ -63,7 +62,7 @@ export default {
   },
   methods: {
     getData(page) {
-      tagVideos(this.$props.query, page)
+      tagVideos(this.$props.tag_id, page)
         .then((res) => {
           this.dataList = res.data.data;
         })
