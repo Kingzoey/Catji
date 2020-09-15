@@ -155,9 +155,8 @@ export default {
 }
 .spic {
   border-radius: 3px;
-  width: 70px;
+  width: 100px;
   height: 70px;
-  margin-right: 20px;
 }
 .title {
   margin-bottom: 5px;
