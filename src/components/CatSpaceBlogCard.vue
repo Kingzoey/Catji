@@ -11,7 +11,7 @@
           <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
-          <span class="detail-link tc-slate">{{blog.time}}</span>
+          <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
         </div>
         <div class="card-content">
           <div class="text description">

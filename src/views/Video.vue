@@ -10,7 +10,7 @@
           <div class="info-meta">
             <span class="meta-view" :title="video.view_num + '次播放'">{{video.view_num}}播放 ·</span>
             <span class="meta-comment" :title="video.comment_num + '条评论'">{{video.comment_num}}评论</span>
-            <span class="meta-time">{{format(video.upload_time*1000,'yyyy-MM-dd')}}</span>
+            <span class="meta-time">{{format(video.upload_time,'yyyy-MM-dd')}}</span>
           </div>
         </div>
         <div class="player-wrap">

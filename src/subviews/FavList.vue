@@ -1,10 +1,15 @@
 <template>
   <div class="all">
-    <p class="title-fav">
-      <font-awesome-icon :icon="['fas', 'folder']" />&nbsp;我的收藏
-    </p>
+    <div class="header">
+      <div class="title-fav">
+        <font-awesome-icon :icon="['fas', 'folder']" />&nbsp;我的收藏
+      </div>
+      <div class="pager-wrap clearfix">
+        <Pager :onChange="getData" ref="pager" />
+      </div>
+    </div>
     <ul>
-      <li class="vi-item" v-for="vi in video" :key="vi.vid">
+      <li class="vi-item" v-for="(vi, index) in dataList" :key="vi.vid">
         <div class="v-cover">
           <router-link :to="/video/ + vi.vid" :title="vi.title" class="coverimg">
             <div class="lazy-img">
@@ -17,12 +22,12 @@
             <router-link :to="/video/ + vi.vid" :title="vi.title" class="title">{{vi.title}}</router-link>
           </div>
           <div class="desc">
-            <a class="visit-up-space" href="https://space.bilibili.com/168598">
+            <router-link class="visit-up-space" :to="/video/ + vi.vid">
               <font-awesome-icon :icon="['fas', 'user']" />
               {{vi.nickname}}
-            </a>
-            <a class="attention-btn" @click="follow(vi.vid)">+ 关注</a>
-            <a class="attention-a" @click="del(vi.vid)">取消收藏</a>
+            </router-link>
+            <button class="attention-btn" @click="follow(index)">关注</button>
+            <button class="attention-a" @click="del(index)">取消收藏</button>
           </div>
         </div>
       </li>
@@ -32,19 +37,17 @@
 
 <script>
 import { favorite, favoriteVideo, unfavoriteVideo } from "../api";
+import Pager from "@/components/Pager.vue";
 export default {
-  name: "FavList",
+  components: {
+    Pager,
+  },
+  props: {
+    usid: Number,
+  },
   data() {
     return {
-      video: [
-        {
-          vid: 0,
-          title: "同济人气猫咪",
-          nickname: "王四锤", //上传视频up主
-          cover:
-            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=187649172,1956357065&fm=26&gp=0.jpg", //封面
-        },
-      ],
+      dataList: [],
     };
   },
   methods: {
@@ -53,56 +56,56 @@ export default {
         .then(() => {})
         .catch(() => {});
     },
-    del() {
-      let video = this.video[0];
-
+    del(index) {
+      let video = this.video[index];
       unfavoriteVideo(video.vid)
         .then(() => {
-          video.ifavorite = video.ifavorite ? 0 : 1;
-          video.favorite_num--;
+          this.video.splice(index);
+          this.$refs.pager.reload();
         })
         .catch((err) => {
           if (err.response.data.status === "未收藏") {
-            video.ifavorite = 0;
+            this.video.splice(index);
+            this.$refs.pager.reload();
+          } else {
+            this.$message.error("网络错误: " + err.response.data.status);
           }
+        });
+    },
+    getData(page) {
+      favorite(this.$props.usid, page) // 函数调用返回的是Promise
+        .then((res) => {
+          res = res.data;
+          if (res.status === "ok") {
+            this.dataList = res.data; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
+          } else {
+            this.$message.error("网络错误: " + res.status);
+          }
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.data.response.status);
         });
     },
   },
   mounted() {
-    let usid = this.$route.params.usid;
-    console.log(usid);
-    favorite(usid) // 函数调用返回的是Promise
-      .then((res) => {
-        res = res.data;
-        console.log(res);
-        if (res.status === "ok") {
-          this.video = res.data; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
-          console.log(res);
-        } else {
-          // ...
-          console.log("请求错误，错误信息 :" + res.status);
-        }
-      })
-      .catch((err) => {
-        console.log("网络失败");
-        console.log(err);
-      }); // 这里和1.1一样写处理函数
+    this.getData(0);
   },
 };
 </script>
 
 <style scoped>
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  margin-left: 8px;
+}
 .title-fav {
   color: rgb(223, 37, 37);
   font-size: 20px;
   padding-left: 5px;
   padding-top: 2px;
 }
-
-.title-fav :hover {
-  color: pink;
-}
-
 .vi-item {
   position: relative;
   padding: 20px 0 10px 102px;
@@ -159,7 +162,7 @@ export default {
 }
 
 .attention-btn {
-  width: 80px;
+  width: 65px;
   height: 24px;
   text-align: center;
   background: rgb(223, 37, 37);

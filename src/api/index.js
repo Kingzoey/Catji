@@ -57,7 +57,7 @@ export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
 });
 
 // 粉丝
-export const followers = (usid, page) => axios.get('/api/follows/followers', { 
+export const followers = (usid, page) => axios.get('/api/follows/followers', {
     params: { usid, offset: (page || 0) * 10 }
 });
 
@@ -100,15 +100,15 @@ export const updateInfo = (params) => {
 }
 
 export const favorite = (usid, page) => axios.get('/api/favorites/info', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: 10 * (page || 0) }
 });
 
 export const watchHistory = (usid, page) => axios.get('/api/watchhistories/info', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: 10 * (page || 0) }
 });
 
 export const myWork = (usid, page) => axios.get('/api/videos/own', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: 10 * (page || 0) }
 });
 
 export const tagInfo = (tag_id) => axios.get('/api/tags/name', {

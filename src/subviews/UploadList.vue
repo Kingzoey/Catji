@@ -1,10 +1,15 @@
 <template>
   <div class="all">
-    <p class="title-upl">
-      <font-awesome-icon :icon="['fas', 'upload']" />&nbsp;我的投稿
-    </p>
+    <div class="header">
+      <div class="title-upl">
+        <font-awesome-icon :icon="['fas', 'upload']" />&nbsp;我的投稿
+      </div>
+      <div class="pager-wrap clearfix">
+        <Pager :onChange="getData" ref="pager" />
+      </div>
+    </div>
     <ul>
-      <li class="vi-item" v-for="vi in video" :key="vi.vid">
+      <li class="vi-item" v-for="vi in dataList" :key="vi.vid">
         <div class="v-cover">
           <router-link :to="/video/ + vi.vid" :title="vi.title" class="coverimg">
             <div class="lazy-img">
@@ -17,13 +22,15 @@
             <router-link :to="/video/ + vi.vid" :title="vi.title" class="title">{{vi.title}}</router-link>
           </div>
           <div class="desc">
-            <a class="visit-up-space" href="https://space.bilibili.com/168598">
-            <font-awesome-icon :icon="['fas', 'user']" />
-            {{vi.nickname}}
-            </a>
-            <a class="attention-btn" @click="follow(vi.vid)">+ 关注</a>
-            
-            <a class="attention-a" @click="del(vi.vid)">删除视频</a>
+            <span class="watch_num" title="观看次数">
+              <font-awesome-icon :icon="['fas', 'play']" />
+              {{vi.watch_num}}
+            </span>
+            <span class="upload_time" title="上传时间">
+              <font-awesome-icon :icon="['fas', 'clock']" />
+              {{format(vi.create_time,"yyyy-MM-dd")}}
+            </span>
+            <button class="attention-a" @click="del(index)">删除视频</button>
           </div>
         </div>
       </li>
@@ -32,91 +39,85 @@
 </template>
 
 <script>
-import {  myWork } from "../api"
+import { myWork } from "../api";
+import Pager from "@/components/Pager.vue";
 export default {
-  
-  name: "UploadList",
+  components: {
+    Pager,
+  },
+  props: {
+    usid: Number,
+  },
   data() {
     return {
-      video: [
-        {
-          vid: 1,
-          title: "可爱猫咪日常搞笑合集",
-          nickname: "王大锤", //上传视频up主
-          cover:
-            "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2338360597,1299861243&fm=26&gp=0.jpg", //封面
-        },
-        {
-          vid: 2,
-          title: "这么可爱的猫咪你下得去手",
-          nickname: "王二锤", //上传视频up主
-          cover:
-            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3294506463,533319956&fm=26&gp=0.jpg", //封面
-        },
-        {
-          vid: 3,
-          title: "云吸猫",
-          nickname: "王三锤", //上传视频up主
-          cover:
-            "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=338026201,811635179&fm=26&gp=0.jpg", //封面
-        },
-        {
-          vid: 4,
-          title: "同济人气猫咪",
-          nickname: "王四锤", //上传视频up主
-          cover:
-            "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=187649172,1956357065&fm=26&gp=0.jpg", //封面
-        },
-        {
-          vid: 5,
-          title: "小猫咪叫人起床",
-          nickname: "王五锤", //上传视频up主
-          cover:
-            "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2418940404,2594675617&fm=26&gp=0.jpg", //封面
-        },
-      ],
+      dataList: [],
     };
   },
   methods: {
-    follow() {
-      window.alert("关注成功!(狗头)");
+    format(timestamp, fmt) {
+      var date = new Date(1000 * timestamp);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds(), //毫秒
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+        }
+      }
+      return fmt;
     },
-     del() {
-      window.alert("已删除!");
+    del(index) {
+      index; // 目前不支持删除投稿
+    },
+    getData(page) {
+      myWork(this.$props.usid, page) // 函数调用返回的是Promise
+        .then((res) => {
+          res = res.data;
+          if (res.status === "ok") {
+            this.dataList = res.data; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
+          } else {
+            this.$message.error("网络错误: " + res.status);
+          }
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.data.response.status);
+        });
     },
   },
-     beforeMount() {
-    myWork() // 函数调用返回的是Promise
-      .then((res) => {
-        res = res.data;
-        console.log(res);
-        if (res.status === "ok") {
-          this.video = res.data; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
-          console.log(res);
-       
-        } else {
-          // ...
-          console.log("请求错误，错误信息 :" + res.status);
-        }
-      })
-      .catch((err) => {
-        console.log("网络失败");
-        console.log(err);
-      }); // 这里和1.1一样写处理函数
+  mounted() {
+    this.getData(0);
   },
 };
 </script>
 
 <style scoped>
-.title-upl {
-  color:orange;
-  font-size: 20px;
-  padding-left: 5px;
-  padding-top: 2px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  margin-left: 8px;
 }
 
-.title-upl :hover {
-  color: pink;
+.title-upl {
+  color: orange;
+  font-size: 20px;
 }
 
 .vi-item {
@@ -127,10 +128,10 @@ export default {
 }
 .v-cover {
   position: absolute;
-  width: 100px;
+  width: 80px;
   height: 80px;
   padding: 0px;
-  left: 5px;
+  left: 10px;
   top: 9.8px;
 }
 .coverimg {
@@ -170,12 +171,8 @@ export default {
   line-height: 16px;
 }
 
-.desc :hover {
-  color: pink;
-}
-
 .attention-btn {
-  width: 80px;
+  width: 65px;
   height: 24px;
   text-align: center;
   background: orange;
@@ -185,9 +182,9 @@ export default {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
-  float:right;
+  float: right;
 }
-.attention-a{
+.attention-a {
   width: 80px;
   height: 24px;
   text-align: center;
@@ -200,6 +197,11 @@ export default {
   vertical-align: middle;
 }
 .headline :hover {
-  color:orange;
+  color: orange;
+}
+.pager-wrap {
+  display: flex;
+  justify-content: right;
+  padding-right: 10px;
 }
 </style>

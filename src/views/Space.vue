@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="right">
-        <component :is="tablist[subpage].tab"></component>
+        <component :is="tablist[subpage].tab" :usid="this.usid"></component>
       </div>
     </div>
   </div>
