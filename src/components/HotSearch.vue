@@ -105,12 +105,12 @@ export default {
 
 <style scoped>
 .rank-list {
- 
-   width: 265px;
-   float:left;
-   position: relative;
-   top:30px;left: 10%;
-   z-index: 100;
+  width: 265px;
+  float: left;
+  position: relative;
+  top: 30px;
+  left: 10%;
+  z-index: 100;
 }
 
 .rank-header {
@@ -119,6 +119,7 @@ export default {
   justify-content: space-between;
   height: 36px;
   margin-bottom: 16px;
+  padding-top: 10px;
 }
 
 .name {

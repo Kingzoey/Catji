@@ -115,7 +115,7 @@ export const tagInfo = (tag_id) => axios.get('/api/tags/name', {
 })
 
 export const tagVideos = (tag_id, page) => axios.get('/api/tags/videos', {
-    params: { tag_id, page: page || 0 }
+    params: { tag_id, offset: 10 * (page || 0) }
 });
 
 export const tagBlogs = (tag_id, page) => axios.get('/api/tags/blogs', {
@@ -135,7 +135,7 @@ export const catBlog = (cat_id, page) => axios.get('/api/cats/blogs', {
 });
 
 export const videoComments = (vid, page) => axios.get('/api/videos/comments', {
-    params: { vid, page: page || 0 }
+    params: { vid, offset: 10 * (page || 0) }
 });
 
 export const blogContent = (only_cat) => axios.get('/api/blogs/content', {
@@ -210,3 +210,6 @@ export const unblock = (usid) => axios.post('/api/blocks/unblock', { usid });
 export const favoriteVideo = (vid) => axios.post('/api/favorites/addfav', { vid });
 
 export const unfavoriteVideo = (vid) => axios.post('/api/favorites/unfav', { vid });
+
+export const addVideoComment = (vid, content) => axios.post('/api/Videocomments/addVC', { vid, content });
+

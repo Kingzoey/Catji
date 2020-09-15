@@ -61,7 +61,7 @@
             </li>
           </ul>
         </div>
-        <VideoComment />
+        <VideoComment :vid="this.$route.params.vid"/>
       </div>
       <div class="right-column">
         <div class="video-up">
@@ -162,6 +162,9 @@ export default {
     } catch (e) {
       this.$message.error("网络错误: " + e.response.data.status);
     }
+  },
+  mounted(){
+    
   },
   data() {
     return {

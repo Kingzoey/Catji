@@ -41,6 +41,9 @@ export default {
     reset() {
       this.cur_page = 1;
     },
+    reload() {
+      this.$props.onChange(this.cur_page - 1);
+    },
   },
 };
 </script>
