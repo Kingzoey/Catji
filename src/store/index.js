@@ -6,8 +6,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    user: {},
-    me: {},
+    user: {}, // loginInfo接口缓存, 包括账号认证信息等
+    me: {}, // userInfo信息缓存, 包括头像等
     pending: false,
     waitOnSuccess: [],
     waitOnFailed: []

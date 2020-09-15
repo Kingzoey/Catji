@@ -6,9 +6,9 @@
     <div class="comment-body">
       <div class="cb-send" :class="{'no-login':!$store.state.user.usid}">
         <div class="send-avatar">
-          <img v-if="!$store.state.user.avatar" src="//static.hdslb.com/images/member/noface.gif" />
+          <img v-if="!user.avatar" src="//static.hdslb.com/images/member/noface.gif" />
           <router-link :to="/space/ + $store.state.user.usid" v-else>
-            <img :src="$store.state.user.avatar" />
+            <img :src="user.avatar" />
           </router-link>
         </div>
         <div class="send-input">
@@ -134,6 +134,7 @@ export default {
           ilike: 0,
         },
       ],
+      user: {},
     };
   },
   methods: {
@@ -217,6 +218,14 @@ export default {
   },
   mounted() {
     this.getData(0);
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (me) => {
+        this.user = me;
+      },
+      onFailed: (status) => {
+        this.$message.error("网络错误: " + status);
+      },
+    });
   },
 };
 </script>

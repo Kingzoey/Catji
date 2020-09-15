@@ -61,7 +61,7 @@
             </li>
           </ul>
         </div>
-        <VideoComment :vid="this.$route.params.vid"/>
+        <VideoComment :vid="Number(this.$route.params.vid)" />
       </div>
       <div class="right-column">
         <div class="video-up">
@@ -163,9 +163,7 @@ export default {
       this.$message.error("网络错误: " + e.response.data.status);
     }
   },
-  mounted(){
-    
-  },
+  mounted() {},
   data() {
     return {
       expand: false, // 视频描述部分的"展开"按钮
@@ -221,7 +219,7 @@ export default {
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         sources: [
           {
-            type: "video/mp4", //这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
+            type: "video/mp4,video/ogg,video/webm", //这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
             src: "", //url地址
           },
         ],
@@ -274,7 +272,7 @@ export default {
       }
 
       let up = this.video.up;
-      if (this.$store.state.user.usid==up.usid) {
+      if (this.$store.state.user.usid == up.usid) {
         this.$message.error("不能关注自己！");
         return;
       }
