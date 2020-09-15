@@ -26,7 +26,7 @@
               <font-awesome-icon :icon="['fas', 'user']" />
               {{vi.nickname}}
             </router-link>
-            <button class="attention-btn" @click="follow(index)">关注</button>
+            <button class="attention-btn" @click="follow(index)">+ 关注</button>
             <button class="attention-a" @click="del(index)">取消收藏</button>
           </div>
         </div>
@@ -172,7 +172,7 @@ export default {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
-  float: right;
+  
 }
 .attention-a {
   width: 80px;
@@ -185,6 +185,7 @@ export default {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
+  float: right;
 }
 
 .headline :hover {
