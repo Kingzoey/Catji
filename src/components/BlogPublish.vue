@@ -89,7 +89,7 @@ export default {
       }
       let rawImages = this.blog.images.map((image) => image.raw);
       try {
-        let res = await postBlog(this.blog.content, rawImages, true);
+        let res = await postBlog(this.blog.content, rawImages, false);
         res = res.data;
         if (res.status === "ok") {
           this.blog = {};

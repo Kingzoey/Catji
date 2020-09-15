@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { followers } from "../api";
+import { followings } from "../api";
 export default {
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
       return;
     }
     try {
-      let res = await followers(usid);
+      let res = await followings(usid);
       res = res.data;
       if (res.status === "ok") {
         this.dataList = res.data;

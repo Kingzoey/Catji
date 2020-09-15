@@ -56,11 +56,12 @@ export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
     params: { usid, offset: page * 10 || 0 }
 });
 
-
-export const followers = (usid, page) => axios.get('/api/follows/followers', {
+// 粉丝
+export const followers = (usid, page) => axios.get('/api/follows/followers', { 
     params: { usid, offset: (page || 0) * 10 }
 });
 
+// 关注
 export const followings = (usid, page) => axios.get('/api/follows/following', {
     params: { usid, offset: (page || 0) * 10 }
 });
@@ -119,7 +120,7 @@ export const tagVideos = (tag_id, page) => axios.get('/api/tags/videos', {
 });
 
 export const tagBlogs = (tag_id, page) => axios.get('/api/tags/blogs', {
-    params: { tag_id, page: page || 0 }
+    params: { tag_id, offset: 10 * (page || 0) }
 });
 
 export const catInfo = (cat_id) => axios.get('/api/cats/info', {
