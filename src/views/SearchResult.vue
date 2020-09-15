@@ -225,7 +225,7 @@ input {
   margin: 50px 200px;
 }
 .search-wrap {
-  padding-top: 180px;
+  padding-top: 150px;
 }
 .rank-wrap {
   margin-bottom: 15px;

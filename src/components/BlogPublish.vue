@@ -136,7 +136,7 @@ export default {
   width: 70px;
   height: 32px;
   outline: none;
-  background-color: pink;
+  background-color: antiquewhite;
   color: #fff;
   border: none;
   border-radius: 4px;
