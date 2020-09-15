@@ -28,7 +28,6 @@
         <div class="send-button">
           <input type="button" value="注册" @click="onRegister()" />
         </div>
-        
       </div>
     </div>
   </div>
