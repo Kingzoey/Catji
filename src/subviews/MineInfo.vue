@@ -14,7 +14,7 @@
         <template slot="label">
           <font-awesome-icon :icon="['fas', 'user']" />&nbsp;昵称
         </template>
-        <el-input v-model="form.nickname" placeholder="请输入用户昵称"></el-input>
+        <el-input auto-complete="false" v-model="form.nickname" placeholder="请输入用户昵称"></el-input>
       </el-form-item>
       <el-form-item>
         <template slot="label">
@@ -36,7 +36,13 @@
         <template slot="label">
           <font-awesome-icon :icon="['fas', 'pen']" />&nbsp;签名
         </template>
-        <el-input v-model="form.signature" placeholder="请输入签名" type="textarea" :rows="2"></el-input>
+        <el-input
+          auto-complete="false"
+          v-model="form.signature"
+          placeholder="请输入签名"
+          type="textarea"
+          :rows="2"
+        ></el-input>
       </el-form-item>
       <el-form-item>
         <template slot="label">
@@ -48,13 +54,13 @@
         <template slot="label">
           <font-awesome-icon :icon="['fas', 'at']" />&nbsp;邮箱
         </template>
-        <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
+        <el-input auto-complete="false" v-model="form.email" placeholder="请输入邮箱"></el-input>
       </el-form-item>
       <el-form-item>
         <template slot="label">
           <font-awesome-icon :icon="['fas', 'key']" />&nbsp;密码
         </template>
-        <el-input v-model="form.password" type="password" placeholder="请输入密码"></el-input>
+        <el-input auto-complete="false" v-model="form.password" type="password" placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">更新个人信息</el-button>
