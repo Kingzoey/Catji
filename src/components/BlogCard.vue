@@ -131,7 +131,7 @@ export default {
       }
     },
     format(timestamp, fmt) {
-      var date = new Date(timestamp);
+      var date = new Date(1000 * timestamp);
       var o = {
         "M+": date.getMonth() + 1, //月份
         "d+": date.getDate(), //日
