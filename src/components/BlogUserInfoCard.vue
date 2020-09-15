@@ -36,7 +36,6 @@
 
 <script>
 export default {
-  name: "UserInfo",
   data() {
     return {
       user: {

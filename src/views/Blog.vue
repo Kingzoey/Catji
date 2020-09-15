@@ -3,8 +3,8 @@
     <NavBar />
     <div class="container clearfix">
       <div class="left">
-        <UserInfo class="userinfo" />
-        <UListt />
+        <BlogUserInfoCard class="userinfo" />
+        <RecommendUserList />
       </div>
       <div class="right">
         <BlogPublish style="margin-top: 8px;" />
@@ -15,17 +15,17 @@
 </template>
 
 <script>
+import NavBar from "@/components/NavBar.vue";
 import BlogCard from "@/components/BlogCard.vue";
 import BlogPublish from "@/components/BlogPublish.vue";
-import NavBar from "@/components/NavBar.vue";
-import UserInfo from "@/components/UserInfo.vue";
-import UListt from "@/components/UListt.vue";
+import BlogUserInfoCard from "@/components/BlogUserInfoCard.vue";
+import RecommendUserList from "@/components/RecommendUserList.vue";
 export default {
   name: "Blog",
   components: {
     NavBar,
-    UserInfo,
-    UListt,
+    BlogUserInfoCard,
+    RecommendUserList,
     BlogPublish,
     BlogCard,
   },

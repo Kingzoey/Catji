@@ -2,7 +2,7 @@
   <div class="page">
     <div class="container clearfix">
       <div class="left">
-        <BlogCard />
+        <SpaceBlogCard />
       </div>
       <div class="no-more">
         <img src="../assets/end.png" class="end-img" />
@@ -15,11 +15,11 @@
 </template>
 
 <script>
-import BlogCard from "@/components/MyBlogCard.vue";
+import SpaceBlogCard from "@/components/SpaceBlogCard.vue";
 export default {
   name: "Blog",
   components: {
-    BlogCard,
+    SpaceBlogCard,
   },
   data() {
     return {
