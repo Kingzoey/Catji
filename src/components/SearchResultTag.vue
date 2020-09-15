@@ -2,7 +2,7 @@
   <div class="tag-container">
     <el-tag
       class="tag"
-      v-for="tag in tagList"
+      v-for="tag in dataList"
       :key="tag.tag_id"
       effect="dark"
       :color="getColor(tag.tag_id)"
@@ -18,20 +18,12 @@
 <script>
 import { searchTag } from "../api";
 export default {
+  props: {
+    query: String,
+  },
   data() {
     return {
-      tagList: [
-        { name: "tag1", tag_id: 0, cat_id: null },
-        { name: "tag1tag1tag1", tag_id: 1, cat_id: null },
-        { name: "tatagtag11gtag11", tag_id: 2, cat_id: null },
-        { name: "tattatatag1g1g1ag1g1", tag_id: 3, cat_id: null },
-        { name: "tatag1tag1tag1g1", tag_id: 4, cat_id: null },
-        { name: "tag1", tag_id: 10, cat_id: null },
-        { name: "tag1tag1tag1", tag_id: 11, cat_id: null },
-        { name: "tatagtag11gtag11", tag_id: 12, cat_id: null },
-        { name: "tattatatag1g1g1ag1g1", tag_id: 13, cat_id: null },
-        { name: "tatag1tag1tag1g1", tag_id: 14, cat_id: null },
-      ],
+      dataList: [],
     };
   },
   methods: {
@@ -47,7 +39,6 @@ export default {
     getColor(seed) {
       return "#" + ((seed * 100000007) % 0xffffff).toString(16);
     },
-    update() {},
   },
   mounted() {
     this.getData(0);

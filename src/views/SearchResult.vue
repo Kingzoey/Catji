@@ -47,10 +47,10 @@
 // 这里的切换栏不单独分成组件了, 不然页面和组件之间的数据传递不好弄
 // import { searchVideo, searchUser, searchCat, searchTag } from "../api";
 import NavBar from "@/components/NavBar.vue";
-import VideoListtSearchResult from "@/components/VideoListtSearchResult.vue";
-import ListViewUser from "@/components/ListViewUser.vue";
-import ListViewCat from "@/components/ListViewCat.vue";
-import TagList from "@/components/TagList.vue";
+import SearchResultVideo from "@/components/SearchResultVideo.vue";
+import SearchResultUser from "@/components/SearchResultUser.vue";
+import SearchResultCat from "@/components/SearchResultCat.vue";
+import SearchResultTag from "@/components/SearchResultTag.vue";
 export default {
   name: "SearchResult",
   components: {
@@ -67,10 +67,10 @@ export default {
       query: "",
       hover: 0,
       tabs: [
-        { name: "视频", component: VideoListtSearchResult },
-        { name: "用户", component: ListViewUser },
-        { name: "猫咪", component: ListViewCat },
-        { name: "标签", component: TagList },
+        { name: "视频", component: SearchResultVideo },
+        { name: "用户", component: SearchResultUser },
+        { name: "猫咪", component: SearchResultCat },
+        { name: "标签", component: SearchResultTag },
       ],
     };
   },

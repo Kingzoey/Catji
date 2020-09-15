@@ -1,71 +1,43 @@
 <template>
-  <!--话题结果-->
-  <div
-    class="card-topic s-mt28"
-    id="pl_topic_header"
-    objectid="1022:2315223416241c875fe8526024a1716f70fd69"
-  >
-    <div class="card-topic-a" node-type="topicSmall">
+  <div class="card-topic s-mt28">
+    <div class="card-topic-a">
       <div class="pic">
-          <img :src="DLAM" width="300" height="300" />
+        <img :src="DLAM" width="300" height="300" />
       </div>
       <div class="info">
         <div class="title">
           <h1>
-            <a href="javascript:void(0);">哆啦a梦</a>
+            <a>哆啦a梦</a>
           </h1>
           <div>
-            <a
-              href="javascript:void(0);"
-              class="s-btn-c"
-              action-type="topicShare"
-              action-data="uid=1736329970&title=分享&content=我分享了话题#nba比赛日#"
-            >分享</a>
-            
+            <a class="s-btn-c">分享</a>
           </div>
         </div>
-        
+
         <div class="total">
           <span>粉丝：十亿</span>
-          <br>
+          <br />
           <span>铲屎官：野比大雄</span>
         </div>
       </div>
     </div>
-    <div class="card-topic-b" node-type="topicBig" style="display:none">
-      <div class="pic" node-type="topicPic">
-        <img src class="bpic" node-type="coverPic" />
-      </div>
-      <div class="tips" node-type="topicError" style="display:none">
-        <p class="error">
-          <i class="icon-warn-s"></i>上传失败，你的图片过小，需要上传1000x300像素以上的图片
-        </p>
-      </div>
-    </div>
-
-    <!--话题头部主导航-->
-    <!--/话题头部主导航-->
   </div>
 </template>
 
 <script>
 import DLAM from "@/assets/DLAM.jpg";
 export default {
-    name: "CatMain",
-    methods: {},
-    data() {
-      return {
-        className:"none",
-        DLAM: DLAM,
-      };
-    },
+  methods: {},
+  data() {
+    return {
+      className: "none",
+      DLAM: DLAM,
+    };
+  },
 };
-
 </script>
 
 <style scoped>
-/* card wrap */
-
 .card-wrap {
   margin-bottom: 10px;
   border-radius: 2px;
@@ -73,17 +45,13 @@ export default {
   background: #fff;
 }
 /* card */
-.pic
-{
-    text-align: center;
+.pic {
+  text-align: center;
 }
-.info
-{
-
+.info {
   margin-left: 700px;
 }
-.m-main-nav
-{
+.m-main-nav {
   text-align: center;
   margin-bottom: 100px;
 }
@@ -112,7 +80,6 @@ export default {
 .card-top .title {
   font-weight: normal;
 }
-/* 璇濋 */
 .card-topic {
   background: #fff;
 }
@@ -259,120 +226,6 @@ export default {
   padding: 16px;
   font-size: 14px;
   border-bottom: 1px solid #ebebeb;
-}
-
-/* 全局通用样式 */
-/*html, body, div, ul, ol, li, dl, dt, dd, header, footer, hgroup, h1, h2, h3, h4, h5, h6, p, br, section, article, figure, figcaption, sup, img, a, span, i, b, small, em, strong, form, fieldset, legend, label, input, select, option, textarea, button, cite, menu, table, thead, tbody, tfoot, tr, th, td {
-	margin: 0;
-	padding: 0;
-	font-weight: normal;
-	font-size: 100%;
-	font-style: normal;	
-	line-height: 100%;
-}*/
-html,
-body,
-div,
-ul,
-ol,
-li,
-dl,
-dt,
-dd,
-header,
-footer,
-hgroup,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-br,
-section,
-article,
-figure,
-figcaption,
-sup,
-img,
-a,
-span,
-i,
-b,
-small,
-em,
-strong,
-form,
-fieldset,
-legend,
-label,
-input,
-select,
-option,
-textarea,
-button,
-cite,
-menu,
-table,
-thead,
-tbody,
-tfoot,
-tr,
-th,
-td {
-  margin: 0;
-  padding: 0;
-  font-style: normal;
-}
-body {
-  font: 12px/1.3 Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
-    "WenQuanYi Micro Hei", sans-serif;
-  overflow-x: hidden;
-  color: #333;
-  -webkit-font-smoothing: antialiased;
-  background: #f7f7f7;
-}
-/*h1,h2,h3,h4,h5,h6 {
-	font-family: "Microsoft YaHei";
-}*/
-a {
-  color: #333;
-}
-a:hover {
-  color: #eb7350;
-}
-a,
-a:hover,
-button,
-input[type="submit"],
-input[type="button"] {
-  text-decoration: none;
-  cursor: pointer;
-  outline: none;
-}
-ul,
-li {
-  list-style: none;
-}
-button,
-img,
-fieldset,
-input,
-textarea,
-select {
-  border: 0;
-  outline: none;
-}
-textarea {
-  resize: none;
-  font: 12px/1.125 Arial, Helvetica, sans-serif;
-}
-input[type="text"],
-input[type="password"],
-textarea {
-  outline-style: none;
-  -webkit-appearance: none;
 }
 
 /*----style----*/
@@ -1723,7 +1576,6 @@ textarea {
 .m-setup-group .btn-box a {
   margin-left: 10px;
 }
-/* 鍐呭鏌ユ壘 */
 .m-findcon .find {
   overflow: hidden;
 }
@@ -1747,7 +1599,6 @@ textarea {
   overflow: scroll;
   margin-top: 10px;
 }
-/* 杩涘害 */
 .m-progress {
   overflow: hidden;
 }
@@ -1763,7 +1614,6 @@ textarea {
   background: #ea834c;
   border-radius: 5px;
 }
-/* @鐢ㄦ埛 */
 .m-user-list {
   /*display: none;*/
   position: absolute;

@@ -1,11 +1,11 @@
 <template>
   <div class="cat">
-    <NavBar2></NavBar2>
-    <CatMain style="background-color: rgb(232, 248, 255);"></CatMain>
+    <NavBar />
+    <CatMain style="background-color: rgb(232, 248, 255);" :cat_id="cat_id"></CatMain>
     <div class="m-main-nav">
       <div class="nav">
         <ul class="nav-switch">
-            <li
+          <li
             v-for="(item, index) in tabs"
             :key="item.name"
             class="nav-switch-item"
@@ -13,53 +13,65 @@
             @click="on = index"
             @mouseenter="hover = index"
             @mouseleave="hover = on"
-            >{{item.name}}
-            </li>
-            <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
+          >{{item.name}}</li>
+          <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
         </ul>
       </div>
-      <component :is="tabs[on].component"></component>
+      <component :is="tabs[on].component" :cat_id="cat_id"></component>
     </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import NavBar2 from "@/components/NavBar.vue";
+import NavBar from "@/components/NavBar.vue";
 import CatMain from "@/components/CatMain.vue";
+import SearchResultVideo from "@/components/SearchResultVideo.vue";
+import BlogCard from "@/components/BlogCard.vue";
+import CatIntroduction from "@/components/CatIntroduction.vue";
 export default {
-  name: "Cat",
-    mounted() {
-      this.hover = this.on;
+  created() {
+    console.log(this.$route.params);
+    this.cat_id = this.$route.params.cat_id;
+  },
+  mounted() {
+    this.hover = this.on;
+  },
+  computed: {
+    anthorx() {
+      return 160 + this.hover * 370;
     },
-    computed: {
-      anthorx() {
-        return 160 + this.hover * 370;
-      },
-    },
-    data() {
-      return {
-        on: 0,
-        hover: 0,
-        tabs: [
-          { name: "猫咪介绍", component: () => import("../components/CatIntroduction.vue") },
-          { name: "猫咪视频", component: () => import("../components/VideoListt.vue") },
-          { name: "猫咪动态", component: () => import("../components/BlogCard.vue") },
-          
-        ],
-      };
-    },
+  },
+  data() {
+    return {
+      cat_id: 0,
+      on: 0,
+      hover: 0,
+      tabs: [
+        {
+          name: "猫咪介绍",
+          component: CatIntroduction,
+        },
+        {
+          name: "猫咪视频",
+          component: SearchResultVideo,
+        },
+        {
+          name: "猫咪动态",
+          component: BlogCard,
+        },
+      ],
+    };
+  },
   components: {
-
     CatMain,
-    NavBar2,
+    NavBar,
   },
 };
 </script>
 
 <style scoped>
-.cat
-{
+.cat {
   margin-left: 200px;
   margin-right: 200px;
 }
@@ -74,15 +86,6 @@ export default {
   vertical-align: bottom;
   font-size: 30px;
   line-height: 80px;
-}
-
-.nav-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 36px;
-  margin-bottom: 16px;
-  background: url("../assets/backgroundd.jpg");
 }
 
 .nav-switch {
@@ -126,7 +129,6 @@ export default {
 .nav-wrap {
   display: flex;
   position: relative;
-  -ms-flex-pack: justify;
   justify-content: space-between;
   margin-bottom: 18px;
 }
