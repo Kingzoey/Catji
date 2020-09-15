@@ -27,7 +27,7 @@
         <span class="icon-info-c">
           <font-awesome-icon :icon="['fas', 'blog']" />&nbsp;
         </span>
-        <p class="textc tc-slate fs-12 ls-0">投稿</p>
+        <p class="textc tc-slate fs-12 ls-0">动态</p>
       </router-link>
     </div>
     <img :src="user.avatar" class="user-head c-pointer" />
