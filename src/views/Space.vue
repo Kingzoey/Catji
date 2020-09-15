@@ -7,8 +7,25 @@
           <div class="avatar">
             <img :src="displayUser.avatar" />
           </div>
-          <div class="name">{{displayUser.nickname}}</div>
-          <div class="stat clearfix">
+          <div class="name">
+            <font-awesome-icon :icon="['fas', 'cat']" v-if="displayUser.cat_id" />
+            {{displayUser.nickname}}
+          </div>
+          <div class="btn">
+            <el-button
+              class="follow"
+              :type="displayUser.ifollow?'success':'primary'"
+              size="mini"
+              @click="onFollow"
+            >{{displayUser.ifollow?"已关注":"关注"}}</el-button>
+            <el-button
+              class="block"
+              :type="displayUser.iblock?'info':'danger'"
+              size="mini"
+              @click="onBlock"
+            >{{displayUser.iblock?"已拉黑":"拉黑"}}</el-button>
+          </div>
+          <div class="stat">
             <router-link class="stat-item" :to="'/space/' + usid + '/fol'">
               <p class="stat-number">{{displayUser.followee_num}}</p>
               <p class="stat-label" :class="{on: tablist[subpage].subpath=='fol'}">关注</p>
@@ -18,7 +35,7 @@
               <p class="stat-label" :class="{on: tablist[subpage].subpath=='fan'}">粉丝</p>
             </router-link>
             <router-link class="stat-item" :to="'/space/' + usid + '/blog'">
-              <p class="stat-number">{{displayUser.upload_num}}</p>
+              <p class="stat-number">{{displayUser.blogs_num}}</p>
               <p class="stat-label" :class="{on: tablist[subpage].subpath=='blog'}">动态</p>
             </router-link>
           </div>
@@ -29,7 +46,7 @@
               <li
                 class="tab-item"
                 :class="{on:index==subpage}"
-                v-if="tab.show() && tab.showInList()"
+                v-if="tab.show() && tab.showInList"
                 :key="tab.subpath"
               >
                 <a href="javascript:void(0);" @click="direct(index)">
@@ -49,7 +66,7 @@
 </template>
 
 <script>
-import { userInfo } from "../api";
+import { userInfo, follow, unfollow, block, unblock } from "../api";
 import NavBar from "@/components/NavBar.vue";
 export default {
   name: "Space",
@@ -128,6 +145,74 @@ export default {
         });
       }
     },
+    onFollow() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能关注up主");
+        return;
+      }
+      let up = this.displayUser;
+      if (this.$store.state.user.usid == up.usid) {
+        this.$message.error("不可以关注自己！");
+        return;
+      }
+
+      if (up.ifollow) {
+        unfollow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            up.follower_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未关注此人") {
+              up.ifollow = 0;
+            }
+          });
+      } else {
+        follow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            up.follower_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已经关注此人") {
+              up.ifollow = 1;
+            }
+          });
+      }
+    },
+    onBlock() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能拉黑up主");
+        return;
+      }
+      let up = this.displayUser;
+      if (this.$store.state.user.usid == up.usid) {
+        this.$message.error("不可以拉黑自己！");
+        return;
+      }
+
+      if (up.iblock) {
+        unblock(up.usid)
+          .then(() => {
+            up.iblock = up.iblock ? 0 : 1;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未拉黑此人") {
+              up.iblock = 0;
+            }
+          });
+      } else {
+        block(up.usid)
+          .then(() => {
+            up.iblock = up.iblock ? 0 : 1;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已经拉黑此人") {
+              up.iblock = 1;
+            }
+          });
+      }
+    },
   },
   data() {
     return {
@@ -141,7 +226,7 @@ export default {
           iconname: "smile",
           tab: () => import("@/subviews/Test.vue"),
           show: () => true,
-          showInList: () => true,
+          showInList: true,
         },
         {
           subpath: "info",
@@ -149,7 +234,7 @@ export default {
           iconname: "edit",
           tab: () => import("@/subviews/MineInfo.vue"),
           show: () => this.usid == this.$store.state.user.usid,
-          showInList: () => true,
+          showInList: true,
         },
         {
           subpath: "blog",
@@ -157,7 +242,7 @@ export default {
           iconname: "blog",
           tab: () => import("@/subviews/MyBlog.vue"),
           show: () => true,
-          showInList: () => true,
+          showInList: true,
         },
         {
           subpath: "fol",
@@ -165,7 +250,7 @@ export default {
           iconname: "list",
           tab: () => import("@/subviews/FolList.vue"),
           show: () => true,
-          showInList: () => false,
+          showInList: false,
         },
         {
           subpath: "fan",
@@ -173,7 +258,7 @@ export default {
           iconname: "list",
           tab: () => import("@/subviews/FanList.vue"),
           show: () => true,
-          showInList: () => false,
+          showInList: false,
         },
         {
           subpath: "favorite",
@@ -181,7 +266,7 @@ export default {
           iconname: "folder",
           tab: () => import("@/subviews/FavList.vue"),
           show: () => true,
-          showInList: () => true,
+          showInList: true,
         },
         {
           subpath: "history",
@@ -189,7 +274,7 @@ export default {
           iconname: "history",
           tab: () => import("@/subviews/HistoryBlock.vue"),
           show: () => true,
-          showInList: () => true,
+          showInList: true,
         },
         {
           subpath: "upload",
@@ -197,7 +282,7 @@ export default {
           iconname: "upload",
           tab: () => import("@/subviews/UploadList.vue"),
           show: () => true,
-          showInList: () => true,
+          showInList: true,
         },
         {
           subpath: "stat",
@@ -205,7 +290,7 @@ export default {
           iconname: "rocket",
           tab: () => import("@/subviews/Stat.vue"),
           show: () => true,
-          showInList: () => true,
+          showInList: true,
         },
       ],
       displayUser: {
@@ -293,21 +378,21 @@ export default {
 }
 
 .stat {
-  margin: 16px auto 8px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .stat-item {
-  width: calc(100% / 3);
-  height: 92px;
+  width: 60px;
   text-align: center;
-  float: left;
   font-size: 16px;
   font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
 }
 
 .stat-number {
-  padding-top: 35px;
   line-height: 19px;
   color: #222;
 }
@@ -355,5 +440,21 @@ export default {
 
 .tab-item.on a svg {
   color: pink;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.follow.on {
+  background-color: #ff6ed4;
+  border-color: #ff6ed4;
+}
+
+.block.on {
+  background: #000;
+  border-color: #000;
 }
 </style>
