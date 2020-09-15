@@ -150,12 +150,14 @@ export default {
   align-content: center;
   justify-content: space-between;
 }
-
+.publish-btn:hover {
+  background-color: #f8c59b;
+}
 .tool-btn:hover {
-  color: rgb(255, 232, 155);
+  color: #f8c59b;
 }
 .tool-btn {
-  color: #f8c59b;
+  color:antiquewhite;
   margin-right: 15px;
   cursor: pointer;
   transition: color 0.5s;

@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
 .page {
-  background-color: rgb(232, 248, 255);
+  background-color: rgb(206, 240, 255);
 }
 
 .container {
