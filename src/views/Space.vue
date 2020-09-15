@@ -13,13 +13,11 @@
           </div>
           <div class="btn">
             <el-button
-              class="follow"
               :type="displayUser.ifollow?'success':'primary'"
               size="mini"
               @click="onFollow"
             >{{displayUser.ifollow?"已关注":"关注"}}</el-button>
             <el-button
-              class="block"
               :type="displayUser.iblock?'info':'danger'"
               size="mini"
               @click="onBlock"
@@ -91,24 +89,7 @@ export default {
       this.$message.error("用户信息有误");
       return;
     }
-    if (this.usid == this.$store.state.user.usid) {
-      this.$store.commit("cacheGetMineInfo", {
-        onSuccess: (me) => {
-          this.displayUser = { ...me };
-        },
-        onFailed: (err) => {
-          console.log(err);
-        },
-      });
-      return;
-    }
-    userInfo(this.usid)
-      .then((res) => {
-        this.displayUser = res.data.data;
-      })
-      .catch((err) => {
-        console.log(err.response.data.status);
-      });
+    this.getUserInfo(this.usid);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -124,6 +105,7 @@ export default {
       this.tablist.map((tabitem) => tabitem.subpath).indexOf(to.params.sub),
       0
     );
+    this.getUserInfo(this.usid);
     next();
   },
   methods: {
@@ -144,6 +126,26 @@ export default {
           path: to,
         });
       }
+    },
+    getUserInfo(usid) {
+      if (usid == this.$store.state.user.usid) {
+        this.$store.commit("cacheGetMineInfo", {
+          onSuccess: (me) => {
+            this.displayUser = { ...me };
+          },
+          onFailed: (err) => {
+            console.log(err);
+          },
+        });
+        return;
+      }
+      userInfo(usid)
+        .then((res) => {
+          this.displayUser = res.data.data;
+        })
+        .catch((e) => {
+          this.$message.error("网络错误: " + e.data.response.status);
+        });
     },
     onFollow() {
       if (!this.$store.state.user.usid) {
@@ -300,6 +302,7 @@ export default {
         follower_num: 0,
         followee_num: 0,
         upload_num: 0,
+        blogs_num: 0,
       },
     };
   },
@@ -448,13 +451,4 @@ export default {
   margin-top: 10px;
 }
 
-.follow.on {
-  background-color: #ff6ed4;
-  border-color: #ff6ed4;
-}
-
-.block.on {
-  background: #000;
-  border-color: #000;
-}
 </style>

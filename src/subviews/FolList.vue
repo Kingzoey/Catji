@@ -15,7 +15,7 @@
       <div
         class="live-panel-item live-up"
         style="margin-bottom: 20px;"
-        v-for="item in dataList"
+        v-for="(item, index) in dataList"
         :key="item.usid"
       >
         <router-link
@@ -27,14 +27,18 @@
           <div class="up-name line-clamp-1">{{item.nickname}}</div>
           <div class="live-name line-clamp-2">{{item.signature}}</div>
         </router-link>
-        <el-button type="danger" style="margin: auto 10px auto auto;" @click="cancelFollow">取消关注</el-button>
+        <el-button
+          style="margin:auto 10px auto auto;"
+          :type="item.ifollow==1?'success':'primary'"
+          @click="onFollow(index)"
+        >{{item.ifollow?"已关注":"关注"}}</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { followings } from "../api";
+import { followings, follow, unfollow } from "../api";
 export default {
   data() {
     return {
@@ -60,7 +64,37 @@ export default {
     }
   },
   methods: {
-    cancelFollow() {},
+    onFollow(index) {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能关注up主");
+        return;
+      }
+
+      let up = this.dataList[index];
+      if (up.ifollow) {
+        unfollow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            // up.follow_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未关注此人") {
+              up.ifollow = 0;
+            }
+          });
+      } else {
+        follow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            // up.follow_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已经关注此人") {
+              up.ifollow = 1;
+            }
+          });
+      }
+    },
   },
 };
 </script>
