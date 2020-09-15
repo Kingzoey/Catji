@@ -2,10 +2,10 @@
   <div class="content" style>
     <div class="user-pic"></div>
     <div class="name-test">
-      <router-link
-        class="user-name tc-black c-pointer"
-        :to="'/space/' + user.usid"
-      >{{user.nickname}}</router-link>
+      <router-link class="user-name tc-black c-pointer" :to="'/space/' + user.usid">
+        <font-awesome-icon :icon="['fas', 'cat']" v-if="user.cat_id" />
+        {{user.nickname}}
+      </router-link>
     </div>
     <div class="bottom">
       <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/fol'">
@@ -22,8 +22,8 @@
         </span>
         <p class="textb tc-slate fs-12 ls-0">粉丝</p>
       </router-link>
-      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/upload'">
-        <p class="numbersc fs-14">{{user.upload_num}}</p>
+      <router-link class="number-part c-pointer f-left" :to="'/space/' + user.usid + '/blog'">
+        <p class="numbersc fs-14">{{user.blogs_num}}</p>
         <span class="icon-info-c">
           <font-awesome-icon :icon="['fas', 'blog']" />&nbsp;
         </span>
