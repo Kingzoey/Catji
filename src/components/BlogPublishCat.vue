@@ -136,7 +136,7 @@ export default {
   width: 70px;
   height: 32px;
   outline: none;
-  background-color: rgb(232, 248, 255);
+  background-color: rgb(206, 240, 255);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -158,7 +158,7 @@ export default {
   color: rgb(151, 224, 255);
 }
 .tool-btn {
-  color: rgb(232, 248, 255);
+  color: rgb(206, 240, 255);
   margin-right: 15px;
   cursor: pointer;
   transition: color 0.5s;
