@@ -2,7 +2,7 @@
   <div class="imagesbox" v-if="images">
     <div class="zoom-wrap">
       <ul
-        class="zoom-list list-none"
+        class="zoom-list"
         :class="(images.length<=1)?'zoom-1':(images.length<=3)?'zoom-2':(images.length<=4)?'zoom-4':'zoom-9'"
       >
         <li
@@ -11,7 +11,7 @@
           v-for="(image,index) in images"
           :key="index"
         >
-          <div class="img-content" :style="'background-image: url('+image+');'"></div>
+          <el-image class="img-content" fit="cover" :src="image" :preview-src-list="[image]" />
         </li>
       </ul>
     </div>
@@ -40,21 +40,21 @@ export default {
   margin-left: -4px;
   vertical-align: top;
 }
-.zoom-list.zoom-1 {
+.zoom-1 {
   width: auto;
   height: auto;
   margin-bottom: 4px;
 }
-.zoom-list.zoom-2 {
+.zoom-2 {
   width: 456px;
 }
-.zoom-list.zoom-4 {
+.zoom-4 {
   width: 228px;
 }
-.zoom-list.zoom-9 {
+.zoom-9 {
   width: 342px;
 }
-.zoom-list .card {
+.card {
   width: 104px;
   height: 104px;
   margin: 4px 0 0 4px;
@@ -65,14 +65,12 @@ export default {
   position: relative;
   cursor: zoom-in;
 }
-.zoom-list .card.card-1 {
+.card.card-1 {
   width: 240px;
   height: 199px;
   border-radius: 0;
 }
 .img-content {
-  background: #fff center/cover no-repeat;
-  background-image: none;
   width: 100%;
   height: 100%;
   border-radius: 4px;

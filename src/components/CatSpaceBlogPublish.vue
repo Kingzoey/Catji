@@ -19,7 +19,7 @@
           <el-upload
             action="javascript:void(0);"
             :auto-upload="false"
-            accept="image/gif, image/jpg, image/png"
+            accept="image/*"
             multiple
             :limit="9"
             :file-list="blog.images"
@@ -36,7 +36,12 @@
         <!---->
       </div>
       <div class="submit-btn">
-        <button class="publish-btn" @click="onSubmit">发布</button>
+        <el-button
+          class="publish-btn"
+          @click="onSubmit"
+          :loading="uploading"
+          size="medium"
+        >{{uploading?"上传中":"发布"}}</el-button>
       </div>
     </div>
     <div class="img-container">
@@ -58,12 +63,14 @@ export default {
   name: "BlogPublish",
   data() {
     return {
+      uploading: false,
       blog: {
         content: "",
         images: [],
       },
     };
   },
+  inject: ["reload"],
   methods: {
     handleChange(file, fileList) {
       this.blog.images = fileList;
@@ -78,7 +85,7 @@ export default {
     handleTag() {
       this.blog.content += "#在此处添加tag#";
     },
-    async onSubmit() {
+    onSubmit() {
       if (!this.$store.state.user.usid) {
         this.$message.error("没有登录不能发表动态");
         return;
@@ -88,18 +95,18 @@ export default {
         return;
       }
       let rawImages = this.blog.images.map((image) => image.raw);
-      try {
-        let res = await postBlog(this.blog.content, rawImages, true);
-        res = res.data;
-        if (res.status === "ok") {
+      this.uploading = true;
+      postBlog(this.blog.content, rawImages, true)
+        .then(() => {
+          this.uploading = false;
           this.blog = {};
           this.$message.info("动态发表成功");
-        } else {
-          this.$message.error("网络错误: " + res.status);
-        }
-      } catch (e) {
-        this.$message.error("网络错误: " + e.response.data.status);
-      }
+          this.reload();
+        })
+        .catch((e) => {
+          this.uploading = false;
+          this.$message.error("网络错误: " + e.response.data.status);
+        });
     },
   },
 };
@@ -133,8 +140,6 @@ export default {
 }
 
 .publish-btn {
-  width: 70px;
-  height: 32px;
   outline: none;
   background-color: rgb(206, 240, 255);
   color: #fff;

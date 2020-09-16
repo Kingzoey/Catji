@@ -8,7 +8,11 @@
             <img :src="displayUser.avatar" />
           </div>
           <div class="name">
-            <font-awesome-icon :icon="['fas', 'cat']" v-if="displayUser.cat_id" style="color: pink"/>
+            <font-awesome-icon
+              :icon="['fas', 'cat']"
+              v-if="displayUser.cat_id"
+              style="color: pink"
+            />
             {{displayUser.nickname}}
           </div>
           <div class="btn">
@@ -72,16 +76,8 @@ export default {
     NavBar,
   },
   created() {
-    this.usid =
-      Number.parseInt(this.$route.params.usid) ||
-      this.$store.state.user.usid ||
-      null;
-    this.subpage = Math.max(
-      this.tablist
-        .map((tabitem) => tabitem.subpath)
-        .indexOf(this.$route.params.sub),
-      0
-    );
+    let { usid, sub } = this.$route.params;
+    this.initParams(usid, sub);
   },
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
@@ -99,16 +95,22 @@ export default {
     // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
     // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
     // 可以访问组件实例 `this`
-    this.usid =
-      Number.parseInt(to.params.usid) || this.$store.state.user.usid || null;
-    this.subpage = Math.max(
-      this.tablist.map((tabitem) => tabitem.subpath).indexOf(to.params.sub),
-      0
-    );
+    let { usid, sub } = to.params;
+    this.initParams(usid, sub);
     this.getUserInfo(this.usid);
     next();
   },
   methods: {
+    initParams(usid, sub) {
+      this.usid = Number.parseInt(usid) || this.$store.state.user.usid || null;
+      let subpageIndex = this.tablist
+        .map((tabitem) => tabitem.subpath)
+        .indexOf(sub);
+      if (subpageIndex < 0) {
+        subpageIndex = 2; // 默认跳转到动态页
+      }
+      this.subpage = subpageIndex;
+    },
     handleScroll() {
       this.scrollTop =
         window.pageYOffset ||
@@ -227,7 +229,7 @@ export default {
           name: "欢迎",
           iconname: "smile",
           tab: () => import("@/subviews/Test.vue"),
-          show: () => true,
+          show: () => this.usid == this.$store.state.user.usid,
           showInList: true,
         },
         {
@@ -454,5 +456,4 @@ export default {
   justify-content: center;
   margin-top: 10px;
 }
-
 </style>

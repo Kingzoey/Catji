@@ -25,7 +25,7 @@
         ></router-link>
         <router-link :to="/space/ + item.usid" class="live-detail ls-0">
           <div class="up-name line-clamp-1">{{item.nickname}}</div>
-          <div class="live-name line-clamp-2">{{item.signature}}</div>
+          <div class="live-name line-clamp-2">{{item.signature || "这个人很懒, 没有填写个性签名"}}</div>
         </router-link>
         <el-button
           style="margin:auto 10px auto auto;"
@@ -71,6 +71,10 @@ export default {
       }
 
       let up = this.dataList[index];
+      if (this.$store.state.user.usid == up.usid) {
+        this.$message.error("不可以关注自己！");
+        return;
+      }
       if (up.ifollow) {
         unfollow(up.usid)
           .then(() => {

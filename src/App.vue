@@ -1,13 +1,21 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view v-if="isRouterAlive" />
 </template>
 
 <script>
 import { loginInfo } from "./api";
 export default {
   name: "app",
+  data() {
+    return {
+      isRouterAlive: true,
+    };
+  },
+  provide() {
+    return {
+      reload: this.reload,
+    };
+  },
   async created() {
     try {
       // 先使用localstorage的数据
@@ -25,6 +33,12 @@ export default {
       // 失败说明cookie过期
       this.$store.commit("logout");
     }
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(() => (this.isRouterAlive = true));
+    },
   },
 };
 </script>
