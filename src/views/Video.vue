@@ -14,12 +14,7 @@
           </div>
         </div>
         <div class="player-wrap">
-          <video-player
-            class="vjs-custom-skin"
-            ref="videoPlayer"
-            :options="playerOptions"
-            :playsinline="true"
-          ></video-player>
+          <div class="player" id="player" />
         </div>
         <div class="toolbar">
           <span
@@ -94,35 +89,14 @@
             </div>
           </div>
         </div>
-        <!-- <div class="rec">
-          <div class="rec-head">视频推荐</div>
-          <div class="rec-list">
-        <div class="rectem" v-for="rectem in recs" :key="rectem.vid">-->
-        <!-- 封面, 左侧 -->
-        <!-- <div class="rectem-cover">
-                <router-link :to="/video/ + rectem.vid">
-                  <img :src="rectem.cover" width="168" height="95" />
-                </router-link>
-        </div>-->
-        <!-- 信息, 右侧 -->
-        <!-- <div class="rectem-info">
-                <div class="rectem-title">
-                  <router-link :to="/video/ + rectem.vid">{{rectem.title}}</router-link>
-                </div>
-                <div class="rectem-up">
-                  <router-link :to="/space/ + rectem.up.usid">{{rectem.up.name}}</router-link>
-                </div>
-                <div class="rectem-count">{{rectem.view_num}} 播放 · {{rectem.comment_num}} 弹幕</div>
-              </div>
-            </div>
-          </div>
-        </div>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import flvjs from "flv.js";
+import DPlayer from "dplayer";
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
 import {
@@ -140,32 +114,42 @@ export default {
     NavBar,
     VideoComment,
   },
-  async beforeMount() {
+  beforeCreate() {
+    window.flvjs = flvjs;
+  },
+  mounted() {
     let vid = this.$route.params.vid;
     if (!vid) {
       this.$message.error("视频信息错误");
       return;
     }
 
-    try {
-      let res = await videoInfo(vid);
-      res = res.data;
-      if (res.status === "ok") {
-        this.video = { ...res.data };
-        let src = this.video.url;
-        this.playerOptions.sources[0].type = "video/" + src.split(".").pop();
-        this.playerOptions.sources[0].src = src;
-        this.playerOptions.poster = this.video.cover;
-      } else {
-        this.$message.error("网络错误: " + res.status);
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.response.data.status);
-    }
+    videoInfo(vid)
+      .then((res) => {
+        res = res.data;
+        if (res.status === "ok") {
+          this.video = res.data;
+          this.dp = new DPlayer({
+            container: document.getElementById("player"),
+            video: {
+              url: res.data.url,
+              pic: res.data.cover,
+            },
+          });
+        } else {
+          this.$message.error("网络错误: " + res.status);
+        }
+      })
+      .catch((e) => {
+        this.$message.error("网络错误: " + e.response.data.status);
+      });
   },
-  mounted() {},
+  beforeDestroy() {
+    this.dp.destroy();
+  },
   data() {
     return {
+      dp: {},
       expand: false, // 视频描述部分的"展开"按钮
       video: {
         vid: 0,
@@ -190,48 +174,6 @@ export default {
         },
         ilike: 0,
         ifavorite: 0,
-      },
-      recs: [
-        {
-          vid: 0,
-          title: "推荐获取中",
-          desc: "推荐获取中",
-          cover: "",
-          view_num: 0,
-          comment_num: 0,
-          upload_time: 0,
-          like_num: 0,
-          favorite_num: 0,
-          up: {
-            usid: 0,
-            name: "获取中",
-          },
-        },
-      ],
-      playerOptions: {
-        autoplay: false, //如果true,浏览器准备好时开始回放。
-        muted: false, // 默认情况下将会消除任何音频。
-        loop: false, // 导致视频一结束就重新开始。
-        playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
-        // preload: "auto", // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
-        language: "zh-CN",
-        // aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
-        fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
-        sources: [
-          {
-            type: "video/mp4,video/ogg,video/webm", //这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-            src: "", //url地址
-          },
-        ],
-        poster: "", //你的封面地址
-        // width: document.documentElement.clientWidth, //播放器宽度
-        notSupportedMessage: "此视频暂无法播放，请稍后再试", //允许覆盖Video.js无法播放媒体源时显示的默认信息。
-        controlBar: {
-          timeDivider: true,
-          durationDisplay: true,
-          remainingTimeDisplay: false,
-          fullscreenToggle: true, //全屏按钮
-        },
       },
     };
   },
@@ -430,6 +372,7 @@ export default {
 
 .player-wrap {
   width: 763px;
+  min-height: 400px;
   overflow: hidden;
   background-color: #212121;
 }

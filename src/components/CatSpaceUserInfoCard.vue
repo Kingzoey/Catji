@@ -57,7 +57,6 @@ export default {
     this.$store.commit("cacheGetMineInfo", {
       onSuccess: (res) => {
         this.user = { ...res };
-        console.log(res);
       },
     });
   },

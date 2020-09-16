@@ -3,14 +3,10 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import VueVideoPlayer from 'vue-video-player'
-import 'video.js/dist/video-js.css'
-import 'vue-video-player/src/custom-theme.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 
-Vue.use(VueVideoPlayer)
 Vue.use(Element)
 
 // 图标查询地址: https://fontawesome.com/icons?d=gallery&q=cat&m=free

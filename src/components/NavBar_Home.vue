@@ -10,13 +10,13 @@
     </div>
     <div class="header">
       <ul class="nav">
-        <li v-if="!this.$store.state.user.usid">
+        <li v-if="!this.$store.state.user.hasOwnProperty('usid')">
           <router-link to="/login">登录</router-link>
         </li>
-        <li v-if="!this.$store.state.user.usid">
+        <li v-if="!this.$store.state.user.hasOwnProperty('usid')">
           <router-link to="/register">注册</router-link>
         </li>
-        <li v-if="this.$store.state.user.usid">
+        <li v-if="this.$store.state.user.hasOwnProperty('usid')">
           <router-link to="/catspace">猫咪广场</router-link>
         </li>
         <li>

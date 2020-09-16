@@ -11,7 +11,7 @@
         <div class="top-left">
           <div class="big-item">
             <div class="cover">
-              <router-link :to="/video/ + curHotlist[0].vid" class="link" target="_blank">
+              <router-link :to="/video/ + curHotlist[0].vid" class="link">
                 <img :src="curHotlist[0].cover" height="208" width="370" :alt="curHotlist[0].name" />
               </router-link>
             </div>
@@ -26,7 +26,7 @@
           <div class="top-right-line">
             <div class="normal-item" v-for="item in curHotlist.slice(1,3)" :key="item.vid">
               <div class="cover">
-                <router-link :to="/video/ + item.vid" class="link" target="_blank">
+                <router-link :to="/video/ + item.vid" class="link">
                   <img :src="item.cover" height="90" width="175" :alt="item.name" />
                 </router-link>
               </div>
@@ -40,7 +40,7 @@
           <div class="top-right-line">
             <div class="normal-item" v-for="item in curHotlist.slice(3,5)" :key="item.vid">
               <div class="cover">
-                <router-link :to="/video/ + item.vid" class="link" target="_blank">
+                <router-link :to="/video/ + item.vid" class="link">
                   <img :src="item.cover" height="90" width="175" :alt="item.name" />
                 </router-link>
               </div>
@@ -56,7 +56,7 @@
           <div class="bottom-line">
             <div class="normal-item" v-for="item in curHotlist.slice(5,9)" :key="item.vid">
               <div class="cover">
-                <router-link :to="/video/ + item.vid" class="link" target="_blank">
+                <router-link :to="/video/ + item.vid" class="link">
                   <img :src="item.cover" height="90" width="175" :alt="item.name" />
                 </router-link>
               </div>
