@@ -221,5 +221,6 @@ export default {
 
 .txt {
   margin-left: 12px;
+  width: 105px;
 }
 </style>
