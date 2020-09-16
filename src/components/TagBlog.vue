@@ -75,7 +75,7 @@ export default {
     getData(page) {
       tagBlogs(this.$props.tag_id, page)
         .then((res) => {
-          this.dataList = res.data.data;
+          this.blogs = res.data.data;
         })
         .catch((err) => {
           this.$message.error("网络错误: " + err.response.data.status);
