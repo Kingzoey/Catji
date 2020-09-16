@@ -8,7 +8,7 @@
             <img :src="displayUser.avatar" />
           </div>
           <div class="name">
-            <font-awesome-icon :icon="['fas', 'cat']" v-if="displayUser.cat_id" />
+            <font-awesome-icon :icon="['fas', 'cat']" v-if="displayUser.cat_id" style="color: pink"/>
             {{displayUser.nickname}}
           </div>
           <div class="btn">
@@ -357,6 +357,10 @@ export default {
   font-size: 18px;
   font-family: Michroma, "Segoe UI Light", "Segoe UI", "Segoe UI WP",
     "Microsoft Jhenghei", "微软雅黑", sans-serif, Times;
+}
+
+.name :hover {
+  color: orange;
 }
 
 .tab {
