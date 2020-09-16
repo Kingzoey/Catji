@@ -9,22 +9,10 @@ const routes = [{
 		import('../views/Home.vue')
 },
 {
-	path: '/test',
-	name: 'Test',
-	component: () =>
-		import('../views/Test.vue')
-},
-{
-	path: '/tag',
+	path: '/tag/:tag_id?',
 	name: 'Tag',
 	component: () =>
 		import('../views/Tag.vue')
-},
-{
-	path: '/tagg',
-	name: 'Tagg',
-	component: () =>
-		import('../views/Tag0.vue')
 },
 {
 	path: '/login',
@@ -51,7 +39,7 @@ const routes = [{
 		import('../views/Search.vue')
 },
 {
-	path: '/space/:usid?',
+	path: '/space/:usid(\\d+)?/:sub?',
 	name: 'Space',
 	component: () =>
 		import('../views/Space.vue')
@@ -86,12 +74,12 @@ const routes = [{
 	component: () =>
 		import('../views/Video.vue')
 },
-{
-	path: '/videolist',
-	name: 'videolist',
-	component: () =>
-		import('../views/VideoList.vue')
-},
+// {
+// 	path: '/videolist',
+// 	name: 'videolist',
+// 	component: () =>
+// 		import('../views/VideoList.vue')
+// },
 {
 	path: '/searchResult',
 	name: 'SearchResult',
@@ -99,47 +87,47 @@ const routes = [{
 		import('../views/SearchResult.vue')
 },
 {
-	path: '/cat',
+	path: '/cat/:cat_id',
 	name: 'Cat',
 	component: () =>
 		import('../views/Cat.vue')
 },
-{
-	path: '/userlist',
-	name: 'UserList',
-	component: () =>
-		import('../views/UserList.vue')
-},
-{
-	path: '/ulist',
-	name: 'UList',
-	component: () =>
-		import('../views/UList.vue')
-},
-{
-	path: '/uinfo',
-	name: 'UInfo',
-	component: () =>
-		import('../views/UInfo.vue')
-},
-{
-	path: '/mine0',
-	name: 'Mine0',
-	component: () =>
-		import('../views/Mine0.vue')
-},
-{
-	path: '/myblog',
-	name: 'MyBlog',
-	component: () =>
-		import('../views/MyBlog.vue')
-},
-{
-	path: '/game',
-	name: 'Game',
-	component: () =>
-		import('../views/Game.vue')
-}
+	// {
+	// 	path: '/userlist',
+	// 	name: 'UserList',
+	// 	component: () =>
+	// 		import('../views/UserList.vue')
+	// },
+	// {
+	// 	path: '/ulist',
+	// 	name: 'UList',
+	// 	component: () =>
+	// 		import('../views/UList.vue')
+	// },
+	// {
+	// 	path: '/uinfo',
+	// 	name: 'UInfo',
+	// 	component: () =>
+	// 		import('../views/UInfo.vue')
+	// },
+	// {
+	// 	path: '/mine0',
+	// 	name: 'Mine0',
+	// 	component: () =>
+	// 		import('../views/Mine0.vue')
+	// },
+	// {
+	// 	path: '/myblog',
+	// 	name: 'MyBlog',
+	// 	component: () =>
+	// 		import('../views/MyBlog.vue')
+	// },
+	// {
+	// 	path: '/game',
+	// 	name: 'Game',
+	// 	component: () =>
+	// 		import('../views/Game.vue')
+	// }
 ]
 
 const router = new VueRouter({

@@ -4,11 +4,11 @@
       <span>{{comment_num}} 条评论</span>
     </div>
     <div class="comment-body">
-      <div class="cb-send" :class="{'no-login':!$store.state.user.a}">
+      <div class="cb-send" :class="{'no-login':!$store.state.user.usid}">
         <div class="send-avatar">
-          <img v-if="!$store.state.user.avatar" src="//static.hdslb.com/images/member/noface.gif" />
+          <img v-if="!user.avatar" src="//static.hdslb.com/images/member/noface.gif" />
           <router-link :to="/space/ + $store.state.user.usid" v-else>
-            <img :src="$store.state.user.avatar" />
+            <img :src="user.avatar" />
           </router-link>
         </div>
         <div class="send-input">
@@ -18,12 +18,19 @@
               <router-link to="/login" class="baffle-login">登录</router-link>后发表评论 (・ω・)
             </div>
           </div>
-          <textarea cols="80" name="msg" rows="5" placeholder="发条友善的评论" class="send-textarea"></textarea>
-          <button type="submit" class="send-submit">发表评论</button>
+          <textarea
+            cols="80"
+            name="msg"
+            rows="5"
+            placeholder="发条友善的评论"
+            class="send-textarea"
+            v-model="content"
+          ></textarea>
+          <button type="submit" class="send-submit" @click="submitComment">发表评论</button>
         </div>
       </div>
       <div class="cb-list">
-        <div class="item" v-for="item in comments" :key="item.vcid">
+        <div class="item" v-for="(item, index) in comments" :key="item.vcid">
           <div class="item-avatar">
             <router-link :to="/space/ + item.user.usid">
               <img :src="item.user.avatar" />
@@ -35,8 +42,8 @@
             </div>
             <p class="item-text">{{item.content}}</p>
             <div class="item-info">
-              <span class="time">{{item.create_time}}</span>
-              <span class="like">
+              <span class="time">{{format(item.create_time,"yyyy-MM-dd")}}</span>
+              <span class="like" @click="like(index)" :class="{on:item.ilike==1}">
                 <font-awesome-icon :icon="['fas', 'thumbs-up']" />
                 {{item.like_num}}
               </span>
@@ -57,7 +64,7 @@
                 </div>
                 <!-- meta, 下方 -->
                 <div class="rtem-info">
-                  <span class="time">{{rtem.create_time}}</span>
+                  <span class="time">{{format(rtem.create_time,"yyyy-MM-dd")}}</span>
                   <span class="like">
                     <font-awesome-icon :icon="['fas', 'thumbs-up']" />
                     {{rtem.like_num}}
@@ -71,167 +78,127 @@
           </div>
         </div>
       </div>
-      <div class="cb-page">
-        <a @click="toPage(cur_page-1)" class="prev" v-if="cur_page > 1">上一页</a>
-        <a @click="toPage(cur_page-3)" class="tcd-number" v-if="cur_page > 3">{{cur_page-3}}</a>
-        <a @click="toPage(cur_page-2)" class="tcd-number" v-if="cur_page > 2">{{cur_page-2}}</a>
-        <a @click="toPage(cur_page-1)" class="tcd-number" v-if="cur_page > 1">{{cur_page-1}}</a>
-        <span class="current">{{cur_page}}</span>
-        <a
-          @click="toPage(cur_page+1)"
-          class="tcd-number"
-          v-if="cur_page+1 < tot_page"
-        >{{cur_page+1}}</a>
-        <a
-          @click="toPage(cur_page+2)"
-          class="tcd-number"
-          v-if="cur_page+2 < tot_page"
-        >{{cur_page+2}}</a>
-        <span class="dian" v-if="cur_page+3 < tot_page">...</span>
-        <a @click="toPage(tot_page)" class="tcd-number" v-if="cur_page < tot_page">{{tot_page}}</a>
-        <a @click="toPage(cur_page+1)" class="next" v-if="cur_page < tot_page && tot_page > 1">下一页</a>
-        <div class="jump">
-          共
-          <span>{{tot_page}}</span>页，
-          跳至
-          <input type="text" v-model="jmp_page" @keyup.enter="toPage(jmp_page)" />页
-        </div>
-      </div>
-      <div class="cb-send" :class="{'no-login':!$store.state.user.a}">
-        <div class="send-avatar">
-          <img v-if="!$store.state.user.avatar" src="//static.hdslb.com/images/member/noface.gif" />
-          <router-link :to="/space/ + $store.state.user.usid" v-else>
-            <img :src="$store.state.user.avatar" />
-          </router-link>
-        </div>
-        <div class="send-input">
-          <div class="baffle-wrap">
-            <div class="baffle">
-              请先
-              <router-link to="/login" class="baffle-login">登录</router-link>后发表评论 (・ω・)
-            </div>
-          </div>
-          <textarea cols="80" name="msg" rows="5" placeholder="发条友善的评论" class="send-textarea"></textarea>
-          <button type="submit" class="send-submit">发表评论</button>
-        </div>
-      </div>
+      <Pager :onChange="getData" ref="pager"></Pager>
     </div>
   </div>
 </template>
 
 <script>
+import Pager from "@/components/Pager.vue";
+import {
+  addVideoComment,
+  videoComments,
+  likeVideoComment,
+  unlikeVideoComment,
+} from "../api";
 export default {
-  name: "VideoComment",
+  components: {
+    Pager,
+  },
+  props: {
+    vid: Number,
+  },
+  computed: {
+    comment_num() {
+      return this.comments.length;
+    },
+  },
   data() {
     return {
-      cur_page: 1,
-      tot_page: 10,
-      jmp_page: "",
-      comment_num: 9999,
-      comments: [
-        {
-          vcid: 1,
-          content: "好!",
-          user: {
-            usid: 1,
-            name: "王小明",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          like_num: 987,
-          create_time: "2020-2-20 00:01",
-          replys: [
-            {
-              vcid: 11,
-              content: "好!",
-              user: {
-                usid: 1,
-                name: "王小明",
-                avatar: "//static.hdslb.com/images/member/noface.gif",
-              },
-              like_num: 987,
-              create_time: "2020-2-20 00:01",
-              replys: [],
-            },
-            {
-              vcid: 12,
-              content: "好!",
-              user: {
-                usid: 1,
-                name: "王小明",
-                avatar: "//static.hdslb.com/images/member/noface.gif",
-              },
-              like_num: 987,
-              create_time: "2020-2-20 00:01",
-              replys: [],
-            },
-            {
-              vcid: 13,
-              content: "好!",
-              user: {
-                usid: 1,
-                name: "王小明",
-                avatar: "//static.hdslb.com/images/member/noface.gif",
-              },
-              like_num: 987,
-              create_time: "2020-2-20 00:01",
-              replys: [],
-            },
-          ],
-        },
-        {
-          vcid: 2,
-          content: "好好!",
-          user: {
-            usid: 2,
-            name: "王小明",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          like_num: 987,
-          create_time: "2020-2-20 00:01",
-        },
-        {
-          vcid: 3,
-          content: "好好好!",
-          user: {
-            usid: 3,
-            name: "王小明",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          like_num: 987,
-          create_time: "2020-2-20 00:01",
-        },
-        {
-          vcid: 4,
-          content: "好好好好!",
-          user: {
-            usid: 4,
-            name: "王小明",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          like_num: 987,
-          create_time: "2020-2-20 00:01",
-        },
-        {
-          vcid: 5,
-          content: "好好好好好!",
-          user: {
-            usid: 5,
-            name: "王小明",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          like_num: 987,
-          create_time: "2020-2-20 00:01",
-        },
-      ],
+      content: "",
+      comments: [],
+      user: {},
     };
   },
   methods: {
-    toPage(new_page) {
-      new_page = Number(new_page);
-      if (!new_page) return;
-      this.cur_page = new_page;
-      //   this.comments = [...this.comments, ...this.comments];
+    format(secTimestamp, fmt) {
+      var date = new Date(secTimestamp * 1000);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds(), //毫秒
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+        }
+      }
+      return fmt;
     },
+    getData(page) {
+      videoComments(this.$props.vid, page)
+        .then((res) => {
+          this.comments = res.data.data;
+        })
+        .catch(() => {
+          this.$message.error("网络错误");
+        });
+    },
+    like(index) {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能点赞视频");
+        return;
+      }
+      let comment = this.comments[index];
+      if (comment.ilike) {
+        unlikeVideoComment(comment.vcid)
+          .then(() => {
+            comment.ilike = comment.ilike ? 0 : 1;
+            comment.like_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未点赞") {
+              comment.ilike = 0;
+            }
+          });
+      } else {
+        likeVideoComment(comment.vcid)
+          .then(() => {
+            comment.ilike = comment.ilike ? 0 : 1;
+            comment.like_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已点赞") {
+              comment.ilike = 1;
+            }
+          });
+      }
+    },
+    submitComment() {
+      addVideoComment(this.$props.vid, this.content)
+        .then(() => {
+          this.$refs.pager.reload();
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.response.data.status);
+        });
+    },
+  },
+  mounted() {
+    this.getData(0);
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: (me) => {
+        this.user = me;
+      },
+      onFailed: (status) => {
+        this.$message.error("网络错误: " + status);
+      },
+    });
   },
 };
 </script>
@@ -272,6 +239,10 @@ export default {
 }
 
 .baffle {
+  display: none;
+}
+
+.no-login .baffle {
   display: block;
   position: absolute;
   z-index: 102;
@@ -402,6 +373,8 @@ export default {
   cursor: pointer;
 }
 
+.item-info .like.on,
+.rtem-info .like.on,
 .item-info .like:hover svg,
 .item-info .reply:hover svg,
 .rtem-info .like:hover svg,

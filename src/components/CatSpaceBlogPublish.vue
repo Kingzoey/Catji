@@ -29,11 +29,11 @@
           >
             <font-awesome-icon :icon="['fas', 'camera']" />
           </el-upload>
-          <!-- <input
-          style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
-          type="file"
-          />-->
         </div>
+        <div id="imgContainer" style="margin-top: 10px;"></div>
+
+        <!---->
+        <!---->
       </div>
       <div class="submit-btn">
         <el-button
@@ -96,7 +96,7 @@ export default {
       }
       let rawImages = this.blog.images.map((image) => image.raw);
       this.uploading = true;
-      postBlog(this.blog.content, rawImages, false)
+      postBlog(this.blog.content, rawImages, true)
         .then(() => {
           this.uploading = false;
           this.blog = {};
@@ -141,33 +141,33 @@ export default {
 
 .publish-btn {
   outline: none;
-  background-color: antiquewhite;
+  background-color: rgb(206, 240, 255);
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  transition: all 0.5s;
 }
-
 .bottom-bar {
   margin-top: 10px;
   display: flex;
   align-content: center;
   justify-content: space-between;
 }
+
 .publish-btn:hover {
-  background-color: #f8c59b;
+  background-color: rgb(151, 224, 255);
 }
 .tool-btn:hover {
-  color: #f8c59b;
+  color: rgb(151, 224, 255);
 }
 .tool-btn {
-  color: antiquewhite;
+  color: rgb(206, 240, 255);
   margin-right: 15px;
   cursor: pointer;
   transition: color 0.5s;
 }
-
 .img-container {
   margin-top: 10px;
 }

@@ -2,16 +2,19 @@
   <div>
     <div class="card" v-for="(blog, index) in blogs" :key="blog.bid">
       <router-link
-        :to="/space/ + blog.up.usid"
-        :style="'background-image:url('+blog.up.avatar+')'"
+        :to="/space/ + user.usid"
+        :style="'background-image:url('+user.avatar+')'"
         class="user-head"
       ></router-link>
-      <div class="main-content" style="padding-bottom: 0px;">
+      <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
-          <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
+          <router-link :to="/space/ + user.usid">{{user.nickname}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
           <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
+        </div>
+        <div class="delete" @click="deletemine(blog.bid)">
+          <font-awesome-icon :icon="['fas', 'trash-alt']" />
         </div>
         <div class="card-content">
           <div class="text description">
@@ -51,11 +54,11 @@
 
 <script>
 import {
-  blogContent,
+  blogInfo,
   likeBlog,
   unlikeBlog,
-  //   likeBlogComment,
-  //   unlikeBlogComment,
+  // likeBlogComment,
+  // unlikeBlogComment,
 } from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
 export default {
@@ -98,6 +101,9 @@ export default {
           });
       }
     },
+    deletemine(bid) {
+      window.alert(bid);
+    },
     format(timestamp, fmt) {
       var date = new Date(1000 * timestamp);
       var o = {
@@ -130,37 +136,55 @@ export default {
   },
   data() {
     return {
+      usid: 0,
+      user: {
+        usid: 0,
+        nickname: "获取中",
+        avatar: "//static.hdslb.com/images/member/noface.gif",
+      },
       blogs: [
         {
           bid: 0,
           content: "获取中",
-          create_time: Math.floor(Date.now() / 1000),
+          create_time: Date.now() / 1000,
           like_num: 0,
           transmit_num: 0,
           comment_num: 0,
-          up: {
-            usid: 0,
-            name: "获取中",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
           images: [],
-          ilike: 0,
         },
       ],
     };
   },
+  created() {
+    this.usid =
+      Number.parseInt(this.$route.params.usid) ||
+      this.$store.state.user.usid ||
+      null;
+  },
   async mounted() {
-    try {
-      let res = await blogContent(true);
-      res = res.data;
-      if (res.status === "ok") {
-        this.blogs = res.data;
-      } else {
-        this.$message.error("网络错误: " + res.status);
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.data.response.status);
+    if (!this.$store.state.user.usid) {
+      this.$message.error("用户未登录");
+      return;
     }
+    this.$store.commit("cacheGetMineInfo", {
+      onSuccess: async (me) => {
+        this.user = me;
+        try {
+          let res = await blogInfo(this.usid, 0);
+          res = res.data;
+          if (res.status === "ok") {
+            this.blogs = res.data;
+          } else {
+            this.$message.error("网络错误: " + res.status);
+          }
+        } catch (e) {
+          this.$message.error("网络错误: " + e.data.response.status);
+        }
+      },
+      onFailed: (status) => {
+        this.$message.error("网络错误: " + status);
+      },
+    });
   },
 };
 </script>
@@ -172,10 +196,6 @@ export default {
   min-width: 632px;
   background: #fff;
   margin-top: 8px;
-  background-repeat: no-repeat;
-  background-position: right top;
-  background-size: 700px;
-  background-image: url(../assets/blogcardtop2.png);
 }
 
 .user-head {
@@ -253,12 +273,22 @@ export default {
 
 .on,
 .single-button:hover {
-  color: #00b5e5;
+  color: #fb7299;
 }
 
 .text-offset {
   position: relative;
   top: 1px;
   left: 3px;
+}
+.delete {
+  position: absolute;
+  top: 35px;
+  right: 30px;
+  color: #6d757a;
+  font-size: 22px;
+}
+.delete:hover {
+  color: #00ffff;
 }
 </style>

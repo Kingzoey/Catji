@@ -14,10 +14,12 @@
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
+    "dplayer": "^1.26.0",
     "element-ui": "^2.13.2",
+    "flv.js": "^1.5.0",
+    "js2wordcloud": "^1.1.12",
     "vue": "^2.6.12",
     "vue-router": "^3.4.3",
-    "vue-video-player": "^5.0.2",
     "vuex": "^3.4.0"
   },
   "devDependencies": {

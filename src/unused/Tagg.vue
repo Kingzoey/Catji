@@ -1,51 +1,43 @@
+
 <template>
-  <div class="tagg">
-    <NavBar />
-    <div class="tagg-wrap" style="background-color: rgb(232, 248, 255);">
-      <div class="card-topic">
-        <img class="spic" src="/img/logo_demo2_00.ee314634.png" />
-        <div class="info">
-          <div class="title">
-            <h1>#{{tag_info.name}}#</h1>
-          </div>
-          <div class="total">
-            <span>阅读 {{tag_info.read_num || Math.round(Math.random() * 1234)}}</span>
-            <span>讨论 {{tag_info.topic_num || Math.round(Math.random() * 1234)}}</span>
-          </div>
+  <!--话题结果-->
+  <div class="tagg-wrap">
+    <div class="card-topic">
+      <img class="spic" src="/img/logo_demo2_00.ee314634.png" />
+      <div class="info">
+        <div class="title">
+          <h1>#{{tag_info.name}}#</h1>
+        </div>
+        <div class="total">
+          <span>阅读 {{tag_info.read_num || Math.round(Math.random() * 1234)}}</span>
+          <span>讨论 {{tag_info.topic_num || Math.round(Math.random() * 1234)}}</span>
         </div>
       </div>
-      <!--话题头部主导航-->
-      <div class="container">
-        <ul class="tab">
-          <li
-            class="tab-item"
-            :class="{on:index==on}"
-            v-for="(tab, index) in tablist"
-            :key="tab.name"
-          >
-            <a @click="on = index">
-              <font-awesome-icon :icon="['fas', tab.iconname]" />
-              {{tab.name}}
-            </a>
-          </li>
-        </ul>
-        <component :is="tablist[on].tab" :tag_id="Number(this.$route.params.tag_id)"></component>
-      </div>
-      <br />
     </div>
+    <!--话题头部主导航-->
+    <div class="container">
+      <ul class="tab">
+        <li
+          class="tab-item"
+          :class="{on:index==on}"
+          v-for="(tab, index) in tablist"
+          :key="tab.name"
+        >
+          <a @click="on = index">
+            <font-awesome-icon :icon="['fas', tab.iconname]" />
+            {{tab.name}}
+          </a>
+        </li>
+      </ul>
+      <component :is="tablist[on].tab" :tag_id="Number(this.$route.params.tag_id)"></component>
+    </div>
+    <br />
   </div>
 </template>
 
 <script>
 import { tagInfo } from "../api";
-import NavBar from "@/components/NavBar.vue";
-import TagVideo from "@/components/TagVideo.vue";
-import TagBlog from "@/components/TagBlog.vue";
 export default {
-  name: "Tag",
-  components: {
-    NavBar,
-  },
   data() {
     return {
       on: 0,
@@ -59,12 +51,12 @@ export default {
         {
           name: "视频",
           iconname: "video",
-          tab: TagVideo,
+          tab: () => import("@/components/VideoListtTagResult.vue"),
         },
         {
           name: "动态",
           iconname: "blog",
-          tab: TagBlog,
+          tab: () => import("@/components/BlogCardSearch.vue"),
         },
       ],
     };
@@ -90,7 +82,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 .container {

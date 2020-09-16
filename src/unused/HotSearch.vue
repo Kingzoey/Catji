@@ -1,13 +1,13 @@
 <template>
   <div class="rank-list">
     <header class="rank-header">
-      <span class="name">搜索历史</span>
+      <span class="name">热门搜索</span>
       <div class="more tab-switch">
-        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0"></div>
+        <div class="tab-switch-item" :class="{on : on == 0}" @click="on = 0">大家都在搜</div>
       </div>
     </header>
     <div class="rank-wrap" v-for="(item, index) in curHotlist" :key="item.id+item.url">
-      <span class="number" :class="{on : index < 0}">{{index + 1}}</span>
+      <span class="number" :class="{on : index < 3}">{{index + 1}}</span>
       <router-link :to="item.url" class="link">
         <p :title="item.title" class="title">{{item.title}}</p>
       </router-link>
@@ -105,12 +105,12 @@ export default {
 
 <style scoped>
 .rank-list {
- 
-   width: 265px;
-   float:left;
-   position: relative;
-   top:30px;left: 55%;
-   z-index: 100;
+  width: 265px;
+  float: left;
+  position: relative;
+  top: 30px;
+  left: 10%;
+  z-index: 100;
 }
 
 .rank-header {
@@ -119,6 +119,7 @@ export default {
   justify-content: space-between;
   height: 36px;
   margin-bottom: 16px;
+  padding-top: 10px;
 }
 
 .name {

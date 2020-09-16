@@ -6,7 +6,7 @@
         :style="'background-image:url('+blog.up.avatar+')'"
         class="user-head"
       ></router-link>
-      <div class="main-content" style="padding-bottom: 0px;">
+      <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
           <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
         </div>
@@ -46,24 +46,41 @@
       <br />
     </div>
     <br />
+    <div class="page-wrap">
+      <Pager :onChange="getData"></Pager>
+    </div>
   </div>
 </template>
 
 <script>
 import {
-  blogContent,
+  tagBlogs,
   likeBlog,
   unlikeBlog,
-  //   likeBlogComment,
-  //   unlikeBlogComment,
+  // likeBlogComment,
+  // unlikeBlogComment,
 } from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
+import Pager from "@/components/Pager.vue";
 export default {
-  name: "BlogCard",
+  name: "BlogCardSearch",
   components: {
     BlogCardImage,
+    Pager,
+  },
+  props: {
+    tag_id: Number,
   },
   methods: {
+    getData(page) {
+      tagBlogs(this.$props.tag_id, page)
+        .then((res) => {
+          this.blogs = res.data.data;
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.response.data.status);
+        });
+    },
     forward(index) {
       this.$message.info("转载功能正在完善中...");
       index;
@@ -149,18 +166,9 @@ export default {
       ],
     };
   },
-  async mounted() {
-    try {
-      let res = await blogContent(true);
-      res = res.data;
-      if (res.status === "ok") {
-        this.blogs = res.data;
-      } else {
-        this.$message.error("网络错误: " + res.status);
-      }
-    } catch (e) {
-      this.$message.error("网络错误: " + e.data.response.status);
-    }
+
+  mounted() {
+    this.getData(0);
   },
 };
 </script>
@@ -175,7 +183,7 @@ export default {
   background-repeat: no-repeat;
   background-position: right top;
   background-size: 700px;
-  background-image: url(../assets/blogcardtop2.png);
+  background-image: url(../assets/blogcardtop3.png);
 }
 
 .user-head {
@@ -246,19 +254,24 @@ export default {
 
 .single-button {
   display: inline-block;
-  width: 92px;
+  margin-right: 70px;
   font-size: 12px;
   cursor: pointer;
 }
 
 .on,
 .single-button:hover {
-  color: #00b5e5;
+  color: #fb7299;
 }
 
 .text-offset {
   position: relative;
   top: 1px;
   left: 3px;
+}
+.page-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -4,38 +4,41 @@
     <div class="container">
       <div class="bank clearfix">
         <div class="left">
-          <Middle>
+          <Middle :getData="mid1">
             <template v-slot:header>
               <font-awesome-icon :icon="['fas', 'fire']" />&nbsp;热门视频
             </template>
           </Middle>
         </div>
         <div class="right">
-          <Top />
+          <TopCombine />
         </div>
       </div>
       <div class="bank clearfix">
         <div class="left">
-          <Middle>
+          <Middle :getData="mid2">
             <template v-slot:header>
               <font-awesome-icon :icon="['fas', 'newspaper']" />&nbsp;最新视频
             </template>
           </Middle>
         </div>
         <div class="right">
-          <Top_0 />
+          <TopNewVideo />
         </div>
       </div>
       <div class="bank clearfix">
         <div class="left">
-          <Middle>
-            <template v-slot:header>
-              <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;热门标签
-            </template>
-          </Middle>
+          <div class="card">
+            <header class="new-header">
+              <span class="new-name">
+                <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;热门标签
+              </span>
+            </header>
+            <div id="wordcloud"></div>
+          </div>
         </div>
         <div class="right">
-          <Top_1 />
+          <TopTag />
         </div>
       </div>
     </div>
@@ -45,20 +48,51 @@
 
 
 <script>
-// @ is an alias to /src
+import Js2WordCloud from "js2wordcloud";
+import { hotVideo, newVideo, hotTag } from "../api";
 import NavBar from "@/components/NavBar_Home.vue";
-import Top from "@/components/Top.vue";
-import Top_0 from "@/components/Top_0.vue";
-import Top_1 from "@/components/Top_1.vue";
-import Middle from "@/components/Middle2.vue";
+import TopCombine from "@/components/TopCombine.vue";
+import TopNewVideo from "@/components/TopNewVideo.vue";
+import TopTag from "@/components/TopTag.vue";
+import Middle from "@/components/Middle.vue";
 export default {
   name: "Home",
   components: {
     NavBar,
-    Top,
-    Top_0,
-    Top_1,
+    TopCombine,
+    TopNewVideo,
+    TopTag,
     Middle,
+  },
+  data() {
+    return {
+      mid1: hotVideo,
+      mid2: newVideo,
+    };
+  },
+  mounted() {
+    hotTag().then((res) => {
+      res = res.data;
+      let items = res.data;
+      let items2 = [];
+      items.forEach((item) => {
+        items2.push(item);
+        items2.push(item);
+      });
+      let words = items2.map((item, index) => [
+        item.name,
+        (items2.length - index) * 6,
+      ]);
+      console.log(words);
+      this.wc = new Js2WordCloud(document.getElementById("wordcloud"));
+      this.wc.setOption({
+        tooltip: {
+          show: false,
+        },
+        list: words,
+        color: "random-dark",
+      });
+    });
   },
 };
 </script>
@@ -88,5 +122,24 @@ export default {
 }
 .right {
   margin-left: 15px;
+}
+
+.card {
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.new-header {
+  height: 36px;
+}
+
+.new-name {
+  font-size: 22px;
+  line-height: 36px;
+}
+
+#wordcloud {
+  height: 360px;
+  width: 100%;
 }
 </style>

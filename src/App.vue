@@ -1,14 +1,44 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view v-if="isRouterAlive" />
 </template>
 
 <script>
+import { loginInfo } from "./api";
 export default {
   name: "app",
-  created() {
-    this.$store.commit("loadUser");
+  data() {
+    return {
+      isRouterAlive: true,
+    };
+  },
+  provide() {
+    return {
+      reload: this.reload,
+    };
+  },
+  async created() {
+    try {
+      // 先使用localstorage的数据
+      this.$store.state.user = JSON.parse(localStorage.getItem("user"));
+      // 然后用cookie尝试登录
+      var res = await loginInfo();
+      res = res.data;
+      if (res.status === "ok") {
+        this.$store.commit("login", res.data);
+        this.$message.info("欢迎用户 " + res.data.nickname + " 回到 Catji");
+      } else {
+        this.$store.commit("logout");
+      }
+    } catch (e) {
+      // 失败说明cookie过期
+      this.$store.commit("logout");
+    }
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(() => (this.isRouterAlive = true));
+    },
   },
 };
 </script>
@@ -24,13 +54,12 @@ export default {
 
 html {
   color: #505050;
-  font: 12px -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial,
-    PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
+  min-width: 1226px;
   font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica,
     Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
   font-size: 12px;
@@ -61,6 +90,10 @@ input,
 button {
   border-style: none;
   padding: 0;
+}
+
+#app {
+  position: relative;
 }
 
 /* 用来清除浮动的class */

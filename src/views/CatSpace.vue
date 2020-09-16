@@ -3,38 +3,38 @@
     <NavBar />
     <div class="container clearfix">
       <div class="left">
-        <CatUserInfo class="catuserinfo" />
-        <UListt />
+        <CatSpaceUserInfoCard class="catuserinfo" />
+        <RecommendUserList />
       </div>
       <div class="right">
-        <BlogPublishCat /> 
-        <CatBlogCard />
+        <CatSpaceBlogPublish style="margin-top: 8px;" />
+        <CatSpaceBlogCard />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CatBlogCard from "@/components/CatSpaceBlogCard.vue";
-import BlogPublishCat from "@/components/BlogPublishCat.vue";
+import CatSpaceBlogCard from "@/components/CatSpaceBlogCard.vue";
+import CatSpaceBlogPublish from "@/components/CatSpaceBlogPublish.vue";
 import NavBar from "@/components/NavBar.vue";
-import CatUserInfo from "@/components/CatUserInfo.vue";
-import UListt from "@/components/UListt.vue";
+import CatSpaceUserInfoCard from "@/components/CatSpaceUserInfoCard.vue";
+import RecommendUserList from "@/components/RecommendUserList.vue";
 export default {
   name: "Blog",
   components: {
     NavBar,
-    CatUserInfo,
-    UListt,
-    BlogPublishCat,
-    CatBlogCard,
+    CatSpaceUserInfoCard,
+    RecommendUserList,
+    CatSpaceBlogPublish,
+    CatSpaceBlogCard,
   },
 };
 </script>
 
 <style scoped>
 .page {
-  background-color: rgb(232, 248, 255);
+  background-color: rgb(206, 240, 255);
 }
 
 .container {

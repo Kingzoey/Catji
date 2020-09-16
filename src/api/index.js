@@ -20,6 +20,8 @@ export const hotTag = () => axios.get('/api/tags/hotlist');
 
 export const hotUser = () => axios.get('/api/users/hotlist');
 
+export const hotCat = () => axios.get('/api/cats/hotlist');
+
 export const hotVideo = () => axios.get('/api/videos/hotlist');
 
 export const newVideo = () => axios.get('/api/videos/newlist');
@@ -43,22 +45,25 @@ export const videoInfo = (vid) => axios.get('/api/videos/info', {
 
 export const userInfo = (usid) => axios.get('/api/users/info', {
     params: { usid }
+}).then(res => {
+    if (res.data.status === 'ok') {
+        res.data.data.birthday = new Date(res.data.data.birthday * 1000);
+    }
+    return res;
 });
 
 export const blogInfo = (usid, page) => axios.get('/api/blogs/info', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: page * 10 || 0 }
 });
 
-export const follow = (usid) => axios.post('/api/follows/follow', {
-    params: { usid }
-});
-
+// 粉丝
 export const followers = (usid, page) => axios.get('/api/follows/followers', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
 
+// 关注
 export const followings = (usid, page) => axios.get('/api/follows/following', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: (page || 0) * 10 }
 });
 
 // /**
@@ -84,30 +89,38 @@ export const followings = (usid, page) => axios.get('/api/follows/following', {
  */
 export const updateInfo = (params) => {
     var formdata = new FormData();
-    for (const param in params) {
-        formdata.append(param, params[param]);
+    for (const key in params) {
+        if (key === 'birthday') {
+            formdata.append(key, params[key] / 1000);
+        } else {
+            formdata.append(key, params[key]);
+        }
     }
     return axios.post('/api/users/updateinfo', formdata);
 }
 
-export const myFavorite = (page) => axios.get('/api/favorites/info', {
-    params: { page: page || 0 }
+export const favorite = (usid, page) => axios.get('/api/favorites/info', {
+    params: { usid, offset: 10 * (page || 0) }
 });
 
-export const watchHistory = (page) => axios.get('/api/watchhistories/info', {
-    params: { page: page || 0 }
+export const watchHistory = (usid, page) => axios.get('/api/watchhistories/info', {
+    params: { usid, offset: 10 * (page || 0) }
 });
 
 export const myWork = (usid, page) => axios.get('/api/videos/own', {
-    params: { usid, page: page || 0 }
+    params: { usid, offset: 10 * (page || 0) }
 });
 
+export const tagInfo = (tag_id) => axios.get('/api/tags/name', {
+    params: { tag_id }
+})
+
 export const tagVideos = (tag_id, page) => axios.get('/api/tags/videos', {
-    params: { tag_id, page: page || 0 }
+    params: { tag_id, offset: 10 * (page || 0) }
 });
 
 export const tagBlogs = (tag_id, page) => axios.get('/api/tags/blogs', {
-    params: { tag_id, page: page || 0 }
+    params: { tag_id, offset: 10 * (page || 0) }
 });
 
 export const catInfo = (cat_id) => axios.get('/api/cats/info', {
@@ -123,7 +136,7 @@ export const catBlog = (cat_id, page) => axios.get('/api/cats/blogs', {
 });
 
 export const videoComments = (vid, page) => axios.get('/api/videos/comments', {
-    params: { vid, page: page || 0 }
+    params: { vid, offset: 10 * (page || 0) }
 });
 
 export const blogContent = (only_cat) => axios.get('/api/blogs/content', {
@@ -131,11 +144,17 @@ export const blogContent = (only_cat) => axios.get('/api/blogs/content', {
 });
 
 /**
- * @param {HTMLFormElement} formdata 
+ * 上传动态
+ * @param {String} content - 动态内容
+ * @param {Blob[]} images - 附带图片(<=9)
+ * @param {bool} is_public - 是否公开
  */
-export const postBlog = (formdata) => {
-    // 这里不太确定
-    return axios.post('/api/blogs/release', formdata);
+export const postBlog = (content, images, is_public) => {
+    var formData = new FormData();
+    formData.append('content', content);
+    images.forEach(image => formData.append('images', image));
+    formData.append('is_public', (is_public ? 1 : 0));
+    return axios.post('/api/blogs/release', formData);
 };
 
 export const searchVideo = (keyword, page) => axios.get('/api/videos/search', {
@@ -164,3 +183,34 @@ export const uploadVideo = (title, desc, coverFile, videoFile, tags, catags) => 
     catags.forEach(catag => formData.append('catags', catag));
     return axios.post('/api/videos/release', formData);
 }
+
+export const likeVideo = (vid) => axios.post('/api/Likevideos/addLikeV', { vid });
+
+export const unlikeVideo = (vid) => axios.post('/api/Likevideos/unlikev', { vid });
+
+export const likeBlog = (bid) => axios.post('/api/Likeblogs/addLikeB', { bid });
+
+export const unlikeBlog = (bid) => axios.post('/api/Likeblogs/unLikeB', { bid });
+
+export const likeVideoComment = (vcid) => axios.post('/api/Likevideocomments/addLikeVc', { vcid });
+
+export const unlikeVideoComment = (vcid) => axios.post('/api/Likevideocomments/unLikeVc', { vcid });
+
+export const likeBlogComment = (bcid) => axios.post('/api/Likeblogcomments/addLikeBc', { bcid });
+
+export const unlikeBlogComment = (bcid) => axios.post('/api/Likeblogcomments/unLikeBc', { bcid });
+
+export const follow = (usid) => axios.post('/api/follows/follow', { usid });
+
+export const unfollow = (usid) => axios.post('/api/follows/unfollow', { usid });
+
+export const block = (usid) => axios.post('/api/blocks/block', { usid });
+
+export const unblock = (usid) => axios.post('/api/blocks/unblock', { usid });
+
+export const favoriteVideo = (vid) => axios.post('/api/favorites/addfav', { vid });
+
+export const unfavoriteVideo = (vid) => axios.post('/api/favorites/unfav', { vid });
+
+export const addVideoComment = (vid, content) => axios.post('/api/Videocomments/addVC', { vid, content });
+

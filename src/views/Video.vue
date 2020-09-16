@@ -10,39 +10,32 @@
           <div class="info-meta">
             <span class="meta-view" :title="video.view_num + '次播放'">{{video.view_num}}播放 ·</span>
             <span class="meta-comment" :title="video.comment_num + '条评论'">{{video.comment_num}}评论</span>
-            <span class="meta-time">{{video.upload_time}}</span>
+            <span class="meta-time">{{format(video.upload_time,'yyyy-MM-dd')}}</span>
           </div>
         </div>
-        <div class="player-warp">
-          <!-- <video-player
-            class="video-player-box"
-            ref="videoPlayer"
-            :options="playerOptions"
-            :playsinline="true"
-            customEventName="customstatechangedeventname"
-          ></video-player>-->
-          <!-- @play="onPlayerPlay($event)"
-            @pause="onPlayerPause($event)"
-            @ended="onPlayerEnded($event)"
-            @waiting="onPlayerWaiting($event)"
-            @playing="onPlayerPlaying($event)"
-            @loadeddata="onPlayerLoadeddata($event)"
-            @timeupdate="onPlayerTimeupdate($event)"
-            @canplay="onPlayerCanplay($event)"
-            @canplaythrough="onPlayerCanplaythrough($event)"
-            @statechanged="playerStateChanged($event)"
-          @ready="playerReadied"-->
+        <div class="player-wrap">
+          <div class="player" id="player" />
         </div>
         <div class="toolbar">
-          <span class="like" :title="video.like_num + '次点赞'">
+          <span
+            class="like"
+            :title="video.like_num + '次点赞'"
+            :class="{on:video.ilike==1}"
+            @click="like"
+          >
             <font-awesome-icon :icon="['fas', 'thumbs-up']" />
             {{video.like_num}}
           </span>
-          <span class="favorite" :title="video.favorite_num + '次收藏'">
+          <span
+            class="favorite"
+            :title="video.favorite_num + '次收藏'"
+            :class="{on:video.ifavorite==1}"
+            @click="favorite"
+          >
             <font-awesome-icon :icon="['fas', 'star']" />
             {{video.favorite_num}}
           </span>
-          <span class="share" :title="video.share_num + '次分享'">
+          <span class="share" :title="video.share_num + '次分享'" @click="share">
             <font-awesome-icon :icon="['fas', 'share-square']" />
             {{video.share_num}}
           </span>
@@ -63,7 +56,7 @@
             </li>
           </ul>
         </div>
-        <VideoComment />
+        <VideoComment :vid="Number(this.$route.params.vid)" />
       </div>
       <div class="right-column">
         <div class="video-up">
@@ -85,34 +78,14 @@
           </div>
           <!-- 关注up, 右下 -->
           <div class="up-btns">
-            <div class="up-follow">
+            <div class="up-follow" :class="{on:video.up.ifollow==1}" @click="onFollow">
               <span>
-                <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注
+                <template v-if="!video.up.ifollow">
+                  <font-awesome-icon :icon="['fas', 'plus']" />&nbsp;&nbsp;&nbsp;&nbsp;关注
+                </template>
+                <template v-else>已关注&nbsp;&nbsp;</template>
                 <span>{{video.up.follow_num}}</span>
               </span>
-            </div>
-          </div>
-        </div>
-        <div class="rec">
-          <div class="rec-head">视频推荐</div>
-          <div class="rec-list">
-            <div class="rectem" v-for="rectem in recs" :key="rectem.vid">
-              <!-- 封面, 左侧 -->
-              <div class="rectem-cover">
-                <router-link :to="/video/ + rectem.vid">
-                  <img :src="rectem.cover" width="168" height="95" />
-                </router-link>
-              </div>
-              <!-- 信息, 右侧 -->
-              <div class="rectem-info">
-                <div class="rectem-title">
-                  <router-link :to="/video/ + rectem.vid">{{rectem.title}}</router-link>
-                </div>
-                <div class="rectem-up">
-                  <router-link :to="/space/ + rectem.up.usid">{{rectem.up.name}}</router-link>
-                </div>
-                <div class="rectem-count">{{rectem.view_num}} 播放 · {{rectem.comment_num}} 弹幕</div>
-              </div>
             </div>
           </div>
         </div>
@@ -122,123 +95,214 @@
 </template>
 
 <script>
+import flvjs from "flv.js";
+import DPlayer from "dplayer";
 import NavBar from "@/components/NavBar.vue";
 import VideoComment from "@/components/VideoComment.vue";
-// import videoInfo from "@/api";
+import {
+  videoInfo,
+  follow,
+  unfollow,
+  likeVideo,
+  unlikeVideo,
+  favoriteVideo,
+  unfavoriteVideo,
+} from "../api";
 export default {
   name: "Video",
   components: {
     NavBar,
     VideoComment,
   },
-  beforeMount() {
-    console.log(this.$route.params.vid);
-    //videoInfoApi(100000)
-    //     .then(
-    //       if(res.status==='ok'){
-    //this.videoInfo = res.data;
-    //       }
-    //     )
+  beforeCreate() {
+    window.flvjs = flvjs;
+  },
+  mounted() {
+    let vid = this.$route.params.vid;
+    if (!vid) {
+      this.$message.error("视频信息错误");
+      return;
+    }
+
+    videoInfo(vid)
+      .then((res) => {
+        res = res.data;
+        if (res.status === "ok") {
+          this.video = res.data;
+          this.dp = new DPlayer({
+            container: document.getElementById("player"),
+            video: {
+              url: res.data.url,
+              pic: res.data.cover,
+            },
+          });
+        } else {
+          this.$message.error("网络错误: " + res.status);
+        }
+      })
+      .catch((e) => {
+        this.$message.error("网络错误: " + e.response.data.status);
+      });
+  },
+  beforeDestroy() {
+    this.dp.destroy();
   },
   data() {
     return {
+      dp: {},
       expand: false, // 视频描述部分的"展开"按钮
       video: {
-        vid: 100000,
-        title: "震惊！某上海985大学假期竟对学生做出这种要求",
-        desc:
-          "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-        cover: "//static.hdslb.com/images/member/noface.gif",
-        view_num: 9999,
-        comment_num: 9999,
-        upload_time: "2020-02-02 12:00:01",
-        url:
-          "https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm",
-        like_num: 8888,
-        favorite_num: 7777,
-        share_num: 6666,
-        tags: [
-          { name: "震惊", tag_id: 1 },
-          { name: "985", tag_id: 2 },
-          { name: "这是一个很长很长很长很长很长的tag", tag_id: 3 },
-        ],
+        vid: 0,
+        title: "加载中...",
+        desc: "加载中...",
+        cover: "",
+        view_num: 0,
+        comment_num: 0,
+        upload_time: 0,
+        url: "",
+        like_num: 0,
+        favorite_num: 0,
+        share_num: 0,
+        tags: [{ name: "加载中...", tag_id: 0 }],
         up: {
-          usid: 1,
-          name: "王小明",
-          desc: "21岁, 是学生",
-          follow_num: 9876,
-          avatar: "//static.hdslb.com/images/member/noface.gif",
+          usid: 0,
+          name: "加载中...",
+          desc: "加载中...",
+          follow_num: 0,
+          avatar: "",
+          ifollow: 0,
         },
-      },
-      recs: [
-        {
-          vid: 100000,
-          title: "震惊！某上海985大学假期竟对学生做出这种要求",
-          desc:
-            "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-          cover: "//static.hdslb.com/images/member/noface.gif",
-          view_num: 9999,
-          comment_num: 9999,
-          upload_time: "2020-02-02 12:00:01",
-          like_num: 8888,
-          favorite_num: 7777,
-          up: {
-            usid: 1,
-            name: "王小明",
-          },
-        },
-        {
-          vid: 100001,
-          title: "震惊！某上海985大学假期竟对学生做出这种要求",
-          desc:
-            "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-          cover: "//static.hdslb.com/images/member/noface.gif",
-          view_num: 9999,
-          comment_num: 9999,
-          upload_time: "2020-02-02 12:00:01",
-          like_num: 8888,
-          favorite_num: 7777,
-          up: {
-            usid: 1,
-            name: "王小明",
-          },
-        },
-        {
-          vid: 100002,
-          title: "震惊！某上海985大学假期竟对学生做出这种要求",
-          desc:
-            "震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n震惊！某上海985大学假期竟对学生做出这种要求\n",
-          cover: "//static.hdslb.com/images/member/noface.gif",
-          view_num: 9999,
-          comment_num: 9999,
-          upload_time: "2020-02-02 12:00:01",
-          like_num: 8888,
-          favorite_num: 7777,
-          up: {
-            usid: 1,
-            name: "王小明",
-          },
-        },
-      ],
-      liked: false,
-      favorited: false,
-      playerOptions: {
-        // videojs options
-        muted: true,
-        language: "en",
-        playbackRates: [0.7, 1.0, 1.5, 2.0],
-        sources: [
-          {
-            // type: "video/mp4",
-            // src: this.video.url,
-          },
-        ],
-        poster: "/static/images/author.jpg",
+        ilike: 0,
+        ifavorite: 0,
       },
     };
   },
   methods: {
+    format(timestamp, fmt) {
+      var date = new Date(1000 * timestamp);
+      var o = {
+        "M+": date.getMonth() + 1, //月份
+        "d+": date.getDate(), //日
+        "h+": date.getHours(), //小时
+        "m+": date.getMinutes(), //分
+        "s+": date.getSeconds(), //秒
+        "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+        S: date.getMilliseconds(), //毫秒
+      };
+      if (/(y+)/.test(fmt)) {
+        fmt = fmt.replace(
+          RegExp.$1,
+          (date.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
+      }
+      for (var k in o) {
+        if (new RegExp("(" + k + ")").test(fmt)) {
+          fmt = fmt.replace(
+            RegExp.$1,
+            RegExp.$1.length == 1
+              ? o[k]
+              : ("00" + o[k]).substr(("" + o[k]).length)
+          );
+        }
+      }
+      return fmt;
+    },
+    onFollow() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能关注up主");
+        return;
+      }
 
+      let up = this.video.up;
+      if (this.$store.state.user.usid == up.usid) {
+        this.$message.error("不能关注自己！");
+        return;
+      }
+      if (up.ifollow) {
+        unfollow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            up.follow_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未关注此人") {
+              up.ifollow = 0;
+            }
+          });
+      } else {
+        follow(up.usid)
+          .then(() => {
+            up.ifollow = up.ifollow ? 0 : 1;
+            up.follow_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已经关注此人") {
+              up.ifollow = 1;
+            }
+          });
+      }
+    },
+    like() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能点赞视频");
+        return;
+      }
+      let video = this.video;
+      if (video.ilike) {
+        unlikeVideo(video.vid)
+          .then(() => {
+            video.ilike = video.ilike ? 0 : 1;
+            video.like_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未点赞") {
+              video.ilike = 0;
+            }
+          });
+      } else {
+        likeVideo(video.vid)
+          .then(() => {
+            video.ilike = video.ilike ? 0 : 1;
+            video.like_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已点赞") {
+              video.ilike = 1;
+            }
+          });
+      }
+    },
+    favorite() {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能收藏视频");
+        return;
+      }
+      let video = this.video;
+      if (video.ifavorite) {
+        unfavoriteVideo(video.vid)
+          .then(() => {
+            video.ifavorite = video.ifavorite ? 0 : 1;
+            video.favorite_num--;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "未收藏") {
+              video.ifavorite = 0;
+            }
+          });
+      } else {
+        favoriteVideo(video.vid)
+          .then(() => {
+            video.ifavorite = video.ifavorite ? 0 : 1;
+            video.favorite_num++;
+          })
+          .catch((err) => {
+            if (err.response.data.status === "已收藏") {
+              video.ifavorite = 1;
+            }
+          });
+      }
+    },
+    share() {},
   },
 };
 </script>
@@ -306,11 +370,16 @@ export default {
   margin-top: 16px;
 }
 
-.player-warp {
+.player-wrap {
   width: 763px;
-  height: 517px;
+  height: 430px;
   overflow: hidden;
   background-color: #212121;
+}
+
+.player {
+  width: 100%;
+  height: 100%;
 }
 
 .toolbar {
@@ -338,6 +407,10 @@ export default {
 }
 
 .toolbar span:hover {
+  color: #00a1d6;
+}
+
+.toolbar span.on {
   color: #00a1d6;
 }
 
@@ -488,6 +561,16 @@ export default {
 .up-follow:hover {
   background: #00b5e5;
   border-color: #00b5e5;
+}
+
+.up-follow.on {
+  background: #ff799f;
+  border-color: #ff6490;
+}
+
+.up-follow.on:hover {
+  background: #ff6490;
+  border-color: #ff6490;
 }
 
 .rec {
