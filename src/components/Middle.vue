@@ -2,7 +2,6 @@
   <div class="new-part">
     <div class="card">
       <header class="new-header">
-        <div class="icon"></div>
         <span class="new-name">
           <slot name="header"></slot>
         </span>

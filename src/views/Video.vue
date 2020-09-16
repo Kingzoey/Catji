@@ -372,9 +372,14 @@ export default {
 
 .player-wrap {
   width: 763px;
-  min-height: 400px;
+  height: 430px;
   overflow: hidden;
   background-color: #212121;
+}
+
+.player {
+  width: 100%;
+  height: 100%;
 }
 
 .toolbar {

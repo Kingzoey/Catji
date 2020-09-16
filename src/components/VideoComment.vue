@@ -106,34 +106,7 @@ export default {
   data() {
     return {
       content: "",
-      comments: [
-        {
-          vcid: 1,
-          content: "好!",
-          user: {
-            usid: 1,
-            name: "王小明",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          like_num: 987,
-          create_time: "2020-2-20 00:01",
-          replys: [
-            {
-              vcid: 11,
-              content: "好!",
-              user: {
-                usid: 1,
-                name: "王小明",
-                avatar: "//static.hdslb.com/images/member/noface.gif",
-              },
-              like_num: 987,
-              create_time: "2020-2-20 00:01",
-              replys: [],
-            },
-          ],
-          ilike: 0,
-        },
-      ],
+      comments: [],
       user: {},
     };
   },

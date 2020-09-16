@@ -27,65 +27,7 @@ export default {
   data() {
     return {
       on: 0,
-      tagHotList: [
-        {
-          tag_id: 100001,
-          name: "视频1名字",
-          cover:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941757390&di=b7daf9b49d8f38283d8fd07b3e2311ed&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_70%2Cc_zoom%2Cw_640%2Fimages%2F20180801%2Fc3ecad961e974873b622c5fb26a9be69.jpeg",
-          up: {
-            usid: 100001,
-            name: "视频1up主名字",
-          },
-        },
-        {
-          tag_id: 100002,
-          name: "视频2名字",
-          cover:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941825454&di=ca816abb927cb86f11948af3081901be&imgtype=0&src=http%3A%2F%2Fp9.qhimg.com%2Ft014610695fb16e41a3.png%3Fsize%3D1195x733",
-          up: {
-            usid: 100002,
-            name: "视频2up主名字",
-          },
-        },
-        {
-          tag_id: 100003,
-          name: "视频3名字",
-          cover:
-            "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597941850196&di=bc462c1dc4640e720053cd92345d348a&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F57c159ca3adbb.jpg",
-          up: {
-            usid: 100003,
-            name: "视频3up主名字",
-          },
-        },
-        {
-          tag_id: 100004,
-          name: "视频4名字",
-          cover: "视频4缩略图url",
-          up: {
-            usid: 100004,
-            name: "视频4up主名字",
-          },
-        },
-        {
-          tag_id: 100005,
-          name: "视频5名字",
-          cover: "视频5缩略图url",
-          up: {
-            usid: 100005,
-            name: "视频5up主名字",
-          },
-        },
-        {
-          tag_id: 100006,
-          name: "视频6名字",
-          cover: "视频6缩略图url",
-          up: {
-            usid: 100006,
-            name: "视频6up主名字",
-          },
-        },
-      ],
+      tagHotList: [],
     };
   },
   methods: {

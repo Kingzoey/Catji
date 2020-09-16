@@ -28,11 +28,14 @@
       </div>
       <div class="bank clearfix">
         <div class="left">
-          <Middle :getData="mid3">
-            <template v-slot:header>
-              <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;热门标签
-            </template>
-          </Middle>
+          <div class="card">
+            <header class="new-header">
+              <span class="new-name">
+                <font-awesome-icon :icon="['fas', 'hashtag']" />&nbsp;热门标签
+              </span>
+            </header>
+            <div id="wordcloud"></div>
+          </div>
         </div>
         <div class="right">
           <TopTag />
@@ -45,6 +48,7 @@
 
 
 <script>
+import Js2WordCloud from "js2wordcloud";
 import { hotVideo, newVideo, hotTag } from "../api";
 import NavBar from "@/components/NavBar_Home.vue";
 import TopCombine from "@/components/TopCombine.vue";
@@ -64,8 +68,31 @@ export default {
     return {
       mid1: hotVideo,
       mid2: newVideo,
-      mid3: hotTag,
     };
+  },
+  mounted() {
+    hotTag().then((res) => {
+      res = res.data;
+      let items = res.data;
+      let items2 = [];
+      items.forEach((item) => {
+        items2.push(item);
+        items2.push(item);
+      });
+      let words = items2.map((item, index) => [
+        item.name,
+        (items2.length - index) * 6,
+      ]);
+      console.log(words);
+      this.wc = new Js2WordCloud(document.getElementById("wordcloud"));
+      this.wc.setOption({
+        tooltip: {
+          show: false,
+        },
+        list: words,
+        color: "random-dark",
+      });
+    });
   },
 };
 </script>
@@ -95,5 +122,24 @@ export default {
 }
 .right {
   margin-left: 15px;
+}
+
+.card {
+  padding-left: 30px;
+  padding-top: 10px;
+}
+
+.new-header {
+  height: 36px;
+}
+
+.new-name {
+  font-size: 22px;
+  line-height: 36px;
+}
+
+#wordcloud {
+  height: 360px;
+  width: 100%;
 }
 </style>
