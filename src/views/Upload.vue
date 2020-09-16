@@ -57,7 +57,13 @@
             <input type="text" placeholder="介绍一下内容" v-model="desc" />
           </div>
           <div class="send-button">
-            <input type="button" value="发布内容" @click="upload" />
+            <el-button
+              class="upload-btn"
+              type="primary"
+              @click="upload"
+              :disabled="uploading"
+              :loading="uploading"
+            >{{uploading?"上传中":"发布内容"}}</el-button>
           </div>
         </div>
       </div>
@@ -99,9 +105,12 @@
                 </div>
               </div>
               <div class="btn-warp">
-                <button class="upload-btn">
-                  <span>上传视频</span>
-                </button>
+                <el-button
+                  class="upload-btn"
+                  type="primary"
+                  :disabled="uploading"
+                  :loading="uploading"
+                >选择视频</el-button>
               </div>
             </div>
           </el-upload>
@@ -132,6 +141,7 @@ export default {
       rawcatags: "",
       tags: [],
       catags: [],
+      uploading: false,
     };
   },
   methods: {
@@ -162,6 +172,7 @@ export default {
         .filter((t) => t.length > 0);
 
       try {
+        this.uploading = true;
         let res = await uploadVideo(
           this.title,
           this.desc,
@@ -172,9 +183,12 @@ export default {
         );
         res = res.data;
         if (res.status === "ok") {
+          this.uploading = false;
+          this.$message.info("上传成功");
           this.$router.push({ path: "/" });
         }
       } catch (e) {
+        this.uploading = false;
         this.$message.error("上传失败: " + e.response.data.status);
       }
     },
@@ -401,19 +415,12 @@ input[type="text"] {
 }
 
 .upload-btn {
-  color: #fff;
   background-color: #fb7299;
-  border-color: #fd4c5d;
-  border-radius: 4px;
+  border-color: #fb7299;
   width: 164px;
-  height: 36px;
-  line-height: 34px;
   font-size: 16px;
-  cursor: pointer;
-  transition: color 0.2s linear, background-color 0.2s linear,
-    border 0.2s linear, box-shadow 0.2s linear;
 }
 .upload-btn:hover {
-  background-color: #ec4556;
+  background-color: #ff82a5;
 }
 </style>
