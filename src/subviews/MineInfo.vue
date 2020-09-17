@@ -50,11 +50,32 @@
         </template>
         <el-date-picker v-model="form.birthday" type="date" placeholder="选择日期"></el-date-picker>
       </el-form-item>
-      <el-form-item>
+      <!-- <el-form-item>
         <template slot="label">
           <font-awesome-icon :icon="['fas', 'at']" />&nbsp;邮箱
         </template>
         <el-input auto-complete="false" v-model="form.email" placeholder="请输入邮箱"></el-input>
+      </el-form-item>-->
+      <el-form-item>
+        <template slot="label">
+          <font-awesome-icon :icon="['fas', 'cat']" />&nbsp;关联
+        </template>
+        <el-select
+          v-model="form.cat_id"
+          filterable
+          remote
+          :disabled="form.cat_id"
+          placeholder="请输入猫咪名字"
+          :remote-method="getCatList"
+          :loading="loading"
+        >
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item>
         <template slot="label">
@@ -71,9 +92,10 @@
 </template>
 
 <script>
-import { updateInfo } from "../api";
+import { updateInfo, searchCatByName } from "../api";
 export default {
   name: "Middle",
+  inject: ["reload"],
   async mounted() {
     // let usid;
     // if (this.$route.params.usid) {
@@ -96,33 +118,15 @@ export default {
       },
     });
     return;
-
-    // try {
-    //   let res = await userInfo(usid);
-    //   res = res.data;
-    //   if (res.status === "ok") {
-    //     this.form = this.origin = {
-    //       usid: res.data.usid,
-    //       nickname: res.data.nickname,
-    //       avatar: res.data.avatar,
-    //       gender: res.data.gender,
-    //       signature: res.data.signature,
-    //       birthday: new Date(res.data.birthday * 1000),
-    //       email: res.data.email,
-    //     };
-    //     this.pic = res.data.avatar;
-    //   } else {
-    //     this.$message.error("网络错误: " + res.status);
-    //   }
-    // } catch (e) {
-    //   this.$message.error("网络错误: " + e.response.data.status);
-    // }
   },
   data() {
     return {
       origin: "",
       form: {},
       pic: "", // 预览用
+      cat_name: "",
+      loading: false,
+      options: [],
     };
   },
 
@@ -173,17 +177,7 @@ export default {
         res = res.data;
         if (res.status === "ok") {
           this.$message.info("更新完成");
-          this.$store.commit("cacheGetMineInfo", {
-            onSuccess: (me) => {
-              this.origin = JSON.stringify(me);
-              this.form = me;
-              this.pic = me.avatar;
-            },
-            onFailed: (e) => {
-              this.$message.error("网络错误: " + e.response.data.status);
-            },
-            noCache: true,
-          });
+          this.reload();
         } else {
           this.$message.error("网络错误: " + res.status);
         }
@@ -194,6 +188,19 @@ export default {
     onReset() {
       this.form = JSON.parse(this.origin);
       this.pic = this.form.avatar;
+    },
+    getCatList(query) {
+      if (!query) {
+        this.options = [];
+        return;
+      }
+      searchCatByName(query).then((res) => {
+        res = res.data;
+        this.options = res.data.map((item) => ({
+          value: item.cat_id,
+          label: item.name,
+        }));
+      });
     },
   },
 };

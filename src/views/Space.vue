@@ -8,13 +8,12 @@
             <img :src="displayUser.avatar" />
           </div>
           <div class="name">
-            <font-awesome-icon
-              :icon="['fas', 'cat']"
-              v-if="displayUser.cat_id"
-              style="color: pink"
-            />
+            <font-awesome-icon :icon="['fas', 'cat']" v-if="displayUser.cat_id" @click="toCatPage" style="cursor:pointer;"/>
             {{displayUser.nickname}}
           </div>
+          <div
+            style="display:flex; justify-content:center;margin-top:10px;"
+          >{{displayUser.signature||"这个人很懒, 没有填写个性签名"}}</div>
           <div class="btn">
             <el-button
               :type="displayUser.ifollow?'success':'primary'"
@@ -216,6 +215,9 @@ export default {
             }
           });
       }
+    },
+    toCatPage() {
+      this.$router.push({ path: "/cat/" + this.displayUser.cat_id });
     },
   },
   data() {
