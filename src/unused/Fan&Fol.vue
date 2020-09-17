@@ -47,7 +47,7 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route.params.usid);
+    // console.log(this.$route.params.usid);
   },
 };
 </script>
