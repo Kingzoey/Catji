@@ -5,14 +5,39 @@
       <div class="intro">
         <div class="intro-mid">
           <div class="pic">
-            <img :src="cat.banner" width="300" height="300" />
+            <img :src="pic" width="300" height="300" @click="uploadHeadImg" />
+            <input
+              type="file"
+              accept="image/*"
+              @change="handleChange"
+              style="display:none;"
+              class="hiddenInput"
+            />
           </div>
           <div class="info">
             <div class="name">
-              <span>{{cat.name}}</span>
-              <el-button type="primary" size="medium" @click="toUserSpace">猫咪账号</el-button>
+              <span @click="editing1=true" v-if="!editing1">{{cat.name}}</span>
+              <el-input v-else @blur="editing1=false" v-model="cat.name"></el-input>
+              <el-button
+                type="primary"
+                size="medium"
+                @click="toUserSpace"
+                style="margin-left:8px;"
+              >猫咪账号</el-button>
             </div>
-            <p>{{cat.description}}</p>
+            <p @click="editing=true" v-if="!editing" style="font-size:16pt;">{{cat.description}}</p>
+            <el-input v-else @blur="editing=false" v-model="cat.description"></el-input>
+            <el-button
+              type="primary"
+              @click="onSubmit"
+              style="bottom: -180px;position: relative;"
+              v-if="this.$store.state.user.hasOwnProperty('usid') && this.$store.state.user.usid == cat.usid"
+            >更新信息</el-button>
+            <el-button
+              @click="onReset"
+              style="bottom: -180px;position: relative;"
+              v-if="this.$store.state.user.hasOwnProperty('usid') && this.$store.state.user.usid == cat.usid"
+            >重置</el-button>
           </div>
         </div>
       </div>
@@ -40,18 +65,74 @@
 </template>
 
 <script>
-import { catInfo } from "../api";
+import { catInfo, updateCatInfo } from "../api";
 import NavBar from "@/components/NavBar.vue";
 import SearchResultVideo from "@/components/SearchResultVideo.vue";
 import BlogCard from "@/components/BlogCard.vue";
 import CatIntroduction from "@/components/CatIntroduction.vue";
 export default {
-  beforeCreate() {
+  inject: ["reload"],
+  created() {
     this.cat_id = this.$route.params.cat_id;
   },
   methods: {
     toUserSpace() {
-      this.$router.push({ path: "/space/ + cat.usid" });
+      this.$router.push({ path: "/space/" + this.cat.usid });
+    },
+    uploadHeadImg() {
+      this.$el.querySelector(".hiddenInput").click();
+    },
+    handleChange(e) {
+      let $target = e.target || e.srcElement;
+      let file = $target.files[0];
+      this.preview(file);
+      this.cat.banner = file;
+    },
+    preview(file) {
+      var reader = new FileReader();
+      reader.onload = (ev) => {
+        let res = ev.target || ev.srcElement;
+        this.pic = res.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    async onSubmit() {
+      let diff = {};
+      let origin = JSON.parse(this.origin);
+
+      for (const key in this.cat) {
+        let oldValue = origin[key];
+        let newValue = this.cat[key];
+        if (oldValue instanceof Date) {
+          if (+newValue !== +oldValue) {
+            diff[key] = newValue;
+          }
+        } else if (newValue !== oldValue) {
+          diff[key] = newValue;
+        }
+      }
+
+      if (Object.entries(diff).length === 0) {
+        this.$message.info("没有要更新的内容");
+        return;
+      }
+
+      try {
+        let res = await updateCatInfo(diff);
+        res = res.data;
+        if (res.status === "ok") {
+          this.$message.info("更新完成");
+          this.reload();
+        } else {
+          this.$message.error("网络错误: " + res.status);
+        }
+      } catch (e) {
+        this.$message.error("网络错误: " + e.response.data.status);
+      }
+    },
+    onReset() {
+      this.cat = JSON.parse(this.origin);
+      this.previewPic = this.cat.banner;
     },
   },
   mounted() {
@@ -59,6 +140,8 @@ export default {
     catInfo(this.cat_id)
       .then((res) => {
         this.cat = res.data.data;
+        this.pic = this.cat.banner;
+        this.origin = JSON.stringify(this.cat);
       })
       .catch((err) => {
         this.$message.error("网络错误: " + err.response.data.status);
@@ -71,7 +154,10 @@ export default {
   },
   data() {
     return {
+      editing: false,
+      editing1: false,
       cat_id: 0,
+      pic: "",
       cat: {
         cat_id: 0,
         name: "获取中...",
@@ -79,6 +165,7 @@ export default {
         banner: "",
         usid: 0,
       },
+      origin: "",
       on: 0,
       hover: 0,
       tabs: [

@@ -24,12 +24,14 @@
       </ul>
       <ul class="nav">
         <li>
-          <router-link to="/space">
+          <router-link :to="(this.$store.state.user.hasOwnProperty('usid')?'/space':'/login')">
             <font-awesome-icon :icon="['fas', 'user']" />&nbsp;
-            <template v-if="this.$store.state.user.usid">{{this.$store.state.user.nickname}}</template>
+            <template
+              v-if="this.$store.state.user.hasOwnProperty('usid')"
+            >{{this.$store.state.user.nickname}}</template>
           </router-link>
         </li>
-        <li v-if="this.$store.state.user.usid">
+        <li v-if="this.$store.state.user.hasOwnProperty('usid')">
           <router-link :to="{path:'/logout',query:{src:'/'}}">注销</router-link>
         </li>
         <!-- <li>

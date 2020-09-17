@@ -5,7 +5,7 @@ axios.defaults.baseURL = "https://myweb1008.xyz:12340";
 
 axios.defaults.withCredentials = true;
 
-var debug = false;
+var debug = true;
 if (debug) {
     axios.defaults.baseURL = "http://localhost:7843";
 }
@@ -214,3 +214,18 @@ export const unfavoriteVideo = (vid) => axios.post('/api/favorites/unfav', { vid
 
 export const addVideoComment = (vid, content) => axios.post('/api/Videocomments/addVC', { vid, content });
 
+export const searchCatByName = (name) => axios.get('/api/cats/search', {
+    params: { name }
+});
+
+export const updateCatInfo = (params) => {
+    var formdata = new FormData();
+    for (const key in params) {
+        if (key == 'description') {
+            formdata.append('desc', params[key]);
+        } else {
+            formdata.append(key, params[key]);
+        }
+    }
+    return axios.post('/api/cats/updateinfo', formdata);
+}
