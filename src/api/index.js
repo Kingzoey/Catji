@@ -5,7 +5,7 @@ axios.defaults.baseURL = "https://myweb1008.xyz:12340";
 
 axios.defaults.withCredentials = true;
 
-var debug = false;
+var debug = true;
 if (debug) {
     axios.defaults.baseURL = "http://localhost:7843";
 }
