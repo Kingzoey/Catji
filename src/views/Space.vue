@@ -135,7 +135,7 @@ export default {
           onSuccess: (me) => {
             this.displayUser = { ...me };
           },
-          onFailed: (err) => {
+          onFailed: () => {
             // console.log(err);
           },
         });
