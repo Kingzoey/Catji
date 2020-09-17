@@ -83,7 +83,7 @@ export default {
         item.name,
         (items2.length - index) * 6,
       ]);
-      console.log(words);
+      // console.log(words);
       this.wc = new Js2WordCloud(document.getElementById("wordcloud"));
       this.wc.setOption({
         tooltip: {

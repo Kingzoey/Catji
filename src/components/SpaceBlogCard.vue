@@ -57,6 +57,7 @@ import {
   blogInfo,
   likeBlog,
   unlikeBlog,
+  userInfo,
   // likeBlogComment,
   // unlikeBlogComment,
 } from "../api";
@@ -166,25 +167,25 @@ export default {
       this.$message.error("用户未登录");
       return;
     }
-    this.$store.commit("cacheGetMineInfo", {
-      onSuccess: async (me) => {
-        this.user = me;
-        try {
-          let res = await blogInfo(this.usid, 0);
-          res = res.data;
-          if (res.status === "ok") {
-            this.blogs = res.data;
-          } else {
-            this.$message.error("网络错误: " + res.status);
-          }
-        } catch (e) {
-          this.$message.error("网络错误: " + e.data.response.status);
-        }
-      },
-      onFailed: (status) => {
-        this.$message.error("网络错误: " + status);
-      },
-    });
+    userInfo(this.usid)
+      .then((res) => {
+        this.user = res.data.data;
+        blogInfo(this.usid, 0)
+          .then((res) => {
+            res = res.data;
+            if (res.status === "ok") {
+              this.blogs = res.data;
+            } else {
+              this.$message.error("网络错误: " + res.status);
+            }
+          })
+          .catch((e) => {
+            this.$message.error("网络错误: " + e.data.response.status);
+          });
+      })
+      .catch((err) => {
+        this.$message.error("网络错误: " + err.response.data.status);
+      });
   },
 };
 </script>

@@ -76,7 +76,7 @@ export default {
       this.blog.images = fileList;
     },
     handleClick(index) {
-      console.log(index);
+      // console.log(index);
       this.blog.images.splice(index, 1);
     },
     handleEmoji() {

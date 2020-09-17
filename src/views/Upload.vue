@@ -197,7 +197,7 @@ export default {
     },
     async onCoverChange(e) {
       var file = e.target.files[0];
-      console.log(file);
+      // console.log(file);
       await this.preview(file);
       this.coverFile = file;
     },
