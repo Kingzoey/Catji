@@ -236,7 +236,7 @@ export default {
           subpath: "welcome",
           name: "欢迎",
           iconname: "smile",
-          tab: () => import("@/subviews/Test.vue"),
+          tab: () => import("@/subviews/Welcome.vue"),
           show: () => this.usid == this.$store.state.user.usid,
           showInList: true,
         },
