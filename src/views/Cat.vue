@@ -56,7 +56,7 @@
             <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
           </ul>
         </div>
-        <component :is="tabs[on].component" :cat_id="cat_id"></component>
+        <component :is="tabs[on].component" :cat_id="cat_id" :usid="cat.usid"></component>
       </div>
       <br />
     </div>
@@ -68,7 +68,7 @@
 import { catInfo, updateCatInfo } from "../api";
 import NavBar from "@/components/NavBar.vue";
 import SearchResultVideo from "@/components/SearchResultVideo.vue";
-import BlogCard from "@/components/BlogCard.vue";
+import CatBlog from "@/components/CatBlog.vue";
 import CatIntroduction from "@/components/CatIntroduction.vue";
 export default {
   inject: ["reload"],
@@ -179,7 +179,7 @@ export default {
         },
         {
           name: "猫咪动态",
-          component: BlogCard,
+          component: CatBlog,
         },
       ],
     };

@@ -214,6 +214,12 @@ export default {
       this.videoFile = file;
     },
   },
+  mounted() {
+    if (!this.$store.state.user.usid) {
+      this.$message.error("登录后才能投稿哦");
+      this.$router.push({ path: "/login" });
+    }
+  },
 };
 </script>
 

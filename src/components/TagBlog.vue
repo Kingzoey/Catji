@@ -147,23 +147,7 @@ export default {
   },
   data() {
     return {
-      blogs: [
-        {
-          bid: 0,
-          content: "获取中",
-          create_time: Math.floor(Date.now() / 1000),
-          like_num: 0,
-          transmit_num: 0,
-          comment_num: 0,
-          up: {
-            usid: 0,
-            name: "获取中",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          images: [],
-          ilike: 0,
-        },
-      ],
+      blogs: [],
     };
   },
 

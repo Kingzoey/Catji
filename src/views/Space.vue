@@ -8,7 +8,12 @@
             <img :src="displayUser.avatar" />
           </div>
           <div class="name">
-            <font-awesome-icon :icon="['fas', 'cat']" v-if="displayUser.cat_id" @click="toCatPage" style="cursor:pointer;"/>
+            <font-awesome-icon
+              :icon="['fas', 'cat']"
+              v-if="displayUser.cat_id"
+              @click="toCatPage"
+              style="cursor:pointer;"
+            />
             {{displayUser.nickname}}
           </div>
           <div
@@ -79,12 +84,13 @@ export default {
     this.initParams(usid, sub);
   },
   mounted() {
-    window.addEventListener("scroll", this.handleScroll);
     if (!this.usid) {
       this.$message.error("用户信息有误");
+      this.$router.push({ path: "/login" });
       return;
     }
     this.getUserInfo(this.usid);
+    window.addEventListener("scroll", this.handleScroll);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);

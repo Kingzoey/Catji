@@ -55,39 +55,9 @@ export default {
   data() {
     return {
       on: 0,
-      videoHotList: [
-        {
-          vid: 100001,
-          name: "获取中...",
-          cover: "",
-          up: {
-            usid: 100001,
-            name: "获取中...",
-          },
-        },
-      ],
-      userHotList: [
-        {
-          uid: 200001,
-          name: "获取中...",
-          cover: "",
-          up: {
-            usid: 200002,
-            name: "获取中...",
-          },
-        },
-      ],
-      nekoHotList: [
-        {
-          cat_id: 300001,
-          name: "获取中...",
-          cover: "",
-          up: {
-            usid: 300001,
-            name: "获取中...",
-          },
-        },
-      ],
+      videoHotList: [],
+      userHotList: [],
+      nekoHotList: [],
     };
   },
   methods: {
