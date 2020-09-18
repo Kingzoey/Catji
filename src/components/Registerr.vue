@@ -16,15 +16,6 @@
         <input type="text" placeholder="请输入邮箱" v-model="email" />
         <input type="password" placeholder="请输入密码" v-model="password1" />
         <input type="password" placeholder="再次输入以确认密码" v-model="password2" />
-        <ul class="tick">
-          <li>
-            <input type="checkbox" id="brand1" />
-            <label for="brand1">
-              <span style="margin-top: 5px"></span>
-              注册为猫咪账号
-            </label>
-          </li>
-        </ul>
         <div class="send-button">
           <input type="button" value="注册" @click="onRegister()" />
         </div>
