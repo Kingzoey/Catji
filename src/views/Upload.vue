@@ -197,7 +197,7 @@ export default {
     },
     async onCoverChange(e) {
       var file = e.target.files[0];
-      console.log(file);
+      // console.log(file);
       await this.preview(file);
       this.coverFile = file;
     },
@@ -213,6 +213,12 @@ export default {
       var file = e.raw;
       this.videoFile = file;
     },
+  },
+  mounted() {
+    if (!this.$store.state.user.usid) {
+      this.$message.error("登录后才能投稿哦");
+      this.$router.push({ path: "/login" });
+    }
   },
 };
 </script>

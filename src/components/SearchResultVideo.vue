@@ -44,21 +44,7 @@ export default {
   },
   data() {
     return {
-      dataList: [
-        {
-          vid: 0,
-          title: "获取中",
-          desc: "获取中",
-          cover: "",
-          view_num: 0,
-          comment_num: 0,
-          upload_time: 0,
-          url: "",
-          like_num: 0,
-          favorite_num: 0,
-          share_num: 0,
-        },
-      ],
+      dataList: [],
     };
   },
   methods: {

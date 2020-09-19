@@ -11,10 +11,14 @@
             <font-awesome-icon
               :icon="['fas', 'cat']"
               v-if="displayUser.cat_id"
-              style="color: pink"
+              @click="toCatPage"
+              style="cursor:pointer;"
             />
             {{displayUser.nickname}}
           </div>
+          <div
+            style="display:flex; justify-content:center;margin-top:10px;"
+          >{{displayUser.signature||"这个人很懒, 没有填写个性签名"}}</div>
           <div class="btn">
             <el-button
               :type="displayUser.ifollow?'success':'primary'"
@@ -80,12 +84,13 @@ export default {
     this.initParams(usid, sub);
   },
   mounted() {
-    window.addEventListener("scroll", this.handleScroll);
     if (!this.usid) {
       this.$message.error("用户信息有误");
+      this.$router.push({ path: "/login" });
       return;
     }
     this.getUserInfo(this.usid);
+    window.addEventListener("scroll", this.handleScroll);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
@@ -107,7 +112,7 @@ export default {
         .map((tabitem) => tabitem.subpath)
         .indexOf(sub);
       if (subpageIndex < 0) {
-        subpageIndex = 2; // 默认跳转到动态页
+        subpageIndex = 0; // 默认跳转到欢迎页
       }
       this.subpage = subpageIndex;
     },
@@ -135,8 +140,8 @@ export default {
           onSuccess: (me) => {
             this.displayUser = { ...me };
           },
-          onFailed: (err) => {
-            console.log(err);
+          onFailed: () => {
+            // console.log(err);
           },
         });
         return;
@@ -217,6 +222,9 @@ export default {
           });
       }
     },
+    toCatPage() {
+      this.$router.push({ path: "/cat/" + this.displayUser.cat_id });
+    },
   },
   data() {
     return {
@@ -228,7 +236,7 @@ export default {
           subpath: "welcome",
           name: "欢迎",
           iconname: "smile",
-          tab: () => import("@/subviews/Test.vue"),
+          tab: () => import("@/subviews/Welcome.vue"),
           show: () => this.usid == this.$store.state.user.usid,
           showInList: true,
         },

@@ -37,7 +37,9 @@ export default new Vuex.Store({
       localStorage.removeItem('me');
     },
     cacheGetMineInfo(state, payload) {
-      const { onSuccess, onFailed, noCache } = payload;
+      let { onSuccess, onFailed, noCache } = payload;
+
+      noCache = true;
 
       if (!noCache && state.me.usid) {
         onSuccess(state.me);

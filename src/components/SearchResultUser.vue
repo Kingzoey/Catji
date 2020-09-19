@@ -52,35 +52,7 @@ export default {
   },
   data() {
     return {
-      dataList: [
-        {
-          usid: 1,
-          name: "王小红",
-          desc: "21岁, 是学生",
-          work_num: 1234,
-          follow_num: 9876,
-          avatar: "//static.hdslb.com/images/member/noface.gif",
-          ifollow: 0,
-        },
-        {
-          usid: 2,
-          name: "王小蓝",
-          desc: "22岁, 是学生",
-          work_num: 1234,
-          follow_num: 9876,
-          avatar: "//static.hdslb.com/images/member/noface.gif",
-          ifollow: 0,
-        },
-        {
-          usid: 3,
-          name: "王小绿",
-          desc: "23岁, 是学生",
-          work_num: 1234,
-          follow_num: 9876,
-          avatar: "//static.hdslb.com/images/member/noface.gif",
-          ifollow: 0,
-        },
-      ],
+      dataList: [],
     };
   },
   methods: {

@@ -86,6 +86,7 @@ export default {
             infores = infores.data;
             if (infores.status == "ok") {
               this.$store.commit("login", infores.data);
+              this.$message.info("登录成功");
               this.$router.push({ path: "/" });
             }
           } catch (e) {
@@ -105,6 +106,8 @@ export default {
           } catch (e) {
             this.$message.error("网络错误: " + e.response.data.status);
           }
+        } else if (res.status == "not found") {
+          this.$message.error("用户名或密码错误");
         } else {
           this.$message.error("网络错误: " + res.status);
         }

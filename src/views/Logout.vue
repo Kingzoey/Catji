@@ -11,7 +11,7 @@ export default {
       let res = await logout();
       res = res.data;
       if (res.status == "ok") {
-        this.$store.state.user = {};
+        this.$store.commit("logout");
         let src = this.$route.query.src || "/";
         this.$router.push({ path: src });
       } else {

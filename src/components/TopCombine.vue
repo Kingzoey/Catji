@@ -15,7 +15,7 @@
       <div class="preview" v-if="index < 3">
         <div class="pic" :class="{'user-pic':on>0}">
           <router-link :to="curPrefix + item[curIdName]" class="link">
-            <img :src="item.cover" :alt="item.name" />
+            <img :src="(on==0?item.cover:(on==1?item.avatar:item.banner))" :alt="item.name" />
           </router-link>
         </div>
         <div class="txt">
@@ -55,39 +55,9 @@ export default {
   data() {
     return {
       on: 0,
-      videoHotList: [
-        {
-          vid: 100001,
-          name: "获取中...",
-          cover: "",
-          up: {
-            usid: 100001,
-            name: "获取中...",
-          },
-        },
-      ],
-      userHotList: [
-        {
-          uid: 200001,
-          name: "获取中...",
-          cover: "",
-          up: {
-            usid: 200002,
-            name: "获取中...",
-          },
-        },
-      ],
-      nekoHotList: [
-        {
-          cat_id: 300001,
-          name: "获取中...",
-          cover: "",
-          up: {
-            usid: 300001,
-            name: "获取中...",
-          },
-        },
-      ],
+      videoHotList: [],
+      userHotList: [],
+      nekoHotList: [],
     };
   },
   methods: {

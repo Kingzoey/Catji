@@ -2,19 +2,16 @@
   <div>
     <div class="card" v-for="(blog, index) in blogs" :key="blog.bid">
       <router-link
-        :to="/space/ + user.usid"
-        :style="'background-image:url('+user.avatar+')'"
+        :to="/space/ + blog.up.usid"
+        :style="'background-image:url('+blog.up.avatar+')'"
         class="user-head"
       ></router-link>
       <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
-          <router-link :to="/space/ + user.usid">{{user.nickname}}</router-link>
+          <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
-          <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
-        </div>
-        <div class="delete" @click="deletemine(blog.bid)">
-          <font-awesome-icon :icon="['fas', 'trash-alt']" />
+          <span class="detail-link tc-slate">{{format(blog.time, 'yyyy-MM-dd')}}</span>
         </div>
         <div class="card-content">
           <div class="text description">
@@ -49,6 +46,9 @@
       <br />
     </div>
     <br />
+    <div class="page-wrap">
+      <Pager :onChange="getData"></Pager>
+    </div>
   </div>
 </template>
 
@@ -57,17 +57,33 @@ import {
   blogInfo,
   likeBlog,
   unlikeBlog,
-  userInfo,
   // likeBlogComment,
   // unlikeBlogComment,
 } from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
+import Pager from "@/components/Pager.vue";
 export default {
-  name: "BlogCard",
+  name: "BlogCardSearch",
   components: {
     BlogCardImage,
+    Pager,
+  },
+  props: {
+    usid: Number,
   },
   methods: {
+    getData(page) {
+      if (!this.$props.usid) {
+        return;
+      }
+      blogInfo(this.$props.usid, page)
+        .then((res) => {
+          this.blogs = res.data.data;
+        })
+        .catch((err) => {
+          this.$message.error("网络错误: " + err.response.data.status);
+        });
+    },
     forward(index) {
       this.$message.info("转载功能正在完善中...");
       index;
@@ -102,9 +118,6 @@ export default {
           });
       }
     },
-    deletemine(bid) {
-      window.alert(bid);
-    },
     format(timestamp, fmt) {
       var date = new Date(1000 * timestamp);
       var o = {
@@ -137,46 +150,12 @@ export default {
   },
   data() {
     return {
-      usid: 0,
-      user: {
-        usid: 0,
-        nickname: "获取中",
-        avatar: "//static.hdslb.com/images/member/noface.gif",
-      },
       blogs: [],
     };
   },
-  created() {
-    this.usid =
-      Number.parseInt(this.$route.params.usid) ||
-      this.$store.state.user.usid ||
-      null;
-  },
-  async mounted() {
-    if (!this.$store.state.user.usid) {
-      this.$message.error("用户未登录");
-      this.$router.push({ path: "/login" });
-      return;
-    }
-    userInfo(this.usid)
-      .then((res) => {
-        this.user = res.data.data;
-        blogInfo(this.usid, 0)
-          .then((res) => {
-            res = res.data;
-            if (res.status === "ok") {
-              this.blogs = res.data;
-            } else {
-              this.$message.error("网络错误: " + res.status);
-            }
-          })
-          .catch((e) => {
-            this.$message.error("网络错误: " + e.data.response.status);
-          });
-      })
-      .catch((err) => {
-        this.$message.error("网络错误: " + err.response.data.status);
-      });
+
+  mounted() {
+    this.getData(0);
   },
 };
 </script>
@@ -188,6 +167,10 @@ export default {
   min-width: 632px;
   background: #fff;
   margin-top: 8px;
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 700px;
+  background-image: url(../assets/blogcardtop3.png);
 }
 
 .user-head {
@@ -258,7 +241,7 @@ export default {
 
 .single-button {
   display: inline-block;
-  width: 92px;
+  margin-right: 70px;
   font-size: 12px;
   cursor: pointer;
 }
@@ -273,14 +256,9 @@ export default {
   top: 1px;
   left: 3px;
 }
-.delete {
-  position: absolute;
-  top: 35px;
-  right: 30px;
-  color: #6d757a;
-  font-size: 22px;
-}
-.delete:hover {
-  color: #00ffff;
+.page-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       cur_page: 1,
-      tot_page: 10,
+      tot_page: 6,
       jmp_page: "",
     };
   },

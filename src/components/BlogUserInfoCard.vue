@@ -52,6 +52,7 @@ export default {
     var usid = this.$store.state.user.usid;
     if (!usid) {
       this.$message.error("用户未登录");
+      this.$router.push({ path: "/login" });
       return;
     }
     this.$store.commit("cacheGetMineInfo", {

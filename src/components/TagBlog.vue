@@ -11,7 +11,7 @@
           <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
-          <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
+          <span class="detail-link tc-slate">{{format(blog.time, 'yyyy-MM-dd')}}</span>
         </div>
         <div class="card-content">
           <div class="text description">
@@ -147,23 +147,7 @@ export default {
   },
   data() {
     return {
-      blogs: [
-        {
-          bid: 0,
-          content: "获取中",
-          create_time: Math.floor(Date.now() / 1000),
-          like_num: 0,
-          transmit_num: 0,
-          comment_num: 0,
-          up: {
-            usid: 0,
-            name: "获取中",
-            avatar: "//static.hdslb.com/images/member/noface.gif",
-          },
-          images: [],
-          ilike: 0,
-        },
-      ],
+      blogs: [],
     };
   },
 
