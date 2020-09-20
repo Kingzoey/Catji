@@ -32,7 +32,8 @@ export default {
     onChange: Function,
     page_num: Number,
   },
-  created() {
+  mounted() {
+    console.log(this.$props.page_num);
     this.tot_page = this.$props.page_num || 1;
   },
   methods: {

@@ -32,8 +32,13 @@ export default {
   data() {
     return {
       on: 0,
-      videoNewList: [],
+      dataList: [],
     };
+  },
+  computed: {
+    videoNewList() {
+      return this.dataList.slice(0, 6);
+    },
   },
   methods: {
     async handleNew() {
@@ -42,7 +47,7 @@ export default {
         var res = await newVideo();
         res = res.data;
         if (res.status === "ok") {
-          this.videoNewList = res.data;
+          this.dataList = res.data;
         } else {
           this.$message.error("网络错误: " + res.status);
         }
@@ -159,6 +164,7 @@ export default {
   width: 112px;
   height: 63px;
   border-radius: 2px;
+  display: block;
 }
 
 .txt {

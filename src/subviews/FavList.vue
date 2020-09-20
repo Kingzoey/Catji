@@ -5,7 +5,7 @@
         <font-awesome-icon :icon="['fas', 'folder']" />&nbsp;我的收藏
       </div>
       <div class="pager-wrap clearfix">
-        <Pager :onChange="getData" ref="pager" />
+        <Pager :onChange="getData" ref="pager" :page_num="page_num" />
       </div>
     </div>
     <ul>
@@ -44,12 +44,7 @@
 </template>
 
 <script>
-import {
-  favorite,
-  unfavoriteVideo,
-  follow,
-  unfollow,
-} from "../api";
+import { favorite, unfavoriteVideo, follow, unfollow } from "../api";
 import Pager from "@/components/Pager.vue";
 export default {
   components: {
@@ -58,9 +53,15 @@ export default {
   props: {
     usid: Number,
   },
+  computed: {
+    page_num() {
+      return Math.round(this.count / 10);
+    },
+  },
   data() {
     return {
       dataList: [],
+      count: 1,
     };
   },
   methods: {
@@ -118,7 +119,8 @@ export default {
         .then((res) => {
           res = res.data;
           if (res.status === "ok") {
-            this.dataList = res.data; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
+            this.dataList = res.data.result; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
+            this.count = res.data.count;
           } else {
             this.$message.error("网络错误: " + res.status);
           }

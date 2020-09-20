@@ -78,7 +78,7 @@
           </div>
         </div>
       </div>
-      <Pager :onChange="getData" ref="pager"></Pager>
+      <Pager :onChange="getData" ref="pager" :page_num="page_num"></Pager>
     </div>
   </div>
 </template>
@@ -100,13 +100,17 @@ export default {
   },
   computed: {
     comment_num() {
-      return this.comments.length;
+      return this.count;
+    },
+    page_num() {
+      return Math.round(this.count / 10);
     },
   },
   data() {
     return {
       content: "",
       comments: [],
+      count: 1,
       user: {},
     };
   },
@@ -143,7 +147,9 @@ export default {
     getData(page) {
       videoComments(this.$props.vid, page)
         .then((res) => {
-          this.comments = res.data.data;
+          res = res.data;
+          this.comments = res.data.result;
+          this.count = res.data.count;
         })
         .catch(() => {
           this.$message.error("网络错误");
