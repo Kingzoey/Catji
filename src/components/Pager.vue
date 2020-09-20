@@ -24,12 +24,16 @@ export default {
   data() {
     return {
       cur_page: 1,
-      tot_page: 6,
+      tot_page: 1,
       jmp_page: "",
     };
   },
   props: {
     onChange: Function,
+    page_num: Number,
+  },
+  created() {
+    this.tot_page = this.$props.page_num || 1;
   },
   methods: {
     toPage(new_page) {
