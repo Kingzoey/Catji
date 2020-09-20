@@ -42,7 +42,7 @@
         </div>
       </div>
       <div class="body">
-        <div class="nav">
+        <div class="nav" style="text-align: center">
           <ul class="nav-switch">
             <li
               v-for="(item, index) in tabs"
@@ -69,7 +69,7 @@ import { catInfo, updateCatInfo } from "../api";
 import NavBar from "@/components/NavBar.vue";
 import SearchResultVideo from "@/components/SearchResultVideo.vue";
 import CatBlog from "@/components/CatBlog.vue";
-import CatIntroduction from "@/components/CatIntroduction.vue";
+
 export default {
   inject: ["reload"],
   created() {
@@ -149,7 +149,7 @@ export default {
   },
   computed: {
     anthorx() {
-      return 160 + this.hover * 400;
+      return 361 + this.hover * 400;
     },
   },
   data() {
@@ -169,10 +169,7 @@ export default {
       on: 0,
       hover: 0,
       tabs: [
-        {
-          name: "猫咪介绍",
-          component: CatIntroduction,
-        },
+        
         {
           name: "猫咪视频",
           component: SearchResultVideo,

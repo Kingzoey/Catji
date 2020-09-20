@@ -112,7 +112,7 @@ export default {
         .map((tabitem) => tabitem.subpath)
         .indexOf(sub);
       if (subpageIndex < 0) {
-        subpageIndex = 2; // 默认跳转到动态页
+        subpageIndex = 0; // 默认跳转到欢迎页
       }
       this.subpage = subpageIndex;
     },
