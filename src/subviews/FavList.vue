@@ -35,7 +35,7 @@
               size="mini"
               @click="onFollow(index)"
             >{{vi.video.up.ifollow?"已关注":"关注"}}</el-button>
-            <el-button type="danger" size="mini" @click="del(index)">删除历史</el-button>
+            <el-button type="danger" size="mini" @click="del(index)">取消收藏</el-button>
           </div>
         </div>
       </li>
@@ -99,15 +99,15 @@ export default {
       }
     },
     del(index) {
-      let video = this.video[index];
+      let video = this.dataList[index].video;
       unfavoriteVideo(video.vid)
         .then(() => {
-          this.video.splice(index);
+          // this.dataList.splice(index);
           this.$refs.pager.reload();
         })
         .catch((err) => {
           if (err.response.data.status === "未收藏") {
-            this.video.splice(index);
+            // this.dataList.splice(index);
             this.$refs.pager.reload();
           } else {
             this.$message.error("网络错误: " + err.response.data.status);
