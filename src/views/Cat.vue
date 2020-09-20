@@ -16,7 +16,7 @@
           </div>
           <div class="info">
             <div class="name">
-              <span @click="editing1=true" v-if="!editing1">{{cat.name}}</span>
+              <span @click="is_me?editing1=true:null" v-if="!editing1">{{cat.name||"这只猫还没有名字"}}</span>
               <el-input v-else @blur="editing1=false" v-model="cat.name"></el-input>
               <el-button
                 type="primary"
@@ -25,18 +25,22 @@
                 style="margin-left:8px;"
               >猫咪账号</el-button>
             </div>
-            <p @click="editing=true" v-if="!editing" style="font-size:16pt;">{{cat.description}}</p>
+            <p
+              @click="is_me?editing=true:null"
+              v-if="!editing"
+              style="font-size:16pt;"
+            >{{cat.description||"这只猫很懒, 没有填写介绍"}}</p>
             <el-input v-else @blur="editing=false" v-model="cat.description"></el-input>
             <el-button
               type="primary"
               @click="onSubmit"
               style="bottom: -180px;position: relative;"
-              v-if="this.$store.state.user.hasOwnProperty('usid') && this.$store.state.user.usid == cat.usid"
+              v-if="this.$store.state.user.hasOwnProperty('usid') && is_me"
             >更新信息</el-button>
             <el-button
               @click="onReset"
               style="bottom: -180px;position: relative;"
-              v-if="this.$store.state.user.hasOwnProperty('usid') && this.$store.state.user.usid == cat.usid"
+              v-if="this.$store.state.user.hasOwnProperty('usid') && is_me"
             >重置</el-button>
           </div>
         </div>
@@ -56,7 +60,13 @@
             <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
           </ul>
         </div>
-        <component :is="tabs[on].component" :cat_id="cat_id" :usid="cat.usid"></component>
+        <component
+          ref="sub"
+          :is="tabs[on].component"
+          :cat_id="cat_id"
+          :usid="cat.usid"
+          :query="cat.name"
+        ></component>
       </div>
       <br />
     </div>
@@ -80,7 +90,9 @@ export default {
       this.$router.push({ path: "/space/" + this.cat.usid });
     },
     uploadHeadImg() {
-      this.$el.querySelector(".hiddenInput").click();
+      if (this.is_me) {
+        this.$el.querySelector(".hiddenInput").click();
+      }
     },
     handleChange(e) {
       let $target = e.target || e.srcElement;
@@ -142,6 +154,7 @@ export default {
         this.cat = res.data.data;
         this.pic = this.cat.banner;
         this.origin = JSON.stringify(this.cat);
+        this.$refs.sub.reload(this.cat.name);
       })
       .catch((err) => {
         this.$message.error("网络错误: " + err.response.data.status);
@@ -151,6 +164,9 @@ export default {
     anthorx() {
       return 361 + this.hover * 400;
     },
+    is_me() {
+      return this.$store.state.user.usid == this.cat.usid;
+    },
   },
   data() {
     return {
@@ -159,17 +175,16 @@ export default {
       cat_id: 0,
       pic: "",
       cat: {
-        cat_id: 0,
-        name: "获取中...",
-        description: "获取中...",
-        banner: "",
-        usid: 0,
+        // cat_id: 0,
+        // name: "获取中...",
+        // description: "获取中...",
+        // banner: "",
+        // usid: 0,
       },
       origin: "",
       on: 0,
       hover: 0,
       tabs: [
-        
         {
           name: "猫咪视频",
           component: SearchResultVideo,

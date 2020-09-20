@@ -12,8 +12,8 @@
       </div>
       <div class="register">
         <h2>注 册</h2>
-        <input type="text" placeholder="请输入用户名" v-model="nickname" />
-        <input type="text" placeholder="请输入邮箱" v-model="email" />
+        <input type="text" placeholder="请输入用户名" v-model="nickname" :class="{on:usernameNotOk}" />
+        <input type="text" placeholder="请输入邮箱" v-model="email" :class="{on:emailNotOk}" />
         <input type="password" placeholder="请输入密码" v-model="password1" />
         <input type="password" placeholder="再次输入以确认密码" v-model="password2" />
         <div class="send-button">
@@ -34,6 +34,8 @@ export default {
       email: "",
       password1: "",
       password2: "",
+      usernameNotOk: false,
+      emailNotOk: false,
     };
   },
   methods: {
@@ -48,6 +50,12 @@ export default {
       }
       if (!email) {
         this.$message.error("邮箱地址不能为空");
+        return;
+      }
+
+      var pattern = /^([a-zA-Z0-9])(\w|-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+      if (!pattern.test(this.email)) {
+        this.$message.error("请检查邮箱格式");
         return;
       }
       if (!password1) {
@@ -172,6 +180,7 @@ input[type="password"] {
   border-bottom: 1px solid rgba(238, 238, 238, 0.41);
   outline: none;
   color: #fff;
+  transition: all 0.1ms;
 }
 
 .send-button {
@@ -235,6 +244,10 @@ input[type="password"] {
 
 .register p a:hover {
   color: #fff;
+}
+
+.register input[type="text"].on {
+  border-bottom: 1px solid rgba(255, 0, 0, 0.747);
 }
 
 .register_from {

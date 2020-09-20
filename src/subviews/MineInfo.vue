@@ -190,10 +190,6 @@ export default {
       this.pic = this.form.avatar;
     },
     getCatList(query) {
-      if (!query) {
-        this.options = [];
-        return;
-      }
       searchCatByName(query).then((res) => {
         res = res.data;
         this.options = res.data.map((item) => ({

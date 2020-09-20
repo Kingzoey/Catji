@@ -5,7 +5,7 @@
         <font-awesome-icon :icon="['fas', 'history']" />&nbsp;观看历史
       </div>
       <div class="pager-wrap clearfix">
-        <Pager :onChange="getData" ref="pager" />
+        <Pager :onChange="getData" ref="pager" :page_num="page_num" />
       </div>
     </div>
     <ul>
@@ -53,9 +53,15 @@ export default {
   props: {
     usid: Number,
   },
+  computed: {
+    page_num() {
+      return Math.round(this.count / 10);
+    },
+  },
   data() {
     return {
       dataList: [],
+      count: 1,
     };
   },
   methods: {
@@ -66,6 +72,10 @@ export default {
       }
 
       let up = this.dataList[index].video.up;
+      if (this.$store.state.user.usid == up.usid) {
+        this.$message.error("不可以关注自己！");
+        return;
+      }
       if (up.ifollow) {
         unfollow(up.usid)
           .then(() => {
@@ -97,7 +107,8 @@ export default {
         .then((res) => {
           res = res.data;
           if (res.status === "ok") {
-            this.dataList = res.data; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
+            this.dataList = res.data.result; // 请求成功后, this.video会被设置为res.data的内容, 从而触发页面更新
+            this.count = res.data.count;
           } else {
             this.$message.error("网络错误: " + res.status);
           }

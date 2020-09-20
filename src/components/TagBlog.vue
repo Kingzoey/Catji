@@ -46,9 +46,6 @@
       <br />
     </div>
     <br />
-    <div class="page-wrap">
-      <Pager :onChange="getData"></Pager>
-    </div>
   </div>
 </template>
 
@@ -61,12 +58,10 @@ import {
   // unlikeBlogComment,
 } from "../api";
 import BlogCardImage from "@/components/BlogCardImage.vue";
-import Pager from "@/components/Pager.vue";
 export default {
   name: "BlogCardSearch",
   components: {
     BlogCardImage,
-    Pager,
   },
   props: {
     tag_id: Number,
@@ -90,6 +85,10 @@ export default {
       index;
     },
     like(index) {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能点赞视频");
+        return;
+      }
       let blog = this.blogs[index];
       if (blog.ilike) {
         unlikeBlog(blog.bid)

@@ -73,6 +73,10 @@ export default {
       index;
     },
     like(index) {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能点赞视频");
+        return;
+      }
       let blog = this.blogs[index];
       if (blog.ilike) {
         unlikeBlog(blog.bid)

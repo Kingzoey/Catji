@@ -35,7 +35,7 @@
       </li>
     </ul>
     <div class="page-wrap">
-      <Pager :onChange="getData" ref="pager"></Pager>
+      <Pager :onChange="getData" ref="pager" :page_num="page_num"></Pager>
     </div>
   </div>
 </template>
@@ -53,13 +53,21 @@ export default {
   data() {
     return {
       dataList: [],
+      count: 1,
     };
+  },
+  computed: {
+    page_num() {
+      return Math.round(this.count / 10);
+    },
   },
   methods: {
     getData(page) {
       searchUser(this.$props.query, page)
         .then((res) => {
-          this.dataList = res.data.data;
+          res = res.data;
+          this.dataList = res.data.result;
+          this.count = res.data.count;
         })
         .catch((err) => {
           this.$message.error("网络错误: " + err.response.data.status);
