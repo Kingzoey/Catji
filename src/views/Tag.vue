@@ -9,8 +9,8 @@
             <h1>#{{tag_info.name}}#</h1>
           </div>
           <div class="total">
-            <span>阅读 {{tag_info.read_num || Math.round(Math.random() * 1234)}}</span>
-            <span>讨论 {{tag_info.topic_num || Math.round(Math.random() * 1234)}}</span>
+            <span>标签ID {{this.$route.params.tag_id || "获取中"}}</span>
+            <span>视频 {{video_num || "获取中"}}</span>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { tagInfo } from "../api";
+import { tagInfo, tagVideos, tagBlogs } from "../api";
 import NavBar from "@/components/NavBar.vue";
 import TagVideo from "@/components/TagVideo.vue";
 import TagBlog from "@/components/TagBlog.vue";
@@ -52,9 +52,9 @@ export default {
       tag_info: {
         tag_id: 0,
         name: "",
-        read_num: 0,
-        topic_num: 0,
       },
+      video_num: 0,
+      blog_num: 0,
       tablist: [
         {
           name: "视频",
@@ -87,6 +87,14 @@ export default {
     } catch (e) {
       this.$message.error("网络错误: " + e.response.data.status);
     }
+    tagVideos(tag_id, 1).then((res) => {
+      res = res.data;
+      this.video_num = res.data.count;
+    });
+    tagBlogs(tag_id, 1).then((res) => {
+      res = res.data;
+      this.blog_num = res.data.count;
+    });
   },
 };
 </script>
