@@ -60,7 +60,13 @@
             <li class="nav-switch-anchor" :style="{transform: 'translateX('+anthorx+'px)'}" />
           </ul>
         </div>
-        <component :is="tabs[on].component" :cat_id="cat_id" :usid="cat.usid"></component>
+        <component
+          ref="sub"
+          :is="tabs[on].component"
+          :cat_id="cat_id"
+          :usid="cat.usid"
+          :query="cat.name"
+        ></component>
       </div>
       <br />
     </div>
@@ -146,6 +152,7 @@ export default {
         this.cat = res.data.data;
         this.pic = this.cat.banner;
         this.origin = JSON.stringify(this.cat);
+        this.$refs.sub.reload(this.cat.name);
       })
       .catch((err) => {
         this.$message.error("网络错误: " + err.response.data.status);
@@ -163,11 +170,11 @@ export default {
       cat_id: 0,
       pic: "",
       cat: {
-        cat_id: 0,
-        name: "获取中...",
-        description: "获取中...",
-        banner: "",
-        usid: 0,
+        // cat_id: 0,
+        // name: "获取中...",
+        // description: "获取中...",
+        // banner: "",
+        // usid: 0,
       },
       origin: "",
       on: 0,

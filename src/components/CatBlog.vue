@@ -2,16 +2,16 @@
   <div>
     <div class="card" v-for="(blog, index) in blogs" :key="blog.bid">
       <router-link
-        :to="/space/ + blog.up.usid"
-        :style="'background-image:url('+blog.up.avatar+')'"
+        :to="/space/ + user.usid"
+        :style="'background-image:url('+user.avatar+')'"
         class="user-head"
       ></router-link>
       <div class="main-content">
         <div class="user-name fs-16 ls-0 d-i-block">
-          <router-link :to="/space/ + blog.up.usid" class>{{blog.up.name}}</router-link>
+          <router-link :to="/space/ + user.usid" class>{{user.nickname}}</router-link>
         </div>
         <div class="time fs-12 ls-0 tc-slate">
-          <span class="detail-link tc-slate">{{format(blog.time, 'yyyy-MM-dd')}}</span>
+          <span class="detail-link tc-slate">{{format(blog.create_time, 'yyyy-MM-dd')}}</span>
         </div>
         <div class="card-content">
           <div class="text description">
@@ -54,6 +54,7 @@ import {
   blogInfo,
   likeBlog,
   unlikeBlog,
+  userInfo,
   // likeBlogComment,
   // unlikeBlogComment,
 } from "../api";
@@ -67,10 +68,16 @@ export default {
     usid: Number,
   },
   methods: {
+    reload() {
+      this.getData(0);
+    },
     getData(page) {
       if (!this.$props.usid) {
         return;
       }
+      userInfo(this.$props.usid).then((res) => {
+        this.user = res.data.data;
+      });
       blogInfo(this.$props.usid, page)
         .then((res) => {
           this.blogs = res.data.data;
@@ -88,6 +95,10 @@ export default {
       index;
     },
     like(index) {
+      if (!this.$store.state.user.usid) {
+        this.$message.error("登录后才能点赞视频");
+        return;
+      }
       let blog = this.blogs[index];
       if (blog.ilike) {
         unlikeBlog(blog.bid)
@@ -146,6 +157,7 @@ export default {
   data() {
     return {
       blogs: [],
+      user: {},
     };
   },
 

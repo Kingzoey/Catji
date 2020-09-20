@@ -54,6 +54,10 @@ export default {
     };
   },
   methods: {
+    reload(cat_name) {
+      this.$props.query = cat_name;
+      this.getData(0);
+    },
     getData(page) {
       searchVideo(this.$props.query, page)
         .then((res) => {
