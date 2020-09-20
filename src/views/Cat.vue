@@ -25,7 +25,11 @@
                 style="margin-left:8px;"
               >猫咪账号</el-button>
             </div>
-            <p @click="editing=true" v-if="!editing" style="font-size:16pt;">{{cat.description}}</p>
+            <p
+              @click="editing=true"
+              v-if="!editing"
+              style="font-size:16pt;"
+            >{{cat.description||"这只猫很懒, 没有填写介绍"}}</p>
             <el-input v-else @blur="editing=false" v-model="cat.description"></el-input>
             <el-button
               type="primary"
@@ -169,7 +173,6 @@ export default {
       on: 0,
       hover: 0,
       tabs: [
-        
         {
           name: "猫咪视频",
           component: SearchResultVideo,
