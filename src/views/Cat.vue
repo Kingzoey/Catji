@@ -16,7 +16,7 @@
           </div>
           <div class="info">
             <div class="name">
-              <span @click="editing1=true" v-if="!editing1">{{cat.name}}</span>
+              <span @click="is_me?editing1=true:null" v-if="!editing1">{{cat.name||"这只猫还没有名字"}}</span>
               <el-input v-else @blur="editing1=false" v-model="cat.name"></el-input>
               <el-button
                 type="primary"
@@ -26,7 +26,7 @@
               >猫咪账号</el-button>
             </div>
             <p
-              @click="editing=true"
+              @click="is_me?editing=true:null"
               v-if="!editing"
               style="font-size:16pt;"
             >{{cat.description||"这只猫很懒, 没有填写介绍"}}</p>
@@ -35,12 +35,12 @@
               type="primary"
               @click="onSubmit"
               style="bottom: -180px;position: relative;"
-              v-if="this.$store.state.user.hasOwnProperty('usid') && this.$store.state.user.usid == cat.usid"
+              v-if="this.$store.state.user.hasOwnProperty('usid') && is_me"
             >更新信息</el-button>
             <el-button
               @click="onReset"
               style="bottom: -180px;position: relative;"
-              v-if="this.$store.state.user.hasOwnProperty('usid') && this.$store.state.user.usid == cat.usid"
+              v-if="this.$store.state.user.hasOwnProperty('usid') && is_me"
             >重置</el-button>
           </div>
         </div>
@@ -90,7 +90,9 @@ export default {
       this.$router.push({ path: "/space/" + this.cat.usid });
     },
     uploadHeadImg() {
-      this.$el.querySelector(".hiddenInput").click();
+      if (this.is_me) {
+        this.$el.querySelector(".hiddenInput").click();
+      }
     },
     handleChange(e) {
       let $target = e.target || e.srcElement;
@@ -161,6 +163,9 @@ export default {
   computed: {
     anthorx() {
       return 361 + this.hover * 400;
+    },
+    is_me() {
+      return this.$store.state.user.usid == this.cat.usid;
     },
   },
   data() {
