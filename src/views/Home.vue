@@ -1,4 +1,5 @@
 <template>
+<!-- It's over :-) -->
   <div class="home">
     <NavBar />
     <div class="container">
@@ -45,7 +46,6 @@
     <br />
   </div>
 </template>
-
 
 <script>
 import Js2WordCloud from "js2wordcloud";
